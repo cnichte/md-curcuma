@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES5",
+    "declaration": true,
+    "moduleResolution": "node",
+    "lib": ["ES2020", "DOM"],
+    "outDir": "dist/lib",
+
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": false,
+    "baseUrl": "./",
+  },
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test"
+  ]
+}

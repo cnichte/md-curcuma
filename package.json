@@ -1,0 +1,21 @@
+{
+  "name": "longform-markdown-splitter",
+  "version": "1.0.3",
+  "description": "Splits and transforms markdown files from obsidian for usage in hugo.",
+  "main": "dist/lib/index.js",
+  "types": "dist/lib/index.d.ts",
+  "files": [
+    "/dist/lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ts": "rm -rf dist/lib && tsc",
+    "watch:ts": "tsc --watch"
+  },
+  "author": "Carsten Nichte",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "typescript": "^5.3.3"
+  }
+}
