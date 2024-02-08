@@ -14,6 +14,7 @@
   },
   "author": "Carsten Nichte",
   "license": "MIT",
+  "homepage": "https://gitlab.com/glimpse-of-life/longform-markdown-splitter",
   "devDependencies": {
     "@types/node": "^20.11.16",
     "typescript": "^5.3.3"
