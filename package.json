@@ -7,6 +7,19 @@
   "files": [
     "/dist/lib"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/glimpse-of-life/longform-markdown-splitter.git"
+  },
+  "keywords": [
+    "Javascript",
+    "Typescript",
+    "Hugo",
+    "Obsidian",
+    "Markdown",
+    "Transport",
+    "Transformation"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:ts": "rm -rf dist/lib && tsc",
