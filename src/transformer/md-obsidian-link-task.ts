@@ -58,7 +58,7 @@ import { MD_Transformer_AbstractBase, MD_Transformer_Interface, MD_Transformer_P
     }
   
     /**
-     * The Transform method is called by the MD_Splitter.
+     * The transform method is called by MD_Exporter.
      *
      * @param {string[]} source
      * @param {number} index
@@ -121,7 +121,7 @@ import { MD_Transformer_AbstractBase, MD_Transformer_Interface, MD_Transformer_P
    */
   export class MD_ObsidianLink_Transformer extends MD_ObsidianLink_Transformer_Base {
     /**
-     * The Transform method is called by the MD_Splitter.
+     * The transform method is called by MD_Exporter.
      * @param {string[]} source
      * @param {number} index
      * @return {*}  (Array<string>)

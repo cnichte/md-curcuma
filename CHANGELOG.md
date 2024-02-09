@@ -4,8 +4,10 @@
 * Transformations on the target filename.
 * Run a joblist in batch.
 * Load custom Transformers from the config file.
+* Implement job-propertys functions: doSubfolders, limit, useCounter.
 * More Transformers
     * Cross-references
+    * ...
 * Copy Attachments and Ressources...
 * A Obsidian-Plugin with a nice Graphical-User-Interface. 
 * Add a frontmatter to a single file (or a batch of single files). At the moment, only the splitter does this.

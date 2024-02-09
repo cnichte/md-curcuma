@@ -40,10 +40,6 @@ It would be nice to be able to build customized transformers for different solut
 * However, the script provides information about which images and attachments it expects and where. 
 * It only runs in Backend, not in Browsers.
 
-## NEWS
-
-* npm 
-
 ## Usage
 
 Write some Typsecript like that:

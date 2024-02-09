@@ -36,7 +36,7 @@ export interface MD_Transformer_TemplateValues_Type {
 export interface MD_Transformer_Interface {
 
   /**
-   * The Transform method is called by the MD_Splitter.
+   * The transform method is called by MD_Exporter.
    *
    * @param {Array<string>} source
    * @param {number} index

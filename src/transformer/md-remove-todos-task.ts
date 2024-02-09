@@ -30,7 +30,7 @@ export class MD_RemoveTODOS_Transformer extends MD_Transformer_AbstractBase {
     }
 
     /**
-     * The Transform method is called by the MD_Splitter.
+     * The transform method is called by MD_Exporter.
      *
      * @param {Array<string>} source
      * @param {number} index
