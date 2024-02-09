@@ -150,7 +150,7 @@ run the script. Hopefully it has created something :-)
 
 The Transport-Scripts can be used...
 
-1. in the Hugo-Project - and pull from Obsidian-Fault.
+1. in the Hugo-Project - and pull from Obsidian Vault.
 2. in Obsidian - and push to your Hugo project. I will write an Obsidian-Plugin for that in near future.
 3. as stand allone project between Obsidian and Hugo - so it does pulling and pushig.
 
