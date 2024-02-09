@@ -1,10 +1,12 @@
 # Unresolved issues & planned features
 
 * A regex-filter for the filereader to exclude some files.
-* Transformations on the Target filename.
+* Transformations on the target filename.
+* Run a joblist in batch.
 * Load custom Transformers from the config file.
 * More Transformers
-* A Obidian-Plugin with a nice Graphical-User-Interface. 
+* A Obsidian-Plugin with a nice Graphical-User-Interface. 
+* Add a Frontmatter to a single file (or a batch of single files). At the moment, only the splitter does this.
 
 # Release 1.0.5 (2024-02-09)
 
