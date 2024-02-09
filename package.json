@@ -21,7 +21,7 @@
     "Transformation"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tsx --test test/*.test.ts",
     "build:ts": "rm -rf dist/lib && tsc",
     "watch:ts": "tsc --watch"
   },
@@ -30,6 +30,7 @@
   "homepage": "https://gitlab.com/glimpse-of-life/longform-markdown-splitter",
   "devDependencies": {
     "@types/node": "^20.11.16",
+    "tsx": "^4.7.0",
     "typescript": "^5.3.3"
   }
 }

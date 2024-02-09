@@ -1,13 +1,13 @@
-import { MD_Template } from "./md-splitter-utils";
+import { MD_Template } from "./md-template";
 
 /**
  * Describes the possible placeholders that can be replaced in the template:
  * Template = `I have a {title} and a {date}.`
  * 
  * @export
- * @interface MD_FrontmatterType
+ * @interface MD_Frontmatter_Type
  */
-export interface MD_FrontmatterType {
+export interface MD_Frontmatter_Type {
   title: string;
   date: string;
   url: string;
@@ -21,16 +21,16 @@ export interface MD_FrontmatterType {
  * @export
  * @class MD_Frontmatter
  */
-export class MD_Frontmatter extends MD_Template{
+export class MD_Frontmatter extends MD_Template {
 
   /**
-   * Fills the template with values from the MD_FrontmatterType object.
+   * Fills the template with values from the MD_Frontmatter_Type object.
    * 
-   * @param {(MD_FrontmatterType)} values
+   * @param {(MD_Frontmatter_Type)} values
    * @return {*}  {string}
    * @memberof MD_Frontmatter
    */
-  getFrontmatter(values: MD_FrontmatterType): string {
+  getFrontmatter(values: MD_Frontmatter_Type): string {
     return this.fill(values);
   }
 }

@@ -1,6 +1,6 @@
-# The Longform Markdown Splitter
+# MD-Curcuma - The Longform Markdown Splitter
 
-Splits and transforms markdown files from [Obsidian](https://obsidian.md/) for usage in [Hugo](https://gohugo.io).
+Copys and transforms Markdown files from [Obsidian](https://obsidian.md/) for usage in [Hugo](https://gohugo.io).
 
 * This thing ist done with [Typescript](https://www.typescriptlang.org/).
 * Inspired by: https://github.com/accraze/split-md
@@ -38,10 +38,126 @@ It would be nice to be able to build customized transformers for different solut
 
 * Images and attachments must be provided separately for the time being. You can see in the console-output which files have been requested and where they should be reside. I will add a copy job that also automates this in near future. 
 * However, the script provides information about which images and attachments it expects and where. 
+* It only runs in Backend, not in Browsers.
 
-## Install
 
-The Transport-Scripts can be used in the Hugo-Project, or separately (what i recomend).
+## Usage
+
+Write some Typsecript like that:
+
+```ts
+const my_exporter: MD_Exporter = new MD_Exporter();
+my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
+```
+
+and provide a `config-file`, and a `frontmatter-file` to get this...
+
+1. transforms `![[image-1.jpg]]` in `{{< image src="assets/images/image-1.jpg" >}}`
+2. transforms `![[docu-1.pdf]]` in `{{< button href="/getthis.php?id=docu-1" name="download docu-1 (pdf)" >}}`
+3. removes paragraphes: `- [ ] #TODO Some serious stuff to do...`
+4. Splits the file on Headlines `# ` in separate files and adds frontmatter
+
+The file `transport-config.json`:
+
+```json
+{
+  "job_list": [
+    {
+      "job_name": "Example-Job No.1",
+      "job_description": "Example Job Description",
+      "job_parameter": {
+        "readPath": "./test/obsidian-vault/longform.md",
+        "writePath": "./test/hugo-content/",
+        "doSubfolders": false,
+        "limit": 100,
+        "useCounter": false
+      },
+      "job_tasks": [
+        {
+          "transformer_class_name": "MD_Frontmatter_Transformer",
+          "transformer_parameter": {
+            "frontmatter_filename": "./test/frontmatter-template.md",
+            "frontmatter": {}
+          }
+        },
+        {
+          "transformer_class_name": "MD_ObsidianLink_Transformer",
+          "transformer_parameter": {
+            "tag_obsidian_prefix": "![[",
+            "tag_obsidian_suffix": "]]",
+            "find_rule": "jpg|png",
+            "replace_template": "{{< lightbox-docs id=\"0\" folder=\"images/kursbuch-sv/{name}/*\" showImageNr=0 >}}"
+          }
+        },
+        {
+          "transformer_class_name": "MD_ObsidianLink_Transformer",
+          "transformer_parameter": {
+            "tag_obsidian_prefix": "![[",
+            "tag_obsidian_suffix": "]]",
+            "find_rule": "pdf|ods|odp",
+            "replace_template": "{{< button href=\"/getthis.php?id={name}\" name=\"download {name} ({name_suffix})\" >}}"
+          }
+        },
+        {
+          "transformer_class_name": "MD_RemoveTODOS_Transformer",
+          "transformer_parameter": {
+            "find_rule": "- [ ] #TODO ",
+            "replace_template": ""
+          }
+        },
+        {
+          "transformer_class_name": "MD_Splitter_Transformer",
+          "transformer_parameter": {
+            "pattern": "# ",
+            "cleanName": "# ",
+            "limit": 100,
+            "hasCounter": false,
+            "weightBase": 8000,
+            "url_prefix": "test-prefix",
+            "doRemoveHeadline": true,
+            "frontmatter_filename": "./frontmatter-template.md",
+            "frontmatter": {}
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+and the frontmatter-file `frontmatter-template.md`:
+
+```yaml
+---
+title: "{title}"
+description: ""
+url: /docs/{url_prefix}-{url}/
+date: {date}
+draft: false
+images: []
+menu:
+  docs:
+    parent: "docs-9602b15bad02600f3883f55e2ade6b81"
+    identifier: "{url_prefix}-{url}-{uuid}"
+weight: {weight}
+toc: true
+---
+
+```
+
+run the script. Hopefully it has created something :-)
+
+## Where to use?
+
+The Transport-Scripts can be used...
+
+1. in the Hugo-Project - and pull from Obsidian-Fault.
+2. in Obsidian - and push to your Hugo project. I will write an Obsidian-Plugin for that in near future.
+3. as stand allone project between Obsidian and Hugo - so it does pulling and pushig.
+
+I recommend Option `3` at the moment.
+
+## Install it
 
 * create a `project-folder`
 * open that folder, an in it...
@@ -56,7 +172,7 @@ tsc --version
 
 create a `tsconfig.json`
 
-If u use it inside your Hugo Project, some folders are excluded per default.
+If you use it inside your Hugo Project, some folders are excluded per default.
 
 ```json
 {
@@ -88,14 +204,16 @@ If u use it inside your Hugo Project, some folders are excluded per default.
 
 Create two folders for your scripts:
 
-* `transport-scripts`
+* `transport-scripts` - holds the typescript source-code
 * `transport-scripts-compiled`
 
-The first is for the Typescript source code, the second is for the Java script that will later be compiled from it.
+The first is for the Typescript source-code, the second is for the Java script that will later be compiled from it.
 
 ## compile to javascript
 
 To simplify handling, include the following build commands in the `package.json`: 
+
+The ts suffix in `build:ts` separates it from the golag scripts which i name `build:go`, but of course you can call them whatever you like.
 
 ```json
     "build:ts": "rm -rf transport-scripts-compiled && tsc",
@@ -105,110 +223,39 @@ To simplify handling, include the following build commands in the `package.json`
 ## Create The Example Markdown-Files
 
 * create folder `test`, and in folder test 
-  * create folder `test/hugo-content/`
-  * create folder `test/obsidian-fault/`
+  * create folder `test/obsidian-fault/` - an put your longform.md in it.
+  * create folder `test/hugo-content/` - this is the target directory
 
-create a file `longform.md`and paste this in:
 
-```md
-# Title
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.
+## Create a Transport-Script 
 
-- [ ] #TODO Some serious stuff to do...
-
-Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-
-## A Chapter
-
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio.
-
-Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.   
-
-# Section 1
-
-Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.   
-
-![[image-1.jpg]]
-
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.    
-
-## Chapter 1.1
-
-Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.   
-
-### Chapter 1.2.1
-
-At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-### Chapter 1.2.2
-
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-
-# Section 2
-
-Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.  
-
-## Chapter 2.1
-
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.   
-
-![[image-2.jpg]]
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
-
-## Chapter 2.2
-
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.
-
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat.
-
-![[document-1.pdf]]
-
-Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-```
-
-## The Example Transport-Script
 
 In folder `transport-scripts`create the file `split-my-longform.ts` and paste the code:
 
-```js
-import { MD_Splitter, type MD_Splitter_Parameter } from "longform-markdown-splitter";
-import {MD_Frontmatter} from "longform-markdown-splitter";
-import {
-  ObsidianLink_Transformer,
-  RemoveTODOS_Transformer,
-  type MD_Transformer_Parameter
-} from "longform-markdown-splitter";
+```ts
+const my_exporter: MD_Exporter = new MD_Exporter();
+my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
+```
+
+That is all was needed when you provide a config file and a frontmatter file.
+
+You can do it the other - the long - way:
+
+```ts
+import { MD_Frontmatter } from "longform-markdown-splitter";
+import { MD_Exporter, MD_Exporter_Parameter_Type } from "longform-markdown-splitter";
+import { MD_Transformer_Parameter_Type } from "longform-markdown-splitter";
+import { MD_Splitter_Transformer } from "longform-markdown-splitter";
+import { MD_Splitter_Parameter_Type } from "longform-markdown-splitter";
+import { MD_ObsidianLink_Transformer } from "longform-markdown-splitter";
+import { MD_RemoveTODOS_Transformer } from "longform-markdown-splitter";
 
 
-let splitter: MD_Splitter = new MD_Splitter();
+const exporter: MD_Exporter = new MD_Exporter();
 
-// Placeholder in the Transformers replace_template
-// as pre defined in MD_Transformer_TemplateValues in the md-transformer module:
-// {name_full} {name_suffix} {name}
-var parameter_images: MD_Transformer_Parameter = {
-  tag_obsidian_prefix:"![[",
-  tag_obsidian_suffix: "]]",
-  find_rule: "jpg|png",
-  replace_template: `{{< image src="assets/images/{name_full}" >}}`
-};
-
-var parameter_docs: MD_Transformer_Parameter = {
-  tag_obsidian_prefix:"![[",
-  tag_obsidian_suffix: "]]",
-  find_rule: "pdf|ods|odp",
-  replace_template: `{{< button href="/getthis.php?id={name}" name="download {name} ({name_suffix})" >}}`
-};
-
-splitter.addTransformer(new ObsidianLink_Transformer(parameter_images));
-splitter.addTransformer(new ObsidianLink_Transformer(parameter_docs));
-splitter.addTransformer(new RemoveTODOS_Transformer("- [ ] #TODO "));
-
-// The placeholders result from the definition of MD_FrontmatterType in md-frontmatter
-var frontmatter:MD_Frontmatter = new MD_Frontmatter(`---
+// The placeholders result from the definition of MD_Frontmatter_Type in md-frontmatter
+var frontmatter: MD_Frontmatter = new MD_Frontmatter(`---
 title: "{title}"
 description: ""
 url: /docs/{url_prefix}-{url}/
@@ -223,22 +270,59 @@ weight: {weight}
 toc: true
 ---\n\n`);
 
-// Please adjust the parameters
-let parameter: MD_Splitter_Parameter = {
-  readPath:
-    "test/obsidian-vault/longform.md",
+const exporter_parameter: MD_Exporter_Parameter_Type = {
+  readPath: "test/obsidian-vault/longform.md",
   writePath: "test/hugo-content/",
+  doSubfolders: false,
+  limit: 1990,
+  hasCounter: false,
+  frontmatter: frontmatter,
+  weightBase: 8011,
+  url_prefix: "my-prefix",
+};
+
+// TODO revise ... I don't need frontmatter in both places.
+const parameter_splitter: MD_Splitter_Parameter_Type = {
+  readPath: "test/obsidian-vault/longform.md",
+  writePath: "test/hugo-content-2/",
   pattern: "# ",
   cleanName: "# ",
   limit: 100,
-  hasCounter: true,
-  weightBase: 8011,
-  url_prefix: "my-prefix",
+  hasCounter: false,
+  weightBase: 8000,
+  url_prefix: "",
   doRemoveHeadline: true,
-  frontmatter: frontmatter
+  frontmatter: frontmatter,
 };
 
-splitter.split_longform(parameter);
+const parameter_images: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "![[",
+  tag_obsidian_suffix: "]]",
+  find_rule: "jpg|png",
+  replace_template: `{{< image src="assets/images/{name_full}" >}}`,
+};
+
+const parameter_docs: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "![[",
+  tag_obsidian_suffix: "]]",
+  find_rule: "pdf|ods|odp",
+  replace_template: `{{< button href="/getthis.php?id={name}" name="download {name} ({name_suffix})" >}}`,
+};
+
+const parameter_remove: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "", // TODO optional?
+  tag_obsidian_suffix: "", // TODO optional?
+  find_rule: "- [ ] #TODO ",
+  replace_template: ``,
+};
+
+exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
+exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
+exporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
+exporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
+
+
+exporter.perform_job(exporter_parameter);
 
 ```
 
@@ -249,10 +333,10 @@ The scripts can then be used as follows. In the terminal:
 * `npm run build:ts` - build the library.
 * `npm run watch:ts` - watch and compile on change to javascript.
 
-The compiled files end up in the `transport-scripts-compiled` directory
+The compiled files end up in the `transport-scripts-compiled` directory.
 
 
-## Run the Script in vscode
+## Run the Script in VSCode
 
 * In Visual Studio Code
 * Go to the directory `transport-scripts-compiled`
@@ -270,52 +354,37 @@ Observe the console output on the Output tab. The images and documents shown in 
 ## Build A Custom Transformer 1
 
 ```ts
-import { type MD_Transformer } from "./md-transformer";
+import { MD_Exporter_Parameter_Type } from "src/md-exporter";
+import { MD_Transformer_AbstractBase } from "src/md-transformer";
 
-class My_Transformer implements MD_Transformer {
-
-  private find_rule = "";
-
-  constructor(find_rule:string = "- [ ] "){
-    this.find_rule = find_rule;
-  }
-
-  transform(source: string[], index: number): string | boolean | string[] {
-    if (source[index].indexOf(this.find_rule) >= 0) {
-      console.log(`Transform my stuff : ${source[index]}`);
-      source.splice(index, 1);
-      return true;
-    } else {
-      return false;
-    }
-  }
+export interface MD_Custom_Parameter_Type {
+  custom_property: string;
 }
-```
 
-## Build A Custom Transformer 2
+export class MD_Custom_Transformer extends MD_Transformer_AbstractBase {
 
-A second possibility is to derive from `ObsidianLink_Transformer_Base`. Then some of the preliminary work is already done: The parsing of prefix and suffix, to get the basic `template_values`.
-
-```ts
-import { type MD_Transformer } from "./md-transformer";
-
-class ObsidianLink_Transformer extends ObsidianLink_Transformer_Base {
-
-  transform(source: string[], index: number): string | boolean | string[] {
-    super.transform(source, index);
-
-    if (this.template_values.name_suffix.match(`^(${this.find_rule})$`)) {
-
-      const hugo_template: MD_Template = new MD_Template(this.replace_template);
-
-      source[index] = source[index].replace(
-        this.tag,
-        hugo_template.fill(this.template_values)
-      );
-
+    parameter: MD_Custom_Parameter_Type;
+  
+    constructor(parameter: MD_Custom_Parameter_Type ){
+      super();
+      this.parameter = parameter;
+    }
+  
+    public set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void {
+      super.set_job_parameter(job_paramter); // this is a hack
     }
 
-    return true;
+    transform(source: Array<string>, index: number): Array<string> {
+
+      if (source[index].indexOf(this.parameter.find_rule) >= 0) {
+        console.log(`Transform before: ${source[index]}`);
+        source.splice(index, 1);
+        console.log(`Transform after: ${source[index]}`);
+      }
+
+      return source;
+    }
   }
-}
 ```
+
+You cannot currently call this Transformer from a configuration file, but only if you instantiate it in your script. But I'm still going to build something for it :-)

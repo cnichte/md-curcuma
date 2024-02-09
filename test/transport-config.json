@@ -1,0 +1,63 @@
+{
+  "job_list": [
+    {
+      "job_name": "Example-Job No.1",
+      "job_description": "Example Job Description",
+      "job_parameter": {
+        "readPath": "./test/obsidian-vault/longform.md",
+        "writePath": "./test/hugo-content-1/",
+        "doSubfolders": false,
+        "limit": 100,
+        "useCounter": false
+      },
+      "job_tasks": [
+        {
+          "transformer_class_name": "MD_Frontmatter_Transformer",
+          "transformer_parameter": {
+            "frontmatter_filename": "./test/frontmatter-template.md",
+            "frontmatter": {}
+          }
+        },
+        {
+          "transformer_class_name": "MD_ObsidianLink_Transformer",
+          "transformer_parameter": {
+            "tag_obsidian_prefix": "![[",
+            "tag_obsidian_suffix": "]]",
+            "find_rule": "jpg|png",
+            "replace_template": "{{< lightbox-docs id=\"0\" folder=\"images/kursbuch-sv/{name}/*\" showImageNr=0 >}}"
+          }
+        },
+        {
+          "transformer_class_name": "MD_ObsidianLink_Transformer",
+          "transformer_parameter": {
+            "tag_obsidian_prefix": "![[",
+            "tag_obsidian_suffix": "]]",
+            "find_rule": "pdf|ods|odp",
+            "replace_template": "{{< button href=\"/getthis.php?id={name}\" name=\"download {name} ({name_suffix})\" >}}"
+          }
+        },
+        {
+          "transformer_class_name": "MD_RemoveTODOS_Transformer",
+          "transformer_parameter": {
+            "find_rule": "- [ ] #TODO ",
+            "replace_template": ""
+          }
+        },
+        {
+          "transformer_class_name": "MD_Splitter_Transformer",
+          "transformer_parameter": {
+            "pattern": "# ",
+            "cleanName": "# ",
+            "limit": 100,
+            "hasCounter": false,
+            "weightBase": 8000,
+            "url_prefix": "test-prefix",
+            "doRemoveHeadline": true,
+            "frontmatter_filename": "./test/frontmatter-template.md",
+            "frontmatter": {}
+          }
+        }
+      ]
+    }
+  ]
+}

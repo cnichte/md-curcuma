@@ -1,6 +1,5 @@
-import { MD_Frontmatter, MD_FrontmatterType } from "./md-frontmatter";
-
-var fs = require("fs");
+import { MD_Frontmatter, MD_Frontmatter_Type } from "./md-frontmatter";
+import { MD_Filesystem } from "./md-filesystem";
 
 /**
  * A collection contains everything that makes up a single document.
@@ -8,7 +7,7 @@ var fs = require("fs");
  * @author Carsten Nichte - 2024
  */
 
-export interface MD_Collection_Parameter {
+export interface MD_Collection_Parameter_Type {
   split_row: string;
   cleanName: string;
   url_prefix: string;
@@ -33,10 +32,10 @@ export class MD_Collection {
 
   /**
    * Creates an instance of MD_Collection.
-   * @param {MD_Collection_Parameter} parameter
+   * @param {MD_Collection_Parameter_Type} parameter
    * @memberof MD_Collection
    */
-  constructor(parameter: MD_Collection_Parameter) {
+  constructor(parameter: MD_Collection_Parameter_Type) {
     this.url_prefix = parameter.url_prefix;
 
     this.headline = parameter.split_row.replace(parameter.cleanName, "").trim();
@@ -60,7 +59,7 @@ export class MD_Collection {
 
     var weight = this.weight + parameter.counter;
 
-    var frontmatter_props: MD_FrontmatterType = {
+    var frontmatter_props: MD_Frontmatter_Type = {
       title: this.headline,
       date: this.date,
       url: this.url,
@@ -78,7 +77,7 @@ export class MD_Collection {
 
   /**
    * Add Content to the Collection.
-   * 
+   *
    * @param {string} content
    * @memberof MD_Collection
    */
@@ -89,18 +88,12 @@ export class MD_Collection {
 
   /**
    * Write the Collection to thwe filesystem.
-   * 
+   *
    * @param {string} writePath
    * @memberof MD_Collection
    */
   public write_file(writePath: string): void {
-    fs.writeFileSync(
-      writePath + this.file_name,
-      this.file_content,
-      function (err: any) {
-        if (err) throw err;
-      }
-    );
+    MD_Filesystem.write_file(writePath + this.file_name, this.file_content);
   }
 
   /**
