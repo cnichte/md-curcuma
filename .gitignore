@@ -3,3 +3,4 @@ node_modules
 dist/lib
 md-demo.test.ts
 TODO.md
+md-curcuma-*.zip
