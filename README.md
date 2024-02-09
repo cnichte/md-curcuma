@@ -40,6 +40,9 @@ It would be nice to be able to build customized transformers for different solut
 * However, the script provides information about which images and attachments it expects and where. 
 * It only runs in Backend, not in Browsers.
 
+## NEWS
+
+* npm 
 
 ## Usage
 
@@ -357,11 +360,11 @@ Observe the console output on the Output tab. The images and documents shown in 
 import { MD_Exporter_Parameter_Type } from "src/md-exporter";
 import { MD_Transformer_AbstractBase } from "src/md-transformer";
 
-export interface MD_Custom_Parameter_Type {
+interface MD_Custom_Parameter_Type {
   custom_property: string;
 }
 
-export class MD_Custom_Transformer extends MD_Transformer_AbstractBase {
+class MD_Custom_Transformer extends MD_Transformer_AbstractBase {
 
     parameter: MD_Custom_Parameter_Type;
   
