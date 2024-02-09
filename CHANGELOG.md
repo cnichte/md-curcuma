@@ -6,7 +6,7 @@
 * Load custom Transformers from the config file.
 * More Transformers
     * Cross-references
-    * ...
+* Copy Attachments and Ressources...
 * A Obsidian-Plugin with a nice Graphical-User-Interface. 
 * Add a frontmatter to a single file (or a batch of single files). At the moment, only the splitter does this.
 
