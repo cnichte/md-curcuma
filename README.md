@@ -27,17 +27,17 @@ It would be nice to be able to build customized transformers for different solut
 
 * The splitting should be done on headings: e.g.: `# `
 * The text of the heading is used as the filename
-    * If necessary, with a number in front, if necessary replace special characters url conform
+  * If necessary, with a number in front, if necessary replace special characters url conform
 * Insert frontmatter and initialize correctly.
 * Remove heading (preferably as an option)
 * Replace images with shortcode, e.g:
-    * Obsidian: `![[ein-bild.jpg]]`
-    * Hugo replacement: `{{<image folder="images/ein-bild.jpg" >}}`.
+  * Obsidian: `![[ein-bild.jpg]]`
+  * Hugo replacement: `{{<image folder="images/ein-bild.jpg" >}}`.
+* Copy images and documents on the fly. 
+  * A simulation mode provides information about which images and attachments it expects and where. 
 
 ## Restrictions
 
-* Images and attachments must be provided separately for the time being. You can see in the console-output which files have been requested and where they should be reside. I will add a copy job that also automates this in near future. 
-* However, the script provides information about which images and attachments it expects and where. 
 * It only runs in Backend, not in Browsers.
 
 ## Usage
@@ -66,7 +66,7 @@ The file `transport-config.json`:
       "job_description": "Example Job Description",
       "job_parameter": {
         "readPath": "./test/obsidian-vault/longform.md",
-        "writePath": "./test/hugo-content/",
+        "writePath": "./test/hugo-content-1/",
         "doSubfolders": false,
         "limit": 100,
         "useCounter": false
@@ -85,7 +85,13 @@ The file `transport-config.json`:
             "tag_obsidian_prefix": "![[",
             "tag_obsidian_suffix": "]]",
             "find_rule": "jpg|png",
-            "replace_template": "{{< lightbox-docs id=\"0\" folder=\"images/kursbuch-sv/{name}/*\" showImageNr=0 >}}"
+            "replace_template": "{{< lightbox-docs id=\"0\" folder=\"images/kursbuch-sv/{name}/*\" showImageNr=0 >}}",
+            "copy_task":{
+              "source":"test/obsidian-vault/images/",
+              "target":"test/hugo-content-2/assets/images/{name}/",
+              "simulate":false
+            }
+
           }
         },
         {
@@ -94,7 +100,12 @@ The file `transport-config.json`:
             "tag_obsidian_prefix": "![[",
             "tag_obsidian_suffix": "]]",
             "find_rule": "pdf|ods|odp",
-            "replace_template": "{{< button href=\"/getthis.php?id={name}\" name=\"download {name} ({name_suffix})\" >}}"
+            "replace_template": "{{< button href=\"/getthis.php?id={name}\" name=\"download {name} ({name_suffix})\" >}}",
+            "copy_task":{
+              "source":"test/obsidian-vault/attachments/",
+              "target":"test/hugo-content-2/static/downloads/",
+              "simulate":false
+            }
           }
         },
         {
@@ -114,7 +125,7 @@ The file `transport-config.json`:
             "weightBase": 8000,
             "url_prefix": "test-prefix",
             "doRemoveHeadline": true,
-            "frontmatter_filename": "./frontmatter-template.md",
+            "frontmatter_filename": "./test/frontmatter-template.md",
             "frontmatter": {}
           }
         }
@@ -201,6 +212,8 @@ If you use it inside your Hugo Project, some folders are excluded per default.
 }
 ```
 
+Look in the `test` folder for running examples. 
+
 Create two folders for your scripts:
 
 * `transport-scripts` - holds the typescript source-code
@@ -225,8 +238,6 @@ The ts suffix in `build:ts` separates it from the golag scripts which i name `bu
   * create folder `test/obsidian-fault/` - an put your longform.md in it.
   * create folder `test/hugo-content/` - this is the target directory
 
-
-
 ## Create a Transport-Script 
 
 
@@ -242,19 +253,67 @@ That is all was needed when you provide a config file and a frontmatter file.
 You can do it the other - the long - way:
 
 ```ts
-import { MD_Frontmatter } from "longform-markdown-splitter";
-import { MD_Exporter, MD_Exporter_Parameter_Type } from "longform-markdown-splitter";
-import { MD_Transformer_Parameter_Type } from "longform-markdown-splitter";
-import { MD_Splitter_Transformer } from "longform-markdown-splitter";
-import { MD_Splitter_Parameter_Type } from "longform-markdown-splitter";
-import { MD_ObsidianLink_Transformer } from "longform-markdown-splitter";
-import { MD_RemoveTODOS_Transformer } from "longform-markdown-splitter";
-
+import { MD_CopyTask_Type } from './../src/md-transformer';
+import { MD_Frontmatter } from "../src/md-frontmatter";
+import { MD_Exporter, MD_Exporter_Parameter_Type } from "../src/md-exporter";
+import { MD_Transformer_Parameter_Type } from "../src/md-transformer";
+import { MD_Splitter_Transformer } from "../src/transformer/md-splitter-task";
+import { MD_Splitter_Parameter_Type } from "../src/transformer/md-splitter-task";
+import { MD_ObsidianLink_Transformer } from "../src/transformer/md-obsidian-link-task";
+import { MD_RemoveTODOS_Transformer } from "../src/transformer/md-remove-todos-task";
 
 const exporter: MD_Exporter = new MD_Exporter();
 
+// Basic instructions for MD_Exporter
+
+const exporter_parameter: MD_Exporter_Parameter_Type = {
+  readPath: "test/obsidian-vault/longform.md",
+  writePath: "test/hugo-content-2/",
+  doSubfolders: false,
+  limit: 1990,
+  useCounter: false
+};
+
+const simulate_copy_job = true;
+
+// The tasks to operate. If you add not tasks you have a simple copy job.
+
+const parameter_images: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "![[",
+  tag_obsidian_suffix: "]]",
+  find_rule: "jpg|png",
+  replace_template: `{{< image src="assets/images/{name_full}" >}}`,
+  copy_task: {
+    source:"test/obsidian-vault/images/",
+    target:"test/hugo-content-2/assets/images/{name}/",
+    simulate:simulate_copy_job
+  }
+};
+
+const parameter_docs: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "![[",
+  tag_obsidian_suffix: "]]",
+  find_rule: "pdf|ods|odp",
+  replace_template: `{{< button href="/getthis.php?id={name}" name="download {name} ({name_suffix})" >}}`,
+  copy_task: {
+    source:"test/obsidian-vault/attachments/",
+    target:"test/hugo-content-2/static/downloads/",
+    simulate:simulate_copy_job
+  }
+};
+
+const parameter_remove: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "", // TODO optional?
+  tag_obsidian_suffix: "", // TODO optional?
+  find_rule: "- [ ] #TODO ",
+  replace_template: ``,
+};
+
+// The Markdown-Splitter Task needs a Frontmatter
+
 // The placeholders result from the definition of MD_Frontmatter_Type in md-frontmatter
-var frontmatter: MD_Frontmatter = new MD_Frontmatter(`---
+// A file definition in frontmatter_filename, overwrites frontmatter Property
+var splitter_frontmatter: MD_Frontmatter = new MD_Frontmatter(`---
 title: "{title}"
 description: ""
 url: /docs/{url_prefix}-{url}/
@@ -269,57 +328,22 @@ weight: {weight}
 toc: true
 ---\n\n`);
 
-const exporter_parameter: MD_Exporter_Parameter_Type = {
-  readPath: "test/obsidian-vault/longform.md",
-  writePath: "test/hugo-content/",
-  doSubfolders: false,
-  limit: 1990,
-  hasCounter: false,
-  frontmatter: frontmatter,
-  weightBase: 8011,
-  url_prefix: "my-prefix",
-};
-
-// TODO revise ... I don't need frontmatter in both places.
 const parameter_splitter: MD_Splitter_Parameter_Type = {
-  readPath: "test/obsidian-vault/longform.md",
-  writePath: "test/hugo-content-2/",
   pattern: "# ",
   cleanName: "# ",
   limit: 100,
   hasCounter: false,
   weightBase: 8000,
-  url_prefix: "",
+  url_prefix: "test-prefix",
   doRemoveHeadline: true,
-  frontmatter: frontmatter,
-};
-
-const parameter_images: MD_Transformer_Parameter_Type = {
-  tag_obsidian_prefix: "![[",
-  tag_obsidian_suffix: "]]",
-  find_rule: "jpg|png",
-  replace_template: `{{< image src="assets/images/{name_full}" >}}`,
-};
-
-const parameter_docs: MD_Transformer_Parameter_Type = {
-  tag_obsidian_prefix: "![[",
-  tag_obsidian_suffix: "]]",
-  find_rule: "pdf|ods|odp",
-  replace_template: `{{< button href="/getthis.php?id={name}" name="download {name} ({name_suffix})" >}}`,
-};
-
-const parameter_remove: MD_Transformer_Parameter_Type = {
-  tag_obsidian_prefix: "", // TODO optional?
-  tag_obsidian_suffix: "", // TODO optional?
-  find_rule: "- [ ] #TODO ",
-  replace_template: ``,
+  frontmatter_filename: "", // ./test/frontmatter-template.md
+  frontmatter: splitter_frontmatter
 };
 
 exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
 exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
 exporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
 exporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
-
 
 exporter.perform_job(exporter_parameter);
 

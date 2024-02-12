@@ -8,9 +8,13 @@
 * More Transformers
     * Cross-references
     * ...
-* Copy Attachments and Ressources...
-* A Obsidian-Plugin with a nice Graphical-User-Interface. 
+* A Obsidian-Plugin or standalone App with a nice Graphical-User-Interface. 
 * Add a frontmatter to a single file (or a batch of single files). At the moment, only the splitter does this.
+
+# Release 1.0.6 (2024-02-12)
+
+* comes with a copy-job to transport all the ressoures, images, and attachments
+* The copy-job has a simulate property, so you can check if everything will land in the right places.
 
 # Release 1.0.5 (2024-02-09)
 

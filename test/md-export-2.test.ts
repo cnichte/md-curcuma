@@ -1,3 +1,4 @@
+import { MD_CopyTask_Type } from './../src/md-transformer';
 import { MD_Frontmatter } from "../src/md-frontmatter";
 import { MD_Exporter, MD_Exporter_Parameter_Type } from "../src/md-exporter";
 import { MD_Transformer_Parameter_Type } from "../src/md-transformer";
@@ -18,6 +19,8 @@ const exporter_parameter: MD_Exporter_Parameter_Type = {
   useCounter: false
 };
 
+const simulate_copy_job = true;
+
 // The tasks to operate. If you add not tasks you have a simple copy job.
 
 const parameter_images: MD_Transformer_Parameter_Type = {
@@ -25,6 +28,11 @@ const parameter_images: MD_Transformer_Parameter_Type = {
   tag_obsidian_suffix: "]]",
   find_rule: "jpg|png",
   replace_template: `{{< image src="assets/images/{name_full}" >}}`,
+  copy_task: {
+    source:"test/obsidian-vault/images/",
+    target:"test/hugo-content-2/assets/images/{name}/",
+    simulate:simulate_copy_job
+  }
 };
 
 const parameter_docs: MD_Transformer_Parameter_Type = {
@@ -32,6 +40,11 @@ const parameter_docs: MD_Transformer_Parameter_Type = {
   tag_obsidian_suffix: "]]",
   find_rule: "pdf|ods|odp",
   replace_template: `{{< button href="/getthis.php?id={name}" name="download {name} ({name_suffix})" >}}`,
+  copy_task: {
+    source:"test/obsidian-vault/attachments/",
+    target:"test/hugo-content-2/static/downloads/",
+    simulate:simulate_copy_job
+  }
 };
 
 const parameter_remove: MD_Transformer_Parameter_Type = {

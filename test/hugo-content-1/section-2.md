@@ -2,13 +2,13 @@
 title: "Section 2"
 description: ""
 url: /docs/test-prefix-section-2/
-date: 2024-02-09T19:01
+date: 2024-02-12T13:14
 draft: false
 images: []
 menu:
   docs:
     parent: "docs-9602b15bad02600f3883f55e2ade6b81"
-    identifier: "test-prefix-section-2-f18ee876-1a19-428e-abd9-3cac98b5576e"
+    identifier: "test-prefix-section-2-b72e21dc-3d89-4f90-87a5-b52395c41c45"
 weight: 8014
 toc: true
 ---
@@ -19,8 +19,7 @@ Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lo
 
 Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.   
 
-{{< lightbox-docs id="0" folder="images/kursbuch-sv/image-1/*" showImageNr=0 >}}
-
+{{< lightbox-docs id="0" folder="images/kursbuch-sv/test-image-04/*" showImageNr=0 >}}
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. 
 
@@ -30,8 +29,10 @@ Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie co
 
 Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.   
 
-{{< button href="/getthis.php?id=document-1" name="download document-1 (pdf)" >}}
+{{< button href="/getthis.php?id=Document-01" name="download Document-01 (pdf)" >}}
 
 Consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+
+{{< button href="/getthis.php?id=Document-02" name="download Document-02 (pdf)" >}}

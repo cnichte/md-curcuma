@@ -1,6 +1,8 @@
+# my personal excludes
 .DS_Store
 node_modules
 dist/lib
 md-demo.test.ts
 TODO.md
+README-dev.md
 md-curcuma-*.zip
