@@ -21,6 +21,17 @@ exporter.addTransformer(new MyTransformer(params));
 my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
 ```
 
+# Release 1.0.8 (2024-02-13)
+
+The Argh! Update.
+
+* Activated test 2
+* Transformer-API missed some Classes - sorry for thet. They are noy published to outside World:
+    * MD_Frontmatter_Template
+    * MD_Frontmatter_Mapper
+    * type MD_Frontmatter_Type
+    * type FileContent_Interface 
+
 # Release 1.0.7 (2024-02-13)
 
 For a working example take a look in the folder `test`

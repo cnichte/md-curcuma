@@ -2,7 +2,7 @@ export { MD_Collection, type MD_Collection_Parameter_Type } from "./md-collectio
 export { MD_CopyJob } from "./md-copy-job";
 export { MD_Exporter, type MD_Exporter_Parameter_Type } from  "./md-exporter";
 export { MD_Filesystem } from "./md-filesystem";
-export { MD_Frontmatter_Template, type MD_Frontmatter_Type } from "./md-frontmatter";
+export { MD_Frontmatter_Template, MD_Frontmatter_Mapper, type MD_Frontmatter_Type, type FileContent_Interface } from "./md-frontmatter";
 export { MD_ObserverSubject, type MD_Observer_Interface } from "./md-observer";
 export { MD_Template } from "./md-template";
 
