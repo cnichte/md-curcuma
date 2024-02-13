@@ -255,14 +255,18 @@ That is all was needed when you provide a config file and a frontmatter file.
 You can do it the other - the long - way:
 
 ```ts
-import { MD_CopyTask_Type } from "longform-markdown-splitter";
-import { MD_Frontmatter } from "longform-markdown-splitter";
-import { MD_Exporter, MD_Exporter_Parameter_Type } from "longform-markdown-splitter";
-import { MD_Transformer_Parameter_Type } from "longform-markdown-splitter";
-import { MD_Splitter_Transformer } from "longform-markdown-splitter";
-import { MD_Splitter_Parameter_Type } from "longform-markdown-splitter";
-import { MD_ObsidianLink_Transformer } from "longform-markdown-splitter";
-import { MD_RemoveTODOS_Transformer } from "longform-markdown-splitter";
+import {
+  MD_Frontmatter_Template,
+  MD_ObsidianLink_Transformer,
+  MD_RemoveTODOS_Transformer,
+  MD_Splitter_Parameter_Type,
+  MD_Transformer_Parameter_Type,
+} from "longform-markdown-splitter";
+import {
+  MD_Exporter,
+  MD_Exporter_Parameter_Type,
+} from "longform-markdown-splitter/dist/lib/md-exporter";
+
 
 const exporter: MD_Exporter = new MD_Exporter();
 
