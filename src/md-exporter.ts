@@ -1,13 +1,24 @@
+/**
+ * MD_Exporter
+ * 
+ * @author Carsten Nichte
+ */
 import * as fs from "fs";
 import { MD_Filesystem } from "./md-filesystem";
 import { MD_Transformer_Interface } from "./md-transformer";
 import { MD_Transformer_Factory } from "./md-transformer-factory";
 import { MD_Job_Type, MD_JobTasks_Type } from "./md-job";
+import { MD_Frontmatter_Mapper } from "./md-frontmatter";
+import { MD_Observer_Interface } from "./md-observer";
+
+export enum MD_EXPORTER_COMMANDS {
+  DO_NOT_WRITE_FILES = "do-not-write-file"
+}
 
 export interface MD_Exporter_Parameter_Type {
   readPath: string; // Datei oder Verzeichnis
   writePath: string; // Verzeichnis
-
+  simulate: boolean;
   doSubfolders: boolean;
   limit: number; // greift nur bei Verzeichnis
   useCounter: boolean;
@@ -19,8 +30,9 @@ export interface MD_Exporter_Parameter_Type {
  * @export
  * @class MD_Exporter
  */
-export class MD_Exporter {
+export class MD_Exporter implements MD_Observer_Interface {
   private transformers: Array<MD_Transformer_Interface> = [];
+  private do_not_write_file: boolean = false;
 
   /**
    * Register a Transformer.
@@ -33,6 +45,16 @@ export class MD_Exporter {
   }
 
   /**
+   * implementing of the MD_Observer_Interface.
+   * MD_Exporter listens to messages from the transformers.
+   */
+  do_command(from:string, to: string, command: string,): void {
+    if (command === MD_EXPORTER_COMMANDS.DO_NOT_WRITE_FILES) {
+      this.do_not_write_file = true;
+    }
+  }
+
+  /**
    ** Runs a job.
    *
    * @param {MD_Exporter_Parameter_Type} job_parameter
@@ -40,7 +62,11 @@ export class MD_Exporter {
    */
   public perform_job(job_parameter: MD_Exporter_Parameter_Type): void {
     if (MD_Filesystem.isFolder(job_parameter.readPath)) {
-      var file_list: Array<string> = MD_Filesystem.get_files_list(job_parameter.readPath);
+      var file_list: Array<string> = MD_Filesystem.get_files_list(
+        job_parameter.readPath
+      );
+
+      console.log(file_list);
 
       file_list.forEach((file: string) => {
         this.transform_and_write(
@@ -61,7 +87,7 @@ export class MD_Exporter {
   }
 
   /**
-   * Tansform and write a markdown document.
+   * Transform and write a markdown document.
    * I look at each paragraph individually.
    *
    * @private
@@ -75,11 +101,24 @@ export class MD_Exporter {
     job_parameter: MD_Exporter_Parameter_Type,
     md_content: string
   ): void {
+    // TODO analysiere Quelle (und Ziel) auf Frontmatter
+    const fmm = new MD_Frontmatter_Mapper("", "");
+    if (fmm.has_frontmatter(md_content)) {
+      console.log("###########################");
+      console.log("SOURCE FILE HAS FRONTMATTER");
+      console.log("###########################");
+    }
+
     var md_content_array: Array<string> = md_content.split("\n");
 
     // I use the transformers on every paragraph.
     for (let transformer of this.transformers) {
+
       transformer.set_job_parameter(job_parameter);
+
+      // listen to messages from the transformers
+      transformer.addObserver(this);
+
       for (var i = 0; i < md_content_array.length; i++) {
         transformer.transform(md_content_array, i);
       }
@@ -88,12 +127,37 @@ export class MD_Exporter {
     // TODO I don't actually want to write the entire file when splitting.
     // TODO perhaps i want to transform also the filename.
     const filename = MD_Filesystem.get_filename_from(source_file);
-    const path_filename = MD_Filesystem.concat_path_filename(
+
+    const path_target_filename = MD_Filesystem.concat_path_filename(
       job_parameter.writePath,
       filename
     );
 
-    MD_Filesystem.write_file(path_filename, md_content_array.join("\n"));
+    MD_Filesystem.ensure_path(job_parameter.writePath, job_parameter.simulate);
+
+    if (!job_parameter.simulate) {
+      // Here, of course, the option of forcing the disk can be useful.
+      if(!this.do_not_write_file){
+        if (MD_Filesystem.is_file_modified(source_file, path_target_filename)) {
+          MD_Filesystem.write_file(
+            path_target_filename,
+            md_content_array.join("\n")
+          );
+        }
+      }
+
+    } else {
+      console.log("###########################");
+      console.log(source_file);
+      console.log(path_target_filename);
+      console.log(
+        `modified:  ${MD_Filesystem.is_file_modified(
+          source_file,
+          path_target_filename
+        )}`
+      );
+      console.log("###########################");
+    }
   }
 
   /**

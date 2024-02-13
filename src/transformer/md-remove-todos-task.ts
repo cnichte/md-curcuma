@@ -1,4 +1,5 @@
 import { MD_Exporter_Parameter_Type } from "src/md-exporter";
+import { MD_Observer_Interface } from "src/md-observer";
 import { MD_Transformer_AbstractBase, MD_Transformer_Interface, MD_Transformer_Parameter_Type } from "src/md-transformer";
 
 /**
@@ -22,6 +23,10 @@ export class MD_RemoveTODOS_Transformer extends MD_Transformer_AbstractBase {
       this.parameter = parameter;
     }
   
+    public add_observer(observer: MD_Observer_Interface){
+      this.observer_subject.add_observer(observer);
+    }
+
     public set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void {
       super.set_job_parameter(job_paramter);
       // Das ist ein Hack.
@@ -37,7 +42,7 @@ export class MD_RemoveTODOS_Transformer extends MD_Transformer_AbstractBase {
      * @return {*}  {Array<string>}
      * @memberof MD_RemoveTODOS_Transformer
      */
-    transform(source: Array<string>, index: number): Array<string> {
+    public transform(source: Array<string>, index: number): Array<string> {
 
       if (source[index].indexOf(this.parameter.find_rule) >= 0) {
         console.log(`Transform TODO (remove) before: ${source[index]}`);

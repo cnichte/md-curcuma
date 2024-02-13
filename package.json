@@ -30,11 +30,12 @@
   "homepage": "https://gitlab.com/glimpse-of-life/longform-markdown-splitter",
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.11.16",
-    "tsx": "^4.7.0",
+    "@types/node": "^20.11.17",
+    "tsx": "^4.7.1",
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "front-matter": "^4.0.2",
     "fs-extra": "^11.2.0"
   }
 }

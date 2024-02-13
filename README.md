@@ -45,6 +45,8 @@ It would be nice to be able to build customized transformers for different solut
 Write some Typsecript like that:
 
 ```ts
+import { MD_Exporter } from "longform-markdown-splitter";
+
 const my_exporter: MD_Exporter = new MD_Exporter();
 my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
 ```
@@ -253,14 +255,14 @@ That is all was needed when you provide a config file and a frontmatter file.
 You can do it the other - the long - way:
 
 ```ts
-import { MD_CopyTask_Type } from './../src/md-transformer';
-import { MD_Frontmatter } from "../src/md-frontmatter";
-import { MD_Exporter, MD_Exporter_Parameter_Type } from "../src/md-exporter";
-import { MD_Transformer_Parameter_Type } from "../src/md-transformer";
-import { MD_Splitter_Transformer } from "../src/transformer/md-splitter-task";
-import { MD_Splitter_Parameter_Type } from "../src/transformer/md-splitter-task";
-import { MD_ObsidianLink_Transformer } from "../src/transformer/md-obsidian-link-task";
-import { MD_RemoveTODOS_Transformer } from "../src/transformer/md-remove-todos-task";
+import { MD_CopyTask_Type } from "longform-markdown-splitter";
+import { MD_Frontmatter } from "longform-markdown-splitter";
+import { MD_Exporter, MD_Exporter_Parameter_Type } from "longform-markdown-splitter";
+import { MD_Transformer_Parameter_Type } from "longform-markdown-splitter";
+import { MD_Splitter_Transformer } from "longform-markdown-splitter";
+import { MD_Splitter_Parameter_Type } from "longform-markdown-splitter";
+import { MD_ObsidianLink_Transformer } from "longform-markdown-splitter";
+import { MD_RemoveTODOS_Transformer } from "longform-markdown-splitter";
 
 const exporter: MD_Exporter = new MD_Exporter();
 

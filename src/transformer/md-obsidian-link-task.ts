@@ -9,6 +9,7 @@ import {
   MD_Transformer_Parameter_Type,
   MD_Transformer_TemplateValues_Type,
 } from "src/md-transformer";
+import { MD_Observer_Interface } from "src/md-observer";
 
 /**
  ** Replace in Obsidian Wikilink, oder Markdownlink with Hugo Shortcode.
@@ -61,6 +62,18 @@ export class MD_ObsidianLink_Transformer_Base extends MD_Transformer_AbstractBas
 
   public set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void {
     super.set_job_parameter(job_paramter);
+
+    // parent job-property overwrites copy_task property
+    // TODO simulate_job overwrites the simulate_copy_job property, if:
+    // job   copy   -> result in copy_job simulation
+    // false false     false
+    // false true      true
+    // true  false     true
+    // true  true      true
+    // TODO das geht so nicht... da muss ein separater state her...
+    // todo + umzug in superklasse
+    // this.copy_task.simulate = this.copy_task.simulate && this.job_parameter.simulate;
+
     // Das ist ein Hack.
     //? Eigentlich ist die Metode ja in der abstrakten Basisklasse vorhanden.
     // Sie wird aber nicht erkannt bei übergabe als Parameter. zB: function(task:MD_Transformer_Interface)
@@ -113,7 +126,6 @@ export class MD_ObsidianLink_Transformer_Base extends MD_Transformer_AbstractBas
   name        : ${this.template_values.name}
   name_suffix : ${this.template_values.name_suffix}
   copy_task   : simulate:${this.copy_task.simulate}, source:'${this.copy_task.source}', target:'${this.copy_task.target}'`;
-
   }
 }
 
@@ -126,12 +138,17 @@ export class MD_ObsidianLink_Transformer_Base extends MD_Transformer_AbstractBas
  * - to:   {{< button href="/getthis.php?id=${this.name}" name="download ${this.name} (${this.name_suffix})" >}}`
  * - from: ![[my-image.jpg]]
  * - to:   {{< lightbox-docs id="0" folder="images/kursbuch-vs/my-image/*" showImageNr=0 >}}
- * 
+ *
  * @export
  * @class MD_ObsidianLink_Transformer
  * @extends {MD_ObsidianLink_Transformer_Base}
  */
 export class MD_ObsidianLink_Transformer extends MD_ObsidianLink_Transformer_Base {
+
+  public add_observer(observer: MD_Observer_Interface){
+    this.observer_subject.add_observer(observer);
+  }
+
   /**
    * The transform method is called by MD_Exporter.
    * @param {string[]} source
@@ -139,7 +156,7 @@ export class MD_ObsidianLink_Transformer extends MD_ObsidianLink_Transformer_Bas
    * @return {*}  (Array<string>)
    * @memberof MD_ObsidianLink_Transformer
    */
-  transform(source: Array<string>, index: number): Array<string> {
+  public transform(source: Array<string>, index: number): Array<string> {
     super.transform(source, index);
 
     if (this.template_values.name_suffix.match(`^(${this.find_rule})$`)) {
@@ -156,6 +173,16 @@ export class MD_ObsidianLink_Transformer extends MD_ObsidianLink_Transformer_Bas
 
       console.log(`item after  : ${source[index]}`);
       console.log(``);
+
+      // parent job-property overwrites copy_task property
+      // TODO simulate_job overwrites the simulate_copy_job property, if:
+      // job   copy   -> result in copy_job simulation
+      // false false     false
+      // false true      true
+      // true  false     true
+      // true  true      true
+      this.copy_task.simulate =
+        this.copy_task.simulate && this.job_parameter.simulate;
 
       MD_CopyJob.perform(this.copy_task, this.template_values);
     }

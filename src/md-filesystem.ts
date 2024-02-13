@@ -20,10 +20,36 @@ import * as fsextra from "fs-extra";
    */
   static copy_file(source: string, target: string, simulate: boolean = false) {
     if (!simulate) {
-      fsextra.copySync(source, target);
-      console.log(`copy_file from ${source} to ${target}`);
+      if (MD_Filesystem.is_file_exist(source)) {
+        if (
+          MD_Filesystem.is_file_exist(target) &&
+          MD_Filesystem.is_file_modified(source, target)
+        ) {
+          fsextra.copySync(source, target);
+          console.log(`copy_file from ${source} to ${target}`);
+        } else {
+          console.log(`copyjob: source file not modified '${source}'`);
+        }
+      } else {
+        console.log(`copyjob: source file doesnt exist '${source}'`);
+      }
     } else {
       console.log(`copy_file (simulated) from ${source} to ${target}`);
+      if (MD_Filesystem.is_file_exist(source)) {
+        console.log(`source exist: ${source}.`);
+      } else {
+        console.log(`source exist not: ${source}.`);
+      }
+      if (MD_Filesystem.is_file_exist(target)) {
+        console.log(`target exist: ${target}.`);
+      } else {
+        console.log(`target exist not: ${target}.`);
+      }
+      if (MD_Filesystem.is_file_modified(source, target)) {
+        console.log(`source is modified: ${target}.`);
+      } else {
+        console.log(`source not modified: ${target}.`);
+      }
     }
   }
 
@@ -55,6 +81,22 @@ import * as fsextra from "fs-extra";
     } else {
       return false;
     }
+  }
+
+  public static is_file_modified(
+    file_source: string,
+    file_target: string
+  ): boolean {
+    const stats_source = fs.statSync(file_source);
+    const mtime_source = stats_source.mtime;
+
+    const stats_target = fs.statSync(file_target);
+    const mtime_target = stats_target.mtime;
+
+    console.log(
+      `File data last modified, source: ${mtime_source}, target: ${mtime_target}`
+    );
+    return mtime_source === mtime_target;
   }
 
   public static get_filename_from(my_path_filename: string): string {
@@ -138,10 +180,10 @@ import * as fsextra from "fs-extra";
     files: Array<string> = []
   ): Array<string> {
     // Get an array of all files and directories in the passed directory using fs.readdirSync
-    const fileList = fs.readdirSync(dir, { withFileTypes: true }); // has a recursive: true
+    const fileList:fs.Dirent[] = fs.readdirSync(dir, { withFileTypes: true }); // has a recursive: true
     // Create the full path of the file/directory by concatenating the passed directory and file/directory name
     for (const file of fileList) {
-      const name = `${dir}/${file}`;
+      const name = `${dir}/${file.name}`;
       // Check if the current file/directory is a directory using fs.statSync
       if (fs.statSync(name).isDirectory()) {
         // If it is a directory, recursively call the getFiles function with the directory path and the files array
@@ -166,6 +208,7 @@ import * as fsextra from "fs-extra";
 
   public static write_file(writePath: string, content: string): void {
     // path + filename;
+    
     try {
       console.log(`Write File ${writePath}`);
       fs.writeFileSync(writePath, content, "utf8");

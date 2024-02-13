@@ -6,6 +6,7 @@
       "job_parameter": {
         "readPath": "./test/obsidian-vault/longform.md",
         "writePath": "./test/hugo-content-1/",
+        "simulate": false,
         "doSubfolders": false,
         "limit": 100,
         "useCounter": false

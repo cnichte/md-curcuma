@@ -16,7 +16,7 @@ export class MD_CopyJob {
    */
   static perform(
     copy_task: MD_CopyTask_Type,
-    template_values: MD_Transformer_TemplateValues_Type,
+    template_values: MD_Transformer_TemplateValues_Type
   ): void {
     if (copy_task !== undefined && copy_task !== null) {
       // TODO Discovery: Should also search in Obsidian Vault subdirectories.
@@ -41,17 +41,10 @@ export class MD_CopyJob {
         target_path,
         target_filename
       );
+      
+      // if source exist, and is modified.
+      MD_Filesystem.copy_file(source, target, copy_task.simulate);
 
-      if (MD_Filesystem.is_file_exist(source)) {
-        if (source.length > 0 && target.length > 0) {
-          MD_Filesystem.copy_file(source, target, copy_task.simulate);
-        }
-        {
-          // console.log('copyjob: source or target missing!');
-        }
-      } else {
-        console.log(`copyjob: source file doesnt exist '${source}' `);
-      }
     } else {
       console.log("copyjob: no job defined.");
     }

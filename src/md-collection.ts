@@ -1,4 +1,4 @@
-import { MD_Frontmatter, MD_Frontmatter_Type } from "./md-frontmatter";
+import { MD_Frontmatter_Template, MD_Frontmatter_Type } from "./md-frontmatter";
 import { MD_Filesystem } from "./md-filesystem";
 
 /**
@@ -13,7 +13,7 @@ export interface MD_Collection_Parameter_Type {
   url_prefix: string;
   useCounter: boolean;
   counter: number;
-  frontmatter: MD_Frontmatter;
+  frontmatter: MD_Frontmatter_Template;
 }
 
 export class MD_Collection {

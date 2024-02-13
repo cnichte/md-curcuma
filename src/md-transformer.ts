@@ -12,6 +12,7 @@
  */
 
 import { MD_Exporter_Parameter_Type } from "./md-exporter";
+import { MD_Observer_Interface, MD_ObserverSubject } from "./md-observer";
 
 export interface MD_CopyTask_Type {
   source:string;
@@ -55,15 +56,21 @@ export interface MD_Transformer_Interface {
   ): Array<string>;
 
   set_job_parameter(job_paramter:MD_Exporter_Parameter_Type):void;
+  addObserver(observer: MD_Observer_Interface):void;
 }
 
 export abstract class MD_Transformer_AbstractBase implements MD_Transformer_Interface {
   
   protected job_parameter:MD_Exporter_Parameter_Type;
-
+  protected observer_subject: MD_ObserverSubject = new MD_ObserverSubject(); 
+  
   abstract transform(source: Array<string>, index: number):Array<string>;
 
   public set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void {
     this.job_parameter = job_paramter;
+  }
+
+  public addObserver(observer: MD_Observer_Interface):void {
+    this.observer_subject.add_observer(observer);
   }
 }

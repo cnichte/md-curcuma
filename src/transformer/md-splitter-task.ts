@@ -1,8 +1,9 @@
 import { MD_Collection, MD_Collection_Parameter_Type } from "src/md-collection";
-import { MD_Exporter_Parameter_Type } from "src/md-exporter";
+import { MD_EXPORTER_COMMANDS, MD_Exporter_Parameter_Type } from "src/md-exporter";
 import { MD_Filesystem } from "src/md-filesystem";
-import { MD_Frontmatter } from "src/md-frontmatter";
-import { MD_Transformer_AbstractBase, MD_Transformer_Interface } from "src/md-transformer";
+import { MD_Frontmatter_Template } from "src/md-frontmatter";
+import { MD_Observer_Interface } from "src/md-observer";
+import { MD_Transformer_AbstractBase } from "src/md-transformer";
 
 export interface MD_Splitter_Parameter_Type {
   pattern: string;
@@ -13,7 +14,7 @@ export interface MD_Splitter_Parameter_Type {
   url_prefix: string;
   doRemoveHeadline: boolean;
   frontmatter_filename:string;
-  frontmatter: MD_Frontmatter;
+  frontmatter: MD_Frontmatter_Template;
 }
 
 export class MD_Splitter_Transformer extends MD_Transformer_AbstractBase {
@@ -28,7 +29,7 @@ export class MD_Splitter_Transformer extends MD_Transformer_AbstractBase {
 
     // file overwrites property parameter.frontmatter 
     if(parameter.frontmatter_filename.length>0 && MD_Filesystem.is_file_exist(parameter.frontmatter_filename)){
-      const frontmatter: MD_Frontmatter = new MD_Frontmatter("");
+      const frontmatter: MD_Frontmatter_Template = new MD_Frontmatter_Template("");
       frontmatter.load(parameter.frontmatter_filename);
       parameter.frontmatter = frontmatter;
     }
@@ -37,8 +38,12 @@ export class MD_Splitter_Transformer extends MD_Transformer_AbstractBase {
   public set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void {
     super.set_job_parameter(job_paramter);
     // Das ist ein Hack.
-    //? Eigentlich ist die Metode ja in der abstrakten Basisklasse vorhanden. 
+    //? Eigentlich ist die Methode ja in der abstrakten Basisklasse vorhanden. 
     // Sie wird aber nicht erkannt bei übergabe als Parameter. zB: function(task:MD_Transformer_Interface)
+  }
+
+  public addObserver(observer: MD_Observer_Interface) {
+    super.addObserver(observer);
   }
   
   /**
@@ -49,7 +54,7 @@ export class MD_Splitter_Transformer extends MD_Transformer_AbstractBase {
    * @return {*}  {Array<string>}
    * @memberof MD_Splitter_Transformer
    */
-  transform(source: Array<string>, index: number): Array<string> {
+  public transform(source: Array<string>, index: number): Array<string> {
     //
     // Record change...
     // Found a heading to split up
@@ -92,6 +97,9 @@ export class MD_Splitter_Transformer extends MD_Transformer_AbstractBase {
     if (this.collection !== null && index==source.length-1) {
        this.collection.write_file(this.job_parameter.writePath);
     }
+
+    // inform MD_Export not to write the entire file after splitting ist up.
+    this.observer_subject.notify_all("md-splitter-task", "md-exporter",  MD_EXPORTER_COMMANDS.DO_NOT_WRITE_FILES);
 
     return source;
   }
