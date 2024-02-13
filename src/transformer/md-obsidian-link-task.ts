@@ -1,15 +1,14 @@
-import { MD_CopyJob } from "src/md-copy-job";
-import { MD_CopyTask_Type } from "./../md-transformer";
-import { MD_Exporter_Parameter_Type } from "src/md-exporter";
-import { MD_Filesystem } from "src/md-filesystem";
-import { MD_Template } from "src/md-template";
+import { MD_CopyJob } from "../md-copy-job";
+import { MD_CopyTask_Type } from "../md-transformer";
+import { MD_Exporter_Parameter_Type } from "../md-exporter";
+import { MD_Template } from "../md-template";
 import {
   MD_Transformer_AbstractBase,
   MD_Transformer_Interface,
   MD_Transformer_Parameter_Type,
   MD_Transformer_TemplateValues_Type,
-} from "src/md-transformer";
-import { MD_Observer_Interface } from "src/md-observer";
+} from "../md-transformer";
+import { MD_Observer_Interface } from "../md-observer";
 
 /**
  ** Replace in Obsidian Wikilink, oder Markdownlink with Hugo Shortcode.

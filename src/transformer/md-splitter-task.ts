@@ -1,9 +1,9 @@
-import { MD_Collection, MD_Collection_Parameter_Type } from "src/md-collection";
-import { MD_EXPORTER_COMMANDS, MD_Exporter_Parameter_Type } from "src/md-exporter";
-import { MD_Filesystem } from "src/md-filesystem";
-import { MD_Frontmatter_Template } from "src/md-frontmatter";
-import { MD_Observer_Interface } from "src/md-observer";
-import { MD_Transformer_AbstractBase } from "src/md-transformer";
+import { MD_Collection, MD_Collection_Parameter_Type } from "../md-collection";
+import { MD_EXPORTER_COMMANDS, MD_Exporter_Parameter_Type } from "../md-exporter";
+import { MD_Filesystem } from "../md-filesystem";
+import { MD_Frontmatter_Template } from "../md-frontmatter";
+import { MD_Observer_Interface } from "../md-observer";
+import { MD_Transformer_AbstractBase } from "../md-transformer";
 
 export interface MD_Splitter_Parameter_Type {
   pattern: string;

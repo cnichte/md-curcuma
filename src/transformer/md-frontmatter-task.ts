@@ -1,10 +1,10 @@
-import { MD_Exporter_Parameter_Type } from "src/md-exporter";
-import { MD_Filesystem } from "src/md-filesystem";
-import { MD_Frontmatter_Template } from "src/md-frontmatter";
-import { MD_Observer_Interface } from "src/md-observer";
+import { MD_Exporter_Parameter_Type } from "../md-exporter";
+import { MD_Filesystem } from "../md-filesystem";
+import { MD_Frontmatter_Template } from "../md-frontmatter";
+import { MD_Observer_Interface } from "../md-observer";
 import {
   MD_Transformer_AbstractBase,
-} from "src/md-transformer";
+} from "../md-transformer";
 
 export interface MD_Frontmatter_Parameter_Type {
   frontmatter_filename: string;

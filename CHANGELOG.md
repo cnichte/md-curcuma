@@ -21,6 +21,14 @@ exporter.addTransformer(new MyTransformer(params));
 my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
 ```
 
+
+# Release 1.0.10 (2024-02-13)
+# Release 1.0.9 (2024-02-13)
+ 
+* Another Argh! Update.
+* Types (d.ts) missing
+* fixed corrupt relative paths
+
 # Release 1.0.8 (2024-02-13)
 
 The Argh! Update.

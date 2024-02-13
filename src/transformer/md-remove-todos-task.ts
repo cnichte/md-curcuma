@@ -1,6 +1,6 @@
-import { MD_Exporter_Parameter_Type } from "src/md-exporter";
-import { MD_Observer_Interface } from "src/md-observer";
-import { MD_Transformer_AbstractBase, MD_Transformer_Interface, MD_Transformer_Parameter_Type } from "src/md-transformer";
+import { MD_Exporter_Parameter_Type } from "../md-exporter";
+import { MD_Observer_Interface } from "../md-observer";
+import { MD_Transformer_AbstractBase, MD_Transformer_Interface, MD_Transformer_Parameter_Type } from "../md-transformer";
 
 /**
  * Removes a paragraph beginning with - [ ] #TODO or a custom find_rule
