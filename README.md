@@ -265,7 +265,7 @@ import {
 import {
   MD_Exporter,
   MD_Exporter_Parameter_Type,
-} from "longform-markdown-splitter/dist/lib/md-exporter";
+} from "longform-markdown-splitter";
 
 
 const exporter: MD_Exporter = new MD_Exporter();
@@ -284,6 +284,9 @@ const simulate_copy_job = true;
 
 // The tasks to operate. If you add not tasks you have a simple copy job.
 
+// Placeholders in the Transformer-Template
+// as pre defined in MD_Transformer_TemplateValues_Type in the md-transformer module:
+// {name_full} {name_suffix} {name}
 const parameter_images: MD_Transformer_Parameter_Type = {
   tag_obsidian_prefix: "![[",
   tag_obsidian_suffix: "]]",

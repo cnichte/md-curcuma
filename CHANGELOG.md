@@ -21,6 +21,7 @@ exporter.addTransformer(new MyTransformer(params));
 my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
 ```
 
+# Release 1.0.12 (2024-02-13) 
 # Release 1.0.11 (2024-02-13) 
 
 * updated READ_ME.md
