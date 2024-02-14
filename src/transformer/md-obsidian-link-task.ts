@@ -9,6 +9,7 @@ import {
   MD_Transformer_TemplateValues_Type,
 } from "../md-transformer";
 import { MD_Observer_Interface } from "../md-observer";
+import { MD_FileContent_Interface } from "src/md-frontmatter";
 
 /**
  ** Replace in Obsidian Wikilink, oder Markdownlink with Hugo Shortcode.
@@ -81,13 +82,13 @@ export class MD_ObsidianLink_Transformer_Base extends MD_Transformer_AbstractBas
   /**
    * The transform method is called by MD_Exporter.
    *
-   * @param {string[]} source
+   * @param {MD_FileContent_Interface} file_content
    * @param {number} index
    * @return {*}  {(string[])}
    * @memberof MD_ObsidianLink_Transformer_Base
    */
-  public transform(source: string[], index: number): string[] {
-    let item = source[index];
+  public transform(file_content: MD_FileContent_Interface, index: number): MD_FileContent_Interface {
+    let item = file_content.body_array[index];
 
     this.reset();
 
@@ -114,8 +115,9 @@ export class MD_ObsidianLink_Transformer_Base extends MD_Transformer_AbstractBas
         );
     } // "![["
 
-    return source;
+    return file_content;
   }
+
 
   protected toString(what: string): string {
     return `
@@ -124,7 +126,7 @@ export class MD_ObsidianLink_Transformer_Base extends MD_Transformer_AbstractBas
   name_full   : ${this.template_values.name_full}
   name        : ${this.template_values.name}
   name_suffix : ${this.template_values.name_suffix}
-  copy_task   : simulate:${this.copy_task.simulate}, source:'${this.copy_task.source}', target:'${this.copy_task.target}'`;
+  copy_task   : ${ MD_CopyJob.toString(this)}`;
   }
 }
 
@@ -155,22 +157,22 @@ export class MD_ObsidianLink_Transformer extends MD_ObsidianLink_Transformer_Bas
    * @return {*}  (Array<string>)
    * @memberof MD_ObsidianLink_Transformer
    */
-  public transform(source: Array<string>, index: number): Array<string> {
-    super.transform(source, index);
+  public transform(file_content: MD_FileContent_Interface, index: number): MD_FileContent_Interface {
+    super.transform(file_content, index);
 
     if (this.template_values.name_suffix.match(`^(${this.find_rule})$`)) {
       // match(/^(pdf|ods|odp)$/)  oder match('^(pdf|ods|odp)$')
       console.log(this.toString(`find rule '${this.find_rule}'`));
-      console.log(`item before : ${source[index]}`);
+      console.log(`item before : ${file_content.body_array[index]}`);
 
       const hugo_template: MD_Template = new MD_Template(this.replace_template);
 
-      source[index] = source[index].replace(
+      file_content.body_array[index] = file_content.body_array[index].replace(
         this.tag,
         hugo_template.fill(this.template_values)
       );
 
-      console.log(`item after  : ${source[index]}`);
+      console.log(`item after  : ${file_content.body_array[index]}`);
       console.log(``);
 
       // parent job-property overwrites copy_task property
@@ -180,12 +182,13 @@ export class MD_ObsidianLink_Transformer extends MD_ObsidianLink_Transformer_Bas
       // false true      true
       // true  false     true
       // true  true      true
-      this.copy_task.simulate =
+      if(MD_CopyJob.hasCopyTask(this)){
+        this.copy_task.simulate =
         this.copy_task.simulate && this.job_parameter.simulate;
-
-      MD_CopyJob.perform(this.copy_task, this.template_values);
+        MD_CopyJob.perform(this.copy_task, this.template_values);
+      }
     }
 
-    return source;
+    return file_content;
   }
 }

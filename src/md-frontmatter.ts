@@ -17,16 +17,14 @@ export interface MD_Frontmatter_Type {
   weight: number;
 }
 
-      // content.attributes - contains the extracted yaml attributes in json form
+    // content.attributes - contains the extracted yaml attributes in json form
     // content.body - contains the string contents below the yaml separators
     // content.bodyBegin - contains the line number the body contents begins at
     // content.frontmatter - contains the original yaml string contents
-export interface FileContent_Interface {
-  attributes:any;
-  body:string;
-  bodyBegin:number
-  frontmatter:string
-
+export interface MD_FileContent_Interface {
+  frontmatter:string;
+  frontmatter_attributes:any;
+  body_array:string[];
 }
 
 /**
@@ -57,28 +55,73 @@ export class MD_Frontmatter_Template extends MD_Template {
 }
 
 export class MD_Frontmatter_Mapper {
-  protected frontmatter_source: MD_Frontmatter_Template;
-  protected frontmatter_target: MD_Frontmatter_Template;
+  protected file_content_source: MD_FileContent_Interface;
+  protected file_content_target_template: MD_FileContent_Interface;
   
-  protected source_fm:any;
-
-  constructor(source:string, target:string){
-
-  }
-
-  public has_frontmatter(content:any): boolean {
-    var content: any = fm(content);
+  constructor(source:any, target_template:any) {
     // content.attributes - contains the extracted yaml attributes in json form
     // content.body - contains the string contents below the yaml separators
     // content.bodyBegin - contains the line number the body contents begins at
     // content.frontmatter - contains the original yaml string contents
-    console.log(content)   
+/*
+    const fm_source = fm(source);
 
+    this.file_content_source.body_array = fm_source.body.split("\n");
+    this.file_content_source.frontmatter = fm_source.frontmatter;
+    this.file_content_source.frontmatter_attributes = fm_source.attributes;
 
+    const fm_target_template = fm(target_template);
 
+    this.file_content_target_template.body_array = []; // fm_target_template.body.split("\n"); // eigentlich hat das keinen inhalt
+    this.file_content_target_template.frontmatter = fm_target_template.frontmatter;
+    this.file_content_target_template.frontmatter_attributes = fm_target_template.attributes;
+*/
+  }
+
+  public has_source_frontmatter(): boolean {
+    console.log(this.file_content_source); 
     return true;
   }
 
+  public static get_md_fileContent_from(content:string): MD_FileContent_Interface{
+    const fm_content = fm(content);
 
+    const file_content:MD_FileContent_Interface = {
+      frontmatter: fm_content.frontmatter,
+      frontmatter_attributes: fm_content.attributes,
+      body_array: fm_content.body.split("\n")
+    }
+    return file_content;
+
+  } 
+
+  public has_target_frontmatter(): boolean {
+    console.log(this.file_content_target_template); 
+    return true;
+  }
+
+  public perform_mapping(source: any, target: any){
+    // Frontmatter Types
+    // https://gohugo.io/content-management/front-matter/
+    // TOML - identified by opening and closing +++
+    //+YAML - identified by opening and closing ---
+    // JSON - a single JSON object surrounded by ‘{’ and ‘}’, followed by a new line.
+    // ORG  - #+KEY: VALUE’
+
+ /*
+    attributes: {
+      title: 'Typoblindtext 2.2',
+      docType: 'Recherche',
+      doPublish: true,
+      tags: [ 'DocType/Recherche' ]
+    },
+     body:
+    bodyBegin: 9,
+    frontmatter: als string
+*/
+
+
+
+  }
 
 }

@@ -20,6 +20,9 @@ exporter.addTransformer(new MyTransformer(params));
 
 my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
 ```
+# Release 1.0.13 (2024-02-14) 
+
+* There was an Exception when no `copy_task` was defined. This no longer happens.
 
 # Release 1.0.12 (2024-02-13) 
 # Release 1.0.11 (2024-02-13) 

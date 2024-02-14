@@ -8,7 +8,7 @@ import { MD_Filesystem } from "./md-filesystem";
 import { MD_Transformer_Interface } from "./md-transformer";
 import { MD_Transformer_Factory } from "./md-transformer-factory";
 import { MD_Job_Type, MD_JobTasks_Type } from "./md-job";
-import { MD_Frontmatter_Mapper } from "./md-frontmatter";
+import { MD_FileContent_Interface, MD_Frontmatter_Mapper } from "./md-frontmatter";
 import { MD_Observer_Interface } from "./md-observer";
 
 export enum MD_EXPORTER_COMMANDS {
@@ -101,15 +101,9 @@ export class MD_Exporter implements MD_Observer_Interface {
     job_parameter: MD_Exporter_Parameter_Type,
     md_content: string
   ): void {
-    // TODO analysiere Quelle (und Ziel) auf Frontmatter
-    const fmm = new MD_Frontmatter_Mapper("", "");
-    if (fmm.has_frontmatter(md_content)) {
-      console.log("###########################");
-      console.log("SOURCE FILE HAS FRONTMATTER");
-      console.log("###########################");
-    }
 
-    var md_content_array: Array<string> = md_content.split("\n");
+    // Trenne im md-content das Frontmatter vom body ab. 
+    const mdfc:MD_FileContent_Interface = MD_Frontmatter_Mapper.get_md_fileContent_from(md_content);
 
     // I use the transformers on every paragraph.
     for (let transformer of this.transformers) {
@@ -119,8 +113,8 @@ export class MD_Exporter implements MD_Observer_Interface {
       // listen to messages from the transformers
       transformer.addObserver(this);
 
-      for (var i = 0; i < md_content_array.length; i++) {
-        transformer.transform(md_content_array, i);
+      for (var i = 0; i < mdfc.body_array.length; i++) {
+        transformer.transform(mdfc, i);
       }
     }
 
@@ -141,7 +135,7 @@ export class MD_Exporter implements MD_Observer_Interface {
         if (MD_Filesystem.is_file_modified(source_file, path_target_filename)) {
           MD_Filesystem.write_file(
             path_target_filename,
-            md_content_array.join("\n")
+            mdfc.body_array.join("\n") // TODO neues Frontmatter mit body zusammenfügen
           );
         }
       }

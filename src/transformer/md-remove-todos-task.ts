@@ -1,3 +1,4 @@
+import { MD_FileContent_Interface } from "src/md-frontmatter";
 import { MD_Exporter_Parameter_Type } from "../md-exporter";
 import { MD_Observer_Interface } from "../md-observer";
 import { MD_Transformer_AbstractBase, MD_Transformer_Interface, MD_Transformer_Parameter_Type } from "../md-transformer";
@@ -37,19 +38,19 @@ export class MD_RemoveTODOS_Transformer extends MD_Transformer_AbstractBase {
     /**
      * The transform method is called by MD_Exporter.
      *
-     * @param {Array<string>} source
+     * @param {MD_FileContent_Interface} file_content
      * @param {number} index
      * @return {*}  {Array<string>}
      * @memberof MD_RemoveTODOS_Transformer
      */
-    public transform(source: Array<string>, index: number): Array<string> {
+    public transform(file_content: MD_FileContent_Interface, index: number): MD_FileContent_Interface {
 
-      if (source[index].indexOf(this.parameter.find_rule) >= 0) {
-        console.log(`Transform TODO (remove) before: ${source[index]}`);
-        source.splice(index, 1);
-        console.log(`Transform TODO (remove) after: ${source[index]}`);
+      if (file_content.body_array[index].indexOf(this.parameter.find_rule) >= 0) {
+        console.log(`Transform TODO (remove) before: ${file_content.body_array[index]}`);
+        file_content.body_array.splice(index, 1);
+        console.log(`Transform TODO (remove) after: ${file_content.body_array[index]}`);
       }
 
-      return source;
+      return file_content;
     }
   }

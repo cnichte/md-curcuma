@@ -12,6 +12,7 @@
  */
 
 import { MD_Exporter_Parameter_Type } from "./md-exporter";
+import { MD_FileContent_Interface } from "./md-frontmatter";
 import { MD_Observer_Interface, MD_ObserverSubject } from "./md-observer";
 
 export interface MD_CopyTask_Type {
@@ -45,15 +46,15 @@ export interface MD_Transformer_Interface {
   /**
    * The transform method is called by MD_Exporter.
    *
-   * @param {Array<string>} source
+   * @param {MD_FileContent_Interface} file_content
    * @param {number} index
    * @return {*}  {Array<string>}
    * @memberof MD_Transformer_Interface
    */
   transform(
-    source: Array<string>,
+    file_content: MD_FileContent_Interface, // file_content.body_array --- MD_FileContent_Interface
     index: number
-  ): Array<string>;
+  ): MD_FileContent_Interface;
 
   set_job_parameter(job_paramter:MD_Exporter_Parameter_Type):void;
   addObserver(observer: MD_Observer_Interface):void;
@@ -64,7 +65,7 @@ export abstract class MD_Transformer_AbstractBase implements MD_Transformer_Inte
   protected job_parameter:MD_Exporter_Parameter_Type;
   protected observer_subject: MD_ObserverSubject = new MD_ObserverSubject(); 
   
-  abstract transform(source: Array<string>, index: number):Array<string>;
+  abstract transform(file_content: MD_FileContent_Interface, index: number): MD_FileContent_Interface;
 
   public set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void {
     this.job_parameter = job_paramter;

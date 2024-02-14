@@ -46,7 +46,21 @@ export class MD_CopyJob {
       MD_Filesystem.copy_file(source, target, copy_task.simulate);
 
     } else {
-      console.log("copyjob: no job defined.");
+      console.log("copy_task: ist not defined.");
     }
+  }
+
+  public static hasCopyTask(obj: any):boolean{
+    if(obj.copy_task === undefined || obj.copy_task === null){
+      return false;
+    } else return true;
+  }
+
+  public static toString(obj:any): string {
+      if(MD_CopyJob.hasCopyTask(obj)){
+        return `simulate:${obj.copy_task.simulate}, source:'${obj.copy_task.source}', target:'${obj.copy_task.target}'`;
+      }else{
+        return "no copy_task defined."; 
+      }
   }
 }
