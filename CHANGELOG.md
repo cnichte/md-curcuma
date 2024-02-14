@@ -19,7 +19,12 @@ const my_exporter: MD_Exporter = new MD_Exporter();
 exporter.addTransformer(new MyTransformer(params));
 
 my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
+
 ```
+# Release 1.0.14 (2024-02-14) 
+
+* `copy_task` sadly didnt copy anything for some reasons. I fixed that.
+
 # Release 1.0.13 (2024-02-14) 
 
 * There was an Exception when no `copy_task` was defined. This no longer happens.

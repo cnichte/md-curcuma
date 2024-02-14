@@ -29,6 +29,11 @@ const parameter_images: MD_Transformer_Parameter_Type = {
   tag_obsidian_suffix: "]]",
   find_rule: "jpg|png",
   replace_template: `{{< image src="assets/images/{name_full}" >}}`,
+  copy_task: {
+    source:"test/obsidian-vault/images/",
+    target:"test/hugo-content-2/assets/images/{name}/",
+    simulate:simulate_copy_job
+  }
 };
 
 const parameter_docs: MD_Transformer_Parameter_Type = {
@@ -48,11 +53,6 @@ const parameter_remove: MD_Transformer_Parameter_Type = {
   tag_obsidian_suffix: "", // TODO optional?
   find_rule: "- [ ] #TODO ",
   replace_template: ``,
-  copy_task: {
-    source:"test/obsidian-vault/images/",
-    target:"test/hugo-content-2/assets/images/{name}/",
-    simulate:simulate_copy_job
-  }
 };
 
 // The Markdown-Splitter Task needs a Frontmatter

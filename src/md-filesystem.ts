@@ -21,14 +21,19 @@ import * as fsextra from "fs-extra";
   static copy_file(source: string, target: string, simulate: boolean = false) {
     if (!simulate) {
       if (MD_Filesystem.is_file_exist(source)) {
-        if (
-          MD_Filesystem.is_file_exist(target) &&
-          MD_Filesystem.is_file_modified(source, target)
-        ) {
+
+
+
+        if (MD_Filesystem.is_file_exist(target)) {
+          if (MD_Filesystem.is_file_modified(source, target)) {
+            fsextra.copySync(source, target);
+            console.log(`copy_file from ${source} to ${target}`);
+          }else{
+            console.log(`copyjob: source file not modified '${source}'`);
+          }
+        } else {
           fsextra.copySync(source, target);
           console.log(`copy_file from ${source} to ${target}`);
-        } else {
-          console.log(`copyjob: source file not modified '${source}'`);
         }
       } else {
         console.log(`copyjob: source file doesnt exist '${source}'`);
@@ -87,6 +92,7 @@ import * as fsextra from "fs-extra";
     file_source: string,
     file_target: string
   ): boolean {
+
     const stats_source = fs.statSync(file_source);
     const mtime_source = stats_source.mtime;
 
@@ -96,6 +102,7 @@ import * as fsextra from "fs-extra";
     console.log(
       `File data last modified, source: ${mtime_source}, target: ${mtime_target}`
     );
+
     return mtime_source === mtime_target;
   }
 
