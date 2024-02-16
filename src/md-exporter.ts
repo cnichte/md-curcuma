@@ -1,6 +1,6 @@
 /**
  * MD_Exporter
- * 
+ *
  * @author Carsten Nichte
  */
 import * as fs from "fs";
@@ -8,11 +8,14 @@ import { MD_Filesystem } from "./md-filesystem";
 import { MD_Transformer_Interface } from "./md-transformer";
 import { MD_Transformer_Factory } from "./md-transformer-factory";
 import { MD_Job_Type, MD_JobTasks_Type } from "./md-job";
-import { MD_FileContent_Interface, MD_Frontmatter_Mapper } from "./md-frontmatter";
+import {
+  MD_FileContent_Interface,
+  MD_Frontmatter_Mapper,
+} from "./md-frontmatter";
 import { MD_Observer_Interface } from "./md-observer";
 
 export enum MD_EXPORTER_COMMANDS {
-  DO_NOT_WRITE_FILES = "do-not-write-file"
+  DO_NOT_WRITE_FILES = "do-not-write-file",
 }
 
 export interface MD_Exporter_Parameter_Type {
@@ -48,7 +51,7 @@ export class MD_Exporter implements MD_Observer_Interface {
    * implementing of the MD_Observer_Interface.
    * MD_Exporter listens to messages from the transformers.
    */
-  do_command(from:string, to: string, command: string,): void {
+  do_command(from: string, to: string, command: string): void {
     if (command === MD_EXPORTER_COMMANDS.DO_NOT_WRITE_FILES) {
       this.do_not_write_file = true;
     }
@@ -101,13 +104,12 @@ export class MD_Exporter implements MD_Observer_Interface {
     job_parameter: MD_Exporter_Parameter_Type,
     md_content: string
   ): void {
-
-    // Trenne im md-content das Frontmatter vom body ab. 
-    const mdfc:MD_FileContent_Interface = MD_Frontmatter_Mapper.get_md_fileContent_from(md_content);
+    // Trenne im md-content das Frontmatter vom body ab.
+    const mdfc: MD_FileContent_Interface =
+      MD_Frontmatter_Mapper.get_md_fileContent_from(md_content);
 
     // I use the transformers on every paragraph.
     for (let transformer of this.transformers) {
-
       transformer.set_job_parameter(job_parameter);
 
       // listen to messages from the transformers
@@ -131,15 +133,23 @@ export class MD_Exporter implements MD_Observer_Interface {
 
     if (!job_parameter.simulate) {
       // Here, of course, the option of forcing the disk can be useful.
-      if(!this.do_not_write_file){
-        if (MD_Filesystem.is_file_modified(source_file, path_target_filename)) {
+      if (!this.do_not_write_file) {
+        if (MD_Filesystem.is_file_exist(path_target_filename)) {
+          if (
+            MD_Filesystem.is_file_modified(source_file, path_target_filename)
+          ) {
+            MD_Filesystem.write_file(
+              path_target_filename,
+              MD_Frontmatter_Mapper.merge_frontmatter_body(mdfc)
+            );
+          }
+        } else {
           MD_Filesystem.write_file(
             path_target_filename,
-            mdfc.body_array.join("\n") // TODO neues Frontmatter mit body zusammenfügen
+            MD_Frontmatter_Mapper.merge_frontmatter_body(mdfc)
           );
         }
       }
-
     } else {
       console.log("###########################");
       console.log(source_file);

@@ -1,10 +1,21 @@
 ---
-title: Typoblindtext 2.2
-docType: Recherche
-doPublish: true
-tags:
-  - DocType/Recherche
---- 
+title: "{title}"
+description: "{description}"
+summary: "{summary}"
+date: {creation-date}
+draft: {draft}
+weight: {weight}
+categories: [{categories}]
+tags: [{tags}]
+contributors: [{authors}]
+pinned: false
+homepage: false
+seo:
+  title: "{seo-title}" # custom title (optional)
+  description: "{seo-description}" # custom description (recommended)
+  canonical: "" # custom canonical URL (optional)
+  noindex: false # false (default) or true
+---
 
 Dies ist ein Typoblindtext. An ihm kann man sehen, ob alle Buchstaben da sind und wie sie aussehen. Manchmal benutzt man Worte wie Hamburgefonts, Rafgenduks oder Handgloves, um Schriften zu testen. Manchmal Sätze, die alle Buchstaben des Alphabets enthalten - man nennt diese Sätze »Pangrams«. Sehr bekannt ist dieser: The quick brown fox jumps over the lazy old dog. Oft werden in Typoblindtexte auch fremdsprachige Satzteile eingebaut (AVAIL® and Wefox™ are testing aussi la Kerning), um die Wirkung in anderen Sprachen zu testen. In Lateinisch sieht zum Beispiel fast jede Schrift gut aus.
 

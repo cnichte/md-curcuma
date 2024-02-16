@@ -19,8 +19,12 @@ const my_exporter: MD_Exporter = new MD_Exporter();
 exporter.addTransformer(new MyTransformer(params));
 
 my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
-
 ```
+
+# Release 1.0.15 (2024-02-16) 
+
+Splitting a single large file already works fine, but I'm still working on case three: copying various individual files and mapping from the frontmatter of the source file to the target file. It's not working properly yet, but it's slowly getting better. 
+
 # Release 1.0.14 (2024-02-14) 
 
 * `copy_task` sadly didnt copy anything for some reasons. I fixed that.

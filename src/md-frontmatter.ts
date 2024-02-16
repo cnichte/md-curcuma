@@ -78,6 +78,10 @@ export class MD_Frontmatter_Mapper {
 */
   }
 
+  public static merge_frontmatter_body(mdfc:MD_FileContent_Interface): string{
+    return "---\n" + mdfc.frontmatter + "\n---\n\n" + mdfc.body_array.join("\n");
+  }
+
   public has_source_frontmatter(): boolean {
     console.log(this.file_content_source); 
     return true;

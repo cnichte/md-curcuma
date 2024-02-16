@@ -1,10 +1,21 @@
 ---
-title: Kafka 1.2
-docType: Recherche
-doPublish: true
-tags:
-  - DocType/Recherche
---- 
+title: "{title}"
+description: "{description}"
+summary: "{summary}"
+date: {creation-date}
+draft: {draft}
+weight: {weight}
+categories: [{categories}]
+tags: [{tags}]
+contributors: [{authors}]
+pinned: false
+homepage: false
+seo:
+  title: "{seo-title}" # custom title (optional)
+  description: "{seo-description}" # custom description (recommended)
+  canonical: "" # custom canonical URL (optional)
+  noindex: false # false (default) or true
+---
 
 ## Kafka 0
 

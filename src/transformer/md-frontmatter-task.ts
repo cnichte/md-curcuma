@@ -11,6 +11,24 @@ export interface MD_Frontmatter_Parameter_Type {
   frontmatter: MD_Frontmatter_Template;
 }
 
+export interface MD_Frontmatter_Map {
+  source: any;
+  target: any;
+  task:MD_Frontmatter_MapTask;
+}
+
+export interface MD_Frontmatter_MapTask {
+  perform(source:any, target:any):any;
+}
+
+
+export class MD_Frontmatter_BooleanTask implements MD_Frontmatter_MapTask {
+  perform(source:boolean, target:boolean): boolean {
+    target = !source!; 
+    return target;
+  }
+}
+
 /**
  * Füge frontmatter zu kopierten Dateien hinzu. (nicht splitter)
  *
@@ -83,22 +101,46 @@ export class MD_Frontmatter_Transformer extends MD_Transformer_AbstractBase {
     template_content.frontmatter_attributes;
 
     console.log("###########################");
-    console.log("----- Source FRONTMATTER");
+    console.log("----- Source FRONTMATTER ------");
     console.log(file_content.frontmatter);
-    console.log("----- Source FRONTMATTER ATTRIBUTES");
+    console.log("----- Source FRONTMATTER ATTRIBUTES ------");
     console.log(file_content.frontmatter_attributes);
     console.log("---------------------------");
-    console.log("----- Target FRONTMATTER");
+    console.log("----- Target FRONTMATTER ------");
     console.log(template_content.frontmatter);
-    console.log("----- Target FRONTMATTER ATTRIBUTES");
+    console.log("----- Target FRONTMATTER ATTRIBUTES ------");
     console.log(template_content.frontmatter_attributes);
     console.log("###########################");
 
-    // attribut-quelle -> attribut-ziel - platt ersetzen, oder
-    const mapper = {
-      "title":"title",
-      "":""
+    //! 1. Frontmatter austauschen
+    file_content.frontmatter = template_content.frontmatter;
+
+    //! 2. Platzhalter ersetzen
+    // attribut-quelle -> attribut-ziel - platt ersetzen, oder ein Task als callback
+
+    const tt_test: MD_Frontmatter_BooleanTask = new MD_Frontmatter_BooleanTask();
+
+    const test: MD_Frontmatter_Map = {
+      source: "doPublish",
+      target: "draft",
+      task: tt_test
     }
+
+    
+    var source_value = file_content.frontmatter_attributes[test.source];
+    var target_value = template_content.frontmatter_attributes[test.target];
+    
+    console.log("########################### START");
+
+    console.log(`${test.source}:${source_value} - ${test.target}:${target_value}`, target_value);
+
+
+    if(test.task!== undefined || test.task!==null){
+      target_value = test.task.perform(source_value, target_value);
+    }
+
+    console.log(`${test.source}:${source_value} - ${test.target}:${target_value}`, target_value);
+    console.log("########################### END");
 
     // Ich muss eigentlich im target frontmatter nach den Platzhalten gucken, und die ersetzen...
     // oder... das geht wenn die propertynames == platzhalter sind: obj[name] -> {name}

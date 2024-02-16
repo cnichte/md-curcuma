@@ -42,7 +42,7 @@ It would be nice to be able to build customized transformers for different solut
 
 ## Usage
 
-Write some Typsecript like that:
+Write some Typescript like that:
 
 ```ts
 import { MD_Exporter } from "longform-markdown-splitter";
@@ -406,7 +406,11 @@ class MD_Custom_Transformer extends MD_Transformer_AbstractBase {
       super.set_job_parameter(job_paramter); // this is a hack
     }
 
-    transform(source: Array<string>, index: number): Array<string> {
+    transform(file_content: MD_FileContent_Interface, index: number): Array<string> {
+
+      const source = file_content.body_array;
+      // file_content.frontmatter;
+      // file_content.frontmatter_attributes;
 
       if (source[index].indexOf(this.parameter.find_rule) >= 0) {
         console.log(`Transform before: ${source[index]}`);
