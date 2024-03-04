@@ -1,7 +1,27 @@
 import * as fs from "fs";
-import { Dirent } from "fs";
 import * as path from "path";
 import * as fsextra from "fs-extra";
+
+// TODO https://github.com/jxson/front-matter
+var fm = require("front-matter");
+// TODO https://eemeli.org/yaml/#yaml
+import { stringify } from "yaml";
+
+/**
+ * Frontmatter is separated from the rest of the text for easier processing.
+ *
+ * content.attributes - contains the extracted yaml attributes in json form
+ * content.body - contains the string contents below the yaml separators
+ * content.bodyBegin - contains the line number the body contents begins at
+ * content.frontmatter - contains the original yaml string contents
+ * @export
+ * @interface MD_FileContent_Interface
+ */
+export interface MD_FileContent_Interface {
+  frontmatter: string;
+  frontmatter_attributes: any;
+  body_array: string[];
+}
 
 /**
  * Some handy Filesystem stuff from https://nodejs.org/api/fs.html
@@ -9,6 +29,42 @@ import * as fsextra from "fs-extra";
  * @export
  * @class MD_Filesystem
  */ export class MD_Filesystem {
+  /**
+   * Split a file in frontmatter and content-body.
+   *
+   * @static
+   * @param {string} content
+   * @return {*}  {MD_FileContent_Interface}
+   * @memberof MD_Filesystem
+   */
+  public static split_frontmatter_body(
+    content: string
+  ): MD_FileContent_Interface {
+    const fm_content = fm(content);
+
+    const file_content: MD_FileContent_Interface = {
+      frontmatter: fm_content.frontmatter,
+      frontmatter_attributes: fm_content.attributes,
+      body_array: fm_content.body.split("\n"),
+    };
+    return file_content;
+  }
+
+  /**
+   * Merge frontmatter and content-body into a file-content.
+   *
+   * @static
+   * @param {MD_FileContent_Interface} mdfc
+   * @return {*}  {string}
+   * @memberof MD_Filesystem
+   */
+  public static merge_frontmatter_body(mdfc: MD_FileContent_Interface): string {
+    mdfc.frontmatter = stringify(mdfc.frontmatter_attributes);
+    return (
+      "---\n" + mdfc.frontmatter + "\n---\n\n" + mdfc.body_array.join("\n")
+    );
+  }
+
   /**
    * TODO filter https://github.com/jprichardson/node-fs-extra/blob/master/docs/copy-sync.md
    *
@@ -21,14 +77,11 @@ import * as fsextra from "fs-extra";
   static copy_file(source: string, target: string, simulate: boolean = false) {
     if (!simulate) {
       if (MD_Filesystem.is_file_exist(source)) {
-
-
-
         if (MD_Filesystem.is_file_exist(target)) {
           if (MD_Filesystem.is_file_modified(source, target)) {
             fsextra.copySync(source, target);
             console.log(`copy_file from ${source} to ${target}`);
-          }else{
+          } else {
             console.log(`copyjob: source file not modified '${source}'`);
           }
         } else {
@@ -92,7 +145,6 @@ import * as fsextra from "fs-extra";
     file_source: string,
     file_target: string
   ): boolean {
-
     const stats_source = fs.statSync(file_source);
     const mtime_source = stats_source.mtime;
 
@@ -187,7 +239,7 @@ import * as fsextra from "fs-extra";
     files: Array<string> = []
   ): Array<string> {
     // Get an array of all files and directories in the passed directory using fs.readdirSync
-    const fileList:fs.Dirent[] = fs.readdirSync(dir, { withFileTypes: true }); // has a recursive: true
+    const fileList: fs.Dirent[] = fs.readdirSync(dir, { withFileTypes: true }); // has a recursive: true
     // Create the full path of the file/directory by concatenating the passed directory and file/directory name
     for (const file of fileList) {
       const name = `${dir}/${file.name}`;
@@ -215,7 +267,7 @@ import * as fsextra from "fs-extra";
 
   public static write_file(writePath: string, content: string): void {
     // path + filename;
-    
+
     try {
       console.log(`Write File ${writePath}`);
       fs.writeFileSync(writePath, content, "utf8");

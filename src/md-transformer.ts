@@ -1,6 +1,6 @@
 /**
  * A collection of transformers to manipulate the text content.
- * 
+ *
  * Transformer sind tasks, die auf Inhalte angewendet werden können.
  *
  * - Shortcode_Transformer_Base
@@ -12,20 +12,20 @@
  */
 
 import { MD_Exporter_Parameter_Type } from "./md-exporter";
-import { MD_FileContent_Interface } from "./md-frontmatter";
+import { MD_FileContent_Interface } from "./md-filesystem";
 import { MD_Observer_Interface, MD_ObserverSubject } from "./md-observer";
 
 export interface MD_CopyTask_Type {
-  source:string;
-  target:string;
-  simulate:boolean;
+  source: string;
+  target: string;
+  simulate: boolean;
 }
 export interface MD_Transformer_Parameter_Type {
   tag_obsidian_prefix: string;
   tag_obsidian_suffix: string;
   find_rule: string;
   replace_template: string;
-  copy_task?:MD_CopyTask_Type;
+  copy_task?: MD_CopyTask_Type;
 }
 
 export interface MD_Transformer_TemplateValues_Type {
@@ -34,7 +34,6 @@ export interface MD_Transformer_TemplateValues_Type {
   name_suffix: string;
 }
 
-
 /**
  * Describes a Transformer class.
  *
@@ -42,7 +41,6 @@ export interface MD_Transformer_TemplateValues_Type {
  * @interface MD_Transformer_Interface
  */
 export interface MD_Transformer_Interface {
-
   /**
    * The transform method is called by MD_Exporter.
    *
@@ -56,22 +54,26 @@ export interface MD_Transformer_Interface {
     index: number
   ): MD_FileContent_Interface;
 
-  set_job_parameter(job_paramter:MD_Exporter_Parameter_Type):void;
-  addObserver(observer: MD_Observer_Interface):void;
+  set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void;
+  addObserver(observer: MD_Observer_Interface): void;
 }
 
-export abstract class MD_Transformer_AbstractBase implements MD_Transformer_Interface {
-  
-  protected job_parameter:MD_Exporter_Parameter_Type;
-  protected observer_subject: MD_ObserverSubject = new MD_ObserverSubject(); 
-  
-  abstract transform(file_content: MD_FileContent_Interface, index: number): MD_FileContent_Interface;
+export abstract class MD_Transformer_AbstractBase
+  implements MD_Transformer_Interface
+{
+  protected job_parameter: MD_Exporter_Parameter_Type;
+  protected observer_subject: MD_ObserverSubject = new MD_ObserverSubject();
+
+  abstract transform(
+    file_content: MD_FileContent_Interface,
+    index: number
+  ): MD_FileContent_Interface;
 
   public set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void {
     this.job_parameter = job_paramter;
   }
 
-  public addObserver(observer: MD_Observer_Interface):void {
+  public addObserver(observer: MD_Observer_Interface): void {
     this.observer_subject.add_observer(observer);
   }
 }

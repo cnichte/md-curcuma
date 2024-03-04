@@ -9,7 +9,7 @@ import {
   MD_Transformer_TemplateValues_Type,
 } from "../md-transformer";
 import { MD_Observer_Interface } from "../md-observer";
-import { MD_FileContent_Interface } from "src/md-frontmatter";
+import { MD_FileContent_Interface } from "../md-filesystem";
 
 /**
  ** Replace in Obsidian Wikilink, oder Markdownlink with Hugo Shortcode.
@@ -87,7 +87,10 @@ export class MD_ObsidianLink_Transformer_Base extends MD_Transformer_AbstractBas
    * @return {*}  {(string[])}
    * @memberof MD_ObsidianLink_Transformer_Base
    */
-  public transform(file_content: MD_FileContent_Interface, index: number): MD_FileContent_Interface {
+  public transform(
+    file_content: MD_FileContent_Interface,
+    index: number
+  ): MD_FileContent_Interface {
     let item = file_content.body_array[index];
 
     this.reset();
@@ -118,7 +121,6 @@ export class MD_ObsidianLink_Transformer_Base extends MD_Transformer_AbstractBas
     return file_content;
   }
 
-
   protected toString(what: string): string {
     return `
   Transform ${what}...
@@ -126,7 +128,7 @@ export class MD_ObsidianLink_Transformer_Base extends MD_Transformer_AbstractBas
   name_full   : ${this.template_values.name_full}
   name        : ${this.template_values.name}
   name_suffix : ${this.template_values.name_suffix}
-  copy_task   : ${ MD_CopyJob.toString(this)}`;
+  copy_task   : ${MD_CopyJob.toString(this)}`;
   }
 }
 
@@ -145,8 +147,7 @@ export class MD_ObsidianLink_Transformer_Base extends MD_Transformer_AbstractBas
  * @extends {MD_ObsidianLink_Transformer_Base}
  */
 export class MD_ObsidianLink_Transformer extends MD_ObsidianLink_Transformer_Base {
-
-  public add_observer(observer: MD_Observer_Interface){
+  public add_observer(observer: MD_Observer_Interface) {
     this.observer_subject.add_observer(observer);
   }
 
@@ -157,7 +158,10 @@ export class MD_ObsidianLink_Transformer extends MD_ObsidianLink_Transformer_Bas
    * @return {*}  (Array<string>)
    * @memberof MD_ObsidianLink_Transformer
    */
-  public transform(file_content: MD_FileContent_Interface, index: number): MD_FileContent_Interface {
+  public transform(
+    file_content: MD_FileContent_Interface,
+    index: number
+  ): MD_FileContent_Interface {
     super.transform(file_content, index);
 
     if (this.template_values.name_suffix.match(`^(${this.find_rule})$`)) {
@@ -182,9 +186,9 @@ export class MD_ObsidianLink_Transformer extends MD_ObsidianLink_Transformer_Bas
       // false true      true
       // true  false     true
       // true  true      true
-      if(MD_CopyJob.hasCopyTask(this)){
+      if (MD_CopyJob.hasCopyTask(this)) {
         this.copy_task.simulate =
-        this.copy_task.simulate && this.job_parameter.simulate;
+          this.copy_task.simulate && this.job_parameter.simulate;
         MD_CopyJob.perform(this.copy_task, this.template_values);
       }
     }

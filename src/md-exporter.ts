@@ -4,14 +4,10 @@
  * @author Carsten Nichte
  */
 import * as fs from "fs";
-import { MD_Filesystem } from "./md-filesystem";
+import { MD_FileContent_Interface, MD_Filesystem } from "./md-filesystem";
 import { MD_Transformer_Interface } from "./md-transformer";
 import { MD_Transformer_Factory } from "./md-transformer-factory";
 import { MD_Job_Type, MD_JobTasks_Type } from "./md-job";
-import {
-  MD_FileContent_Interface,
-  MD_Frontmatter_Mapper,
-} from "./md-frontmatter";
 import { MD_Observer_Interface } from "./md-observer";
 
 export enum MD_EXPORTER_COMMANDS {
@@ -106,7 +102,7 @@ export class MD_Exporter implements MD_Observer_Interface {
   ): void {
     // Trenne im md-content das Frontmatter vom body ab.
     const mdfc: MD_FileContent_Interface =
-      MD_Frontmatter_Mapper.get_md_fileContent_from(md_content);
+      MD_Filesystem.split_frontmatter_body(md_content);
 
     // I use the transformers on every paragraph.
     for (let transformer of this.transformers) {
@@ -129,7 +125,7 @@ export class MD_Exporter implements MD_Observer_Interface {
       filename
     );
 
-    MD_Filesystem.ensure_path(job_parameter.writePath, job_parameter.simulate);
+    MD_Filesystem.ensure_path(job_parameter.writePath, job_parameter.simulate); // TODO das arbeitet nicht immer?
 
     if (!job_parameter.simulate) {
       // Here, of course, the option of forcing the disk can be useful.
@@ -140,13 +136,13 @@ export class MD_Exporter implements MD_Observer_Interface {
           ) {
             MD_Filesystem.write_file(
               path_target_filename,
-              MD_Frontmatter_Mapper.merge_frontmatter_body(mdfc)
+              MD_Filesystem.merge_frontmatter_body(mdfc)
             );
           }
         } else {
           MD_Filesystem.write_file(
             path_target_filename,
-            MD_Frontmatter_Mapper.merge_frontmatter_body(mdfc)
+            MD_Filesystem.merge_frontmatter_body(mdfc)
           );
         }
       }
