@@ -26,7 +26,7 @@ const exporter_parameter: MD_Exporter_Parameter_Type = {
 
 const simulate_copy_job = false;
 
-// The tasks to operate. If you add not tasks you have a simple copy job.
+// The tasks to operate. If you add no tasks you have a simple copy job.
 
 const parameter_images: MD_Transformer_Parameter_Type = {
   tag_obsidian_prefix: "![[",

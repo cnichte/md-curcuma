@@ -320,7 +320,7 @@ const exporter_parameter: MD_Exporter_Parameter_Type = {
 
 const simulate_copy_job = true;
 
-// The tasks to operate. If you add not tasks you have a simple copy job.
+// The tasks to operate. If you add no tasks you have a simple copy job.
 
 // Placeholders in the Transformer-Template
 // as pre defined in MD_Transformer_TemplateValues_Type in the md-transformer module:

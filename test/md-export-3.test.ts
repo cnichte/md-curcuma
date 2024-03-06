@@ -33,7 +33,7 @@ const exporter_parameter: MD_Exporter_Parameter_Type = {
   simulate: simulate_job,
 };
 
-// The tasks to operate. If you add not tasks you have a simple copy job.
+// The tasks to operate. If you add no tasks you have a simple copy job.
 
 // The placeholders result from the definition of MD_Frontmatter_Type in md-frontmatter
 // A file definition in frontmatter_filename, overwrites frontmatter Property
