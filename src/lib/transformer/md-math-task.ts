@@ -1,4 +1,4 @@
-import { MD_Template } from "src/md-template";
+import { MD_Template } from "src/lib/md-template";
 import {
   MD_Exporter_Parameter_Type,
 } from "../md-exporter";

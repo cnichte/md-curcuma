@@ -5,7 +5,7 @@
     "declaration": true,
     "moduleResolution": "node",
     "lib": ["ES2020", "DOM"],
-    "outDir": "dist/lib",
+    "outDir": "dist",
 
     "noImplicitAny": true,
     "removeComments": true,

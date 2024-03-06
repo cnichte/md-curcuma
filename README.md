@@ -35,9 +35,35 @@ It would be nice to be able to build customized transformers for different solut
   * Hugo replacement: `{{<image folder="images/my-image.jpg" >}}`.
 * Copy images and documents on the fly. 
   * A simulation mode provides information about which images and attachments it expects and where. 
-  
-  
-Transform Latex Formulas from Obsidian-Style to Hugo-Style...
+
+## Transform Obsidian-Links
+
+Images from 
+
+````
+![[my-image.jpg]]
+````
+
+Hugo replacement:
+
+```
+ {{<image folder="images/my-image.jpg" >}}
+```
+
+or Dokuments from
+
+````
+![[docu-1.pdf]]
+````
+
+Hugo replacement:
+
+```
+{{< button href="/getthis.php?id=docu-1" name="download docu-1 (pdf)" >}}
+```
+
+
+## Transform Latex Formulas from Obsidian-Style to Hugo-Style
 
  from this
 
@@ -55,6 +81,14 @@ $$
 W_{kin} = \frac { m \cdot v^2}{2} = \frac {p^2}{ 2 \cdot m}
 $$
 ```
+````
+
+## Remove TODOs
+
+Remove for example the following Paragraphes:
+
+````md
+- [ ] #TODO Some serious stuff to do...
 ````
 
 
