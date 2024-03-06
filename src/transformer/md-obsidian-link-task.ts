@@ -6,10 +6,16 @@ import {
   MD_Transformer_AbstractBase,
   MD_Transformer_Interface,
   MD_Transformer_Parameter_Type,
-  MD_Transformer_TemplateValues_Type,
 } from "../md-transformer";
 import { MD_Observer_Interface } from "../md-observer";
 import { MD_FileContent_Interface } from "../md-filesystem";
+
+// TODO D_ObsidianLink_TemplateValues_Type
+export interface MD_LinkTransformer_TemplateValues_Type {
+  name_full: string;
+  name: string;
+  name_suffix: string;
+}
 
 /**
  ** Replace in Obsidian Wikilink, oder Markdownlink with Hugo Shortcode.
@@ -32,7 +38,8 @@ export class MD_ObsidianLink_Transformer_Base extends MD_Transformer_AbstractBas
 
   protected copy_task?: MD_CopyTask_Type;
 
-  protected template_values: MD_Transformer_TemplateValues_Type = {
+  // TODO: MD_LinkTransformer_TemplateValues_Type
+  protected template_values: MD_LinkTransformer_TemplateValues_Type = {
     name_suffix: "",
     name: "",
     name_full: "",

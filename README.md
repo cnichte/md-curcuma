@@ -31,10 +31,32 @@ It would be nice to be able to build customized transformers for different solut
 * Insert frontmatter and initialize correctly.
 * Remove heading (preferably as an option)
 * Replace images with shortcode, e.g:
-  * Obsidian: `![[ein-bild.jpg]]`
-  * Hugo replacement: `{{<image folder="images/ein-bild.jpg" >}}`.
+  * Obsidian: `![[my-image.jpg]]`
+  * Hugo replacement: `{{<image folder="images/my-image.jpg" >}}`.
 * Copy images and documents on the fly. 
   * A simulation mode provides information about which images and attachments it expects and where. 
+  
+  
+Transform Latex Formulas from Obsidian-Style to Hugo-Style...
+
+ from this
+
+```latex
+$$
+W_{kin} = \frac { m \cdot v^2}{2} = \frac {p^2}{ 2 \cdot m}
+$$
+```
+
+to this
+
+````latex
+```math {.text-center}
+$$
+W_{kin} = \frac { m \cdot v^2}{2} = \frac {p^2}{ 2 \cdot m}
+$$
+```
+````
+
 
 ## Restrictions
 
@@ -109,6 +131,21 @@ The file `transport-config.json`:
               "simulate":false
             }
           }
+        },
+        {
+          "transformer_class_name": "MD_RemoveTODOS_Transformer",
+          "transformer_parameter": {
+            "find_rule": "- [ ] #TODO ",
+            "replace_template": ""
+          }
+        },
+        {
+          "transformer_class_name": "MD_Math_Transformer",
+          "transformer_parameter": {
+            "tag_obsidian_prefix": "$$",
+            "tag_obsidian_suffix": "$$",
+            "find_rule": "",
+            "replace_template": "```math {.text-center}\n$$\n {content} \n$$\n```\n"          }
         },
         {
           "transformer_class_name": "MD_RemoveTODOS_Transformer",
@@ -259,6 +296,7 @@ import {
   MD_Frontmatter_Template,
   MD_ObsidianLink_Transformer,
   MD_RemoveTODOS_Transformer,
+  MD_Math_Transformer,
   MD_Splitter_Parameter_Type,
   MD_Transformer_Parameter_Type,
 } from "longform-markdown-splitter";
@@ -311,6 +349,14 @@ const parameter_docs: MD_Transformer_Parameter_Type = {
   }
 };
 
+var parameter_math: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "$$",
+  tag_obsidian_suffix: "$$",
+  find_rule: "",
+  replace_template: "```math {.text-center}\n$$\n {content} \n$$\n```\n",
+};
+
+
 const parameter_remove: MD_Transformer_Parameter_Type = {
   tag_obsidian_prefix: "", // TODO optional?
   tag_obsidian_suffix: "", // TODO optional?
@@ -352,6 +398,7 @@ const parameter_splitter: MD_Splitter_Parameter_Type = {
 exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
 exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
 exporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
+exporter.addTransformer(new MD_Math_Transformer(parameter_math));
 exporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
 
 exporter.perform_job(exporter_parameter);
@@ -406,19 +453,22 @@ class MD_Custom_Transformer extends MD_Transformer_AbstractBase {
       super.set_job_parameter(job_paramter); // this is a hack
     }
 
-    transform(file_content: MD_FileContent_Interface, index: number): Array<string> {
+    transform(file_content: MD_FileContent_Interface, index: number):  MD_FileContent_Interface {
 
-      const source = file_content.body_array;
+      const body_array = file_content.body_array;
+      let item = file_content.body_array[index];
+
       // file_content.frontmatter;
       // file_content.frontmatter_attributes;
 
-      if (source[index].indexOf(this.parameter.find_rule) >= 0) {
-        console.log(`Transform before: ${source[index]}`);
-        source.splice(index, 1);
-        console.log(`Transform after: ${source[index]}`);
+      if (body_array[index].indexOf(this.parameter.find_rule) >= 0) {
+        console.log(`Transform before: ${body_array[index]}`);
+        body_array.splice(index, 1);
+        file_content.index = file_content.index - 1;
+        console.log(`Transform after: ${body_array[index]}`);
       }
 
-      return source;
+      return file_content;
     }
   }
 ```

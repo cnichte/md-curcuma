@@ -55,6 +55,7 @@ export class MD_RemoveTODOS_Transformer extends MD_Transformer_AbstractBase {
         `Transform TODO (remove) before: ${file_content.body_array[index]}`
       );
       file_content.body_array.splice(index, 1);
+      file_content.index = file_content.index - 1;
       console.log(
         `Transform TODO (remove) after: ${file_content.body_array[index]}`
       );

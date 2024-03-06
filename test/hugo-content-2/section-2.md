@@ -2,19 +2,26 @@
 title: "Section 2"
 description: ""
 url: /docs/test-prefix-section-2/
-date: 2024-02-14T20:51
+date: 2024-03-06T15:23
 draft: false
 images: []
 menu:
   docs:
     parent: "docs-9602b15bad02600f3883f55e2ade6b81"
-    identifier: "test-prefix-section-2-9ef69498-e444-485f-8ee2-04a3d9ad06e2"
+    identifier: "test-prefix-section-2-0d8a44a6-edce-4817-b665-c819b364b317"
 weight: 8014
 toc: true
 ---
 
 
-Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.   
+Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
+```math {.text-center}
+$$
+ W_{kin} = \frac { m \cdot v^2}{2} = \frac {p^2}{ 2 \cdot m} 
+$$
+```
+
+Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.   
 
 ## Chapter 2.1
 

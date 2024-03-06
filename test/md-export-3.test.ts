@@ -12,6 +12,11 @@ import { MD_RemoveTODOS_Transformer } from "../src/transformer/md-remove-todos-t
 import { MD_Frontmatter_Transformer } from "../src/transformer/md-frontmatter-task";
 import { MD_Frontmatter_MapBooleanInverseTask } from "../src/frontmatter-mapper-tasks/map-boolean-inverse-task";
 
+/**
+ * This test deals with transforming a couple of Obsidian-Markdown Documents.
+ * Inserting/Replacing a frontmatter.
+ * Adopting and transforming values from the source frontmatter.
+ */
 const exporter: MD_Exporter = new MD_Exporter();
 
 // Basic instructions for MD_Exporter

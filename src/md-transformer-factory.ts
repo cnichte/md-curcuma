@@ -1,4 +1,5 @@
 import { MD_Frontmatter_Transformer } from "./transformer/md-frontmatter-task";
+import { MD_Math_Transformer } from './transformer/md-math-task';
 import { MD_ObsidianLink_Transformer } from "./transformer/md-obsidian-link-task";
 import { MD_RemoveTODOS_Transformer } from "./transformer/md-remove-todos-task";
 import { MD_Splitter_Transformer } from "./transformer/md-splitter-task";
@@ -25,8 +26,9 @@ export class MD_Transformer_Factory {
   // Register the Transformers her to create Instances from Class-Name-String.
   //  https://stackoverflow.com/questions/12710905/how-do-i-dynamically-assign-properties-to-an-object-in-typescript
   export const MD_Transformer_Registry: any = {
+    MD_Frontmatter_Transformer,
+    MD_Math_Transformer,
     MD_ObsidianLink_Transformer,
     MD_RemoveTODOS_Transformer,
     MD_Splitter_Transformer,
-    MD_Frontmatter_Transformer
   }

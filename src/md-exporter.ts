@@ -112,7 +112,9 @@ export class MD_Exporter implements MD_Observer_Interface {
       transformer.addObserver(this);
 
       for (var i = 0; i < mdfc.body_array.length; i++) {
-        transformer.transform(mdfc, i);
+        mdfc.index = i;
+        const test:MD_FileContent_Interface = transformer.transform(mdfc, i);
+        if(test.index != i) i = test.index; // elements are added or removed
       }
     }
 

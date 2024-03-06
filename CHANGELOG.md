@@ -1,6 +1,7 @@
 # Unresolved issues & planned features
 
 * A regex-filter for the filereader to exclude some files.
+* preserve folder structure.
 * Transformations on the target filename.
 * Run a joblist in batch.
 * Implement job-propertys functions: doSubfolders, limit, useCounter.
@@ -20,6 +21,35 @@ exporter.addTransformer(new MyTransformer(params));
 
 my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
 ```
+
+What has been implemented so far:
+
+# Release 1.0.17 (2024-03-06) 
+
+* Adding and removing Items to the Markdown-Content Array is now better considered.
+* `MD_Math_Transformer` Task to transform Transform Latex Formulas from Obsidian-Style to Hugo-Style...
+
+ from this
+
+```latex
+$$
+W_{kin} = \frac { m \cdot v^2}{2} = \frac {p^2}{ 2 \cdot m}
+$$
+```
+
+to this
+
+````latex
+```math {.text-center}
+$$
+W_{kin} = \frac { m \cdot v^2}{2} = \frac {p^2}{ 2 \cdot m}
+$$
+```
+````
+
+# Release 1.0.16 (2024-03-04) 
+
+* Wrong export fixed
 
 # Release 1.0.15 (2024-02-16) 
 

@@ -23,15 +23,9 @@ export interface MD_CopyTask_Type {
 export interface MD_Transformer_Parameter_Type {
   tag_obsidian_prefix: string;
   tag_obsidian_suffix: string;
-  find_rule: string;
+  find_rule?: string;
   replace_template: string;
   copy_task?: MD_CopyTask_Type;
-}
-
-export interface MD_Transformer_TemplateValues_Type {
-  name_full: string;
-  name: string;
-  name_suffix: string;
 }
 
 /**

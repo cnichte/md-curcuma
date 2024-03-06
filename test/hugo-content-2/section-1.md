@@ -2,13 +2,13 @@
 title: "Section 1"
 description: ""
 url: /docs/test-prefix-section-1/
-date: 2024-02-14T20:51
+date: 2024-03-06T15:23
 draft: false
 images: []
 menu:
   docs:
     parent: "docs-9602b15bad02600f3883f55e2ade6b81"
-    identifier: "test-prefix-section-1-d330390f-cbbb-4843-9b49-2dcc410188f2"
+    identifier: "test-prefix-section-1-3556788a-35f9-49a1-a41f-5da692ffb0db"
 weight: 8013
 toc: true
 ---
@@ -33,3 +33,10 @@ At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergr
 {{< image src="assets/images/test-image-03.png" >}}
 
 Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.   
+
+```math {.text-center}
+$$
+ F = \frac {\Delta p}{\Delta t} \text{ mit } p=m \cdot v \text{ und } m = const \text{ ergibt sich } \vec{F}= m \cdot \vec{a} 
+$$
+```
+

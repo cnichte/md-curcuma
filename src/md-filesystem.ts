@@ -21,6 +21,7 @@ export interface MD_FileContent_Interface {
   frontmatter: string;
   frontmatter_attributes: any;
   body_array: string[];
+  index:number;
 }
 
 /**
@@ -46,6 +47,7 @@ export interface MD_FileContent_Interface {
       frontmatter: fm_content.frontmatter,
       frontmatter_attributes: fm_content.attributes,
       body_array: fm_content.body.split("\n"),
+      index: 0
     };
     return file_content;
   }

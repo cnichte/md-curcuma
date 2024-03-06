@@ -1,4 +1,3 @@
-import { MD_CopyTask_Type } from '../src/md-transformer';
 import { MD_Frontmatter_Template } from "../src/md-frontmatter";
 import { MD_Exporter, MD_Exporter_Parameter_Type } from "../src/md-exporter";
 import { MD_Transformer_Parameter_Type } from "../src/md-transformer";
@@ -6,7 +5,12 @@ import { MD_Splitter_Transformer } from "../src/transformer/md-splitter-task";
 import { MD_Splitter_Parameter_Type } from "../src/transformer/md-splitter-task";
 import { MD_ObsidianLink_Transformer } from "../src/transformer/md-obsidian-link-task";
 import { MD_RemoveTODOS_Transformer } from "../src/transformer/md-remove-todos-task";
+import { MD_Math_Transformer } from "../src/transformer/md-math-task";
 
+/**
+ * This test deals with sharing a longform document 
+ * about instantiated classes.
+ */
 const exporter: MD_Exporter = new MD_Exporter();
 
 // Basic instructions for MD_Exporter
@@ -46,6 +50,13 @@ const parameter_docs: MD_Transformer_Parameter_Type = {
     target:"test/hugo-content-2/static/downloads/",
     simulate:simulate_copy_job
   }
+};
+
+var parameter_math: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "$$",
+  tag_obsidian_suffix: "$$",
+  find_rule: "",
+  replace_template: "```math {.text-center}\n$$\n {content} \n$$\n```\n",
 };
 
 const parameter_remove: MD_Transformer_Parameter_Type = {
@@ -89,6 +100,7 @@ const parameter_splitter: MD_Splitter_Parameter_Type = {
 exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
 exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
 exporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
+exporter.addTransformer(new MD_Math_Transformer(parameter_math));
 exporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
 
 exporter.perform_job(exporter_parameter);

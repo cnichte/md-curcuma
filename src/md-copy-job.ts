@@ -2,8 +2,8 @@ import { MD_Filesystem } from "./md-filesystem";
 import { MD_Template } from "./md-template";
 import {
   MD_CopyTask_Type,
-  MD_Transformer_TemplateValues_Type,
 } from "./md-transformer";
+import { MD_LinkTransformer_TemplateValues_Type } from "./transformer/md-obsidian-link-task";
 
 export class MD_CopyJob {
   /**
@@ -11,12 +11,12 @@ export class MD_CopyJob {
    *
    * @static
    * @param {MD_CopyTask_Type} copy_task
-   * @param {MD_Transformer_TemplateValues_Type} template_values
+   * @param {MD_LinkTransformer_TemplateValues_Type} template_values
    * @memberof MD_CopyJob
    */
   static perform(
     copy_task: MD_CopyTask_Type,
-    template_values: MD_Transformer_TemplateValues_Type
+    template_values: MD_LinkTransformer_TemplateValues_Type
   ): void {
     if (copy_task !== undefined && copy_task !== null) {
       // TODO Discovery: Should also search in Obsidian Vault subdirectories.
