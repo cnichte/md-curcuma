@@ -1,7 +1,7 @@
 # my personal excludes
 .DS_Store
 node_modules
-dist/lib
+dist
 md-demo.test.ts
 TODO.md
 README-dev.md
