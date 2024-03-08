@@ -74,7 +74,7 @@ const map_1: MD_Mapping = {
   },
 };
 
-// Ein Beispiel Task, der das aktuelle Datum einfügt.
+// An example task that inserts the current date. Source Property isnt used here.
 const map_2: MD_Mapping = {
   source_property_name: "",
   target_poperty_name: "date",

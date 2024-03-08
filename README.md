@@ -359,7 +359,7 @@ const map_1: MD_Mapping = {
   },
 };
 
-// Ein Beispiel Task, der das aktuelle Datum einfügt.
+// An example task that inserts the current date. Source Property isnt used here.
 const map_2: MD_Mapping = {
   source_property_name: "",
   target_poperty_name: "date",
@@ -395,7 +395,7 @@ exporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatter));
 
 ## 5. Translate Obsidian-Callouts to Hugo-Callout-Shortcodes
 
-* Obsidian Admonitions https://plugins.javalent.com/admonitions/beginner/types
+* Obsidian Callouts https://help.obsidian.md/Editing+and+formatting/Callouts
 * Hugo Callouts https://getdoks.org/docs/basics/shortcodes/
 
 from 
