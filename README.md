@@ -73,7 +73,7 @@ Take a look in the `test` folder for running examples.
 
 I already have a number of transformations on offer, but if you need your own, you can and add them to the pipeline. 
 
-## 1. The Longform Markdown Splitter
+## 1. Split a Longform-Markdown File
 
 The Problem:
 
@@ -141,7 +141,7 @@ exporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
 }
 ```
 
-## 2. Transform Obsidian-Links
+## 2. Obsidian-Links
 
 Images from 
 
@@ -235,7 +235,9 @@ exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
 
 A simulation mode provides information about which images and attachments it expects and where. 
 
-## 3. Transform Latex Formulas from Obsidian-Style to Hugo-Style
+## 3. Latex Formulas
+
+Transform Latex Formulas from Obsidian-Style to Hugo-Style.
 
 * https://www.makeuseof.com/write-mathematical-notation-obsidian/
 * https://getdoks.org/docs/built-ins/math/
@@ -392,7 +394,9 @@ exporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatter));
 
 ```
 
-## 5. Translate Obsidian-Callouts to Hugo-Callout-Shortcodes
+## 5. Callouts
+
+ Transform Obsidian-Callouts to Hugo-Callout-Shortcodes.
 
 * Obsidian Callouts https://help.obsidian.md/Editing+and+formatting/Callouts
 * Hugo Callouts https://getdoks.org/docs/basics/shortcodes/
@@ -498,6 +502,10 @@ exporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
 },
 
 ```
+
+## 7. Wikilinks / Cross-References
+
+This isnt done yet.
 
 # Install and Use
 
