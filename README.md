@@ -240,7 +240,7 @@ A simulation mode provides information about which images and attachments it exp
 * https://www.makeuseof.com/write-mathematical-notation-obsidian/
 * https://getdoks.org/docs/built-ins/math/
 
-from this Formula in a Paragraph:
+from this:
 
 ```latex
 $$
@@ -251,7 +251,7 @@ This is an inline ${(x+y)}^2$ Formula.
 
 ```
 
-to this
+to this:
 
 ````latex
 ```math {.text-center}
@@ -382,7 +382,6 @@ exporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatter));
 ###  Example JSON for usage in config-file
 
 ```json
-
 {
   "transformer_class_name": "MD_Frontmatter_Transformer",
   "transformer_parameter": {
