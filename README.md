@@ -8,11 +8,13 @@ Copys and transforms Markdown files from your [Obsidian](https://obsidian.md/)-V
 
 Transformers are currently available for the following tasks:
 
-1. Split a Longform in separate Files at Headlines
-2. Obsidian-Links (Images and Documents), copy Files on the fly
+1. Split a Longform in separate Files at Headlines.
+2. Obsidian-Links (Images and Documents), copy Files on the fly.
 3. Latex-Formulas, Paragraph an Inline. 
-4. Callouts
-5. Remove Todos
+4. Frontmatter: Add, Replace, Map and Transform Values.
+5. Callouts.
+6. Remove Todos.
+7. TODO: Take wikilinks (cross-references) into account.
 
 You can build customized transformers for different solutions.
 
@@ -71,7 +73,7 @@ Take a look in the `test` folder for running examples.
 
 I already have a number of transformations on offer, but if you need your own, you can and add them to the pipeline. 
 
-## The Longform Markdown Splitter
+## 1. The Longform Markdown Splitter
 
 The Problem:
 
@@ -139,7 +141,7 @@ exporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
 }
 ```
 
-## Transform Obsidian-Links
+## 2. Transform Obsidian-Links
 
 Images from 
 
@@ -233,7 +235,7 @@ exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
 
 A simulation mode provides information about which images and attachments it expects and where. 
 
-## Transform Latex Formulas from Obsidian-Style to Hugo-Style
+## 3. Transform Latex Formulas from Obsidian-Style to Hugo-Style
 
 * https://www.makeuseof.com/write-mathematical-notation-obsidian/
 * https://getdoks.org/docs/built-ins/math/
@@ -306,12 +308,97 @@ exporter.addTransformer(new MD_MathInline_Transformer(parameter_math_inline));
         },
 ```
 
-## Translate Obsidian-Callouts to Hugo-Callout-Shortcodes
+## 4. Frontmatter: Add, Replace, Map and Transform Values
+
+What happens here?
+
+Adds a frontmatter to a single file (or a batch of single files).
+
+* The frontmatter from the source file is removed.
+* The new frontmatter-template is inserted instead.
+* Take some frontmatter fields from the source file, 
+  * and write them to another field in the target file.
+  * The value can be converted on the way.
+
+It's not quite finished yet.
+
+### Code-Example
+
+```ts
+var document_frontmatter: MD_Frontmatter_Template =
+  new MD_Frontmatter_Template(`---
+title: ""
+description: ""
+summary: ""
+date:
+draft:
+weight: 
+categories: []
+tags: []
+contributors: []
+pinned: false
+homepage: false
+seo:
+  title: "" 
+  description: ""
+  canonical: ""
+  noindex: false
+---\n\n`);
+
+// use one of the predefined tasks like so:
+// task: new MD_Mapping_BooleanInverse_Task()
+// or write a custom task:
+const map_1: MD_Mapping = {
+  source_property_name: "doPublish",
+  target_poperty_name: "draft",
+  task: {
+    perform: function (source_value: boolean, target_value: boolean): boolean {
+      target_value = !source_value;
+      return target_value;
+    },
+  },
+};
+
+// Ein Beispiel Task, der das aktuelle Datum einfügt.
+const map_2: MD_Mapping = {
+  source_property_name: "",
+  target_poperty_name: "date",
+  task: {
+    perform: function (source_value: any, target_value: any): any {
+      return new Date().toJSON().slice(0, 16);
+    },
+  },
+};
+
+const parameter_frontmatter: MD_Frontmatter_Parameter_Type = {
+  frontmatter: document_frontmatter,
+  frontmatter_filename: "",
+  mappings: [map_1, map_2],
+};
+
+exporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatter));
+```
+
+###  Example JSON for usage in config-file
+
+```json
+
+{
+  "transformer_class_name": "MD_Frontmatter_Transformer",
+  "transformer_parameter": {
+  "frontmatter_filename": "./test/frontmatter-template.md",
+  "frontmatter": {}
+          }
+},
+
+```
+
+## 5. Translate Obsidian-Callouts to Hugo-Callout-Shortcodes
 
 * Obsidian Admonitions https://plugins.javalent.com/admonitions/beginner/types
 * Hugo Callouts https://getdoks.org/docs/basics/shortcodes/
 
-Von 
+from 
 
 ````
 > [!info] Custom Title
@@ -334,7 +421,7 @@ Von
 * example
 * quote (cite)
 
-in
+to
 
 ```
 {{ < callout context="tip" title="Custom Title" icon="rocket" > }}
@@ -377,7 +464,7 @@ exporter.addTransformer(new MD_Callout_Transformer(parameter_callouts));
 
 ```
 
-## Remove TODOs
+## 6. Remove TODOs
 
 Remove for example the following Paragraphes:
 

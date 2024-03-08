@@ -5,11 +5,7 @@
 * Transformations on the target filename.
 * Run a joblist in batch.
 * Implement job-propertys functions: doSubfolders, limit, useCounter.
-* More Transformers
-    * Cross-references
-    * ...
-* A Obsidian-Plugin or standalone App with a nice Graphical-User-Interface. 
-* Add a frontmatter to a single file (or a batch of single files). At the moment, only the splitter does this.
+* A Obsidian-Plugin or standalone App with a nice Graphical-User-Interface.
 
 What has been implemented so far:
 
