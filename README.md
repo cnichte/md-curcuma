@@ -707,3 +707,13 @@ class MD_Custom_Transformer extends MD_Transformer_AbstractBase {
 ```
 
 You currently cannot call custom Transformer from a configuration file, you have to instantiate it in your script.
+
+You can mixup execution from config-file and adding your custom Transformer class like so:
+
+```ts
+const my_exporter: MD_Exporter = new MD_Exporter();
+
+my_exporter.addTransformer(new MyCustomTransformer(custom_params));
+
+my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
+```

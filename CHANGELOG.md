@@ -11,17 +11,6 @@
 * A Obsidian-Plugin or standalone App with a nice Graphical-User-Interface. 
 * Add a frontmatter to a single file (or a batch of single files). At the moment, only the splitter does this.
 
-* Load custom Transformers from the config file.
-    * Mixup execution from config-file and adding a Transformer class like so:
-
-```ts
-const my_exporter: MD_Exporter = new MD_Exporter();
-
-my_exporter.addTransformer(new MyTransformer(params));
-
-my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
-```
-
 What has been implemented so far:
 
 # Release 1.1.0 (2024-03-08) 
