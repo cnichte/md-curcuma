@@ -22,7 +22,7 @@ Restrictions
 
 * It only runs in Backend, not in Browsers.
 
-## How ist works
+## How it works
 
 In short:
 
