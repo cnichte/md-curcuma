@@ -9,6 +9,11 @@
 
 What has been implemented so far:
 
+# Release 1.1.1 (2024-03-08) 
+
+* Introducing the Mapper
+* Did some documentation
+
 # Release 1.1.0 (2024-03-08) 
 
 * Support Inline Latex-Formula.
