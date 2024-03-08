@@ -6,7 +6,69 @@ Copys and transforms Markdown files from your [Obsidian](https://obsidian.md/)-V
 * Inspired by: https://github.com/accraze/split-md
 * Why not [golang](https://golang.org/)? So you can use it easier outside the golang unsiverse.
 
+It would be nice to be able to build customized transformers for different solutions.
+
+Transformers are currently available for the following tasks:
+
+1. Split a Longform in separate Files at Headlines
+2. Obsidian-Links (Images and Documents)
+  * copy Files
+3. Latex-Formulas, Paragraph an inline. 
+4. Callouts
+5. Remove Todos
+
+Restrictions
+
+* It only runs in Backend, not in Browsers.
+
+## How ist works
+
+```ts
+// in short:
+const my_exporter: MD_Exporter = new MD_Exporter();
+my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
+```
+
+All tasks are defined in the `transport-config.json` configuration file.
+
+```ts
+// in long:
+const my_exporter: MD_Exporter = new MD_Exporter();
+
+// Basic config
+const exporter_parameter: MD_Exporter_Parameter_Type = {
+  readPath: "test/obsidian-vault/longform.md",
+  writePath: "test/hugo-content-2/",
+  doSubfolders: false,
+  limit: 1990,
+  useCounter: false
+};
+
+// Transformer config
+const parameter_images: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "![[",
+  tag_obsidian_suffix: "]]",
+  find_rule: "jpg|png",
+  replace_template: `{{< image src="assets/images/{name_full}" >}}`,
+  copy_task: {
+    source:"test/obsidian-vault/images/",
+    target:"test/hugo-content-2/assets/images/{name}/",
+    simulate:simulate_copy_job
+  }
+};
+
+// Add the Transformer to the pipeline
+exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
+
+// execute the job
+my_exporter.perform_job(exporter_parameter);
+```
+
+Take a look in the `test` folder for running examples.
+
 # Transformations
+
+I already have a number of transformations on offer, but if you need your own, you can and add them to the pipeline. 
 
 ## The Longform Markdown Splitter
 
@@ -31,11 +93,57 @@ The Problem:
   * Callouts.
   * ...
 
-It would be nice to be able to build customized transformers for different solutions.
+### Code-Example
 
-Restrictions
+```ts
+var splitter_frontmatter: MD_Frontmatter = new MD_Frontmatter(`---
+title: "{title}"
+description: ""
+url: /docs/{url_prefix}-{url}/
+date: {date}
+draft: false
+images: []
+menu:
+  docs:
+    parent: "docs-9602b15bad02600f3883f55e2ade6b81"
+    identifier: "{url_prefix}-{url}-{uuid}"
+weight: {weight}
+toc: true
+---\n\n`);
 
-* It only runs in Backend, not in Browsers.
+const parameter_splitter: MD_Splitter_Parameter_Type = {
+  pattern: "# ",
+  cleanName: "# ",
+  limit: 100,
+  hasCounter: false,
+  weightBase: 8000,
+  url_prefix: "test-prefix",
+  doRemoveHeadline: true,
+  frontmatter_filename: "", // ./test/frontmatter-template.md
+  frontmatter: splitter_frontmatter
+};
+
+exporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
+
+```
+
+### Example JSON for usage in config-file
+
+```json
+{
+  "transformer_class_name": "MD_Splitter_Transformer",
+  "transformer_parameter": {
+  "pattern": "# ",
+  "cleanName": "# ",
+  "limit": 100,
+  "hasCounter": false,
+  "weightBase": 8000,
+  "url_prefix": "test-prefix",
+  "doRemoveHeadline": true,
+  "frontmatter_filename": "./test/frontmatter-template.md",
+  "frontmatter": {}
+}
+```
 
 ## Transform Obsidian-Links
 
@@ -61,6 +169,70 @@ Hugo replacement:
 
 ```
 {{< button href="/getthis.php?id=docu-1" name="download docu-1 (pdf)" >}}
+```
+
+### Code-Example
+
+```ts
+const parameter_images: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "![[",
+  tag_obsidian_suffix: "]]",
+  find_rule: "jpg|png",
+  replace_template: `{{< image src="assets/images/{name_full}" >}}`,
+  copy_task: {
+    source:"test/obsidian-vault/images/",
+    target:"test/hugo-content-2/assets/images/{name}/",
+    simulate:simulate_copy_job
+  }
+};
+
+const parameter_docs: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "![[",
+  tag_obsidian_suffix: "]]",
+  find_rule: "pdf|ods|odp",
+  replace_template: `{{< button href="/getthis.php?id={name}" name="download {name} ({name_suffix})" >}}`,
+  copy_task: {
+    source:"test/obsidian-vault/attachments/",
+    target:"test/hugo-content-2/static/downloads/",
+    simulate:simulate_copy_job
+  }
+};
+
+exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
+exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
+```
+
+### Example JSON for usage in config-file
+
+```json
+{
+  "transformer_class_name": "MD_ObsidianLink_Transformer",
+  "transformer_parameter": {
+    "tag_obsidian_prefix": "![[",
+    "tag_obsidian_suffix": "]]",
+    "find_rule": "jpg|png",
+    "replace_template": "{{< lightbox-docs id=\"0\" folder=\"images/kursbuch-sv/{name}/*\" showImageNr=0 >}}",
+    "copy_task":{
+      "source":"test/obsidian-vault/images/",
+      "target":"test/hugo-content-2/assets/images/{name}/",
+      "simulate":false
+    }
+  }
+},
+{
+  "transformer_class_name": "MD_ObsidianLink_Transformer",
+  "transformer_parameter": {
+    "tag_obsidian_prefix": "![[",
+    "tag_obsidian_suffix": "]]",
+    "find_rule": "pdf|ods|odp",
+    "replace_template": "{{< button href=\"/getthis.php?id={name}\" name=\"download {name} ({name_suffix})\" >}}",
+    "copy_task":{
+      "source":"test/obsidian-vault/attachments/",
+      "target":"test/hugo-content-2/static/downloads/",
+      "simulate":false
+    }
+  }
+},
 ```
 
 ### Copy images and documents on the fly 
@@ -94,6 +266,51 @@ $$
 
 This is an inline {{< math >}} ${(x+y)}^2$ {{< /math >}} Formlula.
 ````
+
+### Code-Example
+
+```ts
+
+var parameter_math_paragraph: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "$$",
+  tag_obsidian_suffix: "$$",
+  find_rule: "",
+  replace_template: "```math {.text-center}\n$$\n {content} \n$$\n```\n",
+};
+
+var parameter_math_inline: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "$",
+  tag_obsidian_suffix: "$",
+  find_rule: "",
+  replace_template: "{{< math >}} ${content}$ {{< /math >}}",
+};
+
+exporter.addTransformer(new MD_MathParagraph_Transformer(parameter_math_paragraph));
+exporter.addTransformer(new MD_MathInline_Transformer(parameter_math_inline));
+```
+
+### Example JSON for usage in config-file
+
+```json
+        {
+          "transformer_class_name": "MD_MathParagraph_Transformer",
+          "transformer_parameter": {
+            "tag_obsidian_prefix": "$$",
+            "tag_obsidian_suffix": "$$",
+            "find_rule": "",
+            "replace_template": "```math {.text-center}\n$$\n {content} \n$$\n```\n"
+          }
+        },
+        {
+          "transformer_class_name": "MD_MathInline_Transformer",
+          "transformer_parameter": {
+            "tag_obsidian_prefix": "$",
+            "tag_obsidian_suffix": "$",
+            "find_rule": "",
+            "replace_template": "{{< math >}} ${content}$ {{< /math >}}"          
+          }
+        },
+```
 
 ## Translate Obsidian-Callouts to Hugo-Callout-Shortcodes
 
@@ -136,6 +353,36 @@ in
 * context="caution" title="Caution" icon="alert-triangle" 
 * context="danger"  title="Danger"  icon="alert-octagon"
 
+### Code-Example
+
+```ts
+
+var parameter_callouts: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "> [!",
+  tag_obsidian_suffix: "]",
+  find_rule: "",
+  replace_template: `{{< callout context="{context}" title="{title}" icon="{icon}" > }} {content} {{< /callout >}}`,
+};
+
+exporter.addTransformer(new MD_Callout_Transformer(parameter_callouts));
+
+```
+
+###  Example JSON for usage in config-file
+
+```json
+{
+  "transformer_class_name": "MD_Callout_Transformer",
+  "transformer_parameter": {
+    "tag_obsidian_prefix": "> [!",
+    "tag_obsidian_suffix": "]",
+    "find_rule": "",
+    "replace_template": "{{< callout context=\"{context}\" title=\"{title}\" icon=\"{icon}\" > }} {content} {{< /callout >}}"
+  }
+},
+
+```
+
 ## Remove TODOs
 
 Remove for example the following Paragraphes:
@@ -144,142 +391,33 @@ Remove for example the following Paragraphes:
 - [ ] #TODO Some serious stuff to do...
 ````
 
-# Install and Use
-
-## Basic Usage Example
-
-Write some Typescript like that:
+### Code-Example
 
 ```ts
-import { MD_Exporter } from "longform-markdown-splitter";
+const parameter_remove: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "",
+  tag_obsidian_suffix: "",
+  find_rule: "- [ ] #TODO ",
+  replace_template: ``,
+};
 
-const my_exporter: MD_Exporter = new MD_Exporter();
-my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
+exporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
 ```
 
-and provide a `config-file`, and a `frontmatter-file` to get this...
-
-1. transforms `![[image-1.jpg]]` in `{{< image src="assets/images/image-1.jpg" >}}`
-2. transforms `![[docu-1.pdf]]` in `{{< button href="/getthis.php?id=docu-1" name="download docu-1 (pdf)" >}}`
-3. removes paragraphes: `- [ ] #TODO Some serious stuff to do...`
-4. Splits the file on Headlines `# ` in separate files and adds frontmatter
-
-The file `transport-config.json`:
+### Example JSON for usage in config-file
 
 ```json
 {
-  "job_list": [
-    {
-      "job_name": "Example-Job No.1",
-      "job_description": "Example Job Description",
-      "job_parameter": {
-        "readPath": "./test/obsidian-vault/longform.md",
-        "writePath": "./test/hugo-content-1/",
-        "doSubfolders": false,
-        "limit": 100,
-        "useCounter": false
-      },
-      "job_tasks": [
-        {
-          "transformer_class_name": "MD_Frontmatter_Transformer",
-          "transformer_parameter": {
-            "frontmatter_filename": "./test/frontmatter-template.md",
-            "frontmatter": {}
-          }
-        },
-        {
-          "transformer_class_name": "MD_ObsidianLink_Transformer",
-          "transformer_parameter": {
-            "tag_obsidian_prefix": "![[",
-            "tag_obsidian_suffix": "]]",
-            "find_rule": "jpg|png",
-            "replace_template": "{{< lightbox-docs id=\"0\" folder=\"images/kursbuch-sv/{name}/*\" showImageNr=0 >}}",
-            "copy_task":{
-              "source":"test/obsidian-vault/images/",
-              "target":"test/hugo-content-2/assets/images/{name}/",
-              "simulate":false
-            }
-
-          }
-        },
-        {
-          "transformer_class_name": "MD_ObsidianLink_Transformer",
-          "transformer_parameter": {
-            "tag_obsidian_prefix": "![[",
-            "tag_obsidian_suffix": "]]",
-            "find_rule": "pdf|ods|odp",
-            "replace_template": "{{< button href=\"/getthis.php?id={name}\" name=\"download {name} ({name_suffix})\" >}}",
-            "copy_task":{
-              "source":"test/obsidian-vault/attachments/",
-              "target":"test/hugo-content-2/static/downloads/",
-              "simulate":false
-            }
-          }
-        },
-        {
-          "transformer_class_name": "MD_RemoveTODOS_Transformer",
-          "transformer_parameter": {
-            "find_rule": "- [ ] #TODO ",
-            "replace_template": ""
-          }
-        },
-        {
-          "transformer_class_name": "MD_Math_Transformer",
-          "transformer_parameter": {
-            "tag_obsidian_prefix": "$$",
-            "tag_obsidian_suffix": "$$",
-            "find_rule": "",
-            "replace_template": "```math {.text-center}\n$$\n {content} \n$$\n```\n"          
-          }
-        },
-        {
-          "transformer_class_name": "MD_RemoveTODOS_Transformer",
-          "transformer_parameter": {
-            "find_rule": "- [ ] #TODO ",
-            "replace_template": ""
-          }
-        },
-        {
-          "transformer_class_name": "MD_Splitter_Transformer",
-          "transformer_parameter": {
-            "pattern": "# ",
-            "cleanName": "# ",
-            "limit": 100,
-            "hasCounter": false,
-            "weightBase": 8000,
-            "url_prefix": "test-prefix",
-            "doRemoveHeadline": true,
-            "frontmatter_filename": "./test/frontmatter-template.md",
-            "frontmatter": {}
-          }
-        }
-      ]
-    }
-  ]
-}
-```
-
-and the frontmatter-file `frontmatter-template.md`:
-
-```yaml
----
-title: "{title}"
-description: ""
-url: /docs/{url_prefix}-{url}/
-date: {date}
-draft: false
-images: []
-menu:
-  docs:
-    parent: "docs-9602b15bad02600f3883f55e2ade6b81"
-    identifier: "{url_prefix}-{url}-{uuid}"
-weight: {weight}
-toc: true
----
+  "transformer_class_name": "MD_RemoveTODOS_Transformer",
+  "transformer_parameter": {
+    "find_rule": "- [ ] #TODO ",
+    "replace_template": ""
+  }
+},
 
 ```
 
-run the script. Hopefully it has created something :-)
+# Install and Use
 
 ## Where to use?
 
@@ -293,8 +431,24 @@ I recommend Option `3` at the moment.
 
 ## Install it
 
+The easiest way is to clone the repository:
+
+* copy the link: https://gitlab.com/glimpse-of-life/longform-markdown-splitter.git 
+* open VS Code
+* Click on `Clone Git repository`.
+* Select a directory to clone the target to.
+* The directory `longform-markdown-splitter` will be created.
+* Open the project in VS-Code
+* Open Teriminal
+* `npm install`
+* `npm run test`
+
+![](readme-images/explorer-cloned.png)
+
+Another option is to create an empty project, an install from npm... 
+
 * create a `project-folder`
-* open that folder, an in it...
+* open that folder, and in it...
 
 ```bash
 npm init
@@ -363,7 +517,6 @@ The ts suffix in `build:ts` separates it from the golag scripts which i name `bu
   * create folder `test/hugo-content/` - this is the target directory
 
 ## Create a Transport-Script 
-
 
 In folder `transport-scripts`create the file `split-my-longform.ts` and paste the code:
 
@@ -515,7 +668,7 @@ Observe the console output on the Output tab. The images and documents shown in 
 
 ![](readme-images/test-console-output.png)
 
-## Build A Custom Transformer 1
+## Build A Custom Transformer
 
 ```ts
 import { MD_Exporter_Parameter_Type } from "src/md-exporter";
