@@ -85,14 +85,7 @@ The Problem:
 * Be Hugo compatible.
   * The individual documents should be equipped with frontmatter.
   * autogenerate uuids
-* Certain content may need to be transformed:
-  * Remove heading (preferably as an option)
-  * create Hugo Shortcodes for Images and Attachmemts (pdf, odf,...)
-    * Insert download buttons.
-  * Remove TODOs.
-  * Beachte Formulas.
-  * Callouts.
-  * ...
+* Certain content may need to be transformed.
 
 ### Code-Example
 
