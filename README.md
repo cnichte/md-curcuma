@@ -11,8 +11,7 @@ It would be nice to be able to build customized transformers for different solut
 Transformers are currently available for the following tasks:
 
 1. Split a Longform in separate Files at Headlines
-2. Obsidian-Links (Images and Documents)
-  * copy Files
+2. Obsidian-Links (Images and Documents), copy Files on the fly
 3. Latex-Formulas, Paragraph an inline. 
 4. Callouts
 5. Remove Todos
