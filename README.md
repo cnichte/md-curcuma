@@ -6,8 +6,6 @@ Copys and transforms Markdown files from your [Obsidian](https://obsidian.md/)-V
 * Inspired by: https://github.com/accraze/split-md
 * Why not [golang](https://golang.org/)? So you can use it easier outside the golang unsiverse.
 
-It would be nice to be able to build customized transformers for different solutions.
-
 Transformers are currently available for the following tasks:
 
 1. Split a Longform in separate Files at Headlines
@@ -15,6 +13,8 @@ Transformers are currently available for the following tasks:
 3. Latex-Formulas, Paragraph an inline. 
 4. Callouts
 5. Remove Todos
+
+You can build customized transformers for different solutions.
 
 Restrictions
 
