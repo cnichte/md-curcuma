@@ -440,6 +440,7 @@ The easiest way is to clone the repository:
 * Open the project in VS-Code
 * Open Teriminal
 * `npm install`
+* `npm run build:ts`
 * `npm run test`
 
 ![](readme-images/explorer-cloned.png)
