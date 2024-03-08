@@ -54,7 +54,7 @@ const parameter_images: MD_Transformer_Parameter_Type = {
   copy_task: {
     source:"test/obsidian-vault/images/",
     target:"test/hugo-content-2/assets/images/{name}/",
-    simulate:simulate_copy_job
+    simulate:false
   }
 };
 

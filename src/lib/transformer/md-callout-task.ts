@@ -140,6 +140,7 @@ export class MD_Callout_Transformer extends MD_Transformer_AbstractBase {
     ) {
       // > [!"
       this.doCollect = true;
+      console.group('callout task');
       console.log("###########################################");
       console.log("###########################################");
       console.log("#### callout: found!");
@@ -174,6 +175,7 @@ export class MD_Callout_Transformer extends MD_Transformer_AbstractBase {
         console.log("#### callout: process!", this.collection, this.template_values);
         console.log("###########################################");
         console.log("###########################################");
+        console.groupEnd();
         // end collection, build with template, apply...
         this.template_values.content = this.collection.join("\n");
         const template: MD_Template = new MD_Template(
