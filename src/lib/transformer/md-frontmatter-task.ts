@@ -3,10 +3,10 @@ import { MD_FileContent_Interface, MD_Filesystem } from "../md-filesystem";
 import { MD_Observer_Interface } from "../md-observer";
 import { MD_Transformer_AbstractBase } from "../md-transformer";
 import {
-  MD_Frontmatter_Map,
   MD_Frontmatter_Parameter_Type,
   MD_Frontmatter_Template,
 } from "../md-frontmatter";
+import { MD_Mapper } from "../md-mapping";
 
 /**
  * Füge frontmatter zu kopierten Dateien hinzu. (nicht splitter)
@@ -116,27 +116,12 @@ export class MD_Frontmatter_Transformer extends MD_Transformer_AbstractBase {
       // oder... das geht wenn die propertynames == platzhalter sind: obj[name] -> {name}
       // das ersetzen erfolgt aus den attributen der quelle...
       // Was ist mit den Feldern aus dem Splitter? -> MD_Transformer_TemplateValues_Type aus md-transformer.
-
-      const mappings: MD_Frontmatter_Map[] = this.parameter.map;
-
-      if(mappings!=null || mappings!=undefined){
-        mappings.forEach((map: MD_Frontmatter_Map) => {
-          const source_value =
-            file_content.frontmatter_attributes[map.source_property_name];
-          const target_value =
-            template_content.frontmatter_attributes[map.target_poperty_name];
+      const mapper:MD_Mapper = new MD_Mapper();
+      mapper.addMappings(this.parameter.mappings);
+      mapper.do_mappings(file_content.frontmatter_attributes, fm_new);
   
-          if (map.task !== undefined || map.task !== null) {
-            const tv = map.task.perform(source_value, target_value);
-            fm_new[map.target_poperty_name] = tv;
-          } else {
-            fm_new[map.target_poperty_name] = source_value;
-          }
-        });
-  
-        // github.com/erikvullings/deep-copy-ts
-        file_content.frontmatter_attributes = { ...fm_new }; // clone
-      }
+      // github.com/erikvullings/deep-copy-ts
+      file_content.frontmatter_attributes = { ...fm_new }; // clone
 
     } // if index===0
 

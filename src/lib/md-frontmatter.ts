@@ -1,19 +1,11 @@
+import { MD_Mapping } from "./md-mapping";
 import { MD_Template } from "./md-template";
 
-export interface MD_Frontmatter_MapTask {
-  perform(source_value: any, target_value: any): any;
-}
-
-export interface MD_Frontmatter_Map {
-  source_property_name: any;
-  target_poperty_name: any;
-  task: MD_Frontmatter_MapTask;
-}
-
+// TODO mapping ???
 export interface MD_Frontmatter_Parameter_Type {
   frontmatter_filename: string;
   frontmatter: MD_Frontmatter_Template;
-  map: MD_Frontmatter_Map[];
+  mappings: MD_Mapping[];
 }
 
 /**

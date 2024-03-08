@@ -1,16 +1,18 @@
 import {
   MD_Frontmatter_Parameter_Type,
   MD_Frontmatter_Template,
-  type MD_Frontmatter_Map,
-  MD_Frontmatter_MapTask,
 } from "../src/lib/md-frontmatter";
+
 import { MD_Exporter, MD_Exporter_Parameter_Type } from "../src/lib/md-exporter";
 import { MD_Transformer_Parameter_Type } from "../src/lib/md-transformer";
 import { MD_Splitter_Parameter_Type } from "../src/lib/transformer/md-splitter-task";
 import { MD_ObsidianLink_Transformer } from "../src/lib/transformer/md-obsidian-link-task";
 import { MD_RemoveTODOS_Transformer } from "../src/lib/transformer/md-remove-todos-task";
 import { MD_Frontmatter_Transformer } from "../src/lib/transformer/md-frontmatter-task";
-import { MD_Frontmatter_MapBooleanInverseTask } from "../src/lib/frontmatter-mapper-tasks/map-boolean-inverse-task";
+
+import { type MD_Mapping } from "../src/lib/md-mapping";
+import { MD_Mapping_BooleanInverse_Task } from "../src/lib/mapping-tasks/mapping-boolean-inverse-task";
+import { MD_Mapping_Copy_Task } from "../src/lib/mapping-tasks/mapping-copy-task";
 
 /**
  * This test deals with transforming a couple of Obsidian-Markdown Documents.
@@ -58,8 +60,10 @@ seo:
   noindex: false # false (default) or true
 ---\n\n`);
 
-// task: new MD_Frontmatter_MapBooleanInverseTask()
-const map_1: MD_Frontmatter_Map = {
+// use one of the predefined tasks like so:
+// task: new MD_Mapping_BooleanInverse_Task()
+// or write a custom task:
+const map_1: MD_Mapping = {
   source_property_name: "doPublish",
   target_poperty_name: "draft",
   task: {
@@ -70,7 +74,8 @@ const map_1: MD_Frontmatter_Map = {
   },
 };
 
-const map_2: MD_Frontmatter_Map = {
+// Ein Beispiel Task, der das aktuelle Datum einfügt.
+const map_2: MD_Mapping = {
   source_property_name: "",
   target_poperty_name: "date",
   task: {
@@ -83,7 +88,7 @@ const map_2: MD_Frontmatter_Map = {
 const parameter_frontmatter: MD_Frontmatter_Parameter_Type = {
   frontmatter: document_frontmatter,
   frontmatter_filename: "",
-  map: [map_1, map_2],
+  mappings: [map_1, map_2],
 };
 
 exporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatter));

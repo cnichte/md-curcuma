@@ -9,10 +9,9 @@ export {
   MD_Frontmatter_Template,
   type MD_Frontmatter_Type,
   type MD_Frontmatter_Parameter_Type,
-  type MD_Frontmatter_Map,
-  MD_Frontmatter_MapTask,
 } from "./lib/md-frontmatter";
 // todo md-job
+export { MD_MappingTask, MD_Mapper, type MD_Mapping } from "./lib/md-mapping";
 export { MD_ObserverSubject, type MD_Observer_Interface } from "./lib/md-observer";
 // todo md-tag
 export { MD_Template } from "./lib/md-template";
@@ -24,10 +23,10 @@ export {
   type MD_Transformer_Parameter_Type,
 } from "./lib/md-transformer";
 
-//* Frontmapper-Mapper Tasks
+//* Mapper Tasks
 
-export { MD_Frontmatter_MapBooleanInverseTask } from "./lib/frontmatter-mapper-tasks/map-boolean-inverse-task";
-export { MD_Frontmatter_MapCopyTask } from "./lib/frontmatter-mapper-tasks/map-copy-task";
+export { MD_Mapping_BooleanInverse_Task } from "./lib/mapping-tasks/mapping-boolean-inverse-task";
+export { MD_Mapping_Copy_Task } from "./lib/mapping-tasks/mapping-copy-task";
 
 //* Transformer Tasks
 
