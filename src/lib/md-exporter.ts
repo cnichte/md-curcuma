@@ -127,7 +127,7 @@ export class MD_Exporter implements MD_Observer_Interface {
       filename
     );
 
-    MD_Filesystem.ensure_path(job_parameter.writePath, job_parameter.simulate); // TODO das arbeitet nicht immer?
+    MD_Filesystem.ensure_path(job_parameter.writePath, job_parameter.simulate); // TODO that doesn't always work?
 
     if (!job_parameter.simulate) {
       // Here, of course, the option of forcing the disk can be useful.
@@ -136,12 +136,16 @@ export class MD_Exporter implements MD_Observer_Interface {
           if (
             MD_Filesystem.is_file_modified(source_file, path_target_filename)
           ) {
+            console.log("file does exist, and is modified (compared by modified-date): Write it.");
             MD_Filesystem.write_file(
               path_target_filename,
               MD_Filesystem.merge_frontmatter_body(mdfc)
             );
+          }else{
+            console.log("file does exist, but is not modified: Skip writing.");
           }
         } else {
+          console.log("file does not exist: Write it.");
           MD_Filesystem.write_file(
             path_target_filename,
             MD_Filesystem.merge_frontmatter_body(mdfc)

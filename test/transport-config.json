@@ -49,12 +49,31 @@
           }
         },
         {
-          "transformer_class_name": "MD_Math_Transformer",
+          "transformer_class_name": "MD_MathParagraph_Transformer",
           "transformer_parameter": {
             "tag_obsidian_prefix": "$$",
             "tag_obsidian_suffix": "$$",
             "find_rule": "",
-            "replace_template": "```math {.text-center}\n$$\n {content} \n$$\n```\n"          }
+            "replace_template": "```math {.text-center}\n$$\n {content} \n$$\n```\n"
+          }
+        },
+        {
+          "transformer_class_name": "MD_MathInline_Transformer",
+          "transformer_parameter": {
+            "tag_obsidian_prefix": "$",
+            "tag_obsidian_suffix": "$",
+            "find_rule": "",
+            "replace_template": "{{< math >}} ${content}$ {{< /math >}}"          
+          }
+        },
+        {
+          "transformer_class_name": "MD_Callout_Transformer",
+          "transformer_parameter": {
+            "tag_obsidian_prefix": "> [!",
+            "tag_obsidian_suffix": "]",
+            "find_rule": "",
+            "replace_template": "{{< callout context=\"{context}\" title=\"{title}\" icon=\"{icon}\" > }} {content} {{< /callout >}}"
+          }
         },
         {
           "transformer_class_name": "MD_RemoveTODOS_Transformer",

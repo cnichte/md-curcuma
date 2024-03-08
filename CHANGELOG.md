@@ -17,35 +17,22 @@
 ```ts
 const my_exporter: MD_Exporter = new MD_Exporter();
 
-exporter.addTransformer(new MyTransformer(params));
+my_exporter.addTransformer(new MyTransformer(params));
 
 my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
 ```
 
 What has been implemented so far:
 
+# Release 1.1.0 (2024-03-08) 
+
+* Support Inline Latex-Formula.
+* Translate Callouts from Obsidian-Markdown to Hugo-Callout-Shortcode.
+
 # Release 1.0.17 (2024-03-06) 
 
 * Adding and removing Items to the Markdown-Content Array is now better considered.
-* `MD_Math_Transformer` Task to transform Transform Latex Formulas from Obsidian-Style to Hugo-Style...
-
- from this
-
-```latex
-$$
-W_{kin} = \frac { m \cdot v^2}{2} = \frac {p^2}{ 2 \cdot m}
-$$
-```
-
-to this
-
-````latex
-```math {.text-center}
-$$
-W_{kin} = \frac { m \cdot v^2}{2} = \frac {p^2}{ 2 \cdot m}
-$$
-```
-````
+* `MD_Math_Transformer` Task to transform Transform Latex Formula Parapgraphs from Obsidian-Style to Hugo-Style...
 
 # Release 1.0.16 (2024-03-04) 
 
@@ -72,15 +59,15 @@ Splitting a single large file already works fine, but I'm still working on case 
 # Release 1.0.9 (2024-02-13)
  
 * Another Argh! Update.
-* Types (d.ts) missing
-* fixed corrupt relative paths
+* Types (d.ts) missing.
+* fixed corrupt relative paths.
 
 # Release 1.0.8 (2024-02-13)
 
 The Argh! Update.
 
 * Activated test 2
-* Transformer-API missed some Classes - sorry for thet. They are noy published to outside World:
+* Transformer-API missed some Classes - sorry for that. They are noy published to outside World:
     * MD_Frontmatter_Template
     * MD_Frontmatter_Mapper
     * type MD_Frontmatter_Type

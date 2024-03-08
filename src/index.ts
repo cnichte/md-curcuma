@@ -25,19 +25,22 @@ export {
 } from "./lib/md-transformer";
 
 //* Frontmapper-Mapper Tasks
+
 export { MD_Frontmatter_MapBooleanInverseTask } from "./lib/frontmatter-mapper-tasks/map-boolean-inverse-task";
 export { MD_Frontmatter_MapCopyTask } from "./lib/frontmatter-mapper-tasks/map-copy-task";
 
 //* Transformer Tasks
-export {
-  MD_Splitter_Transformer,
-  MD_Splitter_Parameter_Type,
-} from "./lib/transformer/md-splitter-task";
+
+export { MD_Callout_Transformer } from "./lib/transformer/md-callout-task"
 export { MD_Frontmatter_Transformer } from "./lib/transformer/md-frontmatter-task";
-export { MD_Math_Transformer, type MD_MathTransformer_TemplateValues_Type } from "./lib/transformer/md-math-task";
+export { MD_MathParagraph_Transformer, MD_MathInline_Transformer , type MD_MathTransformer_TemplateValues_Type } from "./lib/transformer/md-math-task";
 export {
   MD_ObsidianLink_Transformer_Base,
   MD_ObsidianLink_Transformer,
   type MD_LinkTransformer_TemplateValues_Type,
 } from "./lib/transformer/md-obsidian-link-task";
 export { MD_RemoveTODOS_Transformer } from "./lib/transformer/md-remove-todos-task";
+export {
+  MD_Splitter_Transformer,
+  MD_Splitter_Parameter_Type,
+} from "./lib/transformer/md-splitter-task";

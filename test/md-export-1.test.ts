@@ -1,5 +1,5 @@
-import { MD_Exporter } from "../src/md-exporter";
-import { MD_Transformer_Parameter_Type } from "../src/md-transformer";
+import { MD_Exporter } from "../src/lib/md-exporter";
+import { MD_Transformer_Parameter_Type } from "../src/lib/md-transformer";
 
 /**
  * This test deals with the sharing of a longform document 

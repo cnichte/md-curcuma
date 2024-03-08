@@ -1,11 +1,12 @@
-import { MD_Frontmatter_Template } from "../src/md-frontmatter";
-import { MD_Exporter, MD_Exporter_Parameter_Type } from "../src/md-exporter";
-import { MD_Transformer_Parameter_Type } from "../src/md-transformer";
-import { MD_Splitter_Transformer } from "../src/transformer/md-splitter-task";
-import { MD_Splitter_Parameter_Type } from "../src/transformer/md-splitter-task";
-import { MD_ObsidianLink_Transformer } from "../src/transformer/md-obsidian-link-task";
-import { MD_RemoveTODOS_Transformer } from "../src/transformer/md-remove-todos-task";
-import { MD_Math_Transformer } from "../src/transformer/md-math-task";
+import { MD_Frontmatter_Template } from "../src/lib/md-frontmatter";
+import { MD_Exporter, MD_Exporter_Parameter_Type } from "../src/lib/md-exporter";
+import { MD_Transformer_Parameter_Type } from "../src/lib/md-transformer";
+import { MD_Splitter_Transformer } from "../src/lib/transformer/md-splitter-task";
+import { MD_Splitter_Parameter_Type } from "../src/lib/transformer/md-splitter-task";
+import { MD_ObsidianLink_Transformer } from "../src/lib/transformer/md-obsidian-link-task";
+import { MD_RemoveTODOS_Transformer } from "../src/lib/transformer/md-remove-todos-task";
+import { MD_MathInline_Transformer, MD_MathParagraph_Transformer } from "../src/lib/transformer/md-math-task";
+import { MD_Callout_Transformer } from "../src/lib/transformer/md-callout-task";
 
 /**
  * This test deals with sharing a longform document 
@@ -52,11 +53,25 @@ const parameter_docs: MD_Transformer_Parameter_Type = {
   }
 };
 
-var parameter_math: MD_Transformer_Parameter_Type = {
+var parameter_math_paragraph: MD_Transformer_Parameter_Type = {
   tag_obsidian_prefix: "$$",
   tag_obsidian_suffix: "$$",
   find_rule: "",
   replace_template: "```math {.text-center}\n$$\n {content} \n$$\n```\n",
+};
+
+var parameter_math_inline: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "$",
+  tag_obsidian_suffix: "$",
+  find_rule: "",
+  replace_template: "{{< math >}} ${content}$ {{< /math >}}",
+};
+
+var parameter_callouts: MD_Transformer_Parameter_Type = {
+  tag_obsidian_prefix: "> [!",
+  tag_obsidian_suffix: "]",
+  find_rule: "",
+  replace_template: `{{< callout context="{context}" title="{title}" icon="{icon}" > }} {content} {{< /callout >}}`,
 };
 
 const parameter_remove: MD_Transformer_Parameter_Type = {
@@ -100,7 +115,9 @@ const parameter_splitter: MD_Splitter_Parameter_Type = {
 exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
 exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
 exporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
-exporter.addTransformer(new MD_Math_Transformer(parameter_math));
+exporter.addTransformer(new MD_MathParagraph_Transformer(parameter_math_paragraph));
+exporter.addTransformer(new MD_MathInline_Transformer(parameter_math_inline));
+exporter.addTransformer(new MD_Callout_Transformer(parameter_callouts));
 exporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
 
 exporter.perform_job(exporter_parameter);

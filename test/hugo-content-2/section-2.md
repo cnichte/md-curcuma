@@ -2,13 +2,13 @@
 title: "Section 2"
 description: ""
 url: /docs/test-prefix-section-2/
-date: 2024-03-06T15:23
+date: 2024-03-08T15:07
 draft: false
 images: []
 menu:
   docs:
     parent: "docs-9602b15bad02600f3883f55e2ade6b81"
-    identifier: "test-prefix-section-2-0d8a44a6-edce-4817-b665-c819b364b317"
+    identifier: "test-prefix-section-2-7cf07245-46d0-4ba0-916c-0a7e797006fe"
 weight: 8014
 toc: true
 ---
@@ -35,6 +35,9 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
 
+> {{< image src="assets/images/test-image-04.jpg" >}}
+{{< callout context="info" title="Callouts with custom title" icon="" > }} Here's a callout block.
+It supports **Markdown**, [[Internal link|Wikilinks]], and [[Embed files|embeds]]! {{< /callout >}}
 Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.   
 
 {{< button href="/getthis.php?id=Document-01" name="download Document-01 (pdf)" >}}

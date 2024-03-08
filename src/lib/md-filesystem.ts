@@ -149,15 +149,20 @@ export interface MD_FileContent_Interface {
   ): boolean {
     const stats_source = fs.statSync(file_source);
     const mtime_source = stats_source.mtime;
+    const ctime_source = stats_source.ctime;
 
     const stats_target = fs.statSync(file_target);
     const mtime_target = stats_target.mtime;
-
+    const ctime_target = stats_target.ctime;
+    console.log(`File source: ${file_source}, target: ${file_target}`);
     console.log(
       `File data last modified, source: ${mtime_source}, target: ${mtime_target}`
     );
+    console.log(
+      `File data last created, source: ${ctime_source}, target: ${ctime_target}`
+    );
 
-    return mtime_source === mtime_target;
+    return mtime_source.getTime() !== ctime_source.getTime();
   }
 
   public static get_filename_from(my_path_filename: string): string {

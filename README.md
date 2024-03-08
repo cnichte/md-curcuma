@@ -1,40 +1,41 @@
-# MD-Curcuma - The Longform Markdown Splitter
+# MD-Curcuma
 
-Copys and transforms Markdown files from [Obsidian](https://obsidian.md/) for usage in [Hugo](https://gohugo.io).
+Copys and transforms Markdown files from your [Obsidian](https://obsidian.md/)-Vault for usage in [Hugo](https://gohugo.io).
 
 * This thing ist done with [Typescript](https://www.typescriptlang.org/).
 * Inspired by: https://github.com/accraze/split-md
 * Why not [golang](https://golang.org/)? So you can use it easier outside the golang unsiverse.
 
-## The Problem
+# Transformations
+
+## The Longform Markdown Splitter
+
+The Problem:
 
 * I have a long Markdown document that was compiled with the [Obsidian Longform plugin](https://github.com/kevboh/longform).
 * I would like to make this available on my website.
 * The website is built with [Hugo](https://gohugo.io).
 * For this purpose, the longform document is to be split into several individual documents.
+  * The splitting should be done on headings: e.g.: `# `
+  * The text of the heading is used as the filename
+  * If necessary, with a number in front, if necessary replace special characters url conform
 * Be Hugo compatible.
   * The individual documents should be equipped with frontmatter.
   * autogenerate uuids
 * Certain content may need to be transformed:
-  * Hugo shortcodes.
+  * Remove heading (preferably as an option)
+  * create Hugo Shortcodes for Images and Attachmemts (pdf, odf,...)
+    * Insert download buttons.
   * Remove TODOs.
-  * Insert download buttons.
+  * Beachte Formulas.
+  * Callouts.
   * ...
 
 It would be nice to be able to build customized transformers for different solutions.
 
-## Further Requirements
+Restrictions
 
-* The splitting should be done on headings: e.g.: `# `
-* The text of the heading is used as the filename
-  * If necessary, with a number in front, if necessary replace special characters url conform
-* Insert frontmatter and initialize correctly.
-* Remove heading (preferably as an option)
-* Replace images with shortcode, e.g:
-  * Obsidian: `![[my-image.jpg]]`
-  * Hugo replacement: `{{<image folder="images/my-image.jpg" >}}`.
-* Copy images and documents on the fly. 
-  * A simulation mode provides information about which images and attachments it expects and where. 
+* It only runs in Backend, not in Browsers.
 
 ## Transform Obsidian-Links
 
@@ -62,15 +63,24 @@ Hugo replacement:
 {{< button href="/getthis.php?id=docu-1" name="download docu-1 (pdf)" >}}
 ```
 
+### Copy images and documents on the fly 
+
+A simulation mode provides information about which images and attachments it expects and where. 
 
 ## Transform Latex Formulas from Obsidian-Style to Hugo-Style
 
- from this
+* https://www.makeuseof.com/write-mathematical-notation-obsidian/
+* https://getdoks.org/docs/built-ins/math/
+
+from this Formula in a Paragraph:
 
 ```latex
 $$
 W_{kin} = \frac { m \cdot v^2}{2} = \frac {p^2}{ 2 \cdot m}
 $$
+
+This is an inline ${(x+y)}^2$ Formula.
+
 ```
 
 to this
@@ -81,7 +91,50 @@ $$
 W_{kin} = \frac { m \cdot v^2}{2} = \frac {p^2}{ 2 \cdot m}
 $$
 ```
+
+This is an inline {{< math >}} ${(x+y)}^2$ {{< /math >}} Formlula.
 ````
+
+## Translate Obsidian-Callouts to Hugo-Callout-Shortcodes
+
+* Obsidian Admonitions https://plugins.javalent.com/admonitions/beginner/types
+* Hugo Callouts https://getdoks.org/docs/basics/shortcodes/
+
+Von 
+
+````
+> [!info] Custom Title
+> Here's a callout block.
+> It supports **Markdown**, [[Internal link|Wikilinks]], and [[Embed files|embeds]]!
+> ![[Engelbart.jpg]]
+````
+
+* note
+* abstract(summary, tldr)
+* info
+* todo
+* tip (hint, important)
+* success(check, done)
+* question (help, faq)
+* warning (caution, attention)
+* failure (fail, missing)
+* danger (error)
+* bug
+* example
+* quote (cite)
+
+in
+
+```
+{{ < callout context="tip" title="Custom Title" icon="rocket" > }}
+ Here's a callout block.
+{{ < /callout > }}
+```
+
+* context="tip"     title="Tip"     icon="rocket"
+* context="note"    title="Note"    icon="info-circle"
+* context="caution" title="Caution" icon="alert-triangle" 
+* context="danger"  title="Danger"  icon="alert-octagon"
 
 ## Remove TODOs
 
@@ -91,12 +144,9 @@ Remove for example the following Paragraphes:
 - [ ] #TODO Some serious stuff to do...
 ````
 
+# Install and Use
 
-## Restrictions
-
-* It only runs in Backend, not in Browsers.
-
-## Usage
+## Basic Usage Example
 
 Write some Typescript like that:
 
@@ -179,7 +229,8 @@ The file `transport-config.json`:
             "tag_obsidian_prefix": "$$",
             "tag_obsidian_suffix": "$$",
             "find_rule": "",
-            "replace_template": "```math {.text-center}\n$$\n {content} \n$$\n```\n"          }
+            "replace_template": "```math {.text-center}\n$$\n {content} \n$$\n```\n"          
+          }
         },
         {
           "transformer_class_name": "MD_RemoveTODOS_Transformer",

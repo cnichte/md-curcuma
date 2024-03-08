@@ -3,14 +3,14 @@ import {
   MD_Frontmatter_Template,
   type MD_Frontmatter_Map,
   MD_Frontmatter_MapTask,
-} from "../src/md-frontmatter";
-import { MD_Exporter, MD_Exporter_Parameter_Type } from "../src/md-exporter";
-import { MD_Transformer_Parameter_Type } from "../src/md-transformer";
-import { MD_Splitter_Parameter_Type } from "../src/transformer/md-splitter-task";
-import { MD_ObsidianLink_Transformer } from "../src/transformer/md-obsidian-link-task";
-import { MD_RemoveTODOS_Transformer } from "../src/transformer/md-remove-todos-task";
-import { MD_Frontmatter_Transformer } from "../src/transformer/md-frontmatter-task";
-import { MD_Frontmatter_MapBooleanInverseTask } from "../src/frontmatter-mapper-tasks/map-boolean-inverse-task";
+} from "../src/lib/md-frontmatter";
+import { MD_Exporter, MD_Exporter_Parameter_Type } from "../src/lib/md-exporter";
+import { MD_Transformer_Parameter_Type } from "../src/lib/md-transformer";
+import { MD_Splitter_Parameter_Type } from "../src/lib/transformer/md-splitter-task";
+import { MD_ObsidianLink_Transformer } from "../src/lib/transformer/md-obsidian-link-task";
+import { MD_RemoveTODOS_Transformer } from "../src/lib/transformer/md-remove-todos-task";
+import { MD_Frontmatter_Transformer } from "../src/lib/transformer/md-frontmatter-task";
+import { MD_Frontmatter_MapBooleanInverseTask } from "../src/lib/frontmatter-mapper-tasks/map-boolean-inverse-task";
 
 /**
  * This test deals with transforming a couple of Obsidian-Markdown Documents.

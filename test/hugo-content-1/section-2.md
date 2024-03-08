@@ -2,18 +2,25 @@
 title: "Section 2"
 description: ""
 url: /docs/test-prefix-section-2/
-date: 2024-02-13T14:56
+date: 2024-03-08T15:07
 draft: false
 images: []
 menu:
   docs:
     parent: "docs-9602b15bad02600f3883f55e2ade6b81"
-    identifier: "test-prefix-section-2-dd6c6dea-c25e-478a-accd-31b9e8a113c9"
+    identifier: "test-prefix-section-2-69f04624-f456-4a45-8403-ebb13e6e5e5b"
 weight: 8014
 toc: true
 ---
 
-Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.   
+Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
+```math {.text-center}
+$$
+ W_{kin} = \frac { m \cdot v^2}{2} = \frac {p^2}{ 2 \cdot m} 
+$$
+```
+
+Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.   
 
 ## Chapter 2.1
 
@@ -27,6 +34,9 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. 
 
+> {{< lightbox-docs id="0" folder="images/kursbuch-sv/test-image-04/*" showImageNr=0 >}}
+{{< callout context="info" title="Callouts with custom title" icon="" > }} Here's a callout block.
+It supports **Markdown**, [[Internal link|Wikilinks]], and [[Embed files|embeds]]! {{< /callout >}}
 Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.   
 
 {{< button href="/getthis.php?id=Document-01" name="download Document-01 (pdf)" >}}

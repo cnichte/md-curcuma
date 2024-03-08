@@ -119,22 +119,25 @@ export class MD_Frontmatter_Transformer extends MD_Transformer_AbstractBase {
 
       const mappings: MD_Frontmatter_Map[] = this.parameter.map;
 
-      mappings.forEach((map: MD_Frontmatter_Map) => {
-        const source_value =
-          file_content.frontmatter_attributes[map.source_property_name];
-        const target_value =
-          template_content.frontmatter_attributes[map.target_poperty_name];
+      if(mappings!=null || mappings!=undefined){
+        mappings.forEach((map: MD_Frontmatter_Map) => {
+          const source_value =
+            file_content.frontmatter_attributes[map.source_property_name];
+          const target_value =
+            template_content.frontmatter_attributes[map.target_poperty_name];
+  
+          if (map.task !== undefined || map.task !== null) {
+            const tv = map.task.perform(source_value, target_value);
+            fm_new[map.target_poperty_name] = tv;
+          } else {
+            fm_new[map.target_poperty_name] = source_value;
+          }
+        });
+  
+        // github.com/erikvullings/deep-copy-ts
+        file_content.frontmatter_attributes = { ...fm_new }; // clone
+      }
 
-        if (map.task !== undefined || map.task !== null) {
-          const tv = map.task.perform(source_value, target_value);
-          fm_new[map.target_poperty_name] = tv;
-        } else {
-          fm_new[map.target_poperty_name] = source_value;
-        }
-      });
-
-      // github.com/erikvullings/deep-copy-ts
-      file_content.frontmatter_attributes = { ...fm_new }; // clone
     } // if index===0
 
     return file_content;
