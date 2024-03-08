@@ -22,16 +22,18 @@ Restrictions
 
 ## How ist works
 
+In short:
+
 ```ts
-// in short:
 const my_exporter: MD_Exporter = new MD_Exporter();
 my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
 ```
 
 All tasks are defined in the `transport-config.json` configuration file.
 
+In long:
+
 ```ts
-// in long:
 const my_exporter: MD_Exporter = new MD_Exporter();
 
 // Basic config
@@ -711,4 +713,4 @@ class MD_Custom_Transformer extends MD_Transformer_AbstractBase {
   }
 ```
 
-You cannot currently call this Transformer from a configuration file, but only if you instantiate it in your script. But I'm still going to build something for it :-)
+You currently cannot call custom Transformer from a configuration file, you have to instantiate it in your script.
