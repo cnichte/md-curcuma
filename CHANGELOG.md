@@ -9,9 +9,10 @@
 
 What has been implemented so far:
 
-# Release 1.2.1, 1.2.2 (2024-03-09) 
+# Release 1.2.1, 1.2.4 (2024-03-09) 
 
 * index was missing, sorry.
+* fixed some wrong paths.
 
 # Release 1.2.0 (2024-03-09) 
 

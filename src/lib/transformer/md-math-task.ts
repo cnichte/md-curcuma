@@ -1,4 +1,4 @@
-import { MD_Template } from "src/lib/md-template";
+import { MD_Template } from "../md-template";
 import { MD_Exporter_Parameter_Type } from "../md-exporter";
 import { MD_FileContent_Interface } from "../md-filesystem";
 import { MD_Observer_Interface } from "../md-observer";
