@@ -9,7 +9,7 @@
 
 What has been implemented so far:
 
-# Release 1.1.3 (2024-03-09) 
+# Release 1.2.0 (2024-03-09) 
 
 * introducing MD_Tool: parse CSV to JSON, and download the images from url.
     * The [BookBuddy App](https://www.kimicoapps.com/bookbuddy) exports its contents as a csv file.
