@@ -9,6 +9,13 @@
 
 What has been implemented so far:
 
+# Release 1.1.3 (2024-03-09) 
+
+* introducing MD_Tool: parse CSV to JSON, and download the images from url.
+    * The [BookBuddy App](https://www.kimicoapps.com/bookbuddy) exports its contents as a csv file.
+    * I would like to use the data in Hugo.
+    * To do this, I convert the csv to json and download the also exported images from URL.
+
 # Release 1.1.2 (2024-03-08) 
 
 * fixed the documentation

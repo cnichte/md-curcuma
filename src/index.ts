@@ -15,6 +15,7 @@ export { MD_MappingTask, MD_Mapper, type MD_Mapping } from "./lib/md-mapping";
 export { MD_ObserverSubject, type MD_Observer_Interface } from "./lib/md-observer";
 // todo md-tag
 export { MD_Template } from "./lib/md-template";
+export { MD_Tools } from "./lib/md-tools";
 export { MD_Transformer_Factory } from "./lib/md-transformer-factory";
 export {
   MD_Transformer_AbstractBase,

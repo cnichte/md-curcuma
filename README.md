@@ -15,6 +15,7 @@ Transformers are currently available for the following tasks:
 5. Callouts.
 6. Remove Todos.
 7. TODO: Take wikilinks (cross-references) into account.
+8. [BookBuddy App](https://www.kimicoapps.com/bookbuddy) support.
 
 You can build customized transformers for different solutions.
 
@@ -506,6 +507,12 @@ exporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
 ## 7. Wikilinks / Cross-References
 
 This isnt done yet.
+
+## 8. BookBuddy-App Support
+
+* The [BookBuddy App](https://www.kimicoapps.com/bookbuddy) exports its contents as a csv file.
+* I would like to use the data in Hugo.
+* To do this, I convert the csv to json and download the also exported images from URL.
 
 # Install and Use
 
