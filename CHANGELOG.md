@@ -9,6 +9,10 @@
 
 What has been implemented so far:
 
+# Release 1.2.1 (2024-03-09) 
+
+* index was missing, sorry.
+
 # Release 1.2.0 (2024-03-09) 
 
 * introducing MD_Tool: parse CSV to JSON, and download the images from url.
