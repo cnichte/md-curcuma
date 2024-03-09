@@ -514,6 +514,11 @@ This isnt done yet.
 * I would like to use the data in Hugo.
 * To do this, I convert the csv to json and download the also exported images from URL.
 
+```ts
+MD_Tools.csv_to_json("test/bookbuddy-export.csv","test/bookbuddy-export.json");
+MD_Tools.download_all_images_from_json("test/bookbuddy-export.json", "test/hugo-content-4", "Uploaded_Image_URL");
+```
+
 # Install and Use
 
 ## Where to use?
