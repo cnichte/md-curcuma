@@ -9,6 +9,11 @@
 
 What has been implemented so far:
 
+# Release 1.2.7 (2024-03-12)
+
+* If `Uploaded_Image_URL` == "" must result in `Cover_Image` = "", and not in the `image_hugo_path`. 
+* Hugo doest support paths when getzing a single image. 
+
 # Release 1.2.6 (2024-03-12) 
 
 * lost the uuid package.

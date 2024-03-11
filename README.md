@@ -533,7 +533,7 @@ This isnt done yet.
 
 let image_download_mapping_props: MD_ImageDownloader_MappingType = {
     image_target_folder: "test-data-hugo/hugo-content-4/assets/images/",
-    image_hugo_path: "images/"
+    image_hugo_path: "images/", 
     filename_property_name: "UUID", // not used by now
     simulate: false
 };
