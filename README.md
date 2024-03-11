@@ -1,6 +1,6 @@
 # MD-Curcuma
 
-Copys and transforms Markdown files from your [Obsidian](https://obsidian.md/)-Vault for usage in [Hugo](https://gohugo.io).
+Copys and transforms Markdown and CSV files from your [Obsidian](https://obsidian.md/)-Vault for usage in [Hugo](https://gohugo.io).
 
 * This thing ist done with [Typescript](https://www.typescriptlang.org/).
 * Inspired by: https://github.com/accraze/split-md
@@ -8,7 +8,7 @@ Copys and transforms Markdown files from your [Obsidian](https://obsidian.md/)-V
 
 Transformers are currently available for the following tasks:
 
-Avaiblie Exporters:
+Availible Exporters:
 
 1. MD_Exporter - for Markdown Files
 2. CSV_Exporter - For files with comma-separated values, where each line is a record. This is a [BookBuddy App](https://www.kimicoapps.com/bookbuddy) support: CSV-File conversion & Image Download.
