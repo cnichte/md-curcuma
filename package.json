@@ -17,6 +17,7 @@
     "Hugo",
     "Obsidian",
     "Markdown",
+    "CSV",
     "Transport",
     "Transformation"
   ],
@@ -40,6 +41,7 @@
   "dependencies": {
     "front-matter": "^4.0.2",
     "fs-extra": "^11.2.0",
+    "uuid": "^9.0.1",
     "yaml": "^2.4.1"
   }
 }

@@ -9,6 +9,11 @@
 
 What has been implemented so far:
 
+# Release 1.2.6 (2024-03-12) 
+
+* lost the uuid package.
+* Dokumentation fixed.
+
 # Release 1.2.5 (2024-03-12) 
 
 * Improvements on the Mapper
@@ -27,7 +32,7 @@ What has been implemented so far:
 * Scripts
     * clean the `test-data-hugo` folder with `npm run clean:test`
     * clean the `dist`folder with `npm run clean:dist`
-    * clean both folder with `npm run clean`
+    * clean both folders with `npm run clean`
 
 # Release 1.2.1 to 1.2.4 (2024-03-09) 
 
