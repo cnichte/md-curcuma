@@ -29,7 +29,7 @@ In short:
 
 ```ts
 const my_exporter: MD_Exporter = new MD_Exporter();
-my_exporter.perform_job_from("../test-data/transport-config.json", "Example-Job No.1");
+my_exporter.perform_job_from("../test-data-obsidian-vault/transport-config.json", "Example-Job No.1");
 ```
 
 All tasks are defined in the `transport-config.json` configuration file.
@@ -41,8 +41,8 @@ const my_exporter: MD_Exporter = new MD_Exporter();
 
 // Basic config
 const exporter_parameter: MD_Exporter_Parameter_Type = {
-  readPath: "test/obsidian-vault/longform.md",
-  writePath: "test/hugo-content-2/",
+  readPath: "test-obsidian-vault/longform.md",
+  writePath: "test-hugo/hugo-content-2/",
   doSubfolders: false,
   limit: 1990,
   useCounter: false
@@ -55,8 +55,8 @@ const parameter_images: MD_Transformer_Parameter_Type = {
   find_rule: "jpg|png",
   replace_template: `{{< image src="assets/images/{name_full}" >}}`,
   copy_task: {
-    source:"test/obsidian-vault/images/",
-    target:"test/hugo-content-2/assets/images/{name}/",
+    source:"test-obsidian-vault/images/",
+    target:"test-hugo/hugo-content-2/assets/images/{name}/",
     simulate:false
   }
 };
