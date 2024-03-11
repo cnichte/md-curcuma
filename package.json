@@ -1,6 +1,6 @@
 {
   "name": "longform-markdown-splitter",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Splits and transforms markdown files from obsidian for usage in hugo.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,8 +25,8 @@
     "watch:ts": "tsc --watch",
     "build:ts": "rm -rf dist/lib && tsc",
     "clean": "npm run clean:dist && npm run clean:test",
-    "clean:dist":"find dist -mindepth 1 -delete",
-    "clean:test":"find test-data-hugo -type f | xargs rm -f"
+    "clean:dist": "find dist -mindepth 1 -delete",
+    "clean:test": "find test-data-hugo -type f | xargs rm -f"
   },
   "author": "Carsten Nichte",
   "license": "MIT",
