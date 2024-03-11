@@ -26,13 +26,13 @@ What has been implemented so far:
 * `MD_Tools` is now `CSV_Exporter` and
 * `MD_Tools.csv_to_json` is now `CSV_Exporter.transform_to_json`
 * I have reorganized the test cases:
-    * `/test/` -  Only the test scripts are still here.
+    * `/test/` -  Only the test scripts `*.test.ts` are still here. The rest of the folders and files can be deleted from this directory.
     * `/test-data-hugo/` - The target directory for the generated Hugo content. The content can be safely deleted.
-    * `test-data-obsidian-vault` - The source directory from which the content is generated.
-* Scripts
-    * clean the `test-data-hugo` folder with `npm run clean:test`
-    * clean the `dist`folder with `npm run clean:dist`
-    * clean both folders with `npm run clean`
+    * `test-data-obsidian-vault` - The source directory from which the content is generated. It would be better not to delete anything here.
+* Some new Build-Scripts
+    * clean the `test-data-hugo` folder with `npm run clean:test`.
+    * clean the `dist`folder with `npm run clean:dist`.
+    * clean both folders with `npm run clean`.
 
 # Release 1.2.1 to 1.2.4 (2024-03-09) 
 
