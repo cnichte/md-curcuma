@@ -17,8 +17,8 @@ const exporter: MD_Exporter = new MD_Exporter();
 // Basic instructions for MD_Exporter
 
 const exporter_parameter: MD_Exporter_Parameter_Type = {
-  readPath: "test/obsidian-vault/longform.md",
-  writePath: "test/hugo-content-2/",
+  readPath: "test-data-obsidian-vault/longform.md",
+  writePath: "test-data-hugo/hugo-content-2/",
   doSubfolders: false,
   limit: 1990,
   useCounter: false,
@@ -33,10 +33,10 @@ const parameter_images: MD_Transformer_Parameter_Type = {
   tag_obsidian_prefix: "![[",
   tag_obsidian_suffix: "]]",
   find_rule: "jpg|png",
-  replace_template: `{{< image src="assets/images/{name_full}" >}}`,
+  replace_template: `{{< image src="images/{name}/{name_full}" >}}`,
   copy_task: {
-    source:"test/obsidian-vault/images/",
-    target:"test/hugo-content-2/assets/images/{name}/",
+    source:"test-data-obsidian-vault/images/",
+    target:"test-data-hugo/hugo-content-2/assets/images/{name}/",
     simulate:simulate_copy_job
   }
 };
@@ -47,8 +47,8 @@ const parameter_docs: MD_Transformer_Parameter_Type = {
   find_rule: "pdf|ods|odp",
   replace_template: `{{< button href="/getthis.php?id={name}" name="download {name} ({name_suffix})" >}}`,
   copy_task: {
-    source:"test/obsidian-vault/attachments/",
-    target:"test/hugo-content-2/static/downloads/",
+    source:"test-data-obsidian-vault/attachments/",
+    target:"test-data-hugo/hugo-content-2/static/downloads/",
     simulate:simulate_copy_job
   }
 };

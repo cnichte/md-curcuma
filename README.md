@@ -29,7 +29,7 @@ In short:
 
 ```ts
 const my_exporter: MD_Exporter = new MD_Exporter();
-my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
+my_exporter.perform_job_from("../test-data/transport-config.json", "Example-Job No.1");
 ```
 
 All tasks are defined in the `transport-config.json` configuration file.
@@ -137,7 +137,7 @@ exporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
   "weightBase": 8000,
   "url_prefix": "test-prefix",
   "doRemoveHeadline": true,
-  "frontmatter_filename": "./test/frontmatter-template.md",
+  "frontmatter_filename": "./test-data-obsidian-vault/frontmatter-template.md",
   "frontmatter": {}
 }
 ```
@@ -175,10 +175,10 @@ const parameter_images: MD_Transformer_Parameter_Type = {
   tag_obsidian_prefix: "![[",
   tag_obsidian_suffix: "]]",
   find_rule: "jpg|png",
-  replace_template: `{{< image src="assets/images/{name_full}" >}}`,
+  replace_template: `{{< image src="assets/images//{name}/{name_full}" >}}`,
   copy_task: {
-    source:"test/obsidian-vault/images/",
-    target:"test/hugo-content-2/assets/images/{name}/",
+    source:"test-data-obsidian-vault/images/",
+    target:"test-data-hugo/hugo-content-2/assets/images/{name}/",
     simulate:simulate_copy_job
   }
 };
@@ -189,8 +189,8 @@ const parameter_docs: MD_Transformer_Parameter_Type = {
   find_rule: "pdf|ods|odp",
   replace_template: `{{< button href="/getthis.php?id={name}" name="download {name} ({name_suffix})" >}}`,
   copy_task: {
-    source:"test/obsidian-vault/attachments/",
-    target:"test/hugo-content-2/static/downloads/",
+    source:"test-data-obsidian-vault/attachments/",
+    target:"test-data-hugo/hugo-content-2/static/downloads/",
     simulate:simulate_copy_job
   }
 };
@@ -208,10 +208,10 @@ exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
     "tag_obsidian_prefix": "![[",
     "tag_obsidian_suffix": "]]",
     "find_rule": "jpg|png",
-    "replace_template": "{{< lightbox-docs id=\"0\" folder=\"images/kursbuch-sv/{name}/*\" showImageNr=0 >}}",
+    "replace_template": "{{< lightbox-docs id=\"0\" folder=\"images/{name}/*\" showImageNr=0 >}}",
     "copy_task":{
-      "source":"test/obsidian-vault/images/",
-      "target":"test/hugo-content-2/assets/images/{name}/",
+      "source":"test-data-obsidian-vault/images/",
+      "target":"test-data-hugo/hugo-content-1/assets/images/{name}/",
       "simulate":false
     }
   }
@@ -224,8 +224,8 @@ exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
     "find_rule": "pdf|ods|odp",
     "replace_template": "{{< button href=\"/getthis.php?id={name}\" name=\"download {name} ({name_suffix})\" >}}",
     "copy_task":{
-      "source":"test/obsidian-vault/attachments/",
-      "target":"test/hugo-content-2/static/downloads/",
+      "source":"test-data-obsidian-vault/attachments/",
+      "target":"test-data-hugo/hugo-content-1/static/downloads/",
       "simulate":false
     }
   }
@@ -291,24 +291,24 @@ exporter.addTransformer(new MD_MathInline_Transformer(parameter_math_inline));
 ### Example JSON for usage in config-file
 
 ```json
-        {
-          "transformer_class_name": "MD_MathParagraph_Transformer",
-          "transformer_parameter": {
-            "tag_obsidian_prefix": "$$",
-            "tag_obsidian_suffix": "$$",
-            "find_rule": "",
-            "replace_template": "```math {.text-center}\n$$\n {content} \n$$\n```\n"
-          }
-        },
-        {
-          "transformer_class_name": "MD_MathInline_Transformer",
-          "transformer_parameter": {
-            "tag_obsidian_prefix": "$",
-            "tag_obsidian_suffix": "$",
-            "find_rule": "",
-            "replace_template": "{{< math >}} ${content}$ {{< /math >}}"          
-          }
-        },
+{
+  "transformer_class_name": "MD_MathParagraph_Transformer",
+  "transformer_parameter": {
+  "tag_obsidian_prefix": "$$",
+  "tag_obsidian_suffix": "$$",
+  "find_rule": "",
+  "replace_template": "```math {.text-center}\n$$\n {content} \n$$\n```\n"
+  }
+},
+{
+  "transformer_class_name": "MD_MathInline_Transformer",
+  "transformer_parameter": {
+  "tag_obsidian_prefix": "$",
+  "tag_obsidian_suffix": "$",
+  "find_rule": "",
+  "replace_template": "{{< math >}} ${content}$ {{< /math >}}"          
+  }
+},
 ```
 
 ## 4. Frontmatter: Add, Replace, Map and Transform Values
@@ -355,8 +355,8 @@ const map_1: MD_Mapping = {
   source_property_name: "doPublish",
   target_poperty_name: "draft",
   task: {
-    perform: function (source_value: boolean, target_value: boolean): boolean {
-      target_value = !source_value;
+    perform: function (mapping_properties: MD_MappingTask_Properties): boolean {
+      let target_value = !mapping_properties.source_value;
       return target_value;
     },
   },
@@ -367,7 +367,7 @@ const map_2: MD_Mapping = {
   source_property_name: "",
   target_poperty_name: "date",
   task: {
-    perform: function (source_value: any, target_value: any): any {
+    perform: function (mapping_properties: MD_MappingTask_Properties): any {
       return new Date().toJSON().slice(0, 16);
     },
   },
@@ -388,7 +388,7 @@ exporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatter));
 {
   "transformer_class_name": "MD_Frontmatter_Transformer",
   "transformer_parameter": {
-  "frontmatter_filename": "./test/frontmatter-template.md",
+  "frontmatter_filename": "./test-data-obsidian-vault/frontmatter-template.md",
   "frontmatter": {}
           }
 },
@@ -513,10 +513,32 @@ This isnt done yet.
 * The [BookBuddy App](https://www.kimicoapps.com/bookbuddy) exports its contents as a csv file.
 * I would like to use the data in Hugo.
 * To do this, I convert the csv to json and download the also exported images from URL.
+* The Property `Cover_Image` saves the local Path to the Image for Hugo. 
 
 ```ts
-MD_Tools.csv_to_json("test/bookbuddy-export.csv","test/bookbuddy-export.json");
-MD_Tools.download_all_images_from_json("test/bookbuddy-export.json", "test/hugo-content-4", "Uploaded_Image_URL");
+
+let image_download_mapping_props: MD_ImageDownloader_MappingType = {
+    image_target_folder: "test-data-hugo/hugo-content-4/assets/images/",
+    image_hugo_path: "images/"
+    filename_property_name: "UUID", // not used by now
+    simulate: false
+};
+
+const image_download_mapping: MD_Mapping = {
+    source_property_name: "Uploaded_Image_URL",
+    target_poperty_name: "Cover_Image",
+    task: new MD_ImageDownloader_Mapping(image_download_mapping_props),
+};
+
+const csv_exporter_parameter: CSV_Exporter_Parameter_Type = {
+    readPath: "test-data-obsidian-vault/attachments/bookbuddy-export.csv",
+    writePath: "test-data-hugo/hugo-content-4/data/bookbuddy-export.json",
+    csvSeparator: ',',
+    mappings: [image_download_mapping],
+};
+
+CSV_Exporter.transform_to_json(csv_exporter_parameter);
+
 ```
 
 # Install and Use
@@ -625,7 +647,7 @@ In folder `transport-scripts`create the file `split-my-longform.ts` and paste th
 
 ```ts
 const my_exporter: MD_Exporter = new MD_Exporter();
-my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
+my_exporter.perform_job_from("../test-data/transport-config.json", "Example-Job No.1");
 ```
 
 That is all was needed when you provide a config file and a frontmatter file.
@@ -823,5 +845,5 @@ const my_exporter: MD_Exporter = new MD_Exporter();
 
 my_exporter.addTransformer(new MyCustomTransformer(custom_params));
 
-my_exporter.perform_job_from("./transport-config.json", "Example-Job No.1");
+my_exporter.perform_job_from("../test-data/transport-config.json", "Example-Job No.1");
 ```

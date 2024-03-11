@@ -9,7 +9,27 @@
 
 What has been implemented so far:
 
-# Release 1.2.1, 1.2.4 (2024-03-09) 
+# Release 1.2.5 (2024-03-12) 
+
+* Improvements on the Mapper
+    * With more information comes more responsibility.
+    * Previously, the MappingTask only received the values from source-object and target-object, and returned the target-value. 
+    * Moreover, a MapperTask was blind to his surroundings.
+    * The assignments were carried out by the calling MD_Mapper.
+    * Now a MapperTask has also access to the whole objects, and the property-names. 
+    * This gives more flexibility when processing the data.
+* `MD_Tools` is now `CSV_Exporter` and
+* `MD_Tools.csv_to_json` is now `CSV_Exporter.transform_to_json`
+* I have reorganized the test cases:
+    * `/test/` -  Only the test scripts are still here.
+    * `/test-data-hugo/` - The target directory for the generated Hugo content. The content can be safely deleted.
+    * `test-data-obsidian-vault` - The source directory from which the content is generated.
+* Scripts
+    * clean the `test-data-hugo` folder with `npm run clean:test`
+    * clean the `dist`folder with `npm run clean:dist`
+    * clean both folder with `npm run clean`
+
+# Release 1.2.1 to 1.2.4 (2024-03-09) 
 
 * index was missing, sorry.
 * fixed some wrong paths.

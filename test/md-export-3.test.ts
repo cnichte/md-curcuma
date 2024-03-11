@@ -3,16 +3,23 @@ import {
   MD_Frontmatter_Template,
 } from "../src/lib/md-frontmatter";
 
-import { MD_Exporter, MD_Exporter_Parameter_Type } from "../src/lib/md-exporter";
+import {
+  MD_Exporter,
+  MD_Exporter_Parameter_Type,
+} from "../src/lib/md-exporter";
 import { MD_Transformer_Parameter_Type } from "../src/lib/md-transformer";
 import { MD_Splitter_Parameter_Type } from "../src/lib/transformer/md-splitter-task";
 import { MD_ObsidianLink_Transformer } from "../src/lib/transformer/md-obsidian-link-task";
 import { MD_RemoveTODOS_Transformer } from "../src/lib/transformer/md-remove-todos-task";
 import { MD_Frontmatter_Transformer } from "../src/lib/transformer/md-frontmatter-task";
 
-import { type MD_Mapping } from "../src/lib/md-mapping";
-import { MD_Mapping_BooleanInverse_Task } from "../src/lib/mapping-tasks/mapping-boolean-inverse-task";
-import { MD_Mapping_Copy_Task } from "../src/lib/mapping-tasks/mapping-copy-task";
+import {
+  MD_MappingTask_Properties,
+  type MD_Mapping,
+} from "../src/lib/md-mapping";
+
+// import { MD_Mapping_BooleanInverse_Task } from "../src/lib/mapping-tasks/mapping-boolean-inverse-task";
+// import { MD_Mapping_Copy_Task } from "../src/lib/mapping-tasks/mapping-copy-task";
 
 /**
  * This test deals with transforming a couple of Obsidian-Markdown Documents.
@@ -26,9 +33,9 @@ const exporter: MD_Exporter = new MD_Exporter();
 const simulate_job = false;
 const simulate_copy_job = false;
 
-const exporter_parameter: MD_Exporter_Parameter_Type = {
-  readPath: "test/obsidian-vault/some-md-docs",
-  writePath: "test/hugo-content-3/",
+const md_exporter_parameter: MD_Exporter_Parameter_Type = {
+  readPath: "test-data-obsidian-vault/some-md-docs",
+  writePath: "test-data-hugo/hugo-content-3/",
   doSubfolders: false,
   limit: 1990,
   useCounter: false,
@@ -67,9 +74,9 @@ const map_1: MD_Mapping = {
   source_property_name: "doPublish",
   target_poperty_name: "draft",
   task: {
-    perform: function (source_value: boolean, target_value: boolean): boolean {
-      target_value = !source_value;
-      return target_value;
+    perform: function (mapping_properties: MD_MappingTask_Properties): boolean {
+      if (typeof mapping_properties.source_value == "boolean") {}
+      return !mapping_properties.source_value;
     },
   },
 };
@@ -79,7 +86,7 @@ const map_2: MD_Mapping = {
   source_property_name: "",
   target_poperty_name: "date",
   task: {
-    perform: function (source_value: any, target_value: any): any {
+    perform: function (mapping_properties: MD_MappingTask_Properties) {
       return new Date().toJSON().slice(0, 16);
     },
   },
@@ -93,4 +100,4 @@ const parameter_frontmatter: MD_Frontmatter_Parameter_Type = {
 
 exporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatter));
 
-exporter.perform_job(exporter_parameter);
+exporter.perform_job(md_exporter_parameter);

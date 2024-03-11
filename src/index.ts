@@ -1,3 +1,5 @@
+
+export { CSV_Exporter, CSV_Exporter_Parameter_Type } from "./lib/csv-exporter";
 export {
   MD_Collection,
   type MD_Collection_Parameter_Type,
@@ -11,11 +13,10 @@ export {
   type MD_Frontmatter_Parameter_Type,
 } from "./lib/md-frontmatter";
 // todo md-job
-export { MD_MappingTask, MD_Mapper, type MD_Mapping } from "./lib/md-mapping";
+export { MD_MappingTask, MD_Mapper, type MD_Mapping, type MD_MappingTask_Properties } from "./lib/md-mapping";
 export { MD_ObserverSubject, type MD_Observer_Interface } from "./lib/md-observer";
 // todo md-tag
 export { MD_Template } from "./lib/md-template";
-export { MD_Tools } from "./lib/md-tools";
 export { MD_Transformer_Factory } from "./lib/md-transformer-factory";
 export {
   MD_Transformer_AbstractBase,
@@ -26,8 +27,10 @@ export {
 
 //* Mapper Tasks
 
-export { MD_Mapping_BooleanInverse_Task } from "./lib/mapping-tasks/mapping-boolean-inverse-task";
-export { MD_Mapping_Copy_Task } from "./lib/mapping-tasks/mapping-copy-task";
+export { MD_AdoptValue_Mapping } from "./lib/mapping-tasks/md-adopt-value-mapping";
+export { MD_BooleanInverse_Mapping } from "./lib/mapping-tasks/md-boolean-inverse-mapping";
+export { MD_ImageDownloader_Mapping, type MD_ImageDownloader_MappingType } from "./lib/mapping-tasks/md-image-downloader-mapping";
+export { MD_InsertUUID_Mapping } from "./lib/mapping-tasks/md-insert-uuid-mapping";
 
 //* Transformer Tasks
 

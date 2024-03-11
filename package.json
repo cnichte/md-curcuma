@@ -22,8 +22,11 @@
   ],
   "scripts": {
     "test": "tsx --test test/*.test.ts",
+    "watch:ts": "tsc --watch",
     "build:ts": "rm -rf dist/lib && tsc",
-    "watch:ts": "tsc --watch"
+    "clean": "npm run clean:dist && npm run clean:test",
+    "clean:dist":"find dist -mindepth 1 -delete",
+    "clean:test":"find test-data-hugo -type f | xargs rm -f"
   },
   "author": "Carsten Nichte",
   "license": "MIT",
