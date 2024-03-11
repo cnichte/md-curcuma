@@ -8,16 +8,30 @@ Copys and transforms Markdown files from your [Obsidian](https://obsidian.md/)-V
 
 Transformers are currently available for the following tasks:
 
-1. Split a Longform in separate Files at Headlines.
+Avaiblie Exporters:
+
+1. MD_Exporter - for Markdown Files
+2. CSV_Exporter - For files with comma-separated values, where each line is a record. This is a [BookBuddy App](https://www.kimicoapps.com/bookbuddy) support: CSV-File conversion & Image Download.
+
+Availible Markdown Transformers:
+
+1. Splits a Markdown-Longform in separate Files at Headlines.
 2. Obsidian-Links (Images and Documents), copy Files on the fly.
 3. Latex-Formulas, Paragraph an Inline. 
 4. Frontmatter: Add, Replace, Map and Transform Values.
 5. Callouts.
 6. Remove Todos.
 7. TODO: Take wikilinks (cross-references) into account.
-8. [BookBuddy App](https://www.kimicoapps.com/bookbuddy) support: CSV-File conversion & Image Download.
 
-You can build customized transformers for different solutions.
+Availible Mappings:
+
+1. Adopt Value
+2. Boolean inverse
+3. Image Downloader
+4. Insert Date (now)
+5. Insert uuid
+
+You can build customized transformers and Mappers for different solutions.
 
 Restrictions
 
@@ -555,6 +569,8 @@ I recommend Option `3` at the moment.
 
 ## Install it
 
+### Install-Method 1: Clone the Repository
+
 The easiest way is to clone the repository:
 
 * copy the link: https://gitlab.com/glimpse-of-life/longform-markdown-splitter.git 
@@ -569,6 +585,8 @@ The easiest way is to clone the repository:
 * `npm run test`
 
 ![](readme-images/explorer-cloned.png)
+
+### Install-Method 2: create new Project
 
 Another option is to create an empty project, an install from npm... 
 
@@ -615,6 +633,27 @@ If you use it inside your Hugo Project, some folders are excluded per default.
 }
 ```
 
+### update from npm
+
+```bash
+# check for updates
+npx npm-check-updates
+
+# upgrade package.json
+npx npm-check-updates -u
+# or 
+npx npm-check-updates -u --interactive --format group
+
+# install the new Versions
+ npm update --save
+# or 
+ npm update --save-dev
+# and then
+ npm install
+```
+
+## Create your Skript 
+
 Look in the `test` folder for running examples. 
 
 Create two folders for your scripts:
@@ -624,7 +663,7 @@ Create two folders for your scripts:
 
 The first is for the Typescript source-code, the second is for the Java script that will later be compiled from it.
 
-## compile to javascript
+## Compile to javascript
 
 To simplify handling, include the following build commands in the `package.json`: 
 
