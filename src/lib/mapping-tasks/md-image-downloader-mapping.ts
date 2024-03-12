@@ -55,9 +55,7 @@ export class MD_ImageDownloader_Mapping implements MD_MappingTask {
             image_url.substring(image_url.lastIndexOf("/") + 1) + ".jpg";
         }
 
-      console.log(`#################################: ${image_name}`);
-
-      // TODO für file_namen eine eigene UUID bilden, und die abspeichern
+      // TODO für file_namen eigene UUIDs bilden...
       let uuid = uuidv4();
       if (
         mapping_properties.source.hasOwnProperty(

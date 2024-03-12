@@ -5,9 +5,22 @@
 * Transformations on the target filename.
 * Run a joblist in batch.
 * Implement job-propertys functions: doSubfolders, limit, useCounter.
-* A Obsidian-Plugin or standalone App with a nice Graphical-User-Interface.
+* Process multiple source-target pairs in one mapping...
+
+and on the top of it
+
+* Nice Graphical-User-Interface...
+    * as Obsidian-Plugin 
+    * or as standalone App
+    * or as fancy integration into [one of these frontends](https://gohugo.io/tools/front-ends/) 
 
 What has been implemented so far:
+
+# Release 1.2.8 (2024-03-12)
+
+* Some optimations in CSV_Exporter.
+* New Mapper: MD_ArrayJoin_Mapping, MD_ArraySplit_Mapping, MD_TrimString_Mapping.
+* As always: Did some Documentation
 
 # Release 1.2.7 (2024-03-12)
 

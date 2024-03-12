@@ -5,14 +5,8 @@
         "Subtitle": "",
         "Series": "",
         "Volume": "",
-        "Author": [
-            "Bruce Barnbaum",
-            "Volker Haxsen"
-        ],
-        "\"Author_(Last,_First)\"": [
-            "Barnbaum",
-            "Bruce"
-        ],
+        "Author": "Bruce Barnbaum, Volker Haxsen",
+        "Author_Last_First": "Barnbaum, Bruce",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -85,8 +79,8 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/40E85916-C515-4104-89B2-B81D5A6C9743",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:47:59.935217857,activityDate:2020\\/10\\/09}]",
-        "UUID": "b6937813-b7cc-40d7-8bf5-7d2235812f77",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images/40E85916-C515-4104-89B2-B81D5A6C9743.jpg"
+        "UUID": "64faa586-d9ca-424c-98cb-febd012c9e50",
+        "Cover_Image": "/40E85916-C515-4104-89B2-B81D5A6C9743.jpg"
     },
     {
         "Title": "Anders Petersen",
@@ -95,10 +89,7 @@
         "Series": "",
         "Volume": "",
         "Author": "Anders Petersen",
-        "\"Author_(Last,_First)\"": [
-            "Petersen",
-            "Anders"
-        ],
+        "Author_Last_First": "Petersen, Anders",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -171,8 +162,8 @@
         "Position": "",
         "Uploaded_Image_URL": "",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:47:59.948628902,activityDate:2020\\/10\\/09}]",
-        "UUID": "ec0adb8a-ad6e-415b-8fe4-3e722f746be8",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images/"
+        "UUID": "fed24012-d74a-4221-ba73-43f0700ca23c",
+        "Cover_Image": ""
     },
     {
         "Title": "Bruce Gilden",
@@ -181,10 +172,7 @@
         "Series": "",
         "Volume": "",
         "Author": "Bruce Gilden",
-        "\"Author_(Last,_First)\"": [
-            "Gilden",
-            "Bruce"
-        ],
+        "Author_Last_First": "Gilden, Bruce",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -257,8 +245,8 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/F29BA3B2-DDA2-47ED-8AE0-19BFE9D295B2",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:47:59.965533971,activityDate:2020\\/10\\/09}]",
-        "UUID": "ba784dd2-c0fa-4798-8e9c-0c8617536b59",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images/F29BA3B2-DDA2-47ED-8AE0-19BFE9D295B2.jpg"
+        "UUID": "d5df3623-5ef0-43d7-a795-08a7f686d3a4",
+        "Cover_Image": "/F29BA3B2-DDA2-47ED-8AE0-19BFE9D295B2.jpg"
     },
     {
         "Title": "Die Erde von oben",
@@ -266,14 +254,8 @@
         "Subtitle": "",
         "Series": "",
         "Volume": "",
-        "Author": [
-            "Yann Arthus-Bertrand",
-            "Peter-Matthias Gaede"
-        ],
-        "\"Author_(Last,_First)\"": [
-            "Arthus-Bertrand",
-            "Yann"
-        ],
+        "Author": "Yann Arthus-Bertrand, Peter-Matthias Gaede",
+        "Author_Last_First": "Arthus-Bertrand, Yann",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -346,24 +328,17 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/E910ADB2-39EC-44C3-92BA-46FB3DE51A7C",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:47:59.998932838,activityDate:2020\\/10\\/09}]",
-        "UUID": "45528e0b-00e6-4f6e-a005-5a0c78499d44",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images/E910ADB2-39EC-44C3-92BA-46FB3DE51A7C.jpg"
+        "UUID": "18292a1f-3cac-43ba-8e25-3d602af75c64",
+        "Cover_Image": "/E910ADB2-39EC-44C3-92BA-46FB3DE51A7C.jpg"
     },
     {
         "Title": "Die Seele des Nordens",
         "Original_Title": "",
-        "Subtitle": [
-            "Island",
-            "Faröer",
-            "Grönland"
-        ],
+        "Subtitle": "Island, Faröer, Grönland",
         "Series": "",
         "Volume": "",
         "Author": "Ragnar Axelsson",
-        "\"Author_(Last,_First)\"": [
-            "Axelsson",
-            "Ragnar"
-        ],
+        "Author_Last_First": "Axelsson, Ragnar",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -436,8 +411,8 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/515F2F83-E4EF-43FB-B4AC-516DC8389CC7",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:48:00.002490997,activityDate:2020\\/10\\/09}]",
-        "UUID": "ec2cfe8c-a94d-433d-8a37-dc9ddc8b000d",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images/515F2F83-E4EF-43FB-B4AC-516DC8389CC7.jpg"
+        "UUID": "95e6a2c3-c1cc-4ce2-bdeb-cd00d11f5ddf",
+        "Cover_Image": "/515F2F83-E4EF-43FB-B4AC-516DC8389CC7.jpg"
     },
     {
         "Title": "Erwin Olaf",
@@ -445,14 +420,8 @@
         "Subtitle": "Unheimlich schön",
         "Series": "",
         "Volume": "",
-        "Author": [
-            "Roger Diederen",
-            "Kunsthalle München Huber"
-        ],
-        "\"Author_(Last,_First)\"": [
-            "Diederen",
-            "Roger"
-        ],
+        "Author": "Roger Diederen, Kunsthalle München Huber",
+        "Author_Last_First": "Diederen, Roger",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -525,8 +494,8 @@
         "Position": "",
         "Uploaded_Image_URL": "http://images.amazon.com/images/P/3775748792.01Z.jpg",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.766962051,activityDate:2021\\/04\\/16}]",
-        "UUID": "c57250c5-ad7a-4cbe-913d-183b6d8d34b4",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images//3775748792.01Z.jpg"
+        "UUID": "b8ec469d-987d-426c-8b72-8daaf1d69d19",
+        "Cover_Image": "//3775748792.01Z.jpg"
     },
     {
         "Title": "Full moon",
@@ -534,14 +503,8 @@
         "Subtitle": "Aufbruch zum Mond",
         "Series": "",
         "Volume": "",
-        "Author": [
-            "Michael Light",
-            "Andrew Chaikin"
-        ],
-        "\"Author_(Last,_First)\"": [
-            "Light",
-            "Michael"
-        ],
+        "Author": "Michael Light, Andrew Chaikin",
+        "Author_Last_First": "Light, Michael",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -614,8 +577,8 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/779A58FC-0714-41B2-9456-E18995C5203D",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:48:00.032227993,activityDate:2020\\/10\\/09}]",
-        "UUID": "d255754a-3693-4c6c-ac37-a4ee7b81d56e",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images/779A58FC-0714-41B2-9456-E18995C5203D.jpg"
+        "UUID": "ccc95c68-d293-47f6-a885-481265d004b7",
+        "Cover_Image": "/779A58FC-0714-41B2-9456-E18995C5203D.jpg"
     },
     {
         "Title": "Full moon",
@@ -624,10 +587,7 @@
         "Series": "",
         "Volume": "",
         "Author": "Michael Light",
-        "\"Author_(Last,_First)\"": [
-            "Light",
-            "Michael"
-        ],
+        "Author_Last_First": "Light, Michael",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -700,8 +660,8 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/BB765D92-D484-4FEB-9F8C-8B22171F2728",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.781578063,activityDate:2021\\/04\\/16}]",
-        "UUID": "3805c027-2b1d-4a8c-9166-757ac49d67a5",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images/BB765D92-D484-4FEB-9F8C-8B22171F2728.jpg"
+        "UUID": "dec31604-8625-4b82-a132-7b40b3c00bdc",
+        "Cover_Image": "/BB765D92-D484-4FEB-9F8C-8B22171F2728.jpg"
     },
     {
         "Title": "Graciela Iturbide",
@@ -710,10 +670,7 @@
         "Series": "",
         "Volume": "",
         "Author": "Graciela Iturbide",
-        "\"Author_(Last,_First)\"": [
-            "Iturbide",
-            "Graciela"
-        ],
+        "Author_Last_First": "Iturbide, Graciela",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -786,8 +743,8 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/BF403591-AB9D-4CA5-95BF-CD75CA69E7E4",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.783650875,activityDate:2021\\/04\\/16}]",
-        "UUID": "e8d65052-c53b-4eb0-ad73-7e14528bbd1f",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images/BF403591-AB9D-4CA5-95BF-CD75CA69E7E4.jpg"
+        "UUID": "a1616967-a9ac-4810-9a7a-31efdd0ebb9e",
+        "Cover_Image": "/BF403591-AB9D-4CA5-95BF-CD75CA69E7E4.jpg"
     },
     {
         "Title": "Man Ray",
@@ -795,14 +752,8 @@
         "Subtitle": "",
         "Series": "",
         "Volume": "",
-        "Author": [
-            "Man Ray",
-            "Emmanuelle de L'Écotais"
-        ],
-        "\"Author_(Last,_First)\"": [
-            "Ray",
-            "Man"
-        ],
+        "Author": "Man Ray, Emmanuelle de L'Écotais",
+        "Author_Last_First": "Ray, Man",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -875,8 +826,8 @@
         "Position": "",
         "Uploaded_Image_URL": "http://images.amazon.com/images/P/3836507986.01Z.jpg",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.818489074,activityDate:2021\\/04\\/16}]",
-        "UUID": "7ebe1d25-327a-4e28-b10d-3d8fc2402a16",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images//3836507986.01Z.jpg"
+        "UUID": "efa07dab-eb34-497c-a86f-4405fbcbd113",
+        "Cover_Image": "//3836507986.01Z.jpg"
     },
     {
         "Title": "Saul Leiter",
@@ -885,10 +836,7 @@
         "Series": "",
         "Volume": "",
         "Author": "Robert Benton",
-        "\"Author_(Last,_First)\"": [
-            "Benton",
-            "Robert"
-        ],
+        "Author_Last_First": "Benton, Robert",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -902,32 +850,7 @@
         "Original_Year_Published": "",
         "Edition": "",
         "Genre": "Fotografie",
-        "Summary": [
-            "The fruit of fantastic recent discoveries from Saul Leiter's vast archive",
-            "In My Room provides an in-depth study of the nude",
-            "through intimate photographs of the women Leiter knew. Showing deeply personal interior spaces",
-            "often illuminated by the lush natural light of the artist's studio in New York City's East Village",
-            "these black-and-white images reveal a unique type of collaboration between Leiter and his subjects. In the 1970s Leiter planned to make a book of nudes",
-            "but the project was never realized in his lifetime. Now",
-            "we get a first-time look at this body of work",
-            "which was begun on Leiter's arrival in New York in 1946 and honed over the next two decades. Leiter",
-            "who was also a painter",
-            "allows abstract elements into the photographs and often shows the influence of his favorite artists",
-            "including Bonnard",
-            "Vuillard and Matisse. Leiter",
-            "who painted and took pictures prolifically up to his death",
-            "worked in relative obscurity until he entered his eighties. He preferred to be left alone",
-            "and resisted any type of explanation or analysis of his work. With In My Room",
-            "Leiter ushers viewers into his private world while retaining his strong sense of mystery. Saul Leiter was born in Pittsburgh in 1923. In 1946 he moved to New York to become a painter",
-            "but was encouraged to pursue photography by the photographic experimentation and influence of his friend",
-            "the Abstract Expressionist Richard Pousette-Dart. Leiter subsequently enjoyed a successful career as a fashion photographer spanning three decades",
-            "and his images were published in magazines such as Esquire",
-            "Harper's Bazaar",
-            "Elle and British Vogue. His work is held in many prestigious private and public collections",
-            "including The Museum of Modern Art",
-            "New York",
-            "the Whitney Museum of American Art and the Victoria and Albert Museum. Leiter died in November 2013."
-        ],
+        "Summary": "The fruit of fantastic recent discoveries from Saul Leiter's vast archive, In My Room provides an in-depth study of the nude, through intimate photographs of the women Leiter knew. Showing deeply personal interior spaces, often illuminated by the lush natural light of the artist's studio in New York City's East Village, these black-and-white images reveal a unique type of collaboration between Leiter and his subjects. In the 1970s Leiter planned to make a book of nudes, but the project was never realized in his lifetime. Now, we get a first-time look at this body of work, which was begun on Leiter's arrival in New York in 1946 and honed over the next two decades. Leiter, who was also a painter, allows abstract elements into the photographs and often shows the influence of his favorite artists, including Bonnard, Vuillard and Matisse. Leiter, who painted and took pictures prolifically up to his death, worked in relative obscurity until he entered his eighties. He preferred to be left alone, and resisted any type of explanation or analysis of his work. With In My Room, Leiter ushers viewers into his private world while retaining his strong sense of mystery. Saul Leiter was born in Pittsburgh in 1923. In 1946 he moved to New York to become a painter, but was encouraged to pursue photography by the photographic experimentation and influence of his friend, the Abstract Expressionist Richard Pousette-Dart. Leiter subsequently enjoyed a successful career as a fashion photographer spanning three decades, and his images were published in magazines such as Esquire, Harper's Bazaar, Elle and British Vogue. His work is held in many prestigious private and public collections, including The Museum of Modern Art, New York, the Whitney Museum of American Art and the Victoria and Albert Museum. Leiter died in November 2013.",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
         "Lexile_Code": "",
@@ -986,8 +909,8 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/7C406A1A-9119-4786-A1AE-CC2BC1148770",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.865483999,activityDate:2021\\/04\\/16}]",
-        "UUID": "9f7bc160-709a-4282-b057-98bb20f21a63",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images/7C406A1A-9119-4786-A1AE-CC2BC1148770.jpg"
+        "UUID": "f22b99f5-b215-40ca-b828-fca92f060c46",
+        "Cover_Image": "/7C406A1A-9119-4786-A1AE-CC2BC1148770.jpg"
     },
     {
         "Title": "Singen - うたたね",
@@ -996,10 +919,7 @@
         "Series": "",
         "Volume": "",
         "Author": "Rinko Kawauchi - 川内倫子",
-        "\"Author_(Last,_First)\"": [
-            "川内倫子",
-            "Rinko Kawauchi -"
-        ],
+        "Author_Last_First": "川内倫子, Rinko Kawauchi -",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -1013,21 +933,7 @@
         "Original_Year_Published": "",
         "Edition": "",
         "Genre": "Fotografie",
-        "Summary": [
-            "Rinko Kawauchi macht einfache",
-            "lyrische Fotos",
-            "die so frisch und ungewöhnlich sind",
-            "dass sie schwer zu beschreiben oder zu klassifizieren sind. Seine Bilder dokumentieren alltägliche Dinge",
-            "obwohl sie nicht als Dokumentarfilme bezeichnet werden können. Sie sind fast umwerfend und scheinen grundlegende psychologische Aspekte des modernen Lebens zu erfassen. Utatane bedeutet Nickerchen",
-            "was auf die Idee eines Traumzustands hindeutet. Jedes Bild im Buch kann als Momentaufnahme eines Films über einen Traum betrachtet werden. Die Anwesenheit einer großen Anzahl von Tieren - Insekten",
-            "Möwen",
-            "Karpfen",
-            "Kaninchen - könnte sich auf eine Art Freudsche Interpretation beziehen. Kawauchi schafft eine mächtige Metapher für das Leben in zeitgenössischen Metropolen",
-            "die für die meisten Menschen offenbar komfortabler ist - zumindest finanziell. Dies ist kein Albtraum: Es passiert nichts Unangemessenes",
-            "aber es gibt etwas",
-            "das uns aus diesem verwirrten",
-            "deprimierenden und ängstlichen Nickerchenzustand herausholt."
-        ],
+        "Summary": "Rinko Kawauchi macht einfache, lyrische Fotos, die so frisch und ungewöhnlich sind, dass sie schwer zu beschreiben oder zu klassifizieren sind. Seine Bilder dokumentieren alltägliche Dinge, obwohl sie nicht als Dokumentarfilme bezeichnet werden können. Sie sind fast umwerfend und scheinen grundlegende psychologische Aspekte des modernen Lebens zu erfassen. Utatane bedeutet Nickerchen, was auf die Idee eines Traumzustands hindeutet. Jedes Bild im Buch kann als Momentaufnahme eines Films über einen Traum betrachtet werden. Die Anwesenheit einer großen Anzahl von Tieren - Insekten, Möwen, Karpfen, Kaninchen - könnte sich auf eine Art Freudsche Interpretation beziehen. Kawauchi schafft eine mächtige Metapher für das Leben in zeitgenössischen Metropolen, die für die meisten Menschen offenbar komfortabler ist - zumindest finanziell. Dies ist kein Albtraum: Es passiert nichts Unangemessenes, aber es gibt etwas, das uns aus diesem verwirrten, deprimierenden und ängstlichen Nickerchenzustand herausholt.",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
         "Lexile_Code": "",
@@ -1086,24 +992,17 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/732436F5-637D-49FB-BED7-9784820138D7",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.953629970,activityDate:2021\\/04\\/16}]",
-        "UUID": "933aedb4-317f-4f06-b175-eb4b0a447517",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images/732436F5-637D-49FB-BED7-9784820138D7.jpg"
+        "UUID": "18107c2b-e1bb-4de7-b843-5b1cafaa4af7",
+        "Cover_Image": "/732436F5-637D-49FB-BED7-9784820138D7.jpg"
     },
     {
-        "Title": [
-            "Street",
-            "Life",
-            "Photography"
-        ],
+        "Title": "Street, Life, Photography",
         "Original_Title": "",
         "Subtitle": "Street Photography aus sieben Jahrzehnten",
         "Series": "",
         "Volume": "",
         "Author": "Sabine Schnakenberg",
-        "\"Author_(Last,_First)\"": [
-            "Schnakenberg",
-            "Sabine"
-        ],
+        "Author_Last_First": "Schnakenberg, Sabine",
         "Illustrator": "",
         "Narrator": "",
         "Translator": "",
@@ -1117,27 +1016,7 @@
         "Original_Year_Published": "",
         "Edition": "",
         "Genre": "Fotografie",
-        "Summary": [
-            "Flüchtig geflasht",
-            "akribisch beobachtet",
-            "rauschhaft energiegebündelt",
-            "schockgefroren",
-            "voyeuristisch aufgeladen",
-            "drastisch überspitzt",
-            "romantisch wild",
-            "tragisch",
-            "komisch",
-            "grüblerisch abwesend und seltsam erschreckend - die Strasse",
-            "der ”urban space“",
-            "als direkt und alltäglich erfahrbarer städtischer Lebensraum ist eines der mit Abstand schillerndsten und facettenreichsten fotografischen Sujets. Die im Rahmen der Triennale der Photographie stattfindende Ausstellung Street. Life. Photography umfasst 52 fotografische Positionen mit rund 350 Arbeiten aus der Sammlung F. C. Gundlach und der Sammlung Falckenberg sowie zahlreichen Leihgaben und Kooperationen mit zeitgenössischen Künstlern. Sie gliedert sich in sieben thematische Gruppen: Street Life",
-            "Crashes",
-            "Public Transfer",
-            "Urban Space",
-            "Lines and Signs",
-            "Anonymity und Alienation. Emanzipiert von Henri Cartier-Bressons ”decisive moment“",
-            "drängen neue erzählerische Tendenzen der Street Photography die Konzentration auf fotografische Zeugenschaft beiseite. Fotografiehistorische Ikonen und aktuelle Positionen laden sich gegenseitig auf und geben in einem bewusst subjektiv gewählten Überblick Auskunft über gesellschaftliche Phänomene",
-            "wie sie sich innerhalb der letzten 70 Jahre fotografisch auf der Strasse manifestierten. (Quelle: orellfuessli.ch)."
-        ],
+        "Summary": "Flüchtig geflasht, akribisch beobachtet, rauschhaft energiegebündelt, schockgefroren, voyeuristisch aufgeladen, drastisch überspitzt, romantisch wild, tragisch, komisch, grüblerisch abwesend und seltsam erschreckend - die Strasse, der ”urban space“, als direkt und alltäglich erfahrbarer städtischer Lebensraum ist eines der mit Abstand schillerndsten und facettenreichsten fotografischen Sujets. Die im Rahmen der Triennale der Photographie stattfindende Ausstellung Street. Life. Photography umfasst 52 fotografische Positionen mit rund 350 Arbeiten aus der Sammlung F. C. Gundlach und der Sammlung Falckenberg sowie zahlreichen Leihgaben und Kooperationen mit zeitgenössischen Künstlern. Sie gliedert sich in sieben thematische Gruppen: Street Life, Crashes, Public Transfer, Urban Space, Lines and Signs, Anonymity und Alienation. Emanzipiert von Henri Cartier-Bressons ”decisive moment“, drängen neue erzählerische Tendenzen der Street Photography die Konzentration auf fotografische Zeugenschaft beiseite. Fotografiehistorische Ikonen und aktuelle Positionen laden sich gegenseitig auf und geben in einem bewusst subjektiv gewählten Überblick Auskunft über gesellschaftliche Phänomene, wie sie sich innerhalb der letzten 70 Jahre fotografisch auf der Strasse manifestierten. (Quelle: orellfuessli.ch).",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
         "Lexile_Code": "",
@@ -1196,7 +1075,7 @@
         "Position": "",
         "Uploaded_Image_URL": "http://images.amazon.com/images/P/386828852X.01Z.jpg",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:48:00.107033967,activityDate:2020\\/10\\/09}]",
-        "UUID": "7e2e0c61-53e5-44aa-a678-0c52c73948b7",
-        "Cover_Image": "test-data-hugo/hugo-content-4/assets/images//386828852X.01Z.jpg"
+        "UUID": "7a610a06-0503-4e88-91ae-8c7bc2b0bb59",
+        "Cover_Image": "//386828852X.01Z.jpg"
     }
 ]

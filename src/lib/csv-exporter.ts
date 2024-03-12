@@ -7,8 +7,8 @@ import { MD_Mapper, MD_Mapping } from "./md-mapping";
 export interface CSV_Exporter_Parameter_Type {
   readPath: string; // Datei oder Verzeichnis
   writePath: string; // Verzeichnis
-  csvSeparator:string;
-  mappings?: MD_Mapping[]
+  csvSeparator: string;
+  mappings?: MD_Mapping[];
 }
 
 export class CSV_Exporter {
@@ -22,7 +22,9 @@ export class CSV_Exporter {
    * @param {string} target
    * @memberof Tools
    */
-  public static transform_to_json(job_parameter:CSV_Exporter_Parameter_Type): void {
+  public static transform_to_json(
+    job_parameter: CSV_Exporter_Parameter_Type
+  ): void {
     let csv_buffer = fs.readFileSync(job_parameter.readPath);
     const rows_array = csv_buffer.toString().split("\n");
 
@@ -34,7 +36,6 @@ export class CSV_Exporter {
     let header_array = new Array();
 
     if (header_csv.trim().length > 0) {
-
       let inSQuotes = false;
       let inDQuotes = false;
       let tmpParam = "";
@@ -47,13 +48,13 @@ export class CSV_Exporter {
           if (inSQuotes) tmpParam += char;
           else if (inDQuotes) tmpParam += char;
           else {
-            header_array.push(tmpParam.split(" ").join("_"));
+            header_array.push(CSV_Exporter.cleanup(tmpParam));
             tmpParam = "";
           }
         } else tmpParam += char;
       }
       
-      header_array.push(tmpParam.split(" ").join("_"));
+      header_array.push(CSV_Exporter.cleanup(tmpParam));
     }
 
     for (let i = 1; i < rows_array.length - 1; i++) {
@@ -78,29 +79,23 @@ export class CSV_Exporter {
       // and store the values in a properties array
       let properties = s.split("|");
 
-      // if a value contains multiple comma separated data store it in form of array 
       for (let j in header_array) {
-        if (properties[j].includes(", ")) {
-          json_obj[header_array[j]] = properties[j]
-            .split(",")
-            .map((item) => item.trim());
-        } else json_obj[header_array[j]] = properties[j];
+        json_obj[header_array[j]] = properties[j];
       }
 
       //* apply mappings to json object...
-      if( job_parameter.hasOwnProperty('mappings') ){
-        let mapper:MD_Mapper = new MD_Mapper();
+      if (job_parameter.hasOwnProperty("mappings")) {
+        let mapper: MD_Mapper = new MD_Mapper();
         mapper.addMappings(job_parameter.mappings);
         mapper.do_mappings(json_obj, json_obj);
       }
-      
+
       json_obj_array.push(json_obj);
     }
 
     let json = JSON.stringify(json_obj_array, null, 4);
     fs.writeFileSync(job_parameter.writePath, json);
   } // csv_to_json
-
 
   /**
    *
@@ -116,24 +111,21 @@ export class CSV_Exporter {
     target_folder: string,
     url_property_name: string
   ): void {
-    
     let rawdata: Buffer = fs.readFileSync(source_file);
     let json: any = JSON.parse(rawdata.toString());
 
     if (Array.isArray(json)) {
       json.forEach((element) => {
         if (url_property_name in element) {
-
           let url: string = element[url_property_name];
 
           if (CSV_Exporter.is_valid_url(url)) {
-            
             // url = url.replace('http://','https://');
             target_folder = target_folder.endsWith("/")
               ? target_folder
               : `${target_folder}/`;
 
-            // I can't figure the data type out... 
+            // I can't figure the data type out...
             const name: string =
               url.substring(url.lastIndexOf("/") + 1) + ".jpg"; // this isnt always jpg
             console.log(`Try Download from url: ${url}`);
@@ -148,14 +140,14 @@ export class CSV_Exporter {
             console.log(`Download url invalid: ${url}`);
           }
         }
-      });      
+      });
     } else {
       // todo single object
     }
   }
 
   /**
-   * 
+   *
    * @static
    * @param {(string | client.RequestOptions | URL)} url
    * @param {fs.PathLike} filepath
@@ -164,7 +156,6 @@ export class CSV_Exporter {
    */
   public static download_image(url: string, filepath: fs.PathLike) {
     return new Promise((resolve, reject) => {
-
       let client = url.startsWith("https://") ? client_https : client_http;
 
       client.get(url, (response) => {
@@ -178,7 +169,9 @@ export class CSV_Exporter {
           // Consume response data to free up memory
           response.resume();
           reject(
-            new Error(`Download from ${url} Failed With Status Code: ${response.statusCode}`)
+            new Error(
+              `Download from ${url} Failed With Status Code: ${response.statusCode}`
+            )
           );
         }
       });
@@ -202,6 +195,42 @@ export class CSV_Exporter {
       console.log(`${error.input} is not a valid url`);
       return false;
     }
+  }
+
+  /**
+   * trim('|hello|world|', '|'); // => 'hello|world'
+   *
+   * @static
+   * @param {string} str
+   * @param {string} ch
+   * @return {*} 
+   * @memberof CSV_Exporter
+   */
+  public static trim_char(str:string, ch:string) {
+    var start = 0,
+      end = str.length;
+
+    while (start < end && str[start] === ch) ++start;
+
+    while (end > start && str[end - 1] === ch) --end;
+
+    return start > 0 || end < str.length ? str.substring(start, end) : str;
+  }
+
+  /**
+   * The property names must be clean.
+   * no characters like: ( );:.", 
+   *
+   * @static
+   * @param {string} str
+   * @return {*} 
+   * @memberof CSV_Exporter
+   */
+  public static cleanup(str:string) {
+    // str = CSV_Exporter.trim_char(str, '"'); // entfernt umschließende " 
+    str = str.replace(/[(),"-]/g, ''); // '()-' -> ''
+    str = str.replace(/[ ]/g, '_'); // ',; ' -> _
+    return str
   }
 
   /**

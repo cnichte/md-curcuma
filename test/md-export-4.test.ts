@@ -31,7 +31,7 @@ const csv_exporter_parameter: CSV_Exporter_Parameter_Type = {
     readPath: "test-data-obsidian-vault/attachments/bookbuddy-export.csv",
     writePath: "test-data-hugo/hugo-content-4/data/bookbuddy-export.json",
     csvSeparator: ',',
-    mappings: [insert_uuid, image_download_mapping],
+    mappings: [insert_uuid, image_download_mapping]
 };
 
 CSV_Exporter.transform_to_json(csv_exporter_parameter);

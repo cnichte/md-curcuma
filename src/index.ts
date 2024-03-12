@@ -28,9 +28,13 @@ export {
 //* Mapper Tasks
 
 export { MD_AdoptValue_Mapping } from "./lib/mapping-tasks/md-adopt-value-mapping";
+export { MD_ArrayJoin_Mapping, type MD_ArrayJoin_MappingType } from "./lib/mapping-tasks/md-arrayjoin-mapping";
+export { MD_ArraySplit_Mapping, type MD_ArraySplit_MappingType } from "./lib/mapping-tasks/md-arraysplit-mapping";
 export { MD_BooleanInverse_Mapping } from "./lib/mapping-tasks/md-boolean-inverse-mapping";
 export { MD_ImageDownloader_Mapping, type MD_ImageDownloader_MappingType } from "./lib/mapping-tasks/md-image-downloader-mapping";
+export { MD_InsertDate_Mapping } from "./lib/mapping-tasks/md-insert-date-mapping";
 export { MD_InsertUUID_Mapping } from "./lib/mapping-tasks/md-insert-uuid-mapping";
+export { MD_TrimString_Mapping } from "./lib/mapping-tasks/md-trim-string-mapping";
 
 //* Transformer Tasks
 

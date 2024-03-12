@@ -22,16 +22,19 @@ Availible Markdown Transformers:
 5. Callouts.
 6. Remove Todos.
 7. TODO: Take wikilinks (cross-references) into account.
+8. TODO: Footnotes Endnotes support.
 
 Availible Mappings:
 
-1. Adopt Value
-2. Boolean inverse
-3. Image Downloader
-4. Insert Date (now)
-5. Insert uuid
+1. Adopt Value - a simple pass through example.
+2. ArrayJoin, ArraySplit
+3. Boolean Inverse
+4. Image Downloader
+5. Insert Date (now)
+6. Insert UUID
+7. Trim Characters from String.
 
-You can build customized transformers and Mappers for different solutions.
+You can build customized transformers and Mappers for different solutions. For planned features and changes take a look into the [CHANGELOG.md](https://gitlab.com/glimpse-of-life/longform-markdown-splitter/-/blob/main/CHANGELOG.md)
 
 Restrictions
 
