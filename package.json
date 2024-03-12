@@ -1,6 +1,6 @@
 {
   "name": "longform-markdown-splitter",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Splits and transforms markdown files from obsidian for usage in hugo.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
