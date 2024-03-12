@@ -574,7 +574,7 @@ I recommend Option `3` at the moment.
 
 ### Install-Method 1: Clone the Repository
 
-The easiest way is to clone the repository:
+The easiest way is to clone the repository. You will then also receive the tests, giving you a good starting point for your own adjustments.
 
 * copy the link: https://gitlab.com/glimpse-of-life/longform-markdown-splitter.git 
 * open VS Code

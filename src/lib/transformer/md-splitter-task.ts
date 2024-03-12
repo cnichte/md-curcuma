@@ -89,6 +89,7 @@ export class MD_Splitter_Transformer extends MD_Transformer_AbstractBase {
       let params: MD_Collection_Parameter_Type = {
         split_row: file_content.body_array[index],
         cleanName: this.parameter.cleanName,
+        weightBase: this.parameter.weightBase,
         url_prefix: this.parameter.url_prefix,
         frontmatter: this.parameter.frontmatter,
         useCounter: this.parameter.hasCounter,

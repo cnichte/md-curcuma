@@ -16,6 +16,10 @@ and on the top of it
 
 What has been implemented so far:
 
+# Release 1.2.9 (2024-03-12)
+
+* For MD_Splitter_Parameter_Type, the `weightBase` parameter was not passed through.
+
 # Release 1.2.8 (2024-03-12)
 
 * Some optimations in CSV_Exporter.

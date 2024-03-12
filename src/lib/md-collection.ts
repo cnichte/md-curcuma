@@ -1,6 +1,8 @@
 import { MD_Frontmatter_Template, MD_Frontmatter_Type } from "./md-frontmatter";
 import { MD_Filesystem } from "./md-filesystem";
 
+import { v4 as uuidv4 } from "uuid";
+
 /**
  * A collection contains everything that makes up a single document.
  *
@@ -12,6 +14,7 @@ export interface MD_Collection_Parameter_Type {
   cleanName: string;
   url_prefix: string;
   useCounter: boolean;
+  weightBase: number;
   counter: number;
   frontmatter: MD_Frontmatter_Template;
 }
@@ -36,7 +39,9 @@ export class MD_Collection {
    * @memberof MD_Collection
    */
   constructor(parameter: MD_Collection_Parameter_Type) {
+    
     this.url_prefix = parameter.url_prefix;
+    this.weight = parameter.weightBase;
 
     this.headline = parameter.split_row.replace(parameter.cleanName, "").trim();
     if (this.headline.length <= 0) {
@@ -64,7 +69,7 @@ export class MD_Collection {
       date: this.date,
       url: this.url,
       url_prefix: this.url_prefix,
-      uuid: this.generateUUID(),
+      uuid: uuidv4(),
       weight: weight,
     };
 
@@ -94,39 +99,5 @@ export class MD_Collection {
    */
   public write_file(writePath: string): void {
     MD_Filesystem.write_file(writePath + this.file_name, this.file_content);
-  }
-
-  /**
-   ** Generate a UUID.
-   * https://stackoverflow.com/questions/105034/how-do-i-create-a-guid-uuid
-   *
-   * @private
-   * @return {*}  {string}
-   * @memberof MD_Splitter
-   */
-  private generateUUID(): string {
-    // Public Domain/MIT
-    var d = new Date().getTime(); // Timestamp
-    var d2 =
-      (typeof performance !== "undefined" &&
-        performance.now &&
-        performance.now() * 1000) ||
-      0; // Time in microseconds since page-load or 0 if unsupported
-    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-      /[xy]/g,
-      function (c) {
-        var r = Math.random() * 16; // random number between 0 and 16
-        if (d > 0) {
-          // Use timestamp until depleted
-          r = (d + r) % 16 | 0;
-          d = Math.floor(d / 16);
-        } else {
-          // Use microseconds since page-load if supported
-          r = (d2 + r) % 16 | 0;
-          d2 = Math.floor(d2 / 16);
-        }
-        return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
-      }
-    );
   }
 }
