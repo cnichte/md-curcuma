@@ -17,7 +17,7 @@ Availible Markdown Transformers:
 
 1. Splits a Markdown-Longform in separate Files at Headlines.
 2. Obsidian-Links (Images and Documents), copy Files on the fly.
-3. Latex-Formulas, Paragraph an Inline. 
+3. Latex-Formulas, Paragraph and Inline. 
 4. Frontmatter: Add, Replace, Map and Transform Values.
 5. Callouts.
 6. Remove Todos.
@@ -831,7 +831,7 @@ Look in the `test` folder to check the result.
 
 ![](readme-images/test-folder.png)
 
-Observe the console output on the Output tab. The images and documents shown in the log have to be copied over manually at the moment. 
+Observe the console output on the Output tab.
 
 ![](readme-images/test-console-output.png)
 

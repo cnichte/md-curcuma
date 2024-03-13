@@ -118,18 +118,17 @@ export class MD_MathInline_Transformer extends MD_Transformer_AbstractBase {
 
     for (let i = 0; i < words_array.length; i++) {
       let word = words_array[i].trim();
-      // TODO ends with: . , ; etc, 
+      // TODO ends with: . , ; etc,
       // todo: use regex
       if (
         word.startsWith(this.parameter.tag_obsidian_prefix) &&
         word.endsWith(this.parameter.tag_obsidian_suffix)
       ) {
-        
         this.template_values.content = word.substring(
           this.parameter.tag_obsidian_prefix.length,
           word.length - this.parameter.tag_obsidian_suffix.length
         );
-        
+
         console.log("found inline formula!", this.template_values.content);
         const template: MD_Template = new MD_Template(
           this.parameter.replace_template

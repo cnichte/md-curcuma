@@ -1,11 +1,12 @@
 # Unresolved issues & planned features
 
-* A regex-filter for the filereader to exclude some files.
-* preserve folder structure.
-* Transformations on the target filename.
-* Run a joblist in batch.
-* Implement job-propertys functions: doSubfolders, limit, useCounter.
-* Process multiple source-target pairs in one mapping...
+1. A filter for the filereader to exclude some files and folders. Keyword: globbing patterns.
+2. preserve folder structure.
+3. Transformations on the target filename.
+4. Run a joblist in batch.
+5. Implement job-propertys functions: doSubfolders, limit, useCounter.
+6. Process multiple source-target pairs in one mapping...
+7. Make individual Markdown-Documents from each data record of the CSV-file.
 
 and on the top of it
 
@@ -15,6 +16,10 @@ and on the top of it
     * or as fancy integration into [one of these frontends](https://gohugo.io/tools/front-ends/) 
 
 What has been implemented so far:
+
+# Release 1.2.10 (2024-03-13)
+
+* `MD_InsertUUID_Mapping` no longer always returns a new uuid, but only if there is no valid uui in the field.
 
 # Release 1.2.9 (2024-03-12)
 
