@@ -583,7 +583,46 @@ CSV_Exporter.transform_to_json(csv_exporter_parameter);
 
 ## Trim Characters from String
 
+## Build a Custom Mapper
 
+For fast prototyping, it can be useful to set up a mapper in this way:
+
+```ts
+const map_1: MD_Mapping = {
+  mapping_items: [
+    {
+      source_property_name: "spn_test", // read from
+      target_poperty_name:  "tpn_test", // write to
+    }
+  ],
+  task: {
+    perform: function (mapping_properties: MD_MappingTask_Properties): boolean {
+      // The values are also made available to you, 
+      // so that you no longer have to read them from the properties:
+      let sv:boolean = mapping_properties.source_value; // type any
+      let tv:boolean = mapping_properties.target_value; // type any
+      // in normal cases you would work with these given values
+      // and return the target_value at the end.
+
+      // you also have access to the source Object, and the Target Object.
+      // possibly source and target are the same.
+      let the_souce:any = mapping_properties.source;
+      let the_target:any = mapping_properties.target;
+
+      // and you have access to the names of the preoccessed Properties:
+      // possibly they are the same.
+      let spn:string = mapping_properties.source_property_name;
+      let tpn:string = mapping_properties.target_poperty_name;
+
+      // do your transformations and mappings
+      // and return the target_value (which is assigned automattically)
+      return !sv;
+    },
+  }
+};
+```
+
+In other cases it my be better to build a real class because you can pass additional parameters. For example take a look at [MD_ArraySplit_Mapping](https://gitlab.com/glimpse-of-life/md-curcuma/-/blob/main/src/lib/mapping-tasks/md-arraysplit-mapping.ts) 
 
 
 # Install and Use

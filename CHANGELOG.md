@@ -17,6 +17,11 @@ and on the top of it
 
 What has been implemented so far:
 
+# Release 1.2.13 (2024-03-14)
+
+* `MD_ArraySplit_Mapping` returns always an array - Which is what you would expect.
+* Did some Documentation.
+
 # Release 1.2.12 (2024-03-14)
 
 * Fixed the Doku

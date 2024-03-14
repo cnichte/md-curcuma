@@ -6,25 +6,29 @@ export interface MD_ArraySplit_MappingType {
 
 export class MD_ArraySplit_Mapping implements MD_MappingTask {
   protected properties: MD_ArraySplit_MappingType;
+
+  /**
+   * 
+   */
   constructor(properties: MD_ArraySplit_MappingType) {
     this.properties = properties;
   }
 
   /**
-   * if a value contains multiple comma separated data store it in form of array.
-   *
+   * Transforms the data in an array.
+   * 
    * @param {MD_MappingTask_Properties} mapping_properties
    * @return {*}  {(string[] | string)}
    * @memberof MD_ArraySplit_Mapping
    */
-  perform(mapping_properties: MD_MappingTask_Properties):string[] | string {
+  perform(mapping_properties: MD_MappingTask_Properties):string[] {
     let target_value: string = mapping_properties.source_value;
     if (target_value.includes(this.properties.separator)){
       console.log(`Tags split: ${target_value}`);
       return target_value.split(this.properties.separator).map((item) => item.trim());
     }else{
       console.log(`Tags: ${target_value}`);
-      return target_value;
+      return [target_value];
     }
   }
 }
