@@ -1,5 +1,5 @@
 {
-  "name": "longform-markdown-splitter",
+  "name": "md-curcuma",
   "version": "1.2.10",
   "description": "Splits and transforms markdown files from obsidian for usage in hugo.",
   "main": "dist/index.js",
@@ -9,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/glimpse-of-life/longform-markdown-splitter.git"
+    "url": "git+https://gitlab.com/glimpse-of-life/md-curcuma.git"
   },
   "keywords": [
     "Javascript",
@@ -31,7 +31,7 @@
   },
   "author": "Carsten Nichte",
   "license": "MIT",
-  "homepage": "https://gitlab.com/glimpse-of-life/longform-markdown-splitter",
+  "homepage": "https://gitlab.com/glimpse-of-life/md-curcuma",
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.11.27",
