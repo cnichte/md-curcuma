@@ -1,6 +1,6 @@
 # MD-Curcuma
 
-Copys and transforms Markdown and CSV files from your [Obsidian](https://obsidian.md/)-Vault for usage in [Hugo](https://gohugo.io).
+The Data-Wrangler. Copys and transforms Markdown and CSV files from your [Obsidian](https://obsidian.md/)-Vault for usage in [Hugo](https://gohugo.io).
 
 * This thing ist done with [Typescript](https://www.typescriptlang.org/).
 * Inspired by: https://github.com/accraze/split-md
@@ -15,14 +15,14 @@ Availible Exporters:
 
 Availible Markdown Transformers:
 
-1. Splits a Markdown-Longform in separate Files at Headlines.
-2. Obsidian-Links (Images and Documents), copy Files on the fly.
-3. Latex-Formulas, Paragraph and Inline. 
-4. Frontmatter: Add, Replace, Map and Transform Values.
-5. Callouts.
-6. Remove Todos.
-7. TODO: Take wikilinks (cross-references) into account.
-8. TODO: Footnotes Endnotes support.
+1. Copying and transforming one or more Markdown files. 
+2. Split longform documents into several individual documents.
+3. Obsidian-Links (Images and Documents), copy Files on the fly.
+4. Latex-Formulas, Paragraph and Inline. 
+5. Frontmatter: Add, Replace, Map and Transform Values.
+6. Callouts.
+7. Remove Todos.
+8. TODO: Take wikilinks (cross-references) into account. Footnotes Endnotes support.
 
 Availible Mappings:
 
@@ -369,8 +369,10 @@ seo:
 // task: new MD_Mapping_BooleanInverse_Task()
 // or write a custom task:
 const map_1: MD_Mapping = {
-  source_property_name: "doPublish",
-  target_poperty_name: "draft",
+  mapping_items: [{
+    source_property_name: "doPublish",
+    target_poperty_name: "draft",
+  }],
   task: {
     perform: function (mapping_properties: MD_MappingTask_Properties): boolean {
       let target_value = !mapping_properties.source_value;
@@ -381,8 +383,10 @@ const map_1: MD_Mapping = {
 
 // An example task that inserts the current date. Source Property isnt used here.
 const map_2: MD_Mapping = {
-  source_property_name: "",
-  target_poperty_name: "date",
+  mapping_items: [{
+    source_property_name: "",
+    target_poperty_name: "date",
+  }],
   task: {
     perform: function (mapping_properties: MD_MappingTask_Properties): any {
       return new Date().toJSON().slice(0, 16);
@@ -525,7 +529,10 @@ exporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
 
 This isnt done yet.
 
-## 8. BookBuddy-App, CSV Support
+## 8. Footnotes Endnotes support.
+
+
+## 9. BookBuddy-App, CSV Support
 
 * The [BookBuddy App](https://www.kimicoapps.com/bookbuddy) exports its contents as a csv file.
 * I would like to use the data in Hugo.
@@ -535,16 +542,18 @@ This isnt done yet.
 ```ts
 
 let image_download_mapping_props: MD_ImageDownloader_MappingType = {
-    image_target_folder: "test-data-hugo/hugo-content-4/assets/images/",
-    image_hugo_path: "images/", 
-    filename_property_name: "UUID", // not used by now
-    simulate: false
+  image_target_folder: "test-data-hugo/hugo-content-4/assets/images/",
+  image_hugo_path: "images/", 
+  filename_property_name: "UUID", // not used by now
+  simulate: false
 };
 
 const image_download_mapping: MD_Mapping = {
+  mapping_items: [{
     source_property_name: "Uploaded_Image_URL",
     target_poperty_name: "Cover_Image",
-    task: new MD_ImageDownloader_Mapping(image_download_mapping_props),
+  }],
+  task: new MD_ImageDownloader_Mapping(image_download_mapping_props),
 };
 
 const csv_exporter_parameter: CSV_Exporter_Parameter_Type = {
@@ -557,6 +566,25 @@ const csv_exporter_parameter: CSV_Exporter_Parameter_Type = {
 CSV_Exporter.transform_to_json(csv_exporter_parameter);
 
 ```
+
+# Mappings
+
+## Adopt Value - a simple pass through example.
+
+## ArrayJoin, ArraySplit
+
+## Boolean Inverse
+
+## Image Downloader
+
+## Insert Date (now)
+
+## Insert UUID
+
+## Trim Characters from String
+
+
+
 
 # Install and Use
 

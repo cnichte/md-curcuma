@@ -34,7 +34,7 @@
   "homepage": "https://gitlab.com/glimpse-of-life/longform-markdown-splitter",
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.11.25",
+    "@types/node": "^20.11.27",
     "@types/uuid": "^9.0.8",
     "tsx": "^4.7.1",
     "typescript": "^5.4.2"

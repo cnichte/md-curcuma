@@ -19,7 +19,10 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie",
+            "Lehrbuch"
+        ],
         "Summary": "",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -66,7 +69,10 @@
         "Date_Added": "2020/10/09 13:00:24.775153160",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie",
+            "Lehrbuch"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -79,8 +85,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/40E85916-C515-4104-89B2-B81D5A6C9743",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:47:59.935217857,activityDate:2020\\/10\\/09}]",
-        "UUID": "64faa586-d9ca-424c-98cb-febd012c9e50",
-        "Cover_Image": "/40E85916-C515-4104-89B2-B81D5A6C9743.jpg"
+        "UUID": "0ed846c8-cb1c-42f6-9980-e66f4e5f112c"
     },
     {
         "Title": "Anders Petersen",
@@ -162,8 +167,7 @@
         "Position": "",
         "Uploaded_Image_URL": "",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:47:59.948628902,activityDate:2020\\/10\\/09}]",
-        "UUID": "fed24012-d74a-4221-ba73-43f0700ca23c",
-        "Cover_Image": ""
+        "UUID": "d98a4237-47b9-48f3-907e-4f9b719c690d"
     },
     {
         "Title": "Bruce Gilden",
@@ -245,8 +249,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/F29BA3B2-DDA2-47ED-8AE0-19BFE9D295B2",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:47:59.965533971,activityDate:2020\\/10\\/09}]",
-        "UUID": "d5df3623-5ef0-43d7-a795-08a7f686d3a4",
-        "Cover_Image": "/F29BA3B2-DDA2-47ED-8AE0-19BFE9D295B2.jpg"
+        "UUID": "93203df8-e00a-4ea1-9176-f5571f3c5a50"
     },
     {
         "Title": "Die Erde von oben",
@@ -268,7 +271,10 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie",
+            "Geografie"
+        ],
         "Summary": "",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -315,7 +321,10 @@
         "Date_Added": "2020/10/06 16:36:42.083518028",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie",
+            "Geografie"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -328,8 +337,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/E910ADB2-39EC-44C3-92BA-46FB3DE51A7C",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:47:59.998932838,activityDate:2020\\/10\\/09}]",
-        "UUID": "18292a1f-3cac-43ba-8e25-3d602af75c64",
-        "Cover_Image": "/E910ADB2-39EC-44C3-92BA-46FB3DE51A7C.jpg"
+        "UUID": "4f521977-891b-4b8b-bde2-6fc7355ebe4d"
     },
     {
         "Title": "Die Seele des Nordens",
@@ -411,8 +419,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/515F2F83-E4EF-43FB-B4AC-516DC8389CC7",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:48:00.002490997,activityDate:2020\\/10\\/09}]",
-        "UUID": "95e6a2c3-c1cc-4ce2-bdeb-cd00d11f5ddf",
-        "Cover_Image": "/515F2F83-E4EF-43FB-B4AC-516DC8389CC7.jpg"
+        "UUID": "aae82768-1478-4143-8166-9f386fd5b8c3"
     },
     {
         "Title": "Erwin Olaf",
@@ -494,8 +501,7 @@
         "Position": "",
         "Uploaded_Image_URL": "http://images.amazon.com/images/P/3775748792.01Z.jpg",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.766962051,activityDate:2021\\/04\\/16}]",
-        "UUID": "b8ec469d-987d-426c-8b72-8daaf1d69d19",
-        "Cover_Image": "//3775748792.01Z.jpg"
+        "UUID": "e580f7db-a3e8-4d3a-a505-2564c7775f29"
     },
     {
         "Title": "Full moon",
@@ -577,8 +583,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/779A58FC-0714-41B2-9456-E18995C5203D",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:48:00.032227993,activityDate:2020\\/10\\/09}]",
-        "UUID": "ccc95c68-d293-47f6-a885-481265d004b7",
-        "Cover_Image": "/779A58FC-0714-41B2-9456-E18995C5203D.jpg"
+        "UUID": "e8215851-081c-42f8-aa96-f9eb823d2cfb"
     },
     {
         "Title": "Full moon",
@@ -660,8 +665,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/BB765D92-D484-4FEB-9F8C-8B22171F2728",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.781578063,activityDate:2021\\/04\\/16}]",
-        "UUID": "dec31604-8625-4b82-a132-7b40b3c00bdc",
-        "Cover_Image": "/BB765D92-D484-4FEB-9F8C-8B22171F2728.jpg"
+        "UUID": "298d35ed-77c0-4e28-917b-3fc8ccd6d2fa"
     },
     {
         "Title": "Graciela Iturbide",
@@ -743,8 +747,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/BF403591-AB9D-4CA5-95BF-CD75CA69E7E4",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.783650875,activityDate:2021\\/04\\/16}]",
-        "UUID": "a1616967-a9ac-4810-9a7a-31efdd0ebb9e",
-        "Cover_Image": "/BF403591-AB9D-4CA5-95BF-CD75CA69E7E4.jpg"
+        "UUID": "d909edf3-017b-49c1-8115-8b99481813ef"
     },
     {
         "Title": "Man Ray",
@@ -826,8 +829,7 @@
         "Position": "",
         "Uploaded_Image_URL": "http://images.amazon.com/images/P/3836507986.01Z.jpg",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.818489074,activityDate:2021\\/04\\/16}]",
-        "UUID": "efa07dab-eb34-497c-a86f-4405fbcbd113",
-        "Cover_Image": "//3836507986.01Z.jpg"
+        "UUID": "4079a8a1-182c-4513-b123-cc80c68d6f54"
     },
     {
         "Title": "Saul Leiter",
@@ -909,8 +911,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/7C406A1A-9119-4786-A1AE-CC2BC1148770",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.865483999,activityDate:2021\\/04\\/16}]",
-        "UUID": "f22b99f5-b215-40ca-b828-fca92f060c46",
-        "Cover_Image": "/7C406A1A-9119-4786-A1AE-CC2BC1148770.jpg"
+        "UUID": "02cde17f-fbdf-4304-8e4f-6022c1a810f4"
     },
     {
         "Title": "Singen - うたたね",
@@ -992,8 +993,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/732436F5-637D-49FB-BED7-9784820138D7",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.953629970,activityDate:2021\\/04\\/16}]",
-        "UUID": "18107c2b-e1bb-4de7-b843-5b1cafaa4af7",
-        "Cover_Image": "/732436F5-637D-49FB-BED7-9784820138D7.jpg"
+        "UUID": "69431dc1-f1b9-4568-8444-3b4955b51225"
     },
     {
         "Title": "Street, Life, Photography",
@@ -1075,7 +1075,6 @@
         "Position": "",
         "Uploaded_Image_URL": "http://images.amazon.com/images/P/386828852X.01Z.jpg",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:48:00.107033967,activityDate:2020\\/10\\/09}]",
-        "UUID": "7a610a06-0503-4e88-91ae-8c7bc2b0bb59",
-        "Cover_Image": "//386828852X.01Z.jpg"
+        "UUID": "a70ed362-ec13-4540-9d24-94b367d8e786"
     }
 ]

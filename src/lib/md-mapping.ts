@@ -14,9 +14,13 @@ export interface MD_MappingTask {
   perform(mapping_properties:MD_MappingTask_Properties): any;
 }
 
-export interface MD_Mapping {
+export interface MD_Mapping_Item {
   source_property_name: any;
   target_poperty_name: any;
+}
+
+export interface MD_Mapping {
+  mapping_items:MD_Mapping_Item[],
   task: MD_MappingTask;
 }
 
@@ -45,22 +49,26 @@ export class MD_Mapper {
       ) {
         this.mappings.forEach((map: MD_Mapping) => {
 
-          let props:MD_MappingTask_Properties = {
-            source: source,
-            target: target,
+          // Alle Felder im Mapping verarbeiten
+          map.mapping_items.forEach((mapping_item: MD_Mapping_Item) => {
 
-            source_property_name: map.source_property_name,
-            target_poperty_name: map.target_poperty_name,
-            
-            source_value: source[map.source_property_name],
-            target_value: target[map.target_poperty_name]
-          }
-
-          if (map.task !== undefined || map.task !== null) {
-            target[map.target_poperty_name] = map.task.perform(props);
-          } else {
-            target[map.target_poperty_name] = props.source_value;
-          }
+            let props:MD_MappingTask_Properties = {
+              source: source,
+              target: target,
+  
+              source_property_name: mapping_item.source_property_name,
+              target_poperty_name: mapping_item.target_poperty_name,
+              
+              source_value: source[mapping_item.source_property_name],
+              target_value: target[mapping_item.target_poperty_name]
+            }
+  
+            if (map.task !== undefined || map.task !== null) {
+              target[mapping_item.target_poperty_name] = map.task.perform(props);
+            } else {
+              target[mapping_item.target_poperty_name] = props.source_value;
+            }
+          });
         });
       }
     }

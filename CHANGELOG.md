@@ -17,6 +17,41 @@ and on the top of it
 
 What has been implemented so far:
 
+# Release 1.2.11 (2024-03-14)
+
+Apply one Mapping Task on multiple pairs of Fields.
+
+Previously Rule: One mapping task, one field. Which means a mapping could only be applied to one pair of fields. You had to write down two mappings to achieve this:
+
+```ts
+// the old ones, shall be dropped.
+const mapping_1: MD_Mapping = {
+    source_property_name: "Tags",
+    target_poperty_name: "Tags",
+    task: new MD_ArraySplit_Mapping({ separator: "," }),
+};
+
+const mapping_2: MD_Mapping = {
+    source_property_name: "Genre",
+    target_poperty_name: "Genre",
+    task: new MD_ArraySplit_Mapping({ separator: "," }),
+};
+```
+
+That no longer applies. 
+
+The New Rule is: One mapping task, multiple pairs of fields. The property `mapping_items` is a List of `MD_Mapping_Item`:
+
+```ts
+const make_array: MD_Mapping = {
+    mapping_items: [
+        { source_property_name: "Tags", target_poperty_name: "Tags" },
+        { source_property_name: "Genre", target_poperty_name: "Genre" },
+    ],
+    task: new MD_ArraySplit_Mapping({ separator: "," }),
+};
+```
+
 # Release 1.2.10 (2024-03-13)
 
 * `MD_InsertUUID_Mapping` no longer always returns a new uuid, but only if there is no valid uui in the field.

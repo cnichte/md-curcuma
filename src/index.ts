@@ -13,7 +13,7 @@ export {
   type MD_Frontmatter_Parameter_Type,
 } from "./lib/md-frontmatter";
 // todo md-job
-export { MD_MappingTask, MD_Mapper, type MD_Mapping, type MD_MappingTask_Properties } from "./lib/md-mapping";
+export { MD_MappingTask, type MD_MappingTask_Properties, MD_Mapper, type MD_Mapping, type MD_Mapping_Item,  } from "./lib/md-mapping";
 export { MD_ObserverSubject, type MD_Observer_Interface } from "./lib/md-observer";
 // todo md-tag
 export { MD_Template } from "./lib/md-template";

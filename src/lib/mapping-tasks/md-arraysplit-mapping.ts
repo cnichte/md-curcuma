@@ -19,10 +19,11 @@ export class MD_ArraySplit_Mapping implements MD_MappingTask {
    */
   perform(mapping_properties: MD_MappingTask_Properties):string[] | string {
     let target_value: string = mapping_properties.source_value;
-
     if (target_value.includes(this.properties.separator)){
+      console.log(`Tags split: ${target_value}`);
       return target_value.split(this.properties.separator).map((item) => item.trim());
     }else{
+      console.log(`Tags: ${target_value}`);
       return target_value;
     }
   }
