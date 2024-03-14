@@ -30,7 +30,7 @@
     "clean:test": "find test-data-hugo -type f | xargs rm -f"
   },
   "author": "Carsten Nichte",
-  "license": "MIT",
+  "license": "GNU GPLv3",
   "homepage": "https://gitlab.com/glimpse-of-life/md-curcuma",
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",

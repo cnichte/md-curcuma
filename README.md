@@ -34,7 +34,7 @@ Availible Mappings:
 6. Insert UUID
 7. Trim Characters from String.
 
-You can build customized transformers and Mappers for different solutions. For planned features and changes take a look into the [CHANGELOG.md](https://gitlab.com/glimpse-of-life/longform-markdown-splitter/-/blob/main/CHANGELOG.md)
+You can build customized transformers and Mappers for different solutions. For planned features and changes take a look into the [CHANGELOG.md](https://gitlab.com/glimpse-of-life/md-curcuma/-/blob/main/CHANGELOG.md)
 
 Restrictions
 
@@ -604,11 +604,11 @@ I recommend Option `3` at the moment.
 
 The easiest way is to clone the repository. You will then also receive the tests, giving you a good starting point for your own adjustments.
 
-* copy the link: https://gitlab.com/glimpse-of-life/longform-markdown-splitter.git 
+* copy the link: https://gitlab.com/glimpse-of-life/md-curcuma.git 
 * open VS Code
 * Click on `Clone Git repository`.
 * Select a directory to clone the target to.
-* The directory `longform-markdown-splitter` will be created.
+* The directory `md-curcuma` will be created.
 * Open the project in VS-Code
 * Open Teriminal
 * `npm install`
@@ -627,7 +627,7 @@ Another option is to create an empty project, an install from npm...
 ```bash
 npm init
 # follow the guide
-npm install longform-markdown-splitter
+npm install md-curcuma
 # check typescript installation
 tsc --version
 ```
@@ -732,11 +732,11 @@ import {
   MD_Math_Transformer,
   MD_Splitter_Parameter_Type,
   MD_Transformer_Parameter_Type,
-} from "longform-markdown-splitter";
+} from "md-curcuma";
 import {
   MD_Exporter,
   MD_Exporter_Parameter_Type,
-} from "longform-markdown-splitter";
+} from "md-curcuma";
 
 
 const exporter: MD_Exporter = new MD_Exporter();

@@ -17,6 +17,17 @@ and on the top of it
 
 What has been implemented so far:
 
+# Release 1.2.12 (2024-03-14)
+
+* Fixed the Doku
+* `longform-markdown-splitter` becomes now finaly `md-curcuma`. The project has had the name for some time, and I have now also adapted the addresses:
+    * Gitlab
+        * old : [gitlab.com/glimpse-of-life/longform-markdown-splitter](https://gitlab.com/glimpse-of-life/longform-markdown-splitter)
+        * new: [gitlab.com/glimpse-of-life/md-curcuma](https://gitlab.com/glimpse-of-life/md-curcuma)
+    * NPM
+        * old: [npmjs.com/package/longform-markdown-splitter](https://www.npmjs.com/package/longform-markdown-splitter)
+        * new : [npmjs.com/package/md-curcuma](https://www.npmjs.com/package/md-curcuma)
+
 # Release 1.2.11 (2024-03-14)
 
 Apply one Mapping Task on multiple pairs of Fields.
