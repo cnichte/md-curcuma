@@ -1,4 +1,4 @@
-import { MD_Collection, MD_Collection_Parameter_Type } from "../md-collection";
+import { MD_Document, MD_Document_Parameter_Type } from "../md-document";
 import {
   MD_TRANSPORTER_COMMANDS,
   MD_Transporter_Parameter_Type,
@@ -24,7 +24,7 @@ export interface MD_Splitter_Parameter_Type {
 
 export class MD_Splitter_Transformer extends MD_Transformer_AbstractBase {
   parameter: MD_Splitter_Parameter_Type;
-  collection: MD_Collection | null | undefined = null;
+  md_document: MD_Document | null | undefined = null;
   counter: number = 0;
 
   constructor(parameter: MD_Splitter_Parameter_Type) {
@@ -71,7 +71,7 @@ export class MD_Splitter_Transformer extends MD_Transformer_AbstractBase {
     //
     // Record change...
     // Found a heading to split up
-    // Potential content before the first headline gets lost.
+    // TODO Potential content before the first headline gets lost.
     // But my longform documents always start with a # headline.
     if (file_content.body_array[index].indexOf(this.parameter.pattern) == 0) {
       this.counter = this.counter + 1;
@@ -82,11 +82,11 @@ export class MD_Splitter_Transformer extends MD_Transformer_AbstractBase {
       )
         return file_content;
 
-      if (this.collection !== null) {
-        this.collection.write_file(this.job_parameter.writePath);
+      if (this.md_document !== null) {
+        this.md_document.write_file(this.job_parameter.writePath);
       }
 
-      let params: MD_Collection_Parameter_Type = {
+      let params: MD_Document_Parameter_Type = {
         split_row: file_content.body_array[index],
         cleanName: this.parameter.cleanName,
         weightBase: this.parameter.weightBase,
@@ -96,24 +96,24 @@ export class MD_Splitter_Transformer extends MD_Transformer_AbstractBase {
         counter: this.counter,
       };
 
-      this.collection = new MD_Collection(params);
+      this.md_document = new MD_Document(params);
 
       // remove the Headline itself, because it is now in frontmatter.
       // 2nd parameter means remove one item only
       if (this.parameter.doRemoveHeadline)
         file_content.body_array.splice(index, 1);
     } else {
-      if (this.collection !== null) {
-        this.collection.add_content(file_content.body_array[index]);
+      if (this.md_document !== null) {
+        this.md_document.add_content(file_content.body_array[index]);
       }
     }
 
     // save the last collection...
     if (
-      this.collection !== null &&
+      this.md_document !== null &&
       index == file_content.body_array.length - 1
     ) {
-      this.collection.write_file(this.job_parameter.writePath);
+      this.md_document.write_file(this.job_parameter.writePath);
     }
 
     // inform MD_Export not to write the entire file after splitting ist up.

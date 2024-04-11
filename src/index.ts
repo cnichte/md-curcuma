@@ -3,9 +3,9 @@ export { CSV_Transporter, CSV_Transporter_Parameter_Type } from "./lib/csv-trans
 export { MD_Transporter, type MD_Transporter_Parameter_Type } from "./lib/md-transporter";
 
 export {
-  MD_Collection,
-  type MD_Collection_Parameter_Type,
-} from "./lib/md-collection";
+  MD_Document,
+  type MD_Document_Parameter_Type,
+} from "./lib/md-document";
 export { MD_CopyJob } from "./lib/md-copy-job";
 export { MD_Filesystem, MD_FileContent_Interface } from "./lib/md-filesystem";
 export {

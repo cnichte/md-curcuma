@@ -4,12 +4,12 @@ import { MD_Filesystem } from "./md-filesystem";
 import { v4 as uuidv4 } from "uuid";
 
 /**
- * A collection contains everything that makes up a single document.
+ * MD_Document contains everything that makes up a single Markdown-Document.
  *
  * @author Carsten Nichte - 2024
  */
 
-export interface MD_Collection_Parameter_Type {
+export interface MD_Document_Parameter_Type {
   split_row: string;
   cleanName: string;
   url_prefix: string;
@@ -19,7 +19,7 @@ export interface MD_Collection_Parameter_Type {
   frontmatter: MD_Frontmatter_Template;
 }
 
-export class MD_Collection {
+export class MD_Document {
   public headline: string = "";
 
   public url_prefix: string = "prefix";
@@ -34,11 +34,11 @@ export class MD_Collection {
   public date: string = new Date().toJSON().slice(0, 16);
 
   /**
-   * Creates an instance of MD_Collection.
-   * @param {MD_Collection_Parameter_Type} parameter
-   * @memberof MD_Collection
+   * Creates an instance of MD_Document.
+   * @param {MD_Document_Parameter_Type} parameter
+   * @memberof MD_Document
    */
-  constructor(parameter: MD_Collection_Parameter_Type) {
+  constructor(parameter: MD_Document_Parameter_Type) {
     
     this.url_prefix = parameter.url_prefix;
     this.weight = parameter.weightBase;
@@ -84,7 +84,7 @@ export class MD_Collection {
    * Add Content to the Collection.
    *
    * @param {string} content
-   * @memberof MD_Collection
+   * @memberof MD_Document
    */
   public add_content(content: string): void {
     var newline = "\n" + content;
@@ -95,7 +95,7 @@ export class MD_Collection {
    * Write the Collection to thwe filesystem.
    *
    * @param {string} writePath
-   * @memberof MD_Collection
+   * @memberof MD_Document
    */
   public write_file(writePath: string): void {
     MD_Filesystem.write_file(writePath + this.file_name, this.file_content);
