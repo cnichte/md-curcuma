@@ -1,11 +1,12 @@
 
-export { CSV_Exporter, CSV_Exporter_Parameter_Type } from "./lib/csv-exporter";
+export { CSV_Transporter, CSV_Transporter_Parameter_Type } from "./lib/csv-transporter";
+export { MD_Transporter, type MD_Transporter_Parameter_Type } from "./lib/md-transporter";
+
 export {
   MD_Collection,
   type MD_Collection_Parameter_Type,
 } from "./lib/md-collection";
 export { MD_CopyJob } from "./lib/md-copy-job";
-export { MD_Exporter, type MD_Exporter_Parameter_Type } from "./lib/md-exporter";
 export { MD_Filesystem, MD_FileContent_Interface } from "./lib/md-filesystem";
 export {
   MD_Frontmatter_Template,

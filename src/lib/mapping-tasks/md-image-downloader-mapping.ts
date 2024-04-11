@@ -1,4 +1,4 @@
-import { CSV_Exporter } from "../csv-exporter";
+import { CSV_Transporter } from "../csv-transporter";
 import { MD_Filesystem } from "../md-filesystem";
 import { MD_MappingTask, MD_MappingTask_Properties } from "../md-mapping";
 
@@ -36,7 +36,7 @@ export class MD_ImageDownloader_Mapping implements MD_MappingTask {
     let image_target_folder = this.properties.image_target_folder;
     let image_hugo_path = this.properties.image_hugo_path;
 
-    if (CSV_Exporter.is_valid_url(image_url)) {
+    if (CSV_Transporter.is_valid_url(image_url)) {
       const myURL = new URL(image_url);
 
       let image_name: string = "";
@@ -83,7 +83,7 @@ export class MD_ImageDownloader_Mapping implements MD_MappingTask {
       );
 
       if (!this.properties.simulate) {
-        CSV_Exporter.download_image(image_url, image_target_folder)
+        CSV_Transporter.download_image(image_url, image_target_folder)
           .then(function (result) {
             console.log(
               `Downloaded from url: '${image_url}' to '${image_target_folder}' with result '${result}'`

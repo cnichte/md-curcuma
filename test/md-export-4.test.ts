@@ -1,4 +1,4 @@
-import { CSV_Exporter, CSV_Exporter_Parameter_Type } from '../src/lib/csv-exporter';
+import { CSV_Transporter, CSV_Transporter_Parameter_Type } from '../src/lib/csv-transporter';
 import { MD_Mapping, MD_Mapping_Item } from '../src/lib/md-mapping';
 import { MD_ImageDownloader_Mapping, type MD_ImageDownloader_MappingType } from "../src/lib/mapping-tasks/md-image-downloader-mapping";
 import { MD_InsertUUID_Mapping } from '../src/lib/mapping-tasks/md-insert-uuid-mapping';
@@ -40,11 +40,11 @@ const image_download_mapping: MD_Mapping = {
     task: new MD_ImageDownloader_Mapping(image_download_mapping_props),
 };
 
-const csv_exporter_parameter: CSV_Exporter_Parameter_Type = {
+const csv_exporter_parameter: CSV_Transporter_Parameter_Type = {
     readPath: "test-data-obsidian-vault/attachments/bookbuddy-export.csv",
     writePath: "test-data-hugo/hugo-content-4/data/bookbuddy-export.json",
     csvSeparator: ',',
     mappings: [insert_uuid, make_array]
 }; // image_download_mapping
 
-CSV_Exporter.transform_to_json(csv_exporter_parameter);
+CSV_Transporter.transform_to_json(csv_exporter_parameter);

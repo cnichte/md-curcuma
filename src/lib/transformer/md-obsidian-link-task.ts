@@ -1,6 +1,6 @@
 import { MD_CopyJob } from "../md-copy-job";
 import { MD_CopyTask_Type } from "../md-transformer";
-import { MD_Exporter_Parameter_Type } from "../md-exporter";
+import { MD_Transporter_Parameter_Type } from "../md-transporter";
 import { MD_Template } from "../md-template";
 import {
   MD_Transformer_AbstractBase,
@@ -67,7 +67,7 @@ export class MD_ObsidianLink_Transformer_Base extends MD_Transformer_AbstractBas
     this.template_values.name_suffix = "";
   }
 
-  public set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void {
+  public set_job_parameter(job_paramter: MD_Transporter_Parameter_Type): void {
     super.set_job_parameter(job_paramter);
 
     // parent job-property overwrites copy_task property

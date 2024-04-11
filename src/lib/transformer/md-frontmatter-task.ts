@@ -1,4 +1,4 @@
-import { MD_Exporter_Parameter_Type } from "../md-exporter";
+import { MD_Transporter_Parameter_Type } from "../md-transporter";
 import { MD_FileContent_Interface, MD_Filesystem } from "../md-filesystem";
 import { MD_Observer_Interface } from "../md-observer";
 import { MD_Transformer_AbstractBase } from "../md-transformer";
@@ -53,10 +53,10 @@ export class MD_Frontmatter_Transformer extends MD_Transformer_AbstractBase {
   /**
    *
    *
-   * @param {MD_Exporter_Parameter_Type} job_paramter
+   * @param {MD_Transporter_Parameter_Type} job_paramter
    * @memberof MD_Frontmatter_Transformer
    */
-  public set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void {
+  public set_job_parameter(job_paramter: MD_Transporter_Parameter_Type): void {
     super.set_job_parameter(job_paramter);
     // Das ist ein Hack.
     //? Eigentlich ist die Metode ja in der abstrakten Basisklasse vorhanden.

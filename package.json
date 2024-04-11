@@ -34,10 +34,10 @@
   "homepage": "https://gitlab.com/glimpse-of-life/md-curcuma",
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.11.27",
+    "@types/node": "^20.12.7",
     "@types/uuid": "^9.0.8",
-    "tsx": "^4.7.1",
-    "typescript": "^5.4.2"
+    "tsx": "^4.7.2",
+    "typescript": "^5.4.5"
   },
   "dependencies": {
     "front-matter": "^4.0.2",

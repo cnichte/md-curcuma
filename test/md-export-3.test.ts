@@ -4,9 +4,9 @@ import {
 } from "../src/lib/md-frontmatter";
 
 import {
-  MD_Exporter,
-  MD_Exporter_Parameter_Type,
-} from "../src/lib/md-exporter";
+  MD_Transporter,
+  MD_Transporter_Parameter_Type,
+} from "../src/lib/md-transporter";
 import { MD_Transformer_Parameter_Type } from "../src/lib/md-transformer";
 import { MD_Splitter_Parameter_Type } from "../src/lib/transformer/md-splitter-task";
 import { MD_ObsidianLink_Transformer } from "../src/lib/transformer/md-obsidian-link-task";
@@ -26,14 +26,14 @@ import {
  * Inserting/Replacing a frontmatter.
  * Adopting and transforming values from the source frontmatter.
  */
-const exporter: MD_Exporter = new MD_Exporter();
+const transporter: MD_Transporter = new MD_Transporter();
 
-// Basic instructions for MD_Exporter
+// Basic instructions for MD_Transporter
 
 const simulate_job = false;
 const simulate_copy_job = false;
 
-const md_exporter_parameter: MD_Exporter_Parameter_Type = {
+const md_transporter_parameter: MD_Transporter_Parameter_Type = {
   readPath: "test-data-obsidian-vault/some-md-docs",
   writePath: "test-data-hugo/hugo-content-3/",
   doSubfolders: false,
@@ -104,6 +104,6 @@ const parameter_frontmatter: MD_Frontmatter_Parameter_Type = {
   mappings: [map_1, map_2],
 };
 
-exporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatter));
+transporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatter));
 
-exporter.perform_job(md_exporter_parameter);
+transporter.perform_job(md_transporter_parameter);

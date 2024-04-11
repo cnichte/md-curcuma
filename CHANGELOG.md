@@ -17,6 +17,14 @@ and on the top of it
 
 What has been implemented so far:
 
+# Release 1.2.14 (2024-04-11)
+
+* Some reorganisation:
+    * `MD_Exporter` is now `MD_Transporter`
+    * `CSV_Exporter` is now `CSV_Transporter`
+* Manual revised
+* All dependencies updated to the latest package versions
+
 # Release 1.2.13 (2024-03-14)
 
 * `MD_ArraySplit_Mapping` returns always an array - Which is what you would expect.

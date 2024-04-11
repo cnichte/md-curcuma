@@ -12,12 +12,16 @@ export class MD_TrimString_Mapping implements MD_MappingTask {
 
   perform(mapping_properties: MD_MappingTask_Properties) {
     let str = mapping_properties.source_value;
-    let ch = this.properties.char;
+    if (str != null && str != undefined) {
+      let ch = this.properties.char;
 
-    var start = 0, end = str.length;
+      var start = 0, end = str.length;
 
-    while (start < end && str[start] === ch) ++start;
-    while (end > start && str[end - 1] === ch) --end;
-    return start > 0 || end < str.length ? str.substring(start, end) : str;
+      while (start < end && str[start] === ch) ++start;
+      while (end > start && str[end - 1] === ch) --end;
+      return start > 0 || end < str.length ? str.substring(start, end) : str;
+    } else {
+      return str;
+    }
   }
 }

@@ -4,14 +4,14 @@ import client_https = require("https");
 import { URL } from "url";
 import { MD_Mapper, MD_Mapping } from "./md-mapping";
 
-export interface CSV_Exporter_Parameter_Type {
+export interface CSV_Transporter_Parameter_Type {
   readPath: string; // Datei oder Verzeichnis
   writePath: string; // Verzeichnis
   csvSeparator: string;
   mappings?: MD_Mapping[];
 }
 
-export class CSV_Exporter {
+export class CSV_Transporter {
   /**
    * The BookBuddy app exports its contents as a csv file.
    * I would like to use the data in Hugo.
@@ -23,7 +23,7 @@ export class CSV_Exporter {
    * @memberof Tools
    */
   public static transform_to_json(
-    job_parameter: CSV_Exporter_Parameter_Type
+    job_parameter: CSV_Transporter_Parameter_Type
   ): void {
     let csv_buffer = fs.readFileSync(job_parameter.readPath);
     const rows_array = csv_buffer.toString().split("\n");
@@ -48,13 +48,13 @@ export class CSV_Exporter {
           if (inSQuotes) tmpParam += char;
           else if (inDQuotes) tmpParam += char;
           else {
-            header_array.push(CSV_Exporter.cleanup(tmpParam));
+            header_array.push(CSV_Transporter.cleanup(tmpParam));
             tmpParam = "";
           }
         } else tmpParam += char;
       }
       
-      header_array.push(CSV_Exporter.cleanup(tmpParam));
+      header_array.push(CSV_Transporter.cleanup(tmpParam));
     }
 
     for (let i = 1; i < rows_array.length - 1; i++) {
@@ -119,7 +119,7 @@ export class CSV_Exporter {
         if (url_property_name in element) {
           let url: string = element[url_property_name];
 
-          if (CSV_Exporter.is_valid_url(url)) {
+          if (CSV_Transporter.is_valid_url(url)) {
             // url = url.replace('http://','https://');
             target_folder = target_folder.endsWith("/")
               ? target_folder
@@ -130,7 +130,7 @@ export class CSV_Exporter {
               url.substring(url.lastIndexOf("/") + 1) + ".jpg"; // this isnt always jpg
             console.log(`Try Download from url: ${url}`);
 
-            CSV_Exporter.download_image(url, `${target_folder}${name}`)
+            CSV_Transporter.download_image(url, `${target_folder}${name}`)
               .then(function (result) {
                 element.Cover_Image = `${target_folder}${name}`;
                 fs.writeFileSync(source_file, JSON.stringify(json, null, 4));
@@ -256,4 +256,4 @@ export class CSV_Exporter {
         };
       });
   }
-} // class tools
+} // class CSV_Transporter

@@ -11,7 +11,7 @@
  * @author Carsten Nichte - 2024
  */
 
-import { MD_Exporter_Parameter_Type } from "./md-exporter";
+import { MD_Transporter_Parameter_Type } from "./md-transporter";
 import { MD_FileContent_Interface } from "./md-filesystem";
 import { MD_Observer_Interface, MD_ObserverSubject } from "./md-observer";
 
@@ -48,14 +48,14 @@ export interface MD_Transformer_Interface {
     index: number
   ): MD_FileContent_Interface;
 
-  set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void;
+  set_job_parameter(job_paramter: MD_Transporter_Parameter_Type): void;
   addObserver(observer: MD_Observer_Interface): void;
 }
 
 export abstract class MD_Transformer_AbstractBase
   implements MD_Transformer_Interface
 {
-  protected job_parameter: MD_Exporter_Parameter_Type;
+  protected job_parameter: MD_Transporter_Parameter_Type;
   protected observer_subject: MD_ObserverSubject = new MD_ObserverSubject();
 
   abstract transform(
@@ -63,7 +63,7 @@ export abstract class MD_Transformer_AbstractBase
     index: number
   ): MD_FileContent_Interface;
 
-  public set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void {
+  public set_job_parameter(job_paramter: MD_Transporter_Parameter_Type): void {
     this.job_parameter = job_paramter;
   }
 

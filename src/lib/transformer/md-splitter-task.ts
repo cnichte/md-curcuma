@@ -1,8 +1,8 @@
 import { MD_Collection, MD_Collection_Parameter_Type } from "../md-collection";
 import {
-  MD_EXPORTER_COMMANDS,
-  MD_Exporter_Parameter_Type,
-} from "../md-exporter";
+  MD_TRANSPORTER_COMMANDS,
+  MD_Transporter_Parameter_Type,
+} from "../md-transporter";
 import { MD_Filesystem, MD_FileContent_Interface } from "../md-filesystem";
 import {
   MD_Frontmatter_Template
@@ -45,7 +45,7 @@ export class MD_Splitter_Transformer extends MD_Transformer_AbstractBase {
     }
   }
 
-  public set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void {
+  public set_job_parameter(job_paramter: MD_Transporter_Parameter_Type): void {
     super.set_job_parameter(job_paramter);
     // Das ist ein Hack.
     //? Eigentlich ist die Methode ja in der abstrakten Basisklasse vorhanden.
@@ -120,7 +120,7 @@ export class MD_Splitter_Transformer extends MD_Transformer_AbstractBase {
     this.observer_subject.notify_all(
       "md-splitter-task",
       "md-exporter",
-      MD_EXPORTER_COMMANDS.DO_NOT_WRITE_FILES
+      MD_TRANSPORTER_COMMANDS.DO_NOT_WRITE_FILES
     );
 
     return file_content;

@@ -1,10 +1,10 @@
-import { MD_Exporter_Parameter_Type } from './md-exporter';
+import { MD_Transporter_Parameter_Type } from './md-transporter';
 import { MD_Transformer_Parameter_Type } from './md-transformer';
 
 export interface MD_Job_Type {
     job_name:string;
     job_description:string;
-    job_parameter: MD_Exporter_Parameter_Type;
+    job_parameter: MD_Transporter_Parameter_Type;
     job_tasks: Array<MD_JobTasks_Type>;
 }
 

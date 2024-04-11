@@ -10,11 +10,11 @@ import { MD_Transformer_Factory } from "./md-transformer-factory";
 import { MD_Job_Type, MD_JobTasks_Type } from "./md-job";
 import { MD_Observer_Interface } from "./md-observer";
 
-export enum MD_EXPORTER_COMMANDS {
+export enum MD_TRANSPORTER_COMMANDS {
   DO_NOT_WRITE_FILES = "do-not-write-file",
 }
 
-export interface MD_Exporter_Parameter_Type {
+export interface MD_Transporter_Parameter_Type {
   readPath: string; // Datei oder Verzeichnis
   writePath: string; // Verzeichnis
   simulate: boolean;
@@ -29,7 +29,7 @@ export interface MD_Exporter_Parameter_Type {
  * @export
  * @class MD_Exporter
  */
-export class MD_Exporter implements MD_Observer_Interface {
+export class MD_Transporter implements MD_Observer_Interface {
   private transformers: Array<MD_Transformer_Interface> = [];
   private do_not_write_file: boolean = false;
 
@@ -48,7 +48,7 @@ export class MD_Exporter implements MD_Observer_Interface {
    * MD_Exporter listens to messages from the transformers.
    */
   do_command(from: string, to: string, command: string): void {
-    if (command === MD_EXPORTER_COMMANDS.DO_NOT_WRITE_FILES) {
+    if (command === MD_TRANSPORTER_COMMANDS.DO_NOT_WRITE_FILES) {
       this.do_not_write_file = true;
     }
   }
@@ -56,10 +56,10 @@ export class MD_Exporter implements MD_Observer_Interface {
   /**
    ** Runs a job.
    *
-   * @param {MD_Exporter_Parameter_Type} job_parameter
+   * @param {MD_Transporter_Parameter_Type} job_parameter
    * @memberof MD_Exporter
    */
-  public perform_job(job_parameter: MD_Exporter_Parameter_Type): void {
+  public perform_job(job_parameter: MD_Transporter_Parameter_Type): void {
     if (MD_Filesystem.isFolder(job_parameter.readPath)) {
       var file_list: Array<string> = MD_Filesystem.get_files_list(
         job_parameter.readPath
@@ -91,13 +91,13 @@ export class MD_Exporter implements MD_Observer_Interface {
    *
    * @private
    * @param {string } source_file
-   * @param {MD_Exporter_Parameter_Type} job_parameter
+   * @param {MD_Transporter_Parameter_Type} job_parameter
    * @param {Array<string>} md_content
    * @memberof MD_Exporter
    */
   private transform_and_write(
     source_file: string,
-    job_parameter: MD_Exporter_Parameter_Type,
+    job_parameter: MD_Transporter_Parameter_Type,
     md_content: string
   ): void {
     // Trenne im md-content das Frontmatter vom body ab.
@@ -189,7 +189,7 @@ export class MD_Exporter implements MD_Observer_Interface {
     if (the_job != null) {
       console.log(`prepare job '${the_job.job_name}'`);
 
-      let job_parameter: MD_Exporter_Parameter_Type = the_job.job_parameter;
+      let job_parameter: MD_Transporter_Parameter_Type = the_job.job_parameter;
 
       let job_tasks: Array<MD_JobTasks_Type> = the_job.job_tasks;
 

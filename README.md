@@ -6,12 +6,10 @@ The Data-Wrangler. Copys and transforms Markdown and CSV files from your [Obsidi
 * Inspired by: https://github.com/accraze/split-md
 * Why not [golang](https://golang.org/)? So you can use it easier outside the golang unsiverse.
 
-Transformers are currently available for the following tasks:
+Availible Transporter:
 
-Availible Exporters:
-
-1. MD_Exporter - for Markdown Files
-2. CSV_Exporter - For files with comma-separated values, where each line is a record. This is a [BookBuddy App](https://www.kimicoapps.com/bookbuddy) support: CSV-File conversion & Image Download.
+1. MD_Transporter - for Markdown Files
+2. CSV_Transporter - For files with comma-separated values, where each line is a record. This is a [BookBuddy App](https://www.kimicoapps.com/bookbuddy) support: CSV-File conversion & Image Download.
 
 Availible Markdown Transformers:
 
@@ -45,8 +43,8 @@ Restrictions
 In short:
 
 ```ts
-const my_exporter: MD_Exporter = new MD_Exporter();
-my_exporter.perform_job_from("../test-data-obsidian-vault/transport-config.json", "Example-Job No.1");
+const my_transporter: MD_Transporter = new MD_Transporter();
+my_transporter.perform_job_from("../test-data-obsidian-vault/transport-config.json", "Example-Job No.1");
 ```
 
 All tasks are defined in the `transport-config.json` configuration file.
@@ -54,10 +52,10 @@ All tasks are defined in the `transport-config.json` configuration file.
 In long:
 
 ```ts
-const my_exporter: MD_Exporter = new MD_Exporter();
+const my_transporter: MD_Transporter = new MD_Transporter();
 
 // Basic config
-const exporter_parameter: MD_Exporter_Parameter_Type = {
+const transporter_parameter: MD_Transport_Parameter_Type = {
   readPath: "test-obsidian-vault/longform.md",
   writePath: "test-hugo/hugo-content-2/",
   doSubfolders: false,
@@ -79,10 +77,10 @@ const parameter_images: MD_Transformer_Parameter_Type = {
 };
 
 // Add the Transformer to the pipeline
-exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
+my_transporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
 
 // execute the job
-my_exporter.perform_job(exporter_parameter);
+my_transporter.perform_job(transporter_parameter);
 ```
 
 Take a look in the `test` folder for running examples.
@@ -137,7 +135,7 @@ const parameter_splitter: MD_Splitter_Parameter_Type = {
   frontmatter: splitter_frontmatter
 };
 
-exporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
+my_transporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
 
 ```
 
@@ -212,8 +210,8 @@ const parameter_docs: MD_Transformer_Parameter_Type = {
   }
 };
 
-exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
-exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
+my_transporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
+my_transporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
 ```
 
 ### Example JSON for usage in config-file
@@ -301,8 +299,8 @@ var parameter_math_inline: MD_Transformer_Parameter_Type = {
   replace_template: "{{< math >}} ${content}$ {{< /math >}}",
 };
 
-exporter.addTransformer(new MD_MathParagraph_Transformer(parameter_math_paragraph));
-exporter.addTransformer(new MD_MathInline_Transformer(parameter_math_inline));
+my_transporter.addTransformer(new MD_MathParagraph_Transformer(parameter_math_paragraph));
+my_transporter.addTransformer(new MD_MathInline_Transformer(parameter_math_inline));
 ```
 
 ### Example JSON for usage in config-file
@@ -400,7 +398,7 @@ const parameter_frontmatter: MD_Frontmatter_Parameter_Type = {
   mappings: [map_1, map_2],
 };
 
-exporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatter));
+my_transporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatter));
 ```
 
 ###  Example JSON for usage in config-file
@@ -472,7 +470,7 @@ var parameter_callouts: MD_Transformer_Parameter_Type = {
   replace_template: `{{< callout context="{context}" title="{title}" icon="{icon}" > }} {content} {{< /callout >}}`,
 };
 
-exporter.addTransformer(new MD_Callout_Transformer(parameter_callouts));
+my_transporter.addTransformer(new MD_Callout_Transformer(parameter_callouts));
 
 ```
 
@@ -509,7 +507,7 @@ const parameter_remove: MD_Transformer_Parameter_Type = {
   replace_template: ``,
 };
 
-exporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
+my_transporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
 ```
 
 ### Example JSON for usage in config-file
@@ -531,6 +529,7 @@ This isnt done yet.
 
 ## 8. Footnotes Endnotes support.
 
+Works for footnotes inside the splitted chapter, but not yet if they are outside.
 
 ## 9. BookBuddy-App, CSV Support
 
@@ -556,14 +555,14 @@ const image_download_mapping: MD_Mapping = {
   task: new MD_ImageDownloader_Mapping(image_download_mapping_props),
 };
 
-const csv_exporter_parameter: CSV_Exporter_Parameter_Type = {
+const csv_transporter_parameter: CSV_Transporter_Parameter_Type = {
     readPath: "test-data-obsidian-vault/attachments/bookbuddy-export.csv",
     writePath: "test-data-hugo/hugo-content-4/data/bookbuddy-export.json",
     csvSeparator: ',',
     mappings: [image_download_mapping],
 };
 
-CSV_Exporter.transform_to_json(csv_exporter_parameter);
+CSV_Transporter.transform_to_json(csv_transporter_parameter);
 
 ```
 
@@ -755,8 +754,8 @@ The ts suffix in `build:ts` separates it from the golag scripts which i name `bu
 In folder `transport-scripts`create the file `split-my-longform.ts` and paste the code:
 
 ```ts
-const my_exporter: MD_Exporter = new MD_Exporter();
-my_exporter.perform_job_from("../test-data/transport-config.json", "Example-Job No.1");
+const my_transporter: MD_Transporter = new MD_Transporter();
+my_transporter.perform_job_from("../test-data/transport-config.json", "Example-Job No.1");
 ```
 
 That is all was needed when you provide a config file and a frontmatter file.
@@ -773,16 +772,16 @@ import {
   MD_Transformer_Parameter_Type,
 } from "md-curcuma";
 import {
-  MD_Exporter,
-  MD_Exporter_Parameter_Type,
+  MD_Transporter,
+  MD_transporter_Parameter_Type,
 } from "md-curcuma";
 
 
-const exporter: MD_Exporter = new MD_Exporter();
+const my_transporter: MD_Transporter = new MD_Transporter();
 
-// Basic instructions for MD_Exporter
+// Basic instructions for MD_Transporter
 
-const exporter_parameter: MD_Exporter_Parameter_Type = {
+const transporter_parameter: MD_Transporter_Parameter_Type = {
   readPath: "test/obsidian-vault/longform.md",
   writePath: "test/hugo-content-2/",
   doSubfolders: false,
@@ -867,13 +866,13 @@ const parameter_splitter: MD_Splitter_Parameter_Type = {
   frontmatter: splitter_frontmatter
 };
 
-exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
-exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
-exporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
-exporter.addTransformer(new MD_Math_Transformer(parameter_math));
-exporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
+my_transporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
+my_transporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
+my_transporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
+my_transporter.addTransformer(new MD_Math_Transformer(parameter_math));
+my_transporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
 
-exporter.perform_job(exporter_parameter);
+my_transporter.perform_job(transporter_parameter);
 
 ```
 
@@ -905,8 +904,8 @@ Observe the console output on the Output tab.
 ## Build A Custom Transformer
 
 ```ts
-import { MD_Exporter_Parameter_Type } from "src/md-exporter";
-import { MD_Transformer_AbstractBase } from "src/md-transformer";
+import { MD_Tranporter_Parameter_Type } from "md-curcuma";
+import { MD_Transformer_AbstractBase } from "md-curcuma";
 
 interface MD_Custom_Parameter_Type {
   custom_property: string;
@@ -914,18 +913,18 @@ interface MD_Custom_Parameter_Type {
 
 class MD_Custom_Transformer extends MD_Transformer_AbstractBase {
 
-    parameter: MD_Custom_Parameter_Type;
+    private parameter: MD_Custom_Parameter_Type;
   
     constructor(parameter: MD_Custom_Parameter_Type ){
       super();
       this.parameter = parameter;
     }
   
-    public set_job_parameter(job_paramter: MD_Exporter_Parameter_Type): void {
+    public set_job_parameter(job_paramter: MD_Transporter_Parameter_Type): void {
       super.set_job_parameter(job_paramter); // this is a hack
     }
 
-    transform(file_content: MD_FileContent_Interface, index: number):  MD_FileContent_Interface {
+    public transform(file_content: MD_FileContent_Interface, index: number):  MD_FileContent_Interface {
 
       const body_array = file_content.body_array;
       let item = file_content.body_array[index];
@@ -950,9 +949,9 @@ You currently cannot call custom Transformer from a configuration file, you have
 You can mixup execution from config-file and adding your custom Transformer class like so:
 
 ```ts
-const my_exporter: MD_Exporter = new MD_Exporter();
+const my_transporter: MD_Transporter = new MD_Transporter();
 
-my_exporter.addTransformer(new MyCustomTransformer(custom_params));
+my_transporter.addTransformer(new MyCustomTransformer(custom_params));
 
-my_exporter.perform_job_from("../test-data/transport-config.json", "Example-Job No.1");
+my_transporter.perform_job_from("../test-data/transport-config.json", "Example-Job No.1");
 ```

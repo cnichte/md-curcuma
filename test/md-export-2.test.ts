@@ -1,5 +1,5 @@
 import { MD_Frontmatter_Template } from "../src/lib/md-frontmatter";
-import { MD_Exporter, MD_Exporter_Parameter_Type } from "../src/lib/md-exporter";
+import { MD_Transporter, MD_Transporter_Parameter_Type } from "../src/lib/md-transporter";
 import { MD_Transformer_Parameter_Type } from "../src/lib/md-transformer";
 import { MD_Splitter_Transformer } from "../src/lib/transformer/md-splitter-task";
 import { MD_Splitter_Parameter_Type } from "../src/lib/transformer/md-splitter-task";
@@ -12,11 +12,11 @@ import { MD_Callout_Transformer } from "../src/lib/transformer/md-callout-task";
  * This test deals with sharing a longform document 
  * about instantiated classes.
  */
-const exporter: MD_Exporter = new MD_Exporter();
+const exporter: MD_Transporter = new MD_Transporter();
 
 // Basic instructions for MD_Exporter
 
-const exporter_parameter: MD_Exporter_Parameter_Type = {
+const exporter_parameter: MD_Transporter_Parameter_Type = {
   readPath: "test-data-obsidian-vault/longform.md",
   writePath: "test-data-hugo/hugo-content-2/",
   doSubfolders: false,

@@ -23,11 +23,16 @@ export class MD_ArraySplit_Mapping implements MD_MappingTask {
    */
   perform(mapping_properties: MD_MappingTask_Properties):string[] {
     let target_value: string = mapping_properties.source_value;
-    if (target_value.includes(this.properties.separator)){
-      console.log(`Tags split: ${target_value}`);
-      return target_value.split(this.properties.separator).map((item) => item.trim());
-    }else{
-      console.log(`Tags: ${target_value}`);
+    
+    if (target_value != null && target_value != undefined) {
+      if (target_value.includes(",")) {
+        console.log("Tags split: ".concat(target_value));
+        return target_value.split(",").map(function (item) { return item.trim(); });
+      }
+      else {
+        return [target_value];
+      }
+    } else {
       return [target_value];
     }
   }
