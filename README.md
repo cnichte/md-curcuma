@@ -32,7 +32,7 @@ Availible Mappings:
 6. Insert UUID
 7. Trim Characters from String.
 
-You can build customized transformers and Mappers for different solutions. For planned features and changes take a look into the [CHANGELOG.md](https://gitlab.com/glimpse-of-life/md-curcuma/-/blob/main/CHANGELOG.md)
+You can build customized transformers and Mappers for different solutions. For planned features and changes take a look into the [CHANGELOG.md](https://github.com/cnichte/md-curcuma/blob/main/CHANGELOG.md)
 
 Restrictions
 

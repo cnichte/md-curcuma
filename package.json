@@ -1,7 +1,7 @@
 {
   "name": "md-curcuma",
   "version": "1.2.14",
-  "description": "Splits and transforms markdown files from obsidian for usage in hugo.",
+  "description": "A Typescript library for transporting and converting markdown and csv data.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -9,7 +9,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/glimpse-of-life/md-curcuma.git"
+    "url": "git+https://github.com/cnichte/md-curcuma.git"
   },
   "keywords": [
     "Javascript",
@@ -31,7 +31,7 @@
   },
   "author": "Carsten Nichte",
   "license": "GNU GPLv3",
-  "homepage": "https://gitlab.com/glimpse-of-life/md-curcuma",
+  "homepage": "https://github.com/cnichte/md-curcuma",
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.12.7",
