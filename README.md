@@ -3,7 +3,7 @@
 The Data-Wrangler. Copys and transforms Markdown and CSV files from your [Obsidian](https://obsidian.md/)-Vault for usage in [Hugo](https://gohugo.io).
 
 * This thing ist done with [Typescript](https://www.typescriptlang.org/).
-* Inspired by: https://github.com/accraze/split-md
+* Inspired by: <https://github.com/accraze/split-md>
 * Why not [golang](https://golang.org/)? So you can use it easier outside the golang unsiverse.
 
 Availible Transporter:
@@ -13,10 +13,10 @@ Availible Transporter:
 
 Availible Markdown Transformers:
 
-1. Copying and transforming one or more Markdown files. 
+1. Copying and transforming one or more Markdown files.
 2. Split longform documents into several individual documents.
 3. Obsidian-Links (Images and Documents), copy Files on the fly.
-4. Latex-Formulas, Paragraph and Inline. 
+4. Latex-Formulas, Paragraph and Inline.
 5. Frontmatter: Add, Replace, Map and Transform Values.
 6. Callouts.
 7. Remove Todos.
@@ -85,11 +85,11 @@ my_transporter.perform_job(transporter_parameter);
 
 Take a look in the `test` folder for running examples.
 
-# Transformations
+## Transformations
 
-I already have a number of transformations on offer, but if you need your own, you can and add them to the pipeline. 
+I already have a number of transformations on offer, but if you need your own, you can and add them to the pipeline.
 
-## 1. Split a Longform-Markdown File
+### 1. Split a Longform-Markdown File
 
 The Problem:
 
@@ -97,7 +97,7 @@ The Problem:
 * I would like to make this available on my website.
 * The website is built with [Hugo](https://gohugo.io).
 * For this purpose, the longform document is to be split into several individual documents.
-  * The splitting should be done on headings: e.g.: `# `
+  * The splitting should be done on headings: e.g.: `#`
   * The text of the heading is used as the filename
   * If necessary, with a number in front, if necessary replace special characters url conform
 * Be Hugo compatible.
@@ -105,7 +105,7 @@ The Problem:
   * autogenerate uuids
 * Certain content may need to be transformed.
 
-### Code-Example
+#### Code-Example 4
 
 ```ts
 var splitter_frontmatter: MD_Frontmatter = new MD_Frontmatter(`---
@@ -139,9 +139,9 @@ my_transporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
 
 ```
 
-### Example JSON for usage in config-file
+#### Example JSON for usage in config-file 1
 
-```json
+```js
 {
   "transformer_class_name": "MD_Splitter_Transformer",
   "transformer_parameter": {
@@ -157,33 +157,33 @@ my_transporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
 }
 ```
 
-## 2. Obsidian-Links
+### 2. Obsidian-Links
 
-Images from 
+Images from
 
-````
+```md
 ![[my-image.jpg]]
-````
+```
 
 Hugo replacement:
 
-```
+```text
  {{<image folder="images/my-image.jpg" >}}
 ```
 
 or Dokuments from
 
-````
+```md
 ![[docu-1.pdf]]
-````
+```
 
 Hugo replacement:
 
-```
+```text
 {{< button href="/getthis.php?id=docu-1" name="download docu-1 (pdf)" >}}
 ```
 
-### Code-Example
+#### Code-Example 5
 
 ```ts
 const parameter_images: MD_Transformer_Parameter_Type = {
@@ -214,7 +214,7 @@ my_transporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images))
 my_transporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
 ```
 
-### Example JSON for usage in config-file
+#### Example JSON for usage in config-file 2
 
 ```json
 {
@@ -247,16 +247,16 @@ my_transporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
 },
 ```
 
-### Copy images and documents on the fly 
+#### Copy images and documents on the fly
 
-A simulation mode provides information about which images and attachments it expects and where. 
+A simulation mode provides information about which images and attachments it expects and where.
 
 ## 3. Latex Formulas
 
 Transform Latex Formulas from Obsidian-Style to Hugo-Style.
 
-* https://www.makeuseof.com/write-mathematical-notation-obsidian/
-* https://getdoks.org/docs/built-ins/math/
+* <https://www.makeuseof.com/write-mathematical-notation-obsidian/>
+* <https://getdoks.org/docs/built-ins/math/>
 
 from this:
 
@@ -281,7 +281,7 @@ $$
 This is an inline {{< math >}} ${(x+y)}^2$ {{< /math >}} Formlula.
 ````
 
-### Code-Example
+#### Code-Example 6
 
 ```ts
 
@@ -303,7 +303,7 @@ my_transporter.addTransformer(new MD_MathParagraph_Transformer(parameter_math_pa
 my_transporter.addTransformer(new MD_MathInline_Transformer(parameter_math_inline));
 ```
 
-### Example JSON for usage in config-file
+#### Example JSON for usage in config-file 3
 
 ```json
 {
@@ -326,7 +326,7 @@ my_transporter.addTransformer(new MD_MathInline_Transformer(parameter_math_inlin
 },
 ```
 
-## 4. Frontmatter: Add, Replace, Map and Transform Values
+### 4. Frontmatter: Add, Replace, Map and Transform Values
 
 What happens here?
 
@@ -334,13 +334,13 @@ Adds a frontmatter to a single file (or a batch of single files).
 
 * The frontmatter from the source file is removed.
 * The new frontmatter-template is inserted instead.
-* Take some frontmatter fields from the source file, 
+* Take some frontmatter fields from the source file,
   * and write them to another field in the target file.
   * The value can be converted on the way.
 
 It's not quite finished yet.
 
-### Code-Example
+#### Code-Example 1
 
 ```ts
 var document_frontmatter: MD_Frontmatter_Template =
@@ -401,7 +401,7 @@ const parameter_frontmatter: MD_Frontmatter_Parameter_Type = {
 my_transporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatter));
 ```
 
-###  Example JSON for usage in config-file
+#### Example JSON for usage in config-file 4
 
 ```json
 {
@@ -414,16 +414,16 @@ my_transporter.addTransformer(new MD_Frontmatter_Transformer(parameter_frontmatt
 
 ```
 
-## 5. Callouts
+### 5. Callouts
 
  Transform Obsidian-Callouts to Hugo-Callout-Shortcodes.
 
-* Obsidian Callouts https://help.obsidian.md/Editing+and+formatting/Callouts
-* Hugo Callouts https://getdoks.org/docs/basics/shortcodes/
+* Obsidian Callouts <https://help.obsidian.md/Editing+and+formatting/Callouts>
+* Hugo Callouts <https://getdoks.org/docs/basics/shortcodes/>
 
 I'm not quite finished here either.
 
-from 
+from
 
 ````
 > [!info] Custom Title
@@ -456,10 +456,10 @@ to
 
 * context="tip"     title="Tip"     icon="rocket"
 * context="note"    title="Note"    icon="info-circle"
-* context="caution" title="Caution" icon="alert-triangle" 
+* context="caution" title="Caution" icon="alert-triangle"
 * context="danger"  title="Danger"  icon="alert-octagon"
 
-### Code-Example
+#### Code-Example 2
 
 ```ts
 
@@ -474,7 +474,7 @@ my_transporter.addTransformer(new MD_Callout_Transformer(parameter_callouts));
 
 ```
 
-###  Example JSON for usage in config-file
+#### Example JSON for usage in config-file 5
 
 ```json
 {
@@ -489,7 +489,7 @@ my_transporter.addTransformer(new MD_Callout_Transformer(parameter_callouts));
 
 ```
 
-## 6. Remove TODOs
+### 6. Remove TODOs
 
 Remove for example the following Paragraphes:
 
@@ -497,7 +497,7 @@ Remove for example the following Paragraphes:
 - [ ] #TODO Some serious stuff to do...
 ````
 
-### Code-Example
+#### Code-Example 3
 
 ```ts
 const parameter_remove: MD_Transformer_Parameter_Type = {
@@ -510,7 +510,7 @@ const parameter_remove: MD_Transformer_Parameter_Type = {
 my_transporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
 ```
 
-### Example JSON for usage in config-file
+#### Example JSON for usage in config-file 6
 
 ```json
 {
@@ -523,20 +523,20 @@ my_transporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
 
 ```
 
-## 7. Wikilinks / Cross-References
+### 7. Wikilinks / Cross-References
 
 This isnt done yet.
 
-## 8. Footnotes Endnotes support.
+### 8. Footnotes Endnotes support
 
 Works for footnotes inside the splitted chapter, but not yet if they are outside.
 
-## 9. BookBuddy-App, CSV Support
+### 9. BookBuddy-App, CSV Support
 
 * The [BookBuddy App](https://www.kimicoapps.com/bookbuddy) exports its contents as a csv file.
 * I would like to use the data in Hugo.
 * To do this, I convert the csv to json and download the also exported images from URL.
-* The Property `Cover_Image` saves the local Path to the Image for Hugo. 
+* The Property `Cover_Image` saves the local Path to the Image for Hugo.
 
 ```ts
 
@@ -566,23 +566,23 @@ CSV_Transporter.transform_to_json(csv_transporter_parameter);
 
 ```
 
-# Mappings
+## Mappings
 
-## Adopt Value - a simple pass through example.
+### Adopt Value - a simple pass through example
 
-## ArrayJoin, ArraySplit
+### ArrayJoin, ArraySplit
 
-## Boolean Inverse
+### Boolean Inverse
 
-## Image Downloader
+### Image Downloader
 
-## Insert Date (now)
+### Insert Date (now)
 
-## Insert UUID
+### Insert UUID
 
-## Trim Characters from String
+### Trim Characters from String
 
-## Build a Custom Mapper
+### Build a Custom Mapper
 
 For fast prototyping, it can be useful to set up a mapper in this way:
 
@@ -621,12 +621,11 @@ const map_1: MD_Mapping = {
 };
 ```
 
-In other cases it my be better to build a real class because you can pass additional parameters. For example take a look at [MD_ArraySplit_Mapping](https://gitlab.com/glimpse-of-life/md-curcuma/-/blob/main/src/lib/mapping-tasks/md-arraysplit-mapping.ts) 
+In other cases it my be better to build a real class because you can pass additional parameters. For example take a look at [MD_ArraySplit_Mapping](https://gitlab.com/glimpse-of-life/md-curcuma/-/blob/main/src/lib/mapping-tasks/md-arraysplit-mapping.ts)
 
+## Install and Use
 
-# Install and Use
-
-## Where to use?
+### Where to use?
 
 The Transport-Scripts can be used...
 
@@ -636,13 +635,13 @@ The Transport-Scripts can be used...
 
 I recommend Option `3` at the moment.
 
-## Install it
+### Install it
 
-### Install-Method 1: Clone the Repository
+#### Install-Method 1: Clone the Repository
 
 The easiest way is to clone the repository. You will then also receive the tests, giving you a good starting point for your own adjustments.
 
-* copy the link: https://gitlab.com/glimpse-of-life/md-curcuma.git 
+* copy the link: <https://gitlab.com/glimpse-of-life/md-curcuma.git>
 * open VS Code
 * Click on `Clone Git repository`.
 * Select a directory to clone the target to.
@@ -655,9 +654,9 @@ The easiest way is to clone the repository. You will then also receive the tests
 
 ![](readme-images/explorer-cloned.png)
 
-### Install-Method 2: create new Project
+#### Install-Method 2: create new Project
 
-Another option is to create an empty project, an install from npm... 
+Another option is to create an empty project, an install from npm...
 
 * create a `project-folder`
 * open that folder, and in it...
@@ -702,7 +701,7 @@ If you use it inside your Hugo Project, some folders are excluded per default.
 }
 ```
 
-### update from npm
+#### update from npm
 
 ```bash
 # check for updates
@@ -721,9 +720,9 @@ npx npm-check-updates -u --interactive --format group
  npm install
 ```
 
-## Create your Skript 
+### Create your Skript
 
-Look in the `test` folder for running examples. 
+Look in the `test` folder for running examples.
 
 Create two folders for your scripts:
 
@@ -732,9 +731,9 @@ Create two folders for your scripts:
 
 The first is for the Typescript source-code, the second is for the Java script that will later be compiled from it.
 
-## Compile to javascript
+### Compile to javascript
 
-To simplify handling, include the following build commands in the `package.json`: 
+To simplify handling, include the following build commands in the `package.json`:
 
 The ts suffix in `build:ts` separates it from the golag scripts which i name `build:go`, but of course you can call them whatever you like.
 
@@ -743,13 +742,13 @@ The ts suffix in `build:ts` separates it from the golag scripts which i name `bu
     "watch:ts": "tsc --watch",
 ```
 
-## Create The Example Markdown-Files
+### Create The Example Markdown-Files
 
-* create folder `test`, and in folder test 
+* create folder `test`, and in folder test
   * create folder `test/obsidian-fault/` - an put your longform.md in it.
   * create folder `test/hugo-content/` - this is the target directory
 
-## Create a Transport-Script 
+### Create a Transport-Script
 
 In folder `transport-scripts`create the file `split-my-longform.ts` and paste the code:
 
@@ -876,7 +875,7 @@ my_transporter.perform_job(transporter_parameter);
 
 ```
 
-## Compile The Transport-Script
+### Compile The Transport-Script
 
 The scripts can then be used as follows. In the terminal:
 
@@ -885,8 +884,7 @@ The scripts can then be used as follows. In the terminal:
 
 The compiled files end up in the `transport-scripts-compiled` directory.
 
-
-## Run the Script in VSCode
+### Run the Script in VSCode
 
 * In Visual Studio Code
 * Go to the directory `transport-scripts-compiled`
@@ -901,7 +899,7 @@ Observe the console output on the Output tab.
 
 ![](readme-images/test-console-output.png)
 
-## Build A Custom Transformer
+### Build A Custom Transformer
 
 ```ts
 import { MD_Tranporter_Parameter_Type } from "md-curcuma";

@@ -85,7 +85,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/40E85916-C515-4104-89B2-B81D5A6C9743",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:47:59.935217857,activityDate:2020\\/10\\/09}]",
-        "UUID": "0ed846c8-cb1c-42f6-9980-e66f4e5f112c"
+        "UUID": "85d46762-2a9a-4e6a-844e-a0a203c2bdf9"
     },
     {
         "Title": "Anders Petersen",
@@ -107,7 +107,9 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie"
+        ],
         "Summary": "",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -154,7 +156,9 @@
         "Date_Added": "2020/10/06 16:20:59.692769050",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -167,7 +171,7 @@
         "Position": "",
         "Uploaded_Image_URL": "",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:47:59.948628902,activityDate:2020\\/10\\/09}]",
-        "UUID": "d98a4237-47b9-48f3-907e-4f9b719c690d"
+        "UUID": "dc9e68fd-568f-4362-8af7-6add42cea7a3"
     },
     {
         "Title": "Bruce Gilden",
@@ -189,7 +193,9 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie"
+        ],
         "Summary": "",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -236,7 +242,9 @@
         "Date_Added": "2020/10/06 16:39:01.283833026",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -249,7 +257,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/F29BA3B2-DDA2-47ED-8AE0-19BFE9D295B2",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:47:59.965533971,activityDate:2020\\/10\\/09}]",
-        "UUID": "93203df8-e00a-4ea1-9176-f5571f3c5a50"
+        "UUID": "2ff6a4f5-f423-459d-ae36-5ac7704bcce4"
     },
     {
         "Title": "Die Erde von oben",
@@ -337,7 +345,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/E910ADB2-39EC-44C3-92BA-46FB3DE51A7C",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:47:59.998932838,activityDate:2020\\/10\\/09}]",
-        "UUID": "4f521977-891b-4b8b-bde2-6fc7355ebe4d"
+        "UUID": "d3b50ff7-bd15-4cbd-90a8-6bb88926d5ed"
     },
     {
         "Title": "Die Seele des Nordens",
@@ -359,7 +367,9 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie"
+        ],
         "Summary": "",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -406,7 +416,9 @@
         "Date_Added": "2020/10/06 16:18:23.544311046",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -419,7 +431,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/515F2F83-E4EF-43FB-B4AC-516DC8389CC7",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:48:00.002490997,activityDate:2020\\/10\\/09}]",
-        "UUID": "aae82768-1478-4143-8166-9f386fd5b8c3"
+        "UUID": "7d35fee0-861a-4b69-8e8c-b07d4a0a0ebe"
     },
     {
         "Title": "Erwin Olaf",
@@ -441,7 +453,9 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie"
+        ],
         "Summary": "",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -488,7 +502,9 @@
         "Date_Added": "2021/04/16 16:15:25.864886999",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -501,7 +517,7 @@
         "Position": "",
         "Uploaded_Image_URL": "http://images.amazon.com/images/P/3775748792.01Z.jpg",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.766962051,activityDate:2021\\/04\\/16}]",
-        "UUID": "e580f7db-a3e8-4d3a-a505-2564c7775f29"
+        "UUID": "7b163713-ff33-48e7-a312-19bf32506de8"
     },
     {
         "Title": "Full moon",
@@ -523,7 +539,9 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie"
+        ],
         "Summary": "",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -570,7 +588,9 @@
         "Date_Added": "2020/10/06 16:33:02.056302070",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -583,7 +603,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/779A58FC-0714-41B2-9456-E18995C5203D",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:48:00.032227993,activityDate:2020\\/10\\/09}]",
-        "UUID": "e8215851-081c-42f8-aa96-f9eb823d2cfb"
+        "UUID": "beb57949-621c-47af-a810-0e07673817ca"
     },
     {
         "Title": "Full moon",
@@ -605,7 +625,9 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie"
+        ],
         "Summary": "",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -652,7 +674,9 @@
         "Date_Added": "2021/04/16 17:25:05.071491003",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -665,7 +689,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/BB765D92-D484-4FEB-9F8C-8B22171F2728",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.781578063,activityDate:2021\\/04\\/16}]",
-        "UUID": "298d35ed-77c0-4e28-917b-3fc8ccd6d2fa"
+        "UUID": "dc973390-48f3-42e4-820e-467d612a305c"
     },
     {
         "Title": "Graciela Iturbide",
@@ -687,7 +711,9 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie"
+        ],
         "Summary": "",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -734,7 +760,9 @@
         "Date_Added": "2021/04/16 16:57:30.510548114",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -747,7 +775,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/BF403591-AB9D-4CA5-95BF-CD75CA69E7E4",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.783650875,activityDate:2021\\/04\\/16}]",
-        "UUID": "d909edf3-017b-49c1-8115-8b99481813ef"
+        "UUID": "ea37394f-a16f-4150-9c10-93fd54387e9a"
     },
     {
         "Title": "Man Ray",
@@ -769,7 +797,9 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie"
+        ],
         "Summary": "",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -816,7 +846,9 @@
         "Date_Added": "2021/04/16 17:23:19.389649868",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -829,7 +861,7 @@
         "Position": "",
         "Uploaded_Image_URL": "http://images.amazon.com/images/P/3836507986.01Z.jpg",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.818489074,activityDate:2021\\/04\\/16}]",
-        "UUID": "4079a8a1-182c-4513-b123-cc80c68d6f54"
+        "UUID": "788d28dc-c45c-4ed3-b1a4-d2794644c138"
     },
     {
         "Title": "Saul Leiter",
@@ -851,7 +883,9 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie"
+        ],
         "Summary": "The fruit of fantastic recent discoveries from Saul Leiter's vast archive, In My Room provides an in-depth study of the nude, through intimate photographs of the women Leiter knew. Showing deeply personal interior spaces, often illuminated by the lush natural light of the artist's studio in New York City's East Village, these black-and-white images reveal a unique type of collaboration between Leiter and his subjects. In the 1970s Leiter planned to make a book of nudes, but the project was never realized in his lifetime. Now, we get a first-time look at this body of work, which was begun on Leiter's arrival in New York in 1946 and honed over the next two decades. Leiter, who was also a painter, allows abstract elements into the photographs and often shows the influence of his favorite artists, including Bonnard, Vuillard and Matisse. Leiter, who painted and took pictures prolifically up to his death, worked in relative obscurity until he entered his eighties. He preferred to be left alone, and resisted any type of explanation or analysis of his work. With In My Room, Leiter ushers viewers into his private world while retaining his strong sense of mystery. Saul Leiter was born in Pittsburgh in 1923. In 1946 he moved to New York to become a painter, but was encouraged to pursue photography by the photographic experimentation and influence of his friend, the Abstract Expressionist Richard Pousette-Dart. Leiter subsequently enjoyed a successful career as a fashion photographer spanning three decades, and his images were published in magazines such as Esquire, Harper's Bazaar, Elle and British Vogue. His work is held in many prestigious private and public collections, including The Museum of Modern Art, New York, the Whitney Museum of American Art and the Victoria and Albert Museum. Leiter died in November 2013.",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -898,7 +932,9 @@
         "Date_Added": "2021/04/16 17:17:39.506919860",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -911,7 +947,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/7C406A1A-9119-4786-A1AE-CC2BC1148770",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.865483999,activityDate:2021\\/04\\/16}]",
-        "UUID": "02cde17f-fbdf-4304-8e4f-6022c1a810f4"
+        "UUID": "ae718f52-e1ba-47d9-826c-e63d8ed3a741"
     },
     {
         "Title": "Singen - うたたね",
@@ -933,7 +969,9 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie"
+        ],
         "Summary": "Rinko Kawauchi macht einfache, lyrische Fotos, die so frisch und ungewöhnlich sind, dass sie schwer zu beschreiben oder zu klassifizieren sind. Seine Bilder dokumentieren alltägliche Dinge, obwohl sie nicht als Dokumentarfilme bezeichnet werden können. Sie sind fast umwerfend und scheinen grundlegende psychologische Aspekte des modernen Lebens zu erfassen. Utatane bedeutet Nickerchen, was auf die Idee eines Traumzustands hindeutet. Jedes Bild im Buch kann als Momentaufnahme eines Films über einen Traum betrachtet werden. Die Anwesenheit einer großen Anzahl von Tieren - Insekten, Möwen, Karpfen, Kaninchen - könnte sich auf eine Art Freudsche Interpretation beziehen. Kawauchi schafft eine mächtige Metapher für das Leben in zeitgenössischen Metropolen, die für die meisten Menschen offenbar komfortabler ist - zumindest finanziell. Dies ist kein Albtraum: Es passiert nichts Unangemessenes, aber es gibt etwas, das uns aus diesem verwirrten, deprimierenden und ängstlichen Nickerchenzustand herausholt.",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -980,7 +1018,9 @@
         "Date_Added": "2021/04/16 17:00:08.900319099",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -993,7 +1033,7 @@
         "Position": "",
         "Uploaded_Image_URL": "https://s3.amazonaws.com/kimicoapps-bookbuddy/732436F5-637D-49FB-BED7-9784820138D7",
         "Activities": "[{status:0,activityYear:2021,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPhone von Carsten,type:12,addedDate:2021\\/04\\/16 17:44:39.953629970,activityDate:2021\\/04\\/16}]",
-        "UUID": "69431dc1-f1b9-4568-8444-3b4955b51225"
+        "UUID": "23ee2c16-95f0-4ae0-8920-8ab02b16fe08"
     },
     {
         "Title": "Street, Life, Photography",
@@ -1015,7 +1055,9 @@
         "Original_Date_Published": "",
         "Original_Year_Published": "",
         "Edition": "",
-        "Genre": "Fotografie",
+        "Genre": [
+            "Fotografie"
+        ],
         "Summary": "Flüchtig geflasht, akribisch beobachtet, rauschhaft energiegebündelt, schockgefroren, voyeuristisch aufgeladen, drastisch überspitzt, romantisch wild, tragisch, komisch, grüblerisch abwesend und seltsam erschreckend - die Strasse, der ”urban space“, als direkt und alltäglich erfahrbarer städtischer Lebensraum ist eines der mit Abstand schillerndsten und facettenreichsten fotografischen Sujets. Die im Rahmen der Triennale der Photographie stattfindende Ausstellung Street. Life. Photography umfasst 52 fotografische Positionen mit rund 350 Arbeiten aus der Sammlung F. C. Gundlach und der Sammlung Falckenberg sowie zahlreichen Leihgaben und Kooperationen mit zeitgenössischen Künstlern. Sie gliedert sich in sieben thematische Gruppen: Street Life, Crashes, Public Transfer, Urban Space, Lines and Signs, Anonymity und Alienation. Emanzipiert von Henri Cartier-Bressons ”decisive moment“, drängen neue erzählerische Tendenzen der Street Photography die Konzentration auf fotografische Zeugenschaft beiseite. Fotografiehistorische Ikonen und aktuelle Positionen laden sich gegenseitig auf und geben in einem bewusst subjektiv gewählten Überblick Auskunft über gesellschaftliche Phänomene, wie sie sich innerhalb der letzten 70 Jahre fotografisch auf der Strasse manifestierten. (Quelle: orellfuessli.ch).",
         "Guided_Reading_Level": "",
         "Lexile_Measure": "",
@@ -1062,7 +1104,9 @@
         "Date_Added": "2020/10/06 16:21:33.969979047",
         "User_Supplied_ID": "",
         "User_Supplied_Descriptor": "",
-        "Tags": "Fotografie",
+        "Tags": [
+            "Fotografie"
+        ],
         "Purchase_Date": "",
         "Purchase_Place": "",
         "Purchase_Price": "",
@@ -1075,6 +1119,6 @@
         "Position": "",
         "Uploaded_Image_URL": "http://images.amazon.com/images/P/386828852X.01Z.jpg",
         "Activities": "[{status:0,activityYear:2020,param1:0,param2:2,param3:,contact:,comments:,deviceName:iPad von Carsten,type:12,addedDate:2020\\/10\\/09 13:48:00.107033967,activityDate:2020\\/10\\/09}]",
-        "UUID": "a70ed362-ec13-4540-9d24-94b367d8e786"
+        "UUID": "1798ed80-6257-4ae6-9ff8-5b745652ff70"
     }
 ]

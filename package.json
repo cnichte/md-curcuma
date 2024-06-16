@@ -34,15 +34,15 @@
   "homepage": "https://github.com/cnichte/md-curcuma",
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.12.7",
+    "@types/node": "^20.14.2",
     "@types/uuid": "^9.0.8",
-    "tsx": "^4.7.2",
+    "tsx": "^4.15.5",
     "typescript": "^5.4.5"
   },
   "dependencies": {
     "front-matter": "^4.0.2",
     "fs-extra": "^11.2.0",
-    "uuid": "^9.0.1",
-    "yaml": "^2.4.1"
+    "uuid": "^10.0.0",
+    "yaml": "^2.4.5"
   }
 }

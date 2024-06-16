@@ -19,6 +19,8 @@ and on the top of it
 
 What has been implemented so far:
 
+## Release 1.2.15 (2024-06-16)
+
 ## Release 1.2.14 (2024-04-11)
 
 * Some reorganisation:
