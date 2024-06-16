@@ -1,6 +1,6 @@
 {
   "name": "md-curcuma",
-  "version": "1.2.14",
+  "version": "1.2.15",
   "description": "A Typescript library for transporting and converting markdown and csv data.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
