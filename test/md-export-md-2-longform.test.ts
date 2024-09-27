@@ -12,11 +12,11 @@ import { MD_Callout_Transformer } from "../src/lib/transformer/md-callout-task";
  * This test deals with sharing a longform document 
  * about instantiated classes.
  */
-const exporter: MD_Transporter = new MD_Transporter();
+const transporter: MD_Transporter = new MD_Transporter();
 
 // Basic instructions for MD_Exporter
 
-const exporter_parameter: MD_Transporter_Parameter_Type = {
+const transporter_parameter: MD_Transporter_Parameter_Type = {
   readPath: "test-data-obsidian-vault/longform.md",
   writePath: "test-data-hugo/hugo-content-2/",
   doSubfolders: false,
@@ -112,12 +112,12 @@ const parameter_splitter: MD_Splitter_Parameter_Type = {
   frontmatter: splitter_frontmatter
 };
 
-exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
-exporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
-exporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
-exporter.addTransformer(new MD_MathParagraph_Transformer(parameter_math_paragraph));
-exporter.addTransformer(new MD_MathInline_Transformer(parameter_math_inline));
-exporter.addTransformer(new MD_Callout_Transformer(parameter_callouts));
-exporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
+transporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_images));
+transporter.addTransformer(new MD_ObsidianLink_Transformer(parameter_docs));
+transporter.addTransformer(new MD_RemoveTODOS_Transformer(parameter_remove));
+transporter.addTransformer(new MD_MathParagraph_Transformer(parameter_math_paragraph));
+transporter.addTransformer(new MD_MathInline_Transformer(parameter_math_inline));
+transporter.addTransformer(new MD_Callout_Transformer(parameter_callouts));
+transporter.addTransformer(new MD_Splitter_Transformer(parameter_splitter));
 
-exporter.perform_job(exporter_parameter);
+transporter.perform_job(transporter_parameter);

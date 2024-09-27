@@ -10,7 +10,7 @@ Availible Transporter:
 
 1. MD_Transporter (Markdown to Markdown) - for Markdown Files.
 2. CSV_Transporter (CVS to Json) - For files with comma-separated values, where each line is a record. This is a [BookBuddy App](https://www.kimicoapps.com/bookbuddy) support: CSV-File conversion & Image Download.
-3. XLSX_Transporter (XLSX to XLSX + Json) - read, write and transform.
+3. XLSX_Transporter (XLSX to Json) - read, write and transform.
 
 Availible Markdown Transformers:
 
@@ -41,6 +41,17 @@ Restrictions
 * Reading and writing is not arbitrary - (but should be).
 
 ## How it works
+
+```mermaid
+flowchart
+    subgraph Transporter
+      subgraph Transformer
+        Transformers
+        Mappers
+      end
+     Reader --> Transformer --> Tasks --> Writer
+    end
+```
 
 In short:
 
