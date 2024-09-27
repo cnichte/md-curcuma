@@ -2,7 +2,7 @@ import { MD_Document, MD_Document_Parameter_Type } from "../md-document";
 import {
   MD_TRANSPORTER_COMMANDS,
   MD_Transporter_Parameter_Type,
-} from "../md-transporter";
+} from "../transporter/md-transporter";
 import { MD_Filesystem, MD_FileContent_Interface } from "../md-filesystem";
 import {
   MD_Frontmatter_Template

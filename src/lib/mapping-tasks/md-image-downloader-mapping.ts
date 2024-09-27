@@ -1,4 +1,4 @@
-import { CSV_Transporter } from "../csv-transporter";
+import { CSV_Transporter } from "../transporter/csv-transporter";
 import { MD_Filesystem } from "../md-filesystem";
 import { MD_MappingTask, MD_MappingTask_Properties } from "../md-mapping";
 

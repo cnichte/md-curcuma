@@ -1,6 +1,6 @@
 import { MD_CopyJob } from "../md-copy-job";
 import { MD_CopyTask_Type } from "../md-transformer";
-import { MD_Transporter_Parameter_Type } from "../md-transporter";
+import { MD_Transporter_Parameter_Type } from "../transporter/md-transporter";
 import { MD_Template } from "../md-template";
 import {
   MD_Transformer_AbstractBase,

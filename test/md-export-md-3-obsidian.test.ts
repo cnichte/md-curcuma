@@ -6,7 +6,7 @@ import {
 import {
   MD_Transporter,
   MD_Transporter_Parameter_Type,
-} from "../src/lib/md-transporter";
+} from "../src/lib/transporter/md-transporter";
 import { MD_Transformer_Parameter_Type } from "../src/lib/md-transformer";
 import { MD_Splitter_Parameter_Type } from "../src/lib/transformer/md-splitter-task";
 import { MD_ObsidianLink_Transformer } from "../src/lib/transformer/md-obsidian-link-task";

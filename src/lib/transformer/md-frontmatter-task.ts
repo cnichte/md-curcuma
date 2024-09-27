@@ -1,4 +1,4 @@
-import { MD_Transporter_Parameter_Type } from "../md-transporter";
+import { MD_Transporter_Parameter_Type } from "../transporter/md-transporter";
 import { MD_FileContent_Interface, MD_Filesystem } from "../md-filesystem";
 import { MD_Observer_Interface } from "../md-observer";
 import { MD_Transformer_AbstractBase } from "../md-transformer";

@@ -98,6 +98,6 @@ export class MD_Document {
    * @memberof MD_Document
    */
   public write_file(writePath: string): void {
-    MD_Filesystem.write_file(writePath + this.file_name, this.file_content);
+    MD_Filesystem.write_file_txt(writePath + this.file_name, this.file_content);
   }
 }

@@ -11,7 +11,7 @@
  * @author Carsten Nichte - 2024
  */
 
-import { MD_Transporter_Parameter_Type } from "./md-transporter";
+import { MD_Transporter_Parameter_Type } from "./transporter/md-transporter";
 import { MD_FileContent_Interface } from "./md-filesystem";
 import { MD_Observer_Interface, MD_ObserverSubject } from "./md-observer";
 

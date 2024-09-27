@@ -1,4 +1,4 @@
-import { MD_Transporter } from "../src/lib/md-transporter";
+import { MD_Transporter } from "../src/lib/transporter/md-transporter";
 
 /**
  * This test deals with the sharing of a longform document 

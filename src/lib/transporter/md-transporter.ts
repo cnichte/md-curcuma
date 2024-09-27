@@ -1,14 +1,15 @@
 /**
- * MD_Exporter
+ * MD_Transporter
  *
  * @author Carsten Nichte
  */
 import * as fs from "fs";
-import { MD_FileContent_Interface, MD_Filesystem } from "./md-filesystem";
-import { MD_Transformer_Interface } from "./md-transformer";
-import { MD_Transformer_Factory } from "./md-transformer-factory";
-import { MD_Job_Type, MD_JobTasks_Type } from "./md-job";
-import { MD_Observer_Interface } from "./md-observer";
+import { MD_FileContent_Interface, MD_Filesystem } from "../md-filesystem";
+import { MD_Transformer_Interface } from "../md-transformer";
+import { MD_Transformer_Factory } from "../md-transformer-factory";
+import { MD_Job_Type, MD_JobTasks_Type } from "../md-job";
+import { MD_Observer_Interface } from "../md-observer";
+import { Transportable } from "../types";
 
 export enum MD_TRANSPORTER_COMMANDS {
   DO_NOT_WRITE_FILES = "do-not-write-file",
@@ -29,7 +30,11 @@ export interface MD_Transporter_Parameter_Type {
  * @export
  * @class MD_Exporter
  */
-export class MD_Transporter implements MD_Observer_Interface {
+export class MD_Transporter
+  implements
+    Transportable<string, MD_Transporter_Parameter_Type>,
+    MD_Observer_Interface
+{
   private transformers: Array<MD_Transformer_Interface> = [];
   private do_not_write_file: boolean = false;
 
@@ -71,14 +76,14 @@ export class MD_Transporter implements MD_Observer_Interface {
         this.transform_and_write(
           file,
           job_parameter,
-          MD_Filesystem.read_file(file)
+          MD_Filesystem.read_file_txt(file)
         );
       });
     } else if (MD_Filesystem.isFile(job_parameter.readPath)) {
       this.transform_and_write(
         job_parameter.readPath,
         job_parameter,
-        MD_Filesystem.read_file(job_parameter.readPath)
+        MD_Filesystem.read_file_txt(job_parameter.readPath)
       );
     } else {
       console.log(`not supported: '${job_parameter.readPath}'`);
@@ -95,7 +100,7 @@ export class MD_Transporter implements MD_Observer_Interface {
    * @param {Array<string>} md_content
    * @memberof MD_Exporter
    */
-  private transform_and_write(
+  transform_and_write(
     source_file: string,
     job_parameter: MD_Transporter_Parameter_Type,
     md_content: string
@@ -113,8 +118,8 @@ export class MD_Transporter implements MD_Observer_Interface {
 
       for (var i = 0; i < mdfc.body_array.length; i++) {
         mdfc.index = i;
-        const test:MD_FileContent_Interface = transformer.transform(mdfc, i);
-        if(test.index != i) i = test.index; // elements are added or removed
+        const test: MD_FileContent_Interface = transformer.transform(mdfc, i);
+        if (test.index != i) i = test.index; // elements are added or removed
       }
     }
 
@@ -127,43 +132,21 @@ export class MD_Transporter implements MD_Observer_Interface {
       filename
     );
 
-    MD_Filesystem.ensure_path(job_parameter.writePath, job_parameter.simulate); // TODO that doesn't always work?
-
-    if (!job_parameter.simulate) {
-      // Here, of course, the option of forcing the disk can be useful.
-      if (!this.do_not_write_file) {
-        if (MD_Filesystem.is_file_exist(path_target_filename)) {
-          if (
-            MD_Filesystem.is_file_modified(source_file, path_target_filename)
-          ) {
-            console.log("file does exist, and is modified (compared by modified-date): Write it.");
-            MD_Filesystem.write_file(
-              path_target_filename,
-              MD_Filesystem.merge_frontmatter_body(mdfc)
-            );
-          }else{
-            console.log("file does exist, but is not modified: Skip writing.");
-          }
-        } else {
-          console.log("file does not exist: Write it.");
-          MD_Filesystem.write_file(
-            path_target_filename,
-            MD_Filesystem.merge_frontmatter_body(mdfc)
-          );
-        }
+    MD_Filesystem.write_my_file<
+      MD_FileContent_Interface,
+      MD_Transporter_Parameter_Type
+    >(
+      source_file,
+      job_parameter,
+      mdfc,
+      this.do_not_write_file,
+      (filename: string, data: MD_FileContent_Interface) => {
+        MD_Filesystem.write_file_txt(
+          filename,
+          MD_Filesystem.merge_frontmatter_body(data)
+        );
       }
-    } else {
-      console.log("###########################");
-      console.log(source_file);
-      console.log(path_target_filename);
-      console.log(
-        `modified:  ${MD_Filesystem.is_file_modified(
-          source_file,
-          path_target_filename
-        )}`
-      );
-      console.log("###########################");
-    }
+    );
   }
 
   /**
@@ -175,7 +158,7 @@ export class MD_Transporter implements MD_Observer_Interface {
    * @param {string} job_name
    * @memberof MD_Exporter
    */
-  public perform_job_from(config_file: string, job_name: string) {
+  public perform_job_from(config_file: string, job_name: string):void {
     let jsonData = JSON.parse(fs.readFileSync(config_file, "utf8")); // TODO auch ins FileSystem
 
     var the_job: MD_Job_Type = null;

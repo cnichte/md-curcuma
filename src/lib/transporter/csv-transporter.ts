@@ -1,8 +1,14 @@
+/**
+ * CSV_Transporter
+ *
+ * @author Carsten Nichte
+ */
 import * as fs from "fs";
 import client_http = require("http");
 import client_https = require("https");
 import { URL } from "url";
-import { MD_Mapper, MD_Mapping } from "./md-mapping";
+import { MD_Mapper, MD_Mapping } from "../md-mapping";
+import { Transportable } from "../types";
 
 export interface CSV_Transporter_Parameter_Type {
   readPath: string; // Datei oder Verzeichnis
@@ -11,7 +17,18 @@ export interface CSV_Transporter_Parameter_Type {
   mappings?: MD_Mapping[];
 }
 
-export class CSV_Transporter {
+// TODO Schnittstelle ordentlich implemetieren:
+export class CSV_Transporter implements Transportable<string, CSV_Transporter_Parameter_Type> {
+  perform_job(job_parameter: CSV_Transporter_Parameter_Type): void {
+    throw new Error("Method not implemented.");
+  }
+  transform_and_write(source_file: string, job_parameter: CSV_Transporter_Parameter_Type, md_content: string): void {
+    throw new Error("Method not implemented.");
+  }
+  perform_job_from(config_file: string, job_name: string): void {
+    throw new Error("Method not implemented.");
+  }
+
   /**
    * The BookBuddy app exports its contents as a csv file.
    * I would like to use the data in Hugo.

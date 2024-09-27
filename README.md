@@ -8,13 +8,14 @@ The Data-Wrangler. Copys and transforms Markdown and CSV files from your [Obsidi
 
 Availible Transporter:
 
-1. MD_Transporter - for Markdown Files
-2. CSV_Transporter - For files with comma-separated values, where each line is a record. This is a [BookBuddy App](https://www.kimicoapps.com/bookbuddy) support: CSV-File conversion & Image Download.
+1. MD_Transporter (Markdown to Markdown) - for Markdown Files.
+2. CSV_Transporter (CVS to Json) - For files with comma-separated values, where each line is a record. This is a [BookBuddy App](https://www.kimicoapps.com/bookbuddy) support: CSV-File conversion & Image Download.
+3. XLSX_Transporter (XLSX to XLSX + Json) - read, write and transform.
 
 Availible Markdown Transformers:
 
 1. Copying and transforming one or more Markdown files.
-2. Split longform documents into several individual documents.
+2. Split Markdown longform documents into several individual documents.
 3. Obsidian-Links (Images and Documents), copy Files on the fly.
 4. Latex-Formulas, Paragraph and Inline.
 5. Frontmatter: Add, Replace, Map and Transform Values.
@@ -37,6 +38,7 @@ You can build customized transformers and Mappers for different solutions. For p
 Restrictions
 
 * It only runs in Backend, not in Browsers.
+* Reading and writing is not arbitrary - (but should be).
 
 ## How it works
 

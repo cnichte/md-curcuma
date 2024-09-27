@@ -1,5 +1,5 @@
 
-export { CSV_Transporter, CSV_Transporter_Parameter_Type } from "./lib/csv-transporter";
+export { CSV_Transporter, CSV_Transporter_Parameter_Type } from "./lib/transporter/csv-transporter";
 export { MD_Transporter, type MD_Transporter_Parameter_Type } from "./lib/md-transporter";
 
 export {

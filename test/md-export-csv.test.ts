@@ -1,4 +1,4 @@
-import { CSV_Transporter, CSV_Transporter_Parameter_Type } from '../src/lib/csv-transporter';
+import { CSV_Transporter, CSV_Transporter_Parameter_Type } from '../src/lib/transporter/csv-transporter';
 import { MD_Mapping, MD_Mapping_Item } from '../src/lib/md-mapping';
 import { MD_ImageDownloader_Mapping, type MD_ImageDownloader_MappingType } from "../src/lib/mapping-tasks/md-image-downloader-mapping";
 import { MD_InsertUUID_Mapping } from '../src/lib/mapping-tasks/md-insert-uuid-mapping';

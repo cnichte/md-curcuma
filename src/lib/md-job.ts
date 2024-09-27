@@ -1,4 +1,4 @@
-import { MD_Transporter_Parameter_Type } from './md-transporter';
+import { MD_Transporter_Parameter_Type } from './transporter/md-transporter';
 import { MD_Transformer_Parameter_Type } from './md-transformer';
 
 export interface MD_Job_Type {

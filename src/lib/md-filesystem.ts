@@ -1,11 +1,13 @@
 import * as fs from "fs";
 import * as path from "path";
 import * as fsextra from "fs-extra";
+import * as XLSX from "xlsx";
 
 // TODO https://github.com/jxson/front-matter
 var fm = require("front-matter");
 // TODO https://eemeli.org/yaml/#yaml
 import { stringify } from "yaml";
+import { IOable } from "./types";
 
 /**
  * Frontmatter is separated from the rest of the text for easier processing.
@@ -21,7 +23,7 @@ export interface MD_FileContent_Interface {
   frontmatter: string;
   frontmatter_attributes: any;
   body_array: string[];
-  index:number;
+  index: number;
 }
 
 /**
@@ -47,7 +49,7 @@ export interface MD_FileContent_Interface {
       frontmatter: fm_content.frontmatter,
       frontmatter_attributes: fm_content.attributes,
       body_array: fm_content.body.split("\n"),
-      index: 0
+      index: 0,
     };
     return file_content;
   }
@@ -262,7 +264,7 @@ export interface MD_FileContent_Interface {
     return files;
   }
 
-  public static read_file(file: string): string {
+  public static read_file_txt(file: string): string {
     try {
       var md_array: string = fs.readFileSync(file).toString();
     } catch (err) {
@@ -272,7 +274,33 @@ export interface MD_FileContent_Interface {
     return md_array;
   }
 
-  public static write_file(writePath: string, content: string): void {
+  public static read_file_xlsx(file: string): XLSX.WorkBook {
+    let wb: XLSX.WorkBook = null;
+
+    try {
+      wb = XLSX.read(fs.readFileSync(file, "binary"), {
+        type: "binary",
+      });
+    } catch (err) {
+      throw err;
+    }
+
+    return wb;
+  }
+
+  public static write_file_xlsx(
+    writePath: string,
+    content: XLSX.WorkBook
+  ): void {
+    try {
+      console.log(`Write XLSX File ${writePath}`);
+      XLSX.writeFile(content, writePath, { compression: true });
+    } catch (error) {
+      console.log(`An error has occurred, writing ${writePath}`, error);
+    }
+  }
+
+  public static write_file_txt(writePath: string, content: string): void {
     // path + filename;
 
     try {
@@ -290,5 +318,68 @@ export interface MD_FileContent_Interface {
   public static write_file_json(file: string, json_object: any): void {
     // if (fs.existsSync(a_path)) { // Do something }
     fs.writeFileSync(file, JSON.stringify(json_object));
+  }
+
+  /**
+   * Does all the nasty filesystem-checking, before writing.
+   * 
+   * - simulation mode (does not write to filesystem anyway)
+   * - extra surpress filesystem writing.
+   * - does file exist?
+   * - is souce-file modified, compared to target-file?
+   * 
+   * @param source_file
+   * @param job_parameter
+   * @param workbook
+   * @param do_not_write_file
+   * @param doWriting - callback
+   */
+  public static write_my_file<T, P extends IOable>(
+    source_file: string,
+    job_parameter: P,
+    workbook: T,
+    do_not_write_file: boolean,
+    doWriting?: (filename: string, data: T) => void
+  ) {
+    const filename = MD_Filesystem.get_filename_from(source_file);
+
+    const path_target_filename = MD_Filesystem.concat_path_filename(
+      job_parameter.writePath,
+      filename
+    );
+
+    MD_Filesystem.ensure_path(job_parameter.writePath, job_parameter.simulate); // TODO that doesn't always work?
+
+    if (!job_parameter.simulate) {
+      // Here, of course, the option of forcing the disk can be useful.
+      if (!do_not_write_file) {
+        if (MD_Filesystem.is_file_exist(path_target_filename)) {
+          if (
+            MD_Filesystem.is_file_modified(source_file, path_target_filename)
+          ) {
+            console.log(
+              "file does exist, and is modified (compared by modified-date): Write it."
+            );
+            doWriting(path_target_filename, workbook);
+          } else {
+            console.log("file does exist, but is not modified: Skip writing.");
+          }
+        } else {
+          console.log("file does not exist: Write it.");
+          doWriting(path_target_filename, workbook);
+        }
+      }
+    } else {
+      console.log("###########################");
+      console.log(source_file);
+      console.log(path_target_filename);
+      console.log(
+        `modified:  ${MD_Filesystem.is_file_modified(
+          source_file,
+          path_target_filename
+        )}`
+      );
+      console.log("###########################");
+    }
   }
 }
