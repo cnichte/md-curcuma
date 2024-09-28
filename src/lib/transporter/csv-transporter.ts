@@ -7,14 +7,14 @@ import * as fs from "fs";
 import client_http = require("http");
 import client_https = require("https");
 import { URL } from "url";
-import { MD_Mapper, MD_Mapping } from "../md-mapping";
+import { MD_Mapper, MD_Mapping, MD_Mapping_Item } from "../md-mapping";
 import { Transportable } from "../types";
 
 export interface CSV_Transporter_Parameter_Type {
   readPath: string; // Datei oder Verzeichnis
   writePath: string; // Verzeichnis
   csvSeparator: string;
-  mappings?: MD_Mapping[];
+  mappings?: MD_Mapping<MD_Mapping_Item>[];
 }
 
 // TODO Schnittstelle ordentlich implemetieren:
@@ -102,7 +102,7 @@ export class CSV_Transporter implements Transportable<string, CSV_Transporter_Pa
 
       //* apply mappings to json object...
       if (job_parameter.hasOwnProperty("mappings")) {
-        let mapper: MD_Mapper = new MD_Mapper();
+        let mapper = new MD_Mapper<MD_Mapping_Item>();
         mapper.addMappings(job_parameter.mappings);
         mapper.do_mappings(json_obj, json_obj);
       }

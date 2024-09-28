@@ -6,7 +6,7 @@ import {
   MD_Frontmatter_Parameter_Type,
   MD_Frontmatter_Template,
 } from "../md-frontmatter";
-import { MD_Mapper } from "../md-mapping";
+import { MD_Mapper, MD_Mapping_Item } from "../md-mapping";
 
 /**
  * Füge frontmatter zu kopierten Dateien hinzu. (nicht splitter)
@@ -116,7 +116,7 @@ export class MD_Frontmatter_Transformer extends MD_Transformer_AbstractBase {
       // oder... das geht wenn die propertynames == platzhalter sind: obj[name] -> {name}
       // das ersetzen erfolgt aus den attributen der quelle...
       // Was ist mit den Feldern aus dem Splitter? -> MD_Transformer_TemplateValues_Type aus md-transformer.
-      const mapper:MD_Mapper = new MD_Mapper();
+      const mapper = new MD_Mapper<MD_Mapping_Item>();
       mapper.addMappings(this.parameter.mappings);
       mapper.do_mappings(file_content.frontmatter_attributes, fm_new);
   

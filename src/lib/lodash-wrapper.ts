@@ -18,7 +18,7 @@ export class Lodash_Wrapper {
    */
   public static get<ObjectType>(
     object: any,
-    path: keyof ObjectType & string
+    path: string
   ): any {
     return _.get(object, path);
   }

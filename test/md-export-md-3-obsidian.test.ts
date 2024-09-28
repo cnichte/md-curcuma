@@ -14,6 +14,7 @@ import { MD_RemoveTODOS_Transformer } from "../src/lib/transformer/md-remove-tod
 import { MD_Frontmatter_Transformer } from "../src/lib/transformer/md-frontmatter-task";
 
 import {
+  MD_Mapping_Item,
   MD_MappingTask_Properties,
   type MD_Mapping,
 } from "../src/lib/md-mapping";
@@ -70,7 +71,7 @@ seo:
 // use one of the predefined tasks like so:
 // task: new MD_Mapping_BooleanInverse_Task()
 // or write a custom task:
-const map_1: MD_Mapping = {
+const map_1: MD_Mapping<MD_Mapping_Item> = {
   mapping_items: [
     {
       source_property_name: "doPublish",
@@ -86,7 +87,7 @@ const map_1: MD_Mapping = {
 };
 
 // An example task that inserts the current date. Source Property isnt used here.
-const map_2: MD_Mapping = {
+const map_2: MD_Mapping<MD_Mapping_Item> = {
   mapping_items: [{
     source_property_name: "",
     target_poperty_name: "date",

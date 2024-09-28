@@ -11,14 +11,18 @@ import { MD_Filesystem } from "../md-filesystem";
 import { MD_Transformer_Interface } from "../md-transformer";
 import { IOable, Transportable } from "../types";
 import { Lodash_Wrapper } from "../lodash-wrapper";
+import { MD_TRANSPORTER_COMMANDS } from "./md-transporter";
+import {
+  MD_Mapper,
+  MD_Mapping,
+  MD_Mapping_Item,
+  MD_MappingTask_Properties,
+} from "../md-mapping";
 
-export interface XLSX_Mapper_Item {
+export interface XLSX_Mapping_Item extends MD_Mapping_Item {
   sheet_name: string;
   source_property_name: string;
   target_poperty_name: string;
-}
-export interface XLSX_Mapper {
-  mapping_items: XLSX_Mapper_Item[];
 }
 
 export interface XLSX_Transporter_Parameter_Type<T> extends IOable {
@@ -31,7 +35,9 @@ export interface XLSX_Transporter_Parameter_Type<T> extends IOable {
   limit: number;
   useCounter: boolean;
   json_template: T;
-  mappings?: XLSX_Mapper[];
+  mappings?: MD_Mapping<XLSX_Mapping_Item | MD_Mapping_Item>[];
+  commands?: MD_TRANSPORTER_COMMANDS[];
+  onPartialResult?: (value: T) => void;
 }
 
 export class XLSX_Transporter<T>
@@ -80,27 +86,64 @@ export class XLSX_Transporter<T>
 
     let json_object: any = job_parameter.json_template; // T
 
-    job_parameter.mappings.forEach((map: XLSX_Mapper) => {
-      map.mapping_items.forEach((item: XLSX_Mapper_Item) => {
-        let sn = item.sheet_name;
-        let spn = item.source_property_name;
-        let tpn = item.target_poperty_name;
+    job_parameter.mappings.forEach((map: MD_Mapping<XLSX_Mapping_Item>) => {
+      // 'member' in o;
+      map.mapping_items.forEach((item: XLSX_Mapping_Item) => {
+        if ("sheet_name" in item) {
+          // hack for `if(item instanceof XLSX_Mapping_Item)` as in java
 
-        const sheet = workbook.Sheets[sn];
-        const v = sheet[spn]?.v;
-        if (v !== null) {
-          // nested property
-          // https://dev.to/pffigueiredo/typescript-utility-keyof-nested-object-2pa3
-          Lodash_Wrapper.set(json_object, tpn, v);
+          // use a special mapper...
+
+          let sn = item.sheet_name;
+          let spn = item.source_property_name;
+          let tpn = item.target_poperty_name;
+
+          const sheet = workbook.Sheets[sn];
+          const v = sheet[spn]?.v;
+
+          // perform a optional task
+          if (map.task != null) {
+            let props: MD_MappingTask_Properties = {
+              source: json_object,
+              target: json_object,
+
+              source_property_name: spn,
+              target_poperty_name: tpn,
+
+              source_value: Lodash_Wrapper.get(json_object, spn), // source[mapping_item.source_property_name],
+              target_value: Lodash_Wrapper.get(json_object, tpn), // target[mapping_item.target_poperty_name]
+            };
+
+            Lodash_Wrapper.set(json_object, tpn, map.task.perform(props));
+          } else {
+            if (v !== null) {
+              // nested property
+              // https://dev.to/pffigueiredo/typescript-utility-keyof-nested-object-2pa3
+              Lodash_Wrapper.set(json_object, tpn, v);
+            }
+          }
+        } else {
+          // if not XLSX_Mapping_Item, use the default MD_Mapper
+          const mapper = new MD_Mapper<MD_Mapping_Item>();
+          mapper.do_mapping(item, json_object, json_object, map.task);
         }
       });
     });
 
-    // TODO Das Objekt soll gefüllt zurückgegeben, aber nicht ins fs geschrieben werden.
-    fs.writeFileSync(
-      `${job_parameter.writePath}erster-test.json`,
-      JSON.stringify(json_object, null, 2)
-    );
+    // partial result callback...
+    job_parameter?.onPartialResult(json_object);
+
+    // write a file
+    if (
+      !job_parameter?.commands.includes(
+        MD_TRANSPORTER_COMMANDS.DO_NOT_WRITE_FILES
+      )
+    ) {
+      fs.writeFileSync(
+        `${job_parameter.writePath}erster-test.json`, // TODO build a name: sheet-name + index / uuid
+        JSON.stringify(json_object, null, 2)
+      );
+    }
 
     //! TEST-Start
     // Alle Sheets

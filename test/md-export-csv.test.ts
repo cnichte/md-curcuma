@@ -8,7 +8,7 @@ import { MD_ArraySplit_Mapping } from '../src/lib/mapping-tasks/md-arraysplit-ma
  * Downloading images from a web resource
  * updating the json with image path.
  */
-const insert_uuid: MD_Mapping = {
+const insert_uuid: MD_Mapping<MD_Mapping_Item> = {
     task: new MD_InsertUUID_Mapping(),
     mapping_items: [{
         source_property_name: "",
@@ -17,7 +17,7 @@ const insert_uuid: MD_Mapping = {
     ]
 };
 
-const make_array: MD_Mapping = {
+const make_array: MD_Mapping<MD_Mapping_Item> = {
     mapping_items: [
         { source_property_name: "Tags", target_poperty_name: "Tags"}, 
         { source_property_name: "Genre", target_poperty_name: "Genre"}
@@ -32,7 +32,7 @@ let image_download_mapping_props: MD_ImageDownloader_MappingType = {
     simulate: false,
 };
 
-const image_download_mapping: MD_Mapping = {
+const image_download_mapping: MD_Mapping<MD_Mapping_Item> = {
     mapping_items: [{
         source_property_name: "Uploaded_Image_URL",
         target_poperty_name: "Cover_Image",

@@ -1,6 +1,7 @@
 
-export { CSV_Transporter, CSV_Transporter_Parameter_Type } from "./lib/transporter/csv-transporter";
-export { MD_Transporter, type MD_Transporter_Parameter_Type } from "./lib/md-transporter";
+export { CSV_Transporter, type CSV_Transporter_Parameter_Type } from "./lib/transporter/csv-transporter";
+export { MD_Transporter, type MD_Transporter_Parameter_Type } from "./lib/transporter/md-transporter";
+export { XLSX_Transporter, type XLSX_Transporter_Parameter_Type } from "./lib/transporter/xlsx-transporter";
 
 export {
   MD_Document,
