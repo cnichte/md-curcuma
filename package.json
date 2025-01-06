@@ -35,17 +35,21 @@
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/lodash": "^4.17.9",
-    "@types/node": "^20.14.2",
-    "@types/uuid": "^9.0.8",
-    "tsx": "^4.15.5",
-    "typescript": "^5.4.5"
+    "@types/node": "^22.10.5",
+    "@types/uuid": "^10.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
   },
   "dependencies": {
+    "date-fns": "^4.1.0",
+    "exif-js": "^2.3.0",
+    "exifreader": "^4.26.0",
     "front-matter": "^4.0.2",
     "fs-extra": "^11.2.0",
+    "linkinator": "^6.1.2",
     "lodash": "^4.17.21",
-    "uuid": "^10.0.0",
+    "uuid": "^11.0.4",
     "xlsx": "^0.18.5",
-    "yaml": "^2.4.5"
+    "yaml": "^2.7.0"
   }
 }

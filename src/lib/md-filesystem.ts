@@ -167,6 +167,21 @@ export interface MD_FileContent_Interface {
     return mtime_source.getTime() !== ctime_source.getTime();
   }
 
+  /**
+   * Get information about a file.
+   * 
+   * https://nodejs.org/api/fs.html#fsfstatsyncfd-options
+   * https://nodejs.org/api/fs.html#class-fsstats
+   * 
+   * @param file 
+   * @returns 
+   */
+  public static get_file_info(
+    file: string,
+  ): fs.Stats {
+    return fs.statSync(file);
+  }
+
   public static get_filename_from(my_path_filename: string): string {
     return path.basename(my_path_filename);
   }

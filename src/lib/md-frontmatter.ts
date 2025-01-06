@@ -5,7 +5,7 @@ import { MD_Template } from "./md-template";
 export interface MD_Frontmatter_Parameter_Type {
   frontmatter_filename: string;
   frontmatter: MD_Frontmatter_Template;
-  mappings: MD_Mapping[];
+  mappings: MD_Mapping<any>[]; // TODO not any, but...
 }
 
 /**

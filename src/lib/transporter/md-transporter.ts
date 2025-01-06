@@ -28,7 +28,7 @@ export interface MD_Transporter_Parameter_Type {
  ** Processes one or many files, and applies the transformers on each.
  *
  * @export
- * @class MD_Exporter
+ * @class MD_Transporter
  */
 export class MD_Transporter
   implements
@@ -65,6 +65,8 @@ export class MD_Transporter
    * @memberof MD_Exporter
    */
   public perform_job(job_parameter: MD_Transporter_Parameter_Type): void {
+    
+    // TODO READER pluggable
     if (MD_Filesystem.isFolder(job_parameter.readPath)) {
       var file_list: Array<string> = MD_Filesystem.get_files_list(
         job_parameter.readPath
@@ -116,6 +118,9 @@ export class MD_Transporter
       // listen to messages from the transformers
       transformer.addObserver(this);
 
+      // TODO File-Info an Transformer übergeben
+      let source_file_info = MD_Filesystem.get_file_info(source_file);
+
       for (var i = 0; i < mdfc.body_array.length; i++) {
         mdfc.index = i;
         const test: MD_FileContent_Interface = transformer.transform(mdfc, i);
@@ -132,6 +137,7 @@ export class MD_Transporter
       filename
     );
 
+    // TODO Writer pluggable
     MD_Filesystem.write_my_file<
       MD_FileContent_Interface,
       MD_Transporter_Parameter_Type

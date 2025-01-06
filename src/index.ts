@@ -53,3 +53,12 @@ export {
   MD_Splitter_Transformer,
   MD_Splitter_Parameter_Type,
 } from "./lib/transformer/md-splitter-task";
+
+export {
+  BLC_MODE,
+  BLC_Parameter_Interface,
+  BLC_Parameter,
+  BLC_Scan_Summary_Interface,
+  BLC_Scan_Summary,
+  Broken_Link_Checker as BL_Checker
+} from "./lib/broken-link-checker";

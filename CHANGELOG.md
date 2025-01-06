@@ -19,6 +19,13 @@ and on the top of it
 
 What has been implemented so far:
 
+## Release 1.2.16 (2025-01-06)
+
+* A Broken Link Checker for Hugo (but not only for Hugo)
+* Added some experimental stuff for EXIF and XLSX Support.
+* All dependencies updated to the latest package versions
+* Typescript Target is now ES6
+
 ## Release 1.2.15 (2024-06-16)
 
 ## Release 1.2.14 (2024-04-11)

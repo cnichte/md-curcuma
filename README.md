@@ -6,13 +6,15 @@ The Data-Wrangler. Copys and transforms Markdown and CSV files from your [Obsidi
 * Inspired by: <https://github.com/accraze/split-md>
 * Why not [golang](https://golang.org/)? So you can use it easier outside the golang unsiverse.
 
-Availible Transporter:
+## What is in the box?
+
+### Availible Transporter
 
 1. MD_Transporter (Markdown to Markdown) - for Markdown Files.
 2. CSV_Transporter (CVS to Json) - For files with comma-separated values, where each line is a record. This is a [BookBuddy App](https://www.kimicoapps.com/bookbuddy) support: CSV-File conversion & Image Download.
 3. XLSX_Transporter (XLSX to Json) - read, write and transform.
 
-Availible Markdown Transformers:
+### Availible Markdown Transformers
 
 1. Copying and transforming one or more Markdown files.
 2. Split Markdown longform documents into several individual documents.
@@ -23,7 +25,7 @@ Availible Markdown Transformers:
 7. Remove Todos.
 8. TODO: Take wikilinks (cross-references) into account. Footnotes Endnotes support.
 
-Availible Mappings:
+### Availible Mappings
 
 1. Adopt Value - a simple pass through example.
 2. ArrayJoin, ArraySplit
@@ -35,7 +37,18 @@ Availible Mappings:
 
 You can build customized transformers and Mappers for different solutions. For planned features and changes take a look into the [CHANGELOG.md](https://github.com/cnichte/md-curcuma/blob/main/CHANGELOG.md)
 
-Restrictions
+### Broken Link Checker
+
+Bases on the great [Linkinator](https://www.npmjs.com/package/linkinator), adds some features:
+
+* Exports the result as JSON, providing a [data source](https://gohugo.io/content-management/data-sources/) for [Hugo](https://gohugo.io)
+* Limit the scan to 'extern', 'intern' or scan 'all'.
+* Write each scan to a different file
+* have some special_excludes.
+
+For usage refere to the `broken-links-checker.test.ts`
+
+### Restrictions
 
 * It only runs in Backend, not in Browsers.
 * Reading and writing is not arbitrary - (but should be).
