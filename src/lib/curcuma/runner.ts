@@ -18,6 +18,11 @@ export class Runner<D, P> implements Runner_Interface<D, P> {
     this.writer = writer;
   }
 
+  /**
+   * Listen to Reades and Writers for actions.
+   * 
+   * @param props 
+   */
   do_command(props: Observer_Props<D>): void {
     console.log("runner received props!", props);
 
@@ -49,6 +54,9 @@ export class Runner<D, P> implements Runner_Interface<D, P> {
     }
   }
 
+  /**
+   * Run the runner.
+   */
   run(): void {
     if (this.reader != null) {
       // Der Reader muss die DAOs häppchenweise weiter geben.
