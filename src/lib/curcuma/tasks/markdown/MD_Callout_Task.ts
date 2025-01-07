@@ -1,16 +1,11 @@
-import { Task_Interface, MD_FileContent_Interface } from "../../types";
+import { Task_Interface, MD_FileContent_Interface, MD_Task_Parameter_Type } from "../../types";
 
 import { MD_Filesystem } from "../../../md-filesystem";
 import { MD_Template } from "../../../md-template";
 import { Markdown_DAO } from "../../io";
 
-export interface MD_Transformer_Parameter_Type {
-  tag_obsidian_prefix: string;
-  tag_obsidian_suffix: string;
-  find_rule?: string;
-  replace_template: string;
-  // copy_task?: MD_CopyTask_Type;
-}
+import { MD_CopyTask_Type } from "../../../md-transformer";
+
 
 export interface MD_Callout_TemplateValues_Type {
   context: string;
@@ -30,7 +25,7 @@ export class MD_FileContent implements MD_FileContent_Interface {
 export class MD_Callout_Task<T extends Markdown_DAO<string>>
   implements Task_Interface<T>
 {
-  parameter: MD_Transformer_Parameter_Type;
+  parameter: MD_Task_Parameter_Type;
   collection: string[] | null | undefined = null;
   counter: number = 0;
   doCollect: boolean = false;
@@ -118,7 +113,7 @@ export class MD_Callout_Task<T extends Markdown_DAO<string>>
     },
   ];
 
-  constructor(parameter: MD_Transformer_Parameter_Type) {
+  constructor(parameter: MD_Task_Parameter_Type) {
     this.parameter = parameter;
   }
 

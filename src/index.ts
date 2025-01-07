@@ -78,5 +78,5 @@ export {
 } from "./lib/curcuma/io";
 
 export {
-  MD_Writer_Task, NOP_Task
+MappingTask, NOP_Task
 } from "./lib/curcuma/tasks";

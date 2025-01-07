@@ -2,12 +2,12 @@
 //TODO: siehe md-math-task
 // TODO: Es gibt einen für Inline and Paragraph
 
-import { Task_Interface, MD_FileContent_Interface } from "../../types";
+import { Task_Interface, MD_FileContent_Interface, MD_Task_Parameter_Type } from "../../types";
 
 import { MD_Filesystem } from "../../../md-filesystem";
 import { MD_Template } from "../../../md-template";
 import { Markdown_DAO } from "../../io";
-import { MD_FileContent, MD_Transformer_Parameter_Type } from "./MD_Callout_Task";
+import { MD_FileContent } from "./MD_Callout_Task";
 import { MD_MathTransformer_TemplateValues_Type } from "./MD_Math_Paragraph_Task";
 
 
@@ -16,7 +16,7 @@ export class MD_Math_Inline_Task<T extends Markdown_DAO<string>>
   implements Task_Interface<T>
 {
 
-  parameter: MD_Transformer_Parameter_Type;
+  parameter: MD_Task_Parameter_Type;
   collection: string[] | null | undefined = null;
   counter: number = 0;
 
@@ -27,7 +27,7 @@ export class MD_Math_Inline_Task<T extends Markdown_DAO<string>>
   };
 
 
-  constructor(parameter: MD_Transformer_Parameter_Type) {
+  constructor(parameter: MD_Task_Parameter_Type) {
     this.parameter = parameter;
   }
 

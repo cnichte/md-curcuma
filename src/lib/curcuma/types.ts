@@ -1,3 +1,4 @@
+import { MD_CopyTask_Type } from "../md-transformer";
 import { ObserverSubject, Observer_Interface, Observer_Props } from "./observer";
 
 /**
@@ -51,4 +52,13 @@ export interface MD_FileContent_Interface {
   frontmatter_attributes: any;
   body_array: string[];
   index: number;
+}
+
+
+export interface MD_Task_Parameter_Type {
+  tag_obsidian_prefix: string;
+  tag_obsidian_suffix: string;
+  find_rule?: string;
+  replace_template: string;
+  copy_task?: MD_CopyTask_Type;
 }
