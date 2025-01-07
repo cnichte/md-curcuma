@@ -1,3 +1,5 @@
+//! Teste: Das neue Curcuma
+
 import {
   Mapping,
   Mapping_Item,
@@ -5,17 +7,17 @@ import {
   Markdown_DAO,
   Markdown_IO,
   Markdown_IO_Props_Interface,
-  MD_Writer_Task,
   NOP_Task,
   Runner,
 } from "../src/lib/curcuma";
 
 import {
   MD_Callout_Task,
-  MD_Math_Paragrahp_Task,
+  MD_Math_Paragraph_Task,
+  MD_Math_Inline_Task,
   MD_Transformer_Parameter_Type,
-} from "../src/lib/curcuma/tasks";
-//! Teste: Das neue Curcuma
+  MD_Writer_Task,
+} from "../src/lib/curcuma/tasks/markdown";
 
 const runner = new Runner<Markdown_DAO<string>, Markdown_IO_Props_Interface>();
 
@@ -44,10 +46,18 @@ runner.addTask(
 );
 
 runner.addTask(
-  new MD_Math_Paragrahp_Task({
+  new MD_Math_Paragraph_Task({
     tag_obsidian_prefix: "$$",
     tag_obsidian_suffix: "$$",
     replace_template: "```math {.text-center}\n$$\n {content} \n$$\n```\n",
+  })
+);
+
+runner.addTask(
+  new MD_Math_Inline_Task({
+    tag_obsidian_prefix: "$",
+    tag_obsidian_suffix: "$",
+    replace_template: "{{< math >}} ${content}$ {{< /math >}}" ,
   })
 );
 

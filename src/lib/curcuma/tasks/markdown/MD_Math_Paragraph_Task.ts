@@ -2,11 +2,11 @@
 //TODO: siehe md-math-task
 // TODO: Es gibt einen für Inline and Paragraph
 
-import { Task_Interface, MD_FileContent_Interface } from "../types";
+import { Task_Interface, MD_FileContent_Interface } from "../../types";
 
-import { MD_Filesystem } from "../../md-filesystem";
-import { MD_Template } from "../../md-template";
-import { Markdown_DAO } from "../io";
+import { MD_Filesystem } from "../../../md-filesystem";
+import { MD_Template } from "../../../md-template";
+import { Markdown_DAO } from "../../io";
 import { MD_FileContent, MD_Transformer_Parameter_Type } from "./MD_Callout_Task";
 
 
@@ -15,7 +15,7 @@ export interface MD_MathTransformer_TemplateValues_Type {
 }
 
 //TODO: Das was früher ein MD_Transporter
-export class MD_Math_Paragrahp_Task<T extends Markdown_DAO<string>>
+export class MD_Math_Paragraph_Task<T extends Markdown_DAO<string>>
   implements Task_Interface<T>
 {
 

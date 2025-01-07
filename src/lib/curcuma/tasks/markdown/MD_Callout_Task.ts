@@ -1,8 +1,8 @@
-import { Task_Interface, MD_FileContent_Interface } from "../types";
+import { Task_Interface, MD_FileContent_Interface } from "../../types";
 
-import { MD_Filesystem } from "../../md-filesystem";
-import { MD_Template } from "../../md-template";
-import { Markdown_DAO } from "../io";
+import { MD_Filesystem } from "../../../md-filesystem";
+import { MD_Template } from "../../../md-template";
+import { Markdown_DAO } from "../../io";
 
 export interface MD_Transformer_Parameter_Type {
   tag_obsidian_prefix: string;

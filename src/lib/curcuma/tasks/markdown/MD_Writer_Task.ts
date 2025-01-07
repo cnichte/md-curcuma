@@ -1,5 +1,5 @@
-import { Markdown_IO } from "../io";
-import { Task_Interface } from "../types";
+import { Markdown_IO } from "../../io";
+import { Task_Interface } from "../../types";
 
 /**
  * TODO: Schreibt eine Markdown Datei.
