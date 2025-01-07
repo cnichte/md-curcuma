@@ -6,7 +6,7 @@ import { Task_Interface } from "../types";
 export class NOP_Task<T> implements Task_Interface<T> {
 
     perform(dao:T): T {
-        console.log('NOP_Task', dao);
+        // console.log('NOP_Task', dao);
         return dao;
     }
 }

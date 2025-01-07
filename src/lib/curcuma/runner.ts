@@ -1,3 +1,4 @@
+import { Markdown_DAO } from "./io/markdown-io";
 import { Observer_Props } from "./observer";
 import { IO_Interface, Runner_Interface, Task_Interface } from "./types";
 
@@ -24,7 +25,7 @@ export class Runner<D, P> implements Runner_Interface<D, P> {
    * @param props 
    */
   do_command(props: Observer_Props<D>): void {
-    console.log("runner received props!", props);
+    console.log("runner.do_command received props: ", props.from, props.to, props.command);
 
     if (
       props.from === "markdown-io" &&

@@ -12,6 +12,7 @@ export interface MD_MathTransformer_TemplateValues_Type {
 }
 
 export class MD_MathParagraph_Transformer extends MD_Transformer_AbstractBase {
+  
   parameter: MD_Transformer_Parameter_Type;
   collection: string[] | null | undefined = null;
   counter: number = 0;

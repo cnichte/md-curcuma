@@ -6,16 +6,6 @@ import { MD_Filesystem } from "../../md-filesystem";
 /**
  * Ein Markdown-File Reader und Writer.
  */
-export interface Markdown_IO_Props_Interface {
-  //! alt: MD_Transporter_Parameter_Type
-  readPath: string; // Datei oder Verzeichnis
-  writePath: string; // Verzeichnis
-  simulate: boolean;
-  doSubfolders: boolean;
-  limit: number; // greift nur bei Verzeichnis
-  useCounter: boolean;
-}
-
 export interface md_reader_meta {
   file_list: string[];
   file_Name: string;
@@ -26,7 +16,7 @@ export interface md_writer_meta {
   file_Name: string;
 }
 
-export class Markdown_DAO<R> implements DAO_Interface<R> {
+export class Markdown_DAO<DATA> implements DAO_Interface<DATA> {
   reader_meta: md_reader_meta = {
     file_list: [],
     file_Name: ""
@@ -35,21 +25,30 @@ export class Markdown_DAO<R> implements DAO_Interface<R> {
     file_list: [],
     file_Name: ""
   } 
-  data: R;
+  data: DATA;
 }
 
-export class MY_Observer_Props<D> implements Observer_Props<D> {
+export class MY_Observer_Props<DAO> implements Observer_Props<DAO> {
   from: string;
   to: string;
   command: string;
-  dao: D;
+  dao: DAO;
 
 }
 
 // TODO Lese eine markdown Datei oder ein Verzeichnis von Markdown Dateien.
 
+export interface Markdown_IO_Props_Interface {
+  //! alt: MD_Transporter_Parameter_Type
+  readPath: string; // Datei oder Verzeichnis
+  writePath: string; // Verzeichnis
+  simulate: boolean;
+  doSubfolders: boolean;
+  limit: number; // greift nur bei Verzeichnis
+  useCounter: boolean;
+}
 
-export class Markdown_IO<Markdown_DAO, Markdown_IO_Props_Interface > implements IO_Interface<Markdown_DAO, Markdown_IO_Props_Interface> {
+export class Markdown_IO<Markdown_DAO, Markdown_IO_Props_Interface> implements IO_Interface<Markdown_DAO, Markdown_IO_Props_Interface> {
 
   props: any = null;
 
@@ -85,7 +84,7 @@ export class Markdown_IO<Markdown_DAO, Markdown_IO_Props_Interface > implements 
       console.log(`not supported: '${this.props.readPath}'`);
     }
 
-    console.log(file_list);
+    console.log('Markdown_IO.read: ', file_list);
 
     file_list.forEach((file: string) => {
 
@@ -101,21 +100,22 @@ export class Markdown_IO<Markdown_DAO, Markdown_IO_Props_Interface > implements 
       let dao = new Markdown_DAO();
       dao.reader_meta.file_list = file_list;
       dao.reader_meta.file_Name = file;
-      dao.data = "DA IST DER TEXT" // TODO txt;
+      dao.data = txt;
 
       m_props.dao = dao;
 
-      //* 3. fire event and inform listeners
+      //* 3. fire event and inform listeners - which is only the runner at the moment.
+      console.log("markdown-io.do_command: perform tasks for", file);
       this.observer.notify_all(m_props);
     });
 
-    // fire finished event to perform write!
+    //* fire finished event to perform write!
     let m_props = new MY_Observer_Props<any>;
     m_props.from = "markdown-io";
     m_props.to = "runner";
     m_props.command = "tasks-finnished";
     
-    let dao = new Markdown_DAO();
+    let dao = new Markdown_DAO<string>();
     dao.reader_meta.file_list = file_list;
     // dao.data = txt;
 
@@ -132,6 +132,7 @@ export class Markdown_IO<Markdown_DAO, Markdown_IO_Props_Interface > implements 
    * @param dao 
    */
   write(dao: Markdown_DAO): Markdown_DAO {
-    throw new Error("Method not implemented.");
+    // TODO write markdown file, see md-transporter
+    return dao;
   }
 }
