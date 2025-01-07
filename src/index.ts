@@ -60,5 +60,23 @@ export {
   BLC_Parameter,
   BLC_Scan_Summary_Interface,
   BLC_Scan_Summary,
-  Broken_Link_Checker as BL_Checker
+  Broken_Link_Checker
 } from "./lib/broken-link-checker";
+
+//! Neuer Ansatz
+
+export {
+  Runner
+} from "./lib/curcuma";
+
+export {
+  Task_Interface, Runner_Interface, IO_Interface
+} from "./lib/curcuma/types";
+
+export {
+  Markdown_IO
+} from "./lib/curcuma/io";
+
+export {
+  MD_Writer_Task, NOP_Task
+} from "./lib/curcuma/tasks";

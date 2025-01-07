@@ -24,7 +24,7 @@ export class BLC_Parameter implements BLC_Parameter_Interface {
     public write_to = './data/linksChecked.json';
     date_format = 'yyyy-MM-dd HH:mm:SSS';
     mode: BLC_MODE = 'extern';
-    special_excludes = ['data:image/webp', 'blog:', 'troubleshooting:']; // special excludes: Links that start with...
+    special_excludes = ['data:image/webp', 'blog:', 'troubleshooting:','mailto:']; // special excludes: Links that start with...
     checkOptions = {
         path: '',
         // port: 8673,

@@ -81,6 +81,7 @@ export class MD_Transporter
           MD_Filesystem.read_file_txt(file)
         );
       });
+      
     } else if (MD_Filesystem.isFile(job_parameter.readPath)) {
       this.transform_and_write(
         job_parameter.readPath,
