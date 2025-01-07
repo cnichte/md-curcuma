@@ -1,8 +1,12 @@
-import { Task_Interface, MD_FileContent_Interface, MD_Task_Parameter_Type } from "../../types";
+import {
+  Task_Interface,
+  MD_FileContent_Interface,
+  MD_Task_Parameter_Type,
+  DAO_META_Interface,
+} from "../../types";
 
 import { MD_Filesystem } from "../../../md-filesystem";
 import { MD_Template } from "../../../md-template";
-import { Markdown_DAO } from "../../io";
 import { MD_FileContent } from "./MD_Callout_Task";
 
 // TODO copy Task ist auch ein separater Task und hier nichrt integriert?
@@ -26,7 +30,7 @@ export interface MD_LinkTransformer_TemplateValues_Type {
  * @class MD_ObsidianLink_Transformer_Base
  * @implements {MD_Transformer_Interface}
  */
-export class MD_ObsidianLink_Task<T extends Markdown_DAO<string>>
+export class MD_ObsidianLink_Task<T extends string>
   implements Task_Interface<T>
 {
   //! from baseclass
@@ -58,14 +62,13 @@ export class MD_ObsidianLink_Task<T extends Markdown_DAO<string>>
     this.copy_task = parameter.copy_task;
   }
 
-  public perform(dao: T): T {
+  public perform(dao: T, dao_meta: DAO_META_Interface): T {
     // console.log("#######################################");
     // console.log("before", dao.data);
 
     // Trenne das Frontmatter vom body ab. siehe md-transporter.
-    const mdfc: MD_FileContent_Interface = MD_Filesystem.split_frontmatter_body(
-      dao.data
-    );
+    const mdfc: MD_FileContent_Interface =
+      MD_Filesystem.split_frontmatter_body(dao);
 
     for (var i = 0; i < mdfc.body_array.length; i++) {
       mdfc.index = i;
@@ -74,7 +77,7 @@ export class MD_ObsidianLink_Task<T extends Markdown_DAO<string>>
     }
 
     // führe alles wieder zusammen
-    dao.data = MD_Filesystem.merge_frontmatter_body(mdfc);
+    dao = MD_Filesystem.merge_frontmatter_body(mdfc) as T;
 
     // console.log("after", dao.data);
     // console.log("#######################################");

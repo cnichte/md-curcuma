@@ -4,7 +4,6 @@ import {
   Mapping,
   Mapping_Item,
   MappingTask_Properties,
-  Markdown_DAO,
   Markdown_IO,
   Markdown_IO_Props_Interface,
   MD_Task_Parameter_Type,
@@ -20,12 +19,11 @@ import {
   MD_ObsidianLink_Task,
 } from "../src/lib/curcuma/tasks/markdown";
 
-const runner = new Runner<Markdown_DAO<string>, Markdown_IO_Props_Interface>();
-
-// Markdown_IO_Props_Interface
+const runner = new Runner<string, Markdown_IO_Props_Interface>();
 
 runner.addReader(
-  new Markdown_IO({
+  new Markdown_IO<string, Markdown_IO_Props_Interface>({
+    //* this is a Markdown_IO_Props_Interface
     // readPath: "test-data-obsidian-vault/some-md-docs",
     readPath: "test-data-obsidian-vault/longform.md",
     writePath: "test-data-hugo/hugo-content-new/",
@@ -39,8 +37,8 @@ runner.addReader(
 runner.addTask(new NOP_Task());
 
 runner.addTask(
-  new MD_Callout_Task({
-    // this is a MD_Transformer_Parameter_Type
+  new MD_Callout_Task<string>({
+    //* this is a MD_Task_Parameter_Type
     tag_obsidian_prefix: "> [!",
     tag_obsidian_suffix: "]",
     replace_template: "{{< callout context=\"{context}\" title=\"{title}\" icon=\"{icon}\" > }} {content} {{< /callout >}}",
@@ -48,7 +46,8 @@ runner.addTask(
 );
 
 runner.addTask(
-  new MD_Math_Paragraph_Task({
+  new MD_Math_Paragraph_Task<string>({
+    //* this is a MD_Task_Parameter_Type
     tag_obsidian_prefix: "$$",
     tag_obsidian_suffix: "$$",
     replace_template: "```math {.text-center}\n$$\n {content} \n$$\n```\n",
@@ -56,7 +55,8 @@ runner.addTask(
 );
 
 runner.addTask(
-  new MD_Math_Inline_Task({
+  new MD_Math_Inline_Task<string>({
+    //* this is a MD_Task_Parameter_Type
     tag_obsidian_prefix: "$",
     tag_obsidian_suffix: "$",
     replace_template: "{{< math >}} ${content}$ {{< /math >}}" ,
@@ -64,7 +64,8 @@ runner.addTask(
 );
 
 runner.addTask(
-  new MD_ObsidianLink_Task({
+  new MD_ObsidianLink_Task<string>({
+    //* this is a MD_Task_Parameter_Type
     tag_obsidian_prefix: "![[",
     tag_obsidian_suffix: "]]",
     find_rule: "pdf|ods|odp",

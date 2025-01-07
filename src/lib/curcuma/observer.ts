@@ -1,13 +1,4 @@
-export interface Observer_Props<D> {
-  from: string
-  to: string
-  command: string
-  dao: D
-}
-
-export interface Observer_Interface<D> {
-  do_command(props: Observer_Props<D>): void;
-}
+import { Observer_Interface, Observer_Props } from "./types";
 
 export class ObserverSubject<D> {
   protected observers: Array<Observer_Interface<D>>;

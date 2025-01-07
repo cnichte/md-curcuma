@@ -1,5 +1,4 @@
-import { Observer_Props } from "./observer";
-import { IO_Interface, Runner_Interface, Task_Interface } from "./types";
+import { IO_Interface, Observer_Props, Runner_Interface, Task_Interface } from "./types";
 
 export class Runner<D, P> implements Runner_Interface<D, P> {
 
@@ -31,23 +30,29 @@ export class Runner<D, P> implements Runner_Interface<D, P> {
       props.to === "runner" &&
       props.command === "perform-tasks"
     ) {
-      // TODO tasks anwenden
+      //! alle Tasks anwenden
       for (let task of this.tasks) {
-        task.perform(props.dao);
+        task.perform(props.dao, props.dao_meta);
+        //TODO Nach jedem DAO mit dem writer schreiben 
+        if (this.writer != null) {
+          this.writer.write(props.dao);
+        }
       }
     } else if (
       props.from === "markdown-io" &&
       props.to === "runner" &&
       props.command === "tasks-finnished"
     ) {
+
       // TODO nach dem letzten dao schreiben
 
       console.log("FERTIG, FÜHRE WRITE AUS!!!");
       if (this.writer != null) {
-        // TODO: Was schreiben? da müsste was übergeben werden...
+        // TODO: Was schreiben? da müsste was übergeben werden... meta, data, etc 
+        // TODO: Benutze DAO_META_Interface ????
         // normalerweise sammelt man vielleicht, und akkumliert daten auf
         // die am Ende weg geschrieben werden.
-        // this.writer.write(dao);
+        this.writer.write(props.dao);
       } else {
         console.log("Du hast keinen writer definiert.");
       }

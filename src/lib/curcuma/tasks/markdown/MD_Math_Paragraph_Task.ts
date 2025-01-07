@@ -2,23 +2,25 @@
 //TODO: siehe md-math-task
 // TODO: Es gibt einen für Inline and Paragraph
 
-import { Task_Interface, MD_FileContent_Interface, MD_Task_Parameter_Type } from "../../types";
+import {
+  Task_Interface,
+  MD_FileContent_Interface,
+  MD_Task_Parameter_Type,
+  DAO_META_Interface,
+} from "../../types";
 
 import { MD_Filesystem } from "../../../md-filesystem";
 import { MD_Template } from "../../../md-template";
-import { Markdown_DAO } from "../../io";
 import { MD_FileContent } from "./MD_Callout_Task";
-
 
 export interface MD_MathTransformer_TemplateValues_Type {
   content: string;
 }
 
 //TODO: Das was früher ein MD_Transporter
-export class MD_Math_Paragraph_Task<T extends Markdown_DAO<string>>
+export class MD_Math_Paragraph_Task<T extends string>
   implements Task_Interface<T>
 {
-
   parameter: MD_Task_Parameter_Type;
   collection: string[] | null | undefined = null;
   counter: number = 0;
@@ -29,19 +31,17 @@ export class MD_Math_Paragraph_Task<T extends Markdown_DAO<string>>
     content: "",
   };
 
-
   constructor(parameter: MD_Task_Parameter_Type) {
     this.parameter = parameter;
   }
 
-  public perform(dao: T): T {
+  public perform(dao: T, dao_meta: DAO_META_Interface): T {
     // console.log("#######################################");
     // console.log("before", dao.data);
 
     // Trenne das Frontmatter vom body ab. siehe md-transporter.
-    const mdfc: MD_FileContent_Interface = MD_Filesystem.split_frontmatter_body(
-      dao.data
-    );
+    const mdfc: MD_FileContent_Interface =
+      MD_Filesystem.split_frontmatter_body(dao);
 
     for (var i = 0; i < mdfc.body_array.length; i++) {
       mdfc.index = i;
@@ -50,7 +50,7 @@ export class MD_Math_Paragraph_Task<T extends Markdown_DAO<string>>
     }
 
     // führe alles wieder zusammen
-    dao.data = MD_Filesystem.merge_frontmatter_body(mdfc);
+    dao = MD_Filesystem.merge_frontmatter_body(mdfc) as T;
 
     // console.log("after", dao.data);
     // console.log("#######################################");
