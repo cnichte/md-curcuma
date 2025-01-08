@@ -4,9 +4,6 @@ export {
   MD_CopyJob,
   Filesystem,
 
-  // Mapping_Properties
-  // Mapping_Task
-
   type Observer_Command_Type,
   type Observer_Type,
   type Observable_Type,
@@ -107,8 +104,8 @@ export {
 } from "./lib/tasks/markdown";
 
 export {
-  MappingTask_Properties,
-  MappingTask,
+  Mapping_Task_Properties,
+  Mapping_Task,
   Mapping,
   Mapper,
 

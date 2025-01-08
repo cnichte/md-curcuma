@@ -1,4 +1,4 @@
-import { MappingTask, MappingTask_Properties } from "../Mapping_Task";
+import { MappingTask, Mapping_Task_Properties } from "../Mapping_Task";
 
 export interface TrimString_MappingType {
   char: string;
@@ -10,7 +10,7 @@ export class TrimString_Mapping implements MappingTask {
     this.properties = properties;
   }
 
-  perform(mapping_properties: MappingTask_Properties) {
+  perform(mapping_properties: Mapping_Task_Properties) {
     let str = mapping_properties.source_value;
     if (str != null && str != undefined) {
       let ch = this.properties.char;

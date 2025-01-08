@@ -1,7 +1,7 @@
-import { MappingTask, MappingTask_Properties } from "../Mapping_Task";
+import { Mapping_Task, Mapping_Task_Properties } from "../Mapping_Task";
 
-export class InsertDate_Mapping implements MappingTask {
-  perform(mapping_properties: MappingTask_Properties): string {
+export class InsertDate_Mapping implements Mapping_Task {
+  perform(mapping_properties: Mapping_Task_Properties): string {
     return new Date().toJSON().slice(0, 16);
   }
 }

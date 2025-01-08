@@ -3,7 +3,7 @@
 import {
   Mapping,
   Mapping_Item,
-  MappingTask_Properties,
+  Mapping_Task_Properties,
   Markdown_IO,
   NOP_Task,
   Runner,
@@ -112,7 +112,7 @@ const map_1: Mapping<Mapping_Item> = {
     }
   ],
   task: {
-    perform: function (mapping_properties: MappingTask_Properties): boolean {
+    perform: function (mapping_properties: Mapping_Task_Properties): boolean {
       if (typeof mapping_properties.source_value == "boolean") { }
       return !mapping_properties.source_value;
     },
@@ -126,7 +126,7 @@ const map_2: Mapping<Mapping_Item> = {
     target_poperty_name: "date",
   }],
   task: {
-    perform: function (mapping_properties: MappingTask_Properties) {
+    perform: function (mapping_properties: Mapping_Task_Properties) {
       return new Date().toJSON().slice(0, 16);
     },
   }

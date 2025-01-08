@@ -1,16 +1,16 @@
-import { MappingTask, MappingTask_Properties } from "../Mapping_Task";
+import { Mapping_Task, Mapping_Task_Properties } from "../Mapping_Task";
 
-export class AdoptValue_Mapping implements MappingTask {
+export class AdoptValue_Mapping implements Mapping_Task {
 
   /**
    * This is a minimalist example.
    * It does nothing more than return the value.
    *
-   * @param {MappingTask_Properties} mapping_properties
+   * @param {Mapping_Task_Properties} mapping_properties
    * @return {*} 
    * @memberof AdoptValue_Mapping
    */
-  perform(mapping_properties: MappingTask_Properties) {
+  perform(mapping_properties: Mapping_Task_Properties) {
     return mapping_properties.target_value;
   }
 }

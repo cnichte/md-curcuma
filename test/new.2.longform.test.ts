@@ -3,7 +3,7 @@
 import {
   Mapping,
   Mapping_Item,
-  MappingTask_Properties,
+  Mapping_Task_Properties,
   Markdown_IO,
   NOP_Task,
   Runner,

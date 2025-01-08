@@ -1,9 +1,9 @@
-import { MappingTask, MappingTask_Properties } from "../Mapping_Task";
+import { Mapping_Task, Mapping_Task_Properties } from "../Mapping_Task";
 
 export class BooleanInverse_Mapping
-  implements MappingTask
+  implements Mapping_Task
 {
-  perform(mapping_properties: MappingTask_Properties): boolean {
+  perform(mapping_properties: Mapping_Task_Properties): boolean {
     return !mapping_properties.source_value;
   }
 

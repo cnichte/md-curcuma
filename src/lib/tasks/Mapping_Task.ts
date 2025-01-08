@@ -1,4 +1,4 @@
-export interface MappingTask_Properties {
+export interface Mapping_Task_Properties {
   source: any;
   target: any;
 
@@ -11,9 +11,9 @@ export interface MappingTask_Properties {
 
 // TODO: MappingTask wird NOCH für nix genutzt. Siehe MD_Callout_Task
 
-export interface MappingTask {
+export interface Mapping_Task {
   // perform(source_value: any, target_value: any): any;
-  perform(mapping_properties: MappingTask_Properties): any;
+  perform(mapping_properties: Mapping_Task_Properties): any;
 }
 
 export interface Mapping_Item {
@@ -23,7 +23,7 @@ export interface Mapping_Item {
 
 export interface Mapping<MI> {
   mapping_items: MI[];
-  task?: MappingTask; // TODO could be optional?
+  task?: Mapping_Task; // TODO could be optional?
 }
 
 export class Mapper<MI extends Mapping_Item> {
@@ -73,9 +73,9 @@ export class Mapper<MI extends Mapping_Item> {
     mapping_item: MI,
     source: any,
     target: any,
-    task: MappingTask
+    task: Mapping_Task
   ): void {
-    let props: MappingTask_Properties = {
+    let props: Mapping_Task_Properties = {
       source: source,
       target: target,
 
