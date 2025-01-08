@@ -30,7 +30,7 @@ export interface MD_LinkTransformer_TemplateValues_Type {
  * @class MD_ObsidianLink_Transformer_Base
  * @implements {MD_Transformer_Interface}
  */
-export class MD_ObsidianLink_Task<T extends string>
+export class MD_ObsidianLink_Task<T>
   implements Task_Interface<T>
 {
   //! from baseclass
@@ -68,7 +68,7 @@ export class MD_ObsidianLink_Task<T extends string>
 
     // Trenne das Frontmatter vom body ab. siehe md-transporter.
     const mdfc: MD_FileContent_Interface =
-      MD_Filesystem.split_frontmatter_body(dao);
+      MD_Filesystem.split_frontmatter_body(dao as string);
 
     for (var i = 0; i < mdfc.body_array.length; i++) {
       mdfc.index = i;
