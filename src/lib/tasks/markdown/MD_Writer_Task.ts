@@ -12,6 +12,13 @@ export class MD_Writer_Task<T extends string> extends MD_Observable_Abstract_Tas
         return dao;
     }
 
+    /**
+     * Is called by super.perform()
+     * @param dao 
+     * @param index 
+     * @param io_meta 
+     * @returns 
+     */
     protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
         return dao;
     }

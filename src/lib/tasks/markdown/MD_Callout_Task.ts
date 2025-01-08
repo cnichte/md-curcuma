@@ -115,7 +115,7 @@ export class MD_Callout_Task<T extends string> extends MD_Observable_Abstract_Ta
   }
 
   /**
-   *
+   * Is called by super.perform()
    * @param dao
    * @param index
    * @returns

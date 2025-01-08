@@ -28,7 +28,7 @@ export class MD_RemoveTODOS_Task<T extends string> extends MD_Observable_Abstrac
   }
 
   /**
-   *
+   * Is called by super.perform()
    * @param dao
    * @param index
    * @returns

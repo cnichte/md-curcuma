@@ -38,7 +38,7 @@ export class MD_Frontmatter_Task<T extends string> extends MD_Observable_Abstrac
   }
 
   /**
-   *
+   * Is called by super.perform()
    * @param dao ist mdfc
    * @param index
    * @returns

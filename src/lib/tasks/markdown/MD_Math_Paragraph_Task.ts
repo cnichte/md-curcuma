@@ -41,7 +41,7 @@ export class MD_Math_Paragraph_Task<T extends string> extends MD_Observable_Abst
   }
 
   /**
-   *
+   * Is called by super.perform()
    * @param dao
    * @param index
    * @returns

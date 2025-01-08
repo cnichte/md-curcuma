@@ -53,7 +53,7 @@ export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_T
   }
 
   /**
-   *
+   * Is called by super.perform()
    * @param dao
    * @param index
    * @returns

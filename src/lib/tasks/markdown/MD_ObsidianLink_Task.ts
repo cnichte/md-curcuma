@@ -69,7 +69,7 @@ export class MD_ObsidianLink_Task<T extends string> extends MD_Observable_Abstra
   }
 
   /**
-   *
+   * Is called by super.perform()
    * @param dao
    * @param index
    * @returns

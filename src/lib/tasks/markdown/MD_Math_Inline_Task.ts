@@ -37,7 +37,7 @@ export class MD_Math_Inline_Task<T extends string> extends MD_Observable_Abstrac
   }
 
   /**
-   *
+   * Is called by super.perform()
    * @param dao
    * @param index
    * @returns
