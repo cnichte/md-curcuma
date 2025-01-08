@@ -1,4 +1,4 @@
-import { Mapping_Task, Mapping_Task_Properties } from "../Mapping_Task";
+import { Mapping_Task_Interface, Mapping_Task_Properties } from "../Mapping_Task";
 
 import path = require("node:path");
 import url = require("node:url");
@@ -13,7 +13,7 @@ export interface ImageDownloader_MappingType {
   simulate: boolean;
 }
 
-export class ImageDownloader_Mapping implements Mapping_Task {
+export class ImageDownloader_Mapping implements Mapping_Task_Interface {
   protected properties: ImageDownloader_MappingType;
 
   constructor(properties: ImageDownloader_MappingType) {

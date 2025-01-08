@@ -1,10 +1,10 @@
-import { Mapping_Task, Mapping_Task_Properties } from "../Mapping_Task";
+import { Mapping_Task_Interface, Mapping_Task_Properties } from "../Mapping_Task";
 
 export interface ArraySplit_MappingType {
   separator: string;
 }
 
-export class ArraySplit_Mapping implements Mapping_Task {
+export class ArraySplit_Mapping implements Mapping_Task_Interface {
   protected properties: ArraySplit_MappingType;
 
   /**

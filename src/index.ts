@@ -105,7 +105,7 @@ export {
 
 export {
   Mapping_Task_Properties,
-  Mapping_Task,
+  Mapping_Task_Interface,
   Mapping,
   Mapper,
 

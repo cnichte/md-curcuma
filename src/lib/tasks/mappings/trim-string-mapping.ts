@@ -1,10 +1,10 @@
-import { MappingTask, Mapping_Task_Properties } from "../Mapping_Task";
+import { Mapping_Task_Interface, Mapping_Task_Properties } from "../Mapping_Task";
 
 export interface TrimString_MappingType {
   char: string;
 }
 
-export class TrimString_Mapping implements MappingTask {
+export class TrimString_Mapping implements Mapping_Task_Interface {
   protected properties: TrimString_MappingType;
   constructor(properties: TrimString_MappingType) {
     this.properties = properties;

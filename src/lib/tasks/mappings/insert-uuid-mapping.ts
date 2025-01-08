@@ -1,8 +1,8 @@
-import { Mapping_Task, Mapping_Task_Properties } from "../Mapping_Task";
+import { Mapping_Task_Interface, Mapping_Task_Properties } from "../Mapping_Task";
 
 import { v4 as uuidv4, validate as uuidValidate } from "uuid";
 
-export class InsertUUID_Mapping implements Mapping_Task {
+export class InsertUUID_Mapping implements Mapping_Task_Interface {
   /**
    *
    * @param {Mapping_Task_Properties} mapping_properties

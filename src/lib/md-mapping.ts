@@ -1,4 +1,4 @@
-export interface Mapping_Task_Properties {
+export interface MD_MappingTask_Properties {
   source: any;
   target: any;
 
@@ -9,30 +9,28 @@ export interface Mapping_Task_Properties {
   target_value: any;
 }
 
-// TODO: MappingTask wird NOCH für nix genutzt??? Siehe MD_Callout_Task
-
-export interface Mapping_Task_Interface {
+export interface MD_MappingTask {
   // perform(source_value: any, target_value: any): any;
-  perform(mapping_properties: Mapping_Task_Properties): any;
+  perform(mapping_properties: MD_MappingTask_Properties): any;
 }
 
-export interface Mapping_Item {
+export interface MD_Mapping_Item {
   source_property_name: any;
   target_poperty_name: any;
 }
 
-export interface Mapping<MI> {
+export interface MD_Mapping<MI> {
   mapping_items: MI[];
-  task?: Mapping_Task_Interface; // TODO could be optional?
+  task?: MD_MappingTask; // TODO could be optional?
 }
 
-export class Mapper<MI extends Mapping_Item> {
-  protected mappings: Mapping<MI>[] = [];
+export class MD_Mapper<MI extends MD_Mapping_Item> {
+  protected mappings: MD_Mapping<MI>[] = [];
 
-  public addMapping(mapping: Mapping<MI>): void {
+  public addMapping(mapping: MD_Mapping<MI>): void {
     this.mappings.push(mapping);
   }
-  public addMappings(mappings: Mapping<MI>[]): void {
+  public addMappings(mappings: MD_Mapping<MI>[]): void {
     this.mappings = mappings;
   }
 
@@ -50,7 +48,7 @@ export class Mapper<MI extends Mapping_Item> {
         (source != null || source != undefined) &&
         (target != null || target != undefined)
       ) {
-        this.mappings.forEach((map: Mapping<MI>) => {
+        this.mappings.forEach((map: MD_Mapping<MI>) => {
           // Alle Felder im Mapping verarbeiten
           map.mapping_items.forEach((mapping_item: MI) => {
             this.do_mapping(mapping_item, source, target, map.task);
@@ -73,9 +71,9 @@ export class Mapper<MI extends Mapping_Item> {
     mapping_item: MI,
     source: any,
     target: any,
-    task: Mapping_Task_Interface
+    task: MD_MappingTask
   ): void {
-    let props: Mapping_Task_Properties = {
+    let props: MD_MappingTask_Properties = {
       source: source,
       target: target,
 
