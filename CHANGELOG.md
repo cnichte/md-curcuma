@@ -19,6 +19,10 @@ and on the top of it
 
 What has been implemented so far:
 
+## Release 2.0.1 ff (2025-01)
+
+Heavy ongoing development stuff and bug fixing.
+
 ## Release 2.0.0 (2025-01-08)
 
 * Complete redesign and new api.
@@ -217,7 +221,7 @@ For a working example take a look in the folder `test`
 * Simulation-Mode.
 * Commands from Transformers to MD_Exporter.
 
-- Use the file system properly:
+* Use the file system properly:
   * Missing Paths are created on the fly.
   * It is only written if modified-date is different.
   * Check whether source file does not exist.
