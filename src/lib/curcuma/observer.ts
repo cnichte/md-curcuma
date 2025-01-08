@@ -25,7 +25,7 @@ export class Observer_Item<D> {
 
 export interface Observer_Interface<D> {
   do_command(props: Observer_Props<D>): void;
-  //? id:string;
+  get_observer_id(): Observer_Type;
 }
 
 export class Observer_Subject<D> {
@@ -68,15 +68,16 @@ export class Observer_Subject<D> {
 
   /**
    * Notify a Observer, that the subject has changed.
+   * Get the id from props.to
    * 
    * @param props 
    */
   notify(props:Observer_Props<D>): void {
     if (this.observers.length > 0) {
-      // TODO Der Observer könnte noch sagen wer er ist, 
-      // TODO dann könnte ich ihn in notify exakt ansteuern.
-      // TODO filter nach ID
-      this.observers.forEach((observer) =>
+      // Select individual observers via the ID.
+      const result = this.observers.filter((observer) => observer.observer_id === props.to);
+
+      result.forEach((observer) =>
         observer.observer_obj.do_command(props)
       );
     }

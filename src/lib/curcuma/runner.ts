@@ -1,5 +1,5 @@
 import { IO_Interface, Task_Interface } from "./types";
-import { Observer_Interface, Observer_Props } from "./observer";
+import { Observer_Interface, Observer_Props, Observer_Type } from "./observer";
 
 export interface Runner_Interface<D> extends Observer_Interface<D> {
   addTask(task: Task_Interface<D>): void;
@@ -7,6 +7,7 @@ export interface Runner_Interface<D> extends Observer_Interface<D> {
   addWriter(writer: IO_Interface<D>): void;
   run(): void;
   do_command(props: Observer_Props<D>): void; // eigentlich do_reader_command
+  get_observer_id(): Observer_Type;
 }
 
 export class Runner<D> implements Runner_Interface<D> {
@@ -42,7 +43,7 @@ export class Runner<D> implements Runner_Interface<D> {
       //! alle Tasks anwenden
       for (let task of this.tasks) {
         // TODO: TASK Observer
-        task.add_observer(this, "");
+        task.add_observer(this, this.get_observer_id());
         task.perform(props.dao, props.io_meta);
         //TODO Nach jedem DAO mit dem writer schreiben (es sei denn 'do-not-io-write')
         if (this.writer != null) { // TODO && props.command === "do-io-write"
@@ -84,5 +85,9 @@ export class Runner<D> implements Runner_Interface<D> {
     } else {
       console.log("Du hast keinen reader definiert.");
     }
+  }
+
+  get_observer_id(): Observer_Type {
+    return 'runner';
   }
 }
