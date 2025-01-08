@@ -1,6 +1,7 @@
 import { IO_Meta_Interface } from "./types";
 
 export type Observer_Command_Type = 'perform-tasks' | 'tasks-finnished' | 'do-io-write' | 'do-not-io-write';
+
 export type Observer_Type = 'runner';
 export type Observable_Type = 'markdown-io' | 'md-splitter-task';
 
