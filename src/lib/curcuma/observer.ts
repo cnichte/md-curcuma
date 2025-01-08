@@ -19,7 +19,7 @@ export interface Observable<D> {
 }
 
 export class Observer_Item<D> {
-  observer_id: string = '';
+  observer_id: Observer_Type;
   observer_obj: Observer_Interface<D>;
 }
 
