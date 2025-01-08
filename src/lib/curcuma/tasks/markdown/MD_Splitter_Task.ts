@@ -91,6 +91,8 @@ export class MD_Splitter_Task<T extends string>
       )
         return dao;
 
+        io_meta.writer_meta.
+
       if (this.md_document !== null) {
         this.md_document.write_file(this.job_parameter.writePath);
       }

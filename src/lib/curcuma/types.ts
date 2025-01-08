@@ -32,6 +32,8 @@ export interface IOable {
 }
 
 export interface IO_Meta_Interface {
-  reader_meta: any;
-  writer_meta: any;
+  file_list_reader: string[];
+  file_name_reader: string;
+  file_list_writer: string[];
+  file_name_writer: string;
 }

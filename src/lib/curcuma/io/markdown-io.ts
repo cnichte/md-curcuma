@@ -1,33 +1,22 @@
-import { Observer_Command_Type, Observer_Props, ObserverSubject } from "../observer";
-import { IO_Meta_Interface, IO_Interface } from "../types";
+import {
+  Observer_Command_Type,
+  Observer_Props,
+  ObserverSubject,
+} from "../observer";
+import { IO_Interface, IO_Meta_Interface } from "../types";
 import { Filesystem } from "../filesystem";
 
 /**
- * Ein Markdown-File Reader und Writer.
+ ** Lese und schreibe Markdown-Dateien.
  */
-export interface md_reader_meta {
-  file_list: string[];
-  file_Name: string;
+export class IO_Meta implements IO_Meta_Interface {
+  file_list_reader: string[];
+  file_name_reader: string;
+  file_list_writer: string[];
+  file_name_writer: string;
 }
 
-export interface md_writer_meta {
-  file_list: string[];
-  file_Name: string;
-}
-
-export class Markdown_IO_META implements IO_Meta_Interface {
-  reader_meta: md_reader_meta = {
-    file_list: [],
-    file_Name: ""
-    // TODO file info (created, modified etc)
-  };
-  writer_meta: md_writer_meta = {
-    file_list: [],
-    file_Name: ""
-  } 
-}
-
-export class MY_Observer_Props<D> implements Observer_Props<D> {
+export class IO_Observer_Props<D> implements Observer_Props<D> {
   from: string;
   to: string;
   command: Observer_Command_Type;
@@ -48,57 +37,49 @@ export interface Markdown_IO_Props_Interface {
 }
 
 export class Markdown_IO<D> implements IO_Interface<D> {
-
   props: Markdown_IO_Props_Interface = null;
 
   // Der reader löst ein Event aus, auf das der Runner hört.
-  // Der reader schickt so die file-datensätze nacheinander zu weiteren Verarbeitung. 
-  observer:ObserverSubject<D> = new ObserverSubject<D>();
+  // Der reader schickt so die file-datensätze nacheinander zu weiteren Verarbeitung.
+  observer: ObserverSubject<D> = new ObserverSubject<D>();
 
-  constructor(props: Markdown_IO_Props_Interface){
+  constructor(props: Markdown_IO_Props_Interface) {
     this.props = props;
   }
 
   /**
-   * 
-   * @param props 
-   * @returns 
+   *
+   * @param props
+   * @returns
    */
   read(): void {
-
     var file_list: Array<string> = [];
 
     if (Filesystem.isFolder(this.props.readPath)) {
-      file_list = Filesystem.get_files_list(
-        this.props.readPath
-      );
-
+      file_list = Filesystem.get_files_list(this.props.readPath);
     } else if (Filesystem.isFile(this.props.readPath)) {
       file_list.push(this.props.readPath);
     } else {
       console.log(`not supported: '${this.props.readPath}'`);
     }
 
-    console.log('Markdown_IO.read: ', file_list);
+    console.log("Markdown_IO.read: ", file_list);
 
     file_list.forEach((file: string) => {
-
-      //* 0. Observer Properties
-      let o_props = new MY_Observer_Props<any>;
+      //* 1. Observer Properties
+      // Die Nachricht die an alle Listener gesendet wird.
+      let o_props = new IO_Observer_Props<any>();
       o_props.from = "markdown-io";
       o_props.to = "runner";
       o_props.command = "perform-tasks";
 
-      //* 1. DATEN LADEN
-      let txt = Filesystem.read_file_txt(file);
+      //* 2. DATEN LADEN und DAO ERZEUGEN (in dem Fall ein Markdown String)
+      o_props.dao = Filesystem.read_file_txt(file);
 
-      //* 2. DAO ERZEUGEN
-      o_props.dao = txt;
-
-      //* 3. File-Metadaten zum DAO
-      let io_meta = new Markdown_IO_META();
-      io_meta.reader_meta.file_list = file_list;
-      io_meta.reader_meta.file_Name = file;
+      //* 3. File-Metadaten
+      let io_meta = new IO_Meta();
+      io_meta.file_list_reader= file_list;
+      io_meta.file_name_reader = file;
       o_props.io_meta = io_meta;
 
       //* 4. fire event and inform listeners - which is only the runner at the moment.
@@ -107,26 +88,24 @@ export class Markdown_IO<D> implements IO_Interface<D> {
     });
 
     //* fire finished event to perform write!
-    let m_props = new MY_Observer_Props<any>;
+    let m_props = new IO_Observer_Props<any>();
     m_props.from = "markdown-io";
     m_props.to = "runner";
     m_props.command = "tasks-finnished";
-    
+
     this.observer.notify_all(m_props);
 
-    return null; 
+    return null;
   }
 
   /**
-   * 
-   * @param dao 
+   *
+   * @param dao
    */
   write(dao: D): void {
     // TODO write markdown file, see md-transporter
-
     // Filesystem.write_my_file()
-
-/*
+    /*
 
     MD_Filesystem.write_my_file<
       MD_FileContent_Interface,

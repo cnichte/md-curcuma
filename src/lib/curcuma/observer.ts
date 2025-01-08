@@ -5,13 +5,14 @@ export type Observer_Command_Type = 'perform-tasks' | 'tasks-finnished' | 'do-io
 export interface Observer_Props<D> {
   from: string
   to: string
-  command: Observer_Command_Type
+  command: Observer_Command_Type // TODO Ein Array of Observer_Commands
   dao?: D
   io_meta?: IO_Meta_Interface;
 }
 
 export interface Observer_Interface<D> {
   do_command(props: Observer_Props<D>): void;
+  //? id():string;
 }
 
 export class ObserverSubject<D> {
@@ -31,5 +32,10 @@ export class ObserverSubject<D> {
         observer.do_command(props)
       );
     }
+  }
+
+
+  notify(props:Observer_Props<D>): void {
+    // TODO Der Observer könnte noch sagen wer er ist, dann könnte ich ihn in notify exakt ansteuern.
   }
 }
