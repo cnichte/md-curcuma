@@ -43,6 +43,9 @@ export {
   CSV_IO_Props_Interface,
   CSV_IO,
 
+  Json_IO_Props_Interface,
+  Json_IO,
+
   IO_Meta,
   IO_Observer_Props,
   type Markdown_IO_Props_Interface,
