@@ -1,7 +1,7 @@
 import {
   Observer_Command_Type,
   Observer_Props,
-  ObserverSubject,
+  Observer_Subject,
 } from "../observer";
 import { IO_Interface, IO_Meta_Interface } from "../types";
 import { Filesystem } from "../filesystem";
@@ -41,7 +41,7 @@ export class Markdown_IO<D> implements IO_Interface<D> {
 
   // Der reader löst ein Event aus, auf das der Runner hört.
   // Der reader schickt so die file-datensätze nacheinander zu weiteren Verarbeitung.
-  observer: ObserverSubject<D> = new ObserverSubject<D>();
+  observer_subject: Observer_Subject<D> = new Observer_Subject<D>();
 
   constructor(props: Markdown_IO_Props_Interface) {
     this.props = props;
@@ -84,7 +84,7 @@ export class Markdown_IO<D> implements IO_Interface<D> {
 
       //* 4. fire event and inform listeners - which is only the runner at the moment.
       console.log("markdown-io.do_command: perform tasks for", file);
-      this.observer.notify_all(o_props);
+      this.observer_subject.notify_all(o_props);
     });
 
     //* fire finished event to perform write!
@@ -93,7 +93,7 @@ export class Markdown_IO<D> implements IO_Interface<D> {
     m_props.to = "runner";
     m_props.command = "tasks-finnished";
 
-    this.observer.notify_all(m_props);
+    this.observer_subject.notify_all(m_props);
 
     return null;
   }

@@ -45,6 +45,8 @@ export class Runner<D> implements Runner_Interface<D> {
         //TODO Nach jedem DAO mit dem writer schreiben (es sei denn 'do-not-io-write')
         if (this.writer != null) { // TODO && props.command === "do-io-write"
           this.writer.write(props.dao);
+        }else{
+          this.reader.write(props.dao);
         }
       }
     } else if (
@@ -63,7 +65,8 @@ export class Runner<D> implements Runner_Interface<D> {
         // die am Ende weg geschrieben werden.
         this.writer.write(props.dao);
       } else {
-        console.log("Du hast keinen writer definiert.");
+        console.log("Du hast keinen writer definiert, benutze reader...");
+        this.reader.write(props.dao);
       }
     }
   }
@@ -74,7 +77,7 @@ export class Runner<D> implements Runner_Interface<D> {
   run(): void {
     if (this.reader != null) {
       // Der Reader muss die DAOs häppchenweise weiter geben.
-      this.reader.observer.add_observer(this);
+      this.reader.observer_subject.add_observer(this, 'runner');
       this.reader.read(); // and send do_command
     } else {
       console.log("Du hast keinen reader definiert.");

@@ -1,9 +1,9 @@
 import { MD_CopyTask_Type } from "../md-transformer";
-import { ObserverSubject } from "./observer";
+import { Observer_Subject } from "./observer";
 
 /**
  * Alles ist ein Task: Transformer und Mapper.
- * Es gibt ein Data-Object  (DAO) das durchgereicht wird.
+ * Es gibt ein Data-Object (DAO) das durchgereicht wird.
  * Es gibt ein metadata objekt für File-Daten.
  * TODO und ein daten-objekt zum mappen ??
  */
@@ -22,7 +22,7 @@ export interface MD_Task_Parameter_Type {
 export interface IO_Interface<D> {
   read(): void;
   write(dao: D): void;
-  observer: ObserverSubject<D>;
+  observer_subject: Observer_Subject<D>;
 }
 
 export interface IOable {

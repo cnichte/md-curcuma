@@ -111,6 +111,7 @@ runner.addTask(
 
 runner.addTask(new MD_Writer_Task());
 
+// Wenn kein writer definiert ist wird der reader benutzt.
 //! runner.addWriter();
 
 runner.run();
