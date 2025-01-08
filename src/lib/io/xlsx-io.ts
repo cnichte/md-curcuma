@@ -8,9 +8,10 @@ import {
   Observer_Type,
 } from "../observer";
 import { IO_Interface, IOable } from "../types";
-import { Mapping, Mapping_Item  } from "../tasks/Mapping_Task";
 
-export interface XLSX_Mapping_Item extends Mapping_Item {
+//! import { Mapping_XXX_Interface, Mapping_Item  } from "../tasks/Mapping_Task";
+
+export interface XLSX_Mapping_Item { //! extends Mapping_Item {
   sheet_name: string;
   source_property_name: string;
   target_poperty_name: string;
@@ -26,7 +27,7 @@ export interface XLSX_Transporter_Parameter_Type<T> extends IOable {
   limit: number;
   useCounter: boolean;
   json_template: T;
-  mappings?: Mapping<XLSX_Mapping_Item | Mapping_Item>[];
+  //! mappings?: Mapper_Interface<XLSX_Mapping_Item | Mapping_Item>[];
   commands?: Observer_Command_Type[];
   onPartialResult?: (value: T) => void;
 }

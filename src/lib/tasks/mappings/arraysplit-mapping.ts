@@ -1,10 +1,10 @@
-import { Mapping_Task_Interface, Mapping_Task_Properties } from "../Mapping_Task";
+import { Mapper_Properties, Mapper_Task_Interface } from "../../mapper";
 
 export interface ArraySplit_MappingType {
   separator: string;
 }
 
-export class ArraySplit_Mapping implements Mapping_Task_Interface {
+export class ArraySplit_Mapping implements Mapper_Task_Interface {
   protected properties: ArraySplit_MappingType;
 
   /**
@@ -21,7 +21,7 @@ export class ArraySplit_Mapping implements Mapping_Task_Interface {
    * @return {*}  {(string[] | string)}
    * @memberof MD_ArraySplit_Mapping
    */
-  perform(mapping_properties: Mapping_Task_Properties):string[] {
+  perform(mapping_properties: Mapper_Properties):string[] {
     let target_value: string = mapping_properties.source_value;
     
     if (target_value != null && target_value != undefined) {

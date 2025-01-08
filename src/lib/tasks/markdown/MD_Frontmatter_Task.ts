@@ -6,13 +6,13 @@ import {
 import { MD_MathTransformer_TemplateValues_Type } from "./MD_Math_Paragraph_Task";
 import { MD_FileContent, MD_FileContent_Interface } from "./helpers/markdown-filecontent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
-import { Mapper, Mapping, Mapping_Item } from "../Mapping_Task";
 import { Filesystem } from "../../filesystem";
+import { Mapper, Mapper_Interface, Mapper_Item_Interface } from "../../mapper";
 
 export interface MD_FrontmatterTask_Parameter_Type {
   frontmatter_filename: string;
   frontmatter: any;
-  mappings: Mapping<any>[]; // TODO not any, but...
+  mappings: Mapper_Interface<any>[]; // TODO not any, but...
 }
 
 export class MD_Frontmatter_Task<T extends string> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T>
@@ -88,7 +88,7 @@ export class MD_Frontmatter_Task<T extends string> extends MD_Observable_Abstrac
       // oder... das geht wenn die propertynames == platzhalter sind: obj[name] -> {name}
       // das ersetzen erfolgt aus den attributen der quelle...
       // Was ist mit den Feldern aus dem Splitter? -> MD_Transformer_TemplateValues_Type aus md-transformer.
-      const mapper = new Mapper<Mapping_Item>();
+      const mapper = new Mapper<Mapper_Item_Interface>();
       mapper.addMappings(this.parameter.mappings);
       mapper.do_mappings(dao.frontmatter_attributes, fm_new);
   

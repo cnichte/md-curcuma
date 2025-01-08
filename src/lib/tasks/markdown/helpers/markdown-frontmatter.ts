@@ -1,11 +1,11 @@
-import { Mapping_Task_Interface } from "../../Mapping_Task";
+import { Mapper_Task_Interface } from "../../../mapper";
 import { MD_Template } from "./markdown-template";
 
 // TODO mapping ???
 export interface MD_Frontmatter_Parameter_Type {
   frontmatter_filename: string;
   frontmatter: MD_Frontmatter_Template;
-  mappings: Mapping_Task_Interface[]; // TODO not <any>, but...
+  mappings: Mapper_Task_Interface[]; // TODO not <any>, but...
 }
 
 /**

@@ -1,7 +1,7 @@
-import { Mapping_Task_Interface, Mapping_Task_Properties } from "../Mapping_Task";
+import { Mapper_Properties, Mapper_Task_Interface } from "../../mapper";
 
-export class InsertDate_Mapping implements Mapping_Task_Interface {
-  perform(mapping_properties: Mapping_Task_Properties): string {
+export class InsertDate_Mapping implements Mapper_Task_Interface {
+  perform(mapping_properties: Mapper_Properties): string {
     return new Date().toJSON().slice(0, 16);
   }
 }

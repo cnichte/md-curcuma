@@ -10,7 +10,8 @@ import {
 } from "../observer";
 import { IO_Interface } from "../types";
 import { Filesystem } from "../filesystem";
-import { Mapper, Mapping, Mapping_Item  } from "../tasks/Mapping_Task";
+
+// import { Mapping_Macher, Mapping_XXX_Interface, Mapping_Item  } from "../tasks/Mapping_Task";
 
 import * as fs from "fs";
 import client_http = require("http");
@@ -22,7 +23,7 @@ export interface CSV_IO_Props_Interface {
   readPath: string; // Datei oder Verzeichnis
   writePath: string; // Verzeichnis
   csvSeparator: string;
-  mappings?: Mapping<Mapping_Item>[]; 
+  // mappings?: Mapping<Mapping_Item>[]; 
 }
 
 export class CSV_IO<D> implements IO_Interface<D>, Observable<D> {
@@ -53,6 +54,84 @@ export class CSV_IO<D> implements IO_Interface<D>, Observable<D> {
    */
   read(): void {
 
+    let csv_buffer = fs.readFileSync(this.props.readPath);
+    const rows_array = csv_buffer.toString().split("\n");
+
+    let json_obj_array = [];
+
+    // The array[0] contains all the header columns so we store them in header_array
+    // consider commas within quotation marks: 1, "A, B, C", 2, 3
+    const header_csv = rows_array[0];
+    let header_array = new Array();
+
+    if (header_csv.trim().length > 0) {
+      let inSQuotes = false;
+      let inDQuotes = false;
+      let tmpParam = "";
+
+      for (let i = 0; i < header_csv.length; ++i) {
+        const char = header_csv.substring(i, i + 1);
+        if (char == "'") inSQuotes = inSQuotes ? false : !inDQuotes;
+        else if (char == '"') inDQuotes = inDQuotes ? false : !inSQuotes;
+        if (char == ",") {
+          if (inSQuotes) tmpParam += char;
+          else if (inDQuotes) tmpParam += char;
+          else {
+            header_array.push(CSV_IO.cleanup(tmpParam));
+            tmpParam = "";
+          }
+        } else tmpParam += char;
+      }
+      
+      header_array.push(CSV_IO.cleanup(tmpParam));
+    }
+
+    for (let i = 1; i < rows_array.length - 1; i++) {
+      let json_obj: any = {};
+
+      let str: string = rows_array[i];
+      let s: string = "";
+
+      // Commas within quotation marks 1, "A, B, C", 2, 3
+      // Commas remain inside the quotation marks.
+      // Outside the quotation marks, replace separators with pipe |.
+      let flag = 0;
+      for (let ch of str) {
+        if (ch === '"' && flag === 0) {
+          flag = 1;
+        } else if (ch === '"' && flag == 1) flag = 0;
+        if (ch === "," && flag === 0) ch = "|";
+        if (ch !== '"') s += ch;
+      }
+
+      // Split the string using pipe delimiter |
+      // and store the values in a properties array
+      let properties = s.split("|");
+
+      for (let j in header_array) {
+        json_obj[header_array[j]] = properties[j];
+      }
+
+      // TODO Mapper_Task: apply mappings to json object...
+      
+      
+      //TODO Mapping_Task ausgliedern
+/*
+      if (this.props.hasOwnProperty("mappings")) {
+        let mapper = new Mapping_Macher<Mapping_Item>();
+        mapper.addMappings(this.props.mappings);
+        mapper.do_mappings(json_obj, json_obj);
+      }
+
+      json_obj_array.push(json_obj);
+*/
+    }
+
+
+    
+    // let json = JSON.stringify(json_obj_array, null, 4);
+    // fs.writeFileSync(this.props.writePath, json);
+
   }
 
   /**
@@ -61,7 +140,33 @@ export class CSV_IO<D> implements IO_Interface<D>, Observable<D> {
    */
   write(dao: D): void {
 
+   // let json = JSON.stringify(json_obj_array, null, 4);
+   // fs.writeFileSync(this.props.writePath, json);
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   /**
      * The BookBuddy app exports its contents as a csv file.
@@ -134,13 +239,16 @@ export class CSV_IO<D> implements IO_Interface<D>, Observable<D> {
           json_obj[header_array[j]] = properties[j];
         }
   
+
+        // TODO Mapping_Task ausgliedern
         //* apply mappings to json object...
+/*
         if (job_parameter.hasOwnProperty("mappings")) {
-          let mapper = new Mapper<Mapping_Item>();
+          let mapper = new Mapping_Macher<Mapping_Item>();
           mapper.addMappings(job_parameter.mappings);
           mapper.do_mappings(json_obj, json_obj);
         }
-  
+  */
         json_obj_array.push(json_obj);
       }
   
