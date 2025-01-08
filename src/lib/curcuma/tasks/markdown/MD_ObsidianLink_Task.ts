@@ -1,18 +1,18 @@
 import {
   Task_Interface,
-  MD_FileContent_Interface,
   MD_Task_Parameter_Type,
-  DAO_META_Interface,
+  IO_Meta_Interface,
 } from "../../types";
 
 import { MD_Filesystem } from "../../../md-filesystem";
 import { MD_Template } from "../../../md-template";
-import { MD_FileContent } from "./MD_Callout_Task";
+
 
 // TODO copy Task ist auch ein separater Task und hier nichrt integriert?
 // oder ein Subtask..
 import { MD_CopyTask_Type } from "../../../md-transformer";
 import { MD_CopyJob } from "../../../md-copy-job";
+import { MD_FileContent, MD_FileContent_Interface } from "./helpers/markdown-filecontent";
 
 export interface MD_LinkTransformer_TemplateValues_Type {
   name_full: string;
@@ -62,7 +62,7 @@ export class MD_ObsidianLink_Task<T>
     this.copy_task = parameter.copy_task;
   }
 
-  public perform(dao: T, dao_meta: DAO_META_Interface): T {
+  public perform(dao: T, io_meta: IO_Meta_Interface): T {
     // console.log("#######################################");
     // console.log("before", dao.data);
 
@@ -72,7 +72,7 @@ export class MD_ObsidianLink_Task<T>
 
     for (var i = 0; i < mdfc.body_array.length; i++) {
       mdfc.index = i;
-      const test: MD_FileContent_Interface = this.transform(mdfc, i);
+      const test: MD_FileContent_Interface = this.transform(mdfc, i, io_meta);
       if (test.index != i) i = test.index; // elements are added or removed
     }
 
@@ -91,8 +91,8 @@ export class MD_ObsidianLink_Task<T>
    * @param index
    * @returns
    */
-  protected transform(dao: MD_FileContent, index: number): MD_FileContent {
-    this.super_transform(dao, index);
+  protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
+    this.super_transform(dao, index, io_meta);
 
     if (this.template_values.name_suffix.match(`^(${this.find_rule})$`)) {
       // match(/^(pdf|ods|odp)$/)  oder match('^(pdf|ods|odp)$')
@@ -125,7 +125,7 @@ export class MD_ObsidianLink_Task<T>
 
     return dao;
   }
-  super_transform(file_content: any, index: number) {
+  super_transform(file_content: any, index: number, io_meta: IO_Meta_Interface) {
     let item = file_content.body_array[index];
 
     this.reset();

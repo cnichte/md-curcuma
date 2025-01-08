@@ -1,5 +1,5 @@
-import { ObserverSubject } from "../observer";
-import { DAO_META_Interface, IO_Interface, Observer_Props } from "../types";
+import { Observer_Command_Type, Observer_Props, ObserverSubject } from "../observer";
+import { IO_Meta_Interface, IO_Interface } from "../types";
 import { Filesystem } from "../filesystem";
 
 /**
@@ -15,10 +15,11 @@ export interface md_writer_meta {
   file_Name: string;
 }
 
-export class Markdown_DAO_META implements DAO_META_Interface {
+export class Markdown_IO_META implements IO_Meta_Interface {
   reader_meta: md_reader_meta = {
     file_list: [],
     file_Name: ""
+    // TODO file info (created, modified etc)
   };
   writer_meta: md_writer_meta = {
     file_list: [],
@@ -29,9 +30,9 @@ export class Markdown_DAO_META implements DAO_META_Interface {
 export class MY_Observer_Props<D> implements Observer_Props<D> {
   from: string;
   to: string;
-  command: string;
+  command: Observer_Command_Type;
   dao: D;
-  dao_meta: DAO_META_Interface;
+  io_meta: IO_Meta_Interface;
 }
 
 // TODO Lese eine markdown Datei oder ein Verzeichnis von Markdown Dateien.
@@ -46,20 +47,16 @@ export interface Markdown_IO_Props_Interface {
   useCounter: boolean;
 }
 
-export class Markdown_IO<D, P> implements IO_Interface<D, P> {
+export class Markdown_IO<D> implements IO_Interface<D> {
 
-  props: any = null;
+  props: Markdown_IO_Props_Interface = null;
 
   // Der reader löst ein Event aus, auf das der Runner hört.
   // Der reader schickt so die file-datensätze nacheinander zu weiteren Verarbeitung. 
   observer:ObserverSubject<D> = new ObserverSubject<D>();
 
-  constructor(props: P){
+  constructor(props: Markdown_IO_Props_Interface){
     this.props = props;
-  }
-
-  setProps(props: P): void {
-    this.props = props
   }
 
   /**
@@ -98,13 +95,13 @@ export class Markdown_IO<D, P> implements IO_Interface<D, P> {
       //* 2. DAO ERZEUGEN
       o_props.dao = txt;
 
-      //* Metadaten zum DAO
-      let dao_meta = new Markdown_DAO_META();
-      dao_meta.reader_meta.file_list = file_list;
-      dao_meta.reader_meta.file_Name = file;
-      o_props.dao_meta = dao_meta;
+      //* 3. File-Metadaten zum DAO
+      let io_meta = new Markdown_IO_META();
+      io_meta.reader_meta.file_list = file_list;
+      io_meta.reader_meta.file_Name = file;
+      o_props.io_meta = io_meta;
 
-      //* 3. fire event and inform listeners - which is only the runner at the moment.
+      //* 4. fire event and inform listeners - which is only the runner at the moment.
       console.log("markdown-io.do_command: perform tasks for", file);
       this.observer.notify_all(o_props);
     });

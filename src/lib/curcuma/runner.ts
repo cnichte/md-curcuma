@@ -1,24 +1,33 @@
-import { IO_Interface, Observer_Props, Runner_Interface, Task_Interface } from "./types";
+import { IO_Interface, Task_Interface } from "./types";
+import { Observer_Interface, Observer_Props } from "./observer";
 
-export class Runner<D, P> implements Runner_Interface<D, P> {
+export interface Runner_Interface<D> extends Observer_Interface<D> {
+  addTask(task: Task_Interface<D>): void;
+  addReader(reader: IO_Interface<D>): void;
+  addWriter(writer: IO_Interface<D>): void;
+  run(): void;
+  do_command(props: Observer_Props<D>): void; // eigentlich do_reader_command
+}
+
+export class Runner<D> implements Runner_Interface<D> {
 
   private tasks: Task_Interface<D>[] = [];
-  private reader: IO_Interface<D, P> = null;
-  private writer: IO_Interface<D, P> = null;
+  private reader: IO_Interface<D> = null;
+  private writer: IO_Interface<D> = null;
 
   addTask(task: Task_Interface<D>): void {
     this.tasks.push(task);
   }
 
-  addReader(reader: IO_Interface<D, P>): void {
+  addReader(reader: IO_Interface<D>): void {
     this.reader = reader;
   }
-  addWriter(writer: IO_Interface<D, P>): void {
+  addWriter(writer: IO_Interface<D>): void {
     this.writer = writer;
   }
 
   /**
-   * Listen to Reades and Writers for actions.
+   * Listen to Reades, Writers and Tasks for actions.
    * 
    * @param props 
    */
@@ -32,9 +41,9 @@ export class Runner<D, P> implements Runner_Interface<D, P> {
     ) {
       //! alle Tasks anwenden
       for (let task of this.tasks) {
-        task.perform(props.dao, props.dao_meta);
-        //TODO Nach jedem DAO mit dem writer schreiben 
-        if (this.writer != null) {
+        task.perform(props.dao, props.io_meta);
+        //TODO Nach jedem DAO mit dem writer schreiben (es sei denn 'do-not-io-write')
+        if (this.writer != null) { // TODO && props.command === "do-io-write"
           this.writer.write(props.dao);
         }
       }
@@ -49,7 +58,7 @@ export class Runner<D, P> implements Runner_Interface<D, P> {
       console.log("FERTIG, FÜHRE WRITE AUS!!!");
       if (this.writer != null) {
         // TODO: Was schreiben? da müsste was übergeben werden... meta, data, etc 
-        // TODO: Benutze DAO_META_Interface ????
+        // TODO: Benutze IO_Meta_Interface ????
         // normalerweise sammelt man vielleicht, und akkumliert daten auf
         // die am Ende weg geschrieben werden.
         this.writer.write(props.dao);

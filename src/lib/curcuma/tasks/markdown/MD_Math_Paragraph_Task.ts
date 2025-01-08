@@ -4,14 +4,13 @@
 
 import {
   Task_Interface,
-  MD_FileContent_Interface,
   MD_Task_Parameter_Type,
-  DAO_META_Interface,
+  IO_Meta_Interface,
 } from "../../types";
 
 import { MD_Filesystem } from "../../../md-filesystem";
 import { MD_Template } from "../../../md-template";
-import { MD_FileContent } from "./MD_Callout_Task";
+import { MD_FileContent, MD_FileContent_Interface } from "./helpers/markdown-filecontent";
 
 export interface MD_MathTransformer_TemplateValues_Type {
   content: string;
@@ -35,7 +34,7 @@ export class MD_Math_Paragraph_Task<T extends string>
     this.parameter = parameter;
   }
 
-  public perform(dao: T, dao_meta: DAO_META_Interface): T {
+  public perform(dao: T, io_meta: IO_Meta_Interface): T {
     // console.log("#######################################");
     // console.log("before", dao.data);
 
@@ -45,7 +44,7 @@ export class MD_Math_Paragraph_Task<T extends string>
 
     for (var i = 0; i < mdfc.body_array.length; i++) {
       mdfc.index = i;
-      const test: MD_FileContent_Interface = this.transform(mdfc, i);
+      const test: MD_FileContent_Interface = this.transform(mdfc, i, io_meta);
       if (test.index != i) i = test.index; // elements are added or removed
     }
 
@@ -64,7 +63,7 @@ export class MD_Math_Paragraph_Task<T extends string>
    * @param index
    * @returns
    */
-  protected transform(dao: MD_FileContent, index: number): MD_FileContent {
+  protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
     let item = dao.body_array[index];
 
     // Formel als Absatz mit $$

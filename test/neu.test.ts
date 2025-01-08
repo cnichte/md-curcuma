@@ -2,7 +2,6 @@
 
 import {
   Markdown_IO,
-  Markdown_IO_Props_Interface,
   NOP_Task,
   Runner,
 } from "../src/lib/curcuma";
@@ -13,12 +12,15 @@ import {
   MD_Math_Inline_Task,
   MD_Writer_Task,
   MD_ObsidianLink_Task,
+  MD_Splitter_Task,
+  MD_RemoveTODOS_Task,
+  MD_Frontmatter_Task,
 } from "../src/lib/curcuma/tasks/markdown";
 
-const runner = new Runner<string, Markdown_IO_Props_Interface>();
+const runner = new Runner<string>();
 
 runner.addReader(
-  new Markdown_IO<string, Markdown_IO_Props_Interface>({
+  new Markdown_IO<string>({
     //* this is a Markdown_IO_Props_Interface
     // readPath: "test-data-obsidian-vault/some-md-docs",
     readPath: "test-data-obsidian-vault/longform.md",
@@ -74,8 +76,41 @@ runner.addTask(
   })
 );
 
+
+runner.addTask(
+  new MD_Frontmatter_Task<string>({
+    //* this is a MD_FrontmatterTask_Parameter_Type
+    frontmatter_filename: "./test-data-obsidian-vault/frontmatter-template.md",
+    frontmatter: {}
+  })
+);
+
+
+runner.addTask(
+  new MD_RemoveTODOS_Task<string>({
+    //* this is a MD_Task_Parameter_Type - subset
+    find_rule: "- [ ] #TODO ",
+    replace_template: "",
+  })
+);
+
+runner.addTask(
+  new MD_Splitter_Task<string>({
+    // this is a MD_Splitter_Parameter_Type
+    pattern: "# ",
+    cleanName: "# ",
+    limit: 100,
+    hasCounter: false,
+    weightBase: 8000,
+    url_prefix: "test-prefix",
+    doRemoveHeadline: true,
+    frontmatter_filename: "./test-data-obsidian-vault/frontmatter-template.md",
+  })
+);
+
+
 runner.addTask(new MD_Writer_Task());
 
-// runner.addWriter();
+//! runner.addWriter();
 
 runner.run();

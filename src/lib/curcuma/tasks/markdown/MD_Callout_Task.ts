@@ -1,13 +1,12 @@
 import {
   Task_Interface,
-  MD_FileContent_Interface,
   MD_Task_Parameter_Type,
-  DAO_META_Interface,
+  IO_Meta_Interface,
 } from "../../types";
-
-import { MD_Filesystem } from "../../../md-filesystem";
-import { MD_Template } from "../../../md-template";
-
+import { Filesystem } from "../../filesystem";
+import { MD_FileContent, MD_FileContent_Interface } from "./helpers/markdown-filecontent";
+import { MD_Template } from "./helpers/markdown-template";
+import { MD_AbstractTaskBase } from "./MD_AbstractTaskBase";
 export interface MD_Callout_TemplateValues_Type {
   context: string;
   title: string;
@@ -15,15 +14,8 @@ export interface MD_Callout_TemplateValues_Type {
   content: string;
 }
 
-export class MD_FileContent implements MD_FileContent_Interface {
-  frontmatter: string = "";
-  frontmatter_attributes: any = "";
-  body_array: string[] = [];
-  index: number = 0;
-}
-
 //TODO: Das was früher ein MD_Transporter
-export class MD_Callout_Task<T extends string> implements Task_Interface<T> {
+export class MD_Callout_Task<T extends string> extends MD_AbstractTaskBase<T> implements Task_Interface<T> {
   parameter: MD_Task_Parameter_Type;
   collection: string[] | null | undefined = null;
   counter: number = 0;
@@ -113,31 +105,12 @@ export class MD_Callout_Task<T extends string> implements Task_Interface<T> {
   ];
 
   constructor(parameter: MD_Task_Parameter_Type) {
+    super()
     this.parameter = parameter;
   }
 
-  public perform(dao: T, dao_meta: DAO_META_Interface): T {
-    // console.log("#######################################");
-    // console.log("before", dao.data);
-
-    // Trenne das Frontmatter vom body ab. siehe md-transporter.
-    const mdfc: MD_FileContent_Interface = MD_Filesystem.split_frontmatter_body(
-      dao as string
-    );
-
-    for (var i = 0; i < mdfc.body_array.length; i++) {
-      mdfc.index = i;
-      const test: MD_FileContent_Interface = this.transform(mdfc, i);
-      if (test.index != i) i = test.index; // elements are added or removed
-    }
-
-    // führe alles wieder zusammen
-    dao = MD_Filesystem.merge_frontmatter_body(mdfc) as T;
-
-    // console.log("after", dao.data);
-    // console.log("#######################################");
-
-    return dao;
+  public perform(dao: T, io_meta: IO_Meta_Interface): T {
+    return super.perform(dao, io_meta);
   }
 
   /**
@@ -146,7 +119,7 @@ export class MD_Callout_Task<T extends string> implements Task_Interface<T> {
    * @param index
    * @returns
    */
-  protected transform(dao: MD_FileContent, index: number): MD_FileContent {
+  protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
     let item = dao.body_array[index];
 
     // Callout beginnt als Absatz mit "> [!   ]"
