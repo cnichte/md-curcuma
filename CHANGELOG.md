@@ -19,6 +19,10 @@ and on the top of it
 
 What has been implemented so far:
 
+## Release 2.0.0 (2025-01-08)
+
+* Complete redesign and new api.
+
 ## Release 1.2.16 (2025-01-06)
 
 * A Broken Link Checker for Hugo (but not only for Hugo)

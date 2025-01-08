@@ -1,0 +1,84 @@
+//TODO: Das was früher ein MD_Transporter
+//TODO: siehe md-math-task
+// TODO: Es gibt einen für Inline and Paragraph
+
+import {
+  Task_Interface,
+  MD_Task_Parameter_Type,
+  IO_Meta_Interface,
+} from "../../types";
+
+import { Filesystem } from "../../filesystem";
+import { MD_Template } from "./helpers/markdown-template";
+import { MD_FileContent, MD_FileContent_Interface } from "./helpers/markdown-filecontent";
+import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
+
+export interface MD_MathTransformer_TemplateValues_Type {
+  content: string;
+}
+
+//TODO: Das was früher ein MD_Transporter
+export class MD_Math_Paragraph_Task<T extends string> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T>
+{
+  parameter: MD_Task_Parameter_Type;
+  collection: string[] | null | undefined = null;
+  counter: number = 0;
+
+  doCollect: boolean = false;
+
+  protected template_values: MD_MathTransformer_TemplateValues_Type = {
+    content: "",
+  };
+
+  constructor(parameter: MD_Task_Parameter_Type) {
+    super();
+    this.parameter = parameter;
+  }
+
+  public perform(dao: T, io_meta: IO_Meta_Interface): T {
+    dao = super.perform(dao, io_meta);
+    return dao;
+  }
+
+  /**
+   *
+   * @param dao
+   * @param index
+   * @returns
+   */
+  protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
+    let item = dao.body_array[index];
+
+    // Formel als Absatz mit $$
+    if (
+      !this.doCollect &&
+      item.indexOf(this.parameter.tag_obsidian_prefix) >= 0
+    ) {
+      // $$
+      this.doCollect = true;
+      console.log("#### math: found!");
+      this.collection = []; // may go over several lines
+      dao.body_array.splice(index, 1); // Remove line: $$
+      dao.index = dao.index - 1;
+      // start to collect
+    } else if (this.doCollect) {
+      if (item.indexOf(this.parameter.tag_obsidian_suffix) >= 0) {
+        // $$
+        this.doCollect = false;
+        console.log("#### math: process!");
+        // end collection, build with template, apply...
+        this.template_values.content = this.collection.join("\n");
+        const template: MD_Template = new MD_Template(
+          this.parameter.replace_template
+        );
+        dao.body_array[index] = template.fill(this.template_values);
+      } else {
+        this.collection.push(item); // remember and remove
+        dao.body_array.splice(index, 1);
+        dao.index = dao.index - 1;
+        console.log("#### math: collect...", this.collection);
+      }
+    }
+    return dao;
+  }
+}

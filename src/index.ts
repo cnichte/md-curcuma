@@ -1,58 +1,24 @@
-
-export { CSV_Transporter, type CSV_Transporter_Parameter_Type } from "./lib/transporter/csv-transporter";
-export { MD_Transporter, type MD_Transporter_Parameter_Type } from "./lib/transporter/md-transporter";
-export { XLSX_Transporter, type XLSX_Transporter_Parameter_Type } from "./lib/transporter/xlsx-transporter";
-
 export {
-  MD_Document,
-  type MD_Document_Parameter_Type,
-} from "./lib/md-document";
-export { MD_CopyJob } from "./lib/md-copy-job";
-export { MD_Filesystem, MD_FileContent_Interface } from "./lib/md-filesystem";
-export {
-  MD_Frontmatter_Template,
-  type MD_Frontmatter_Type,
-  type MD_Frontmatter_Parameter_Type,
-} from "./lib/md-frontmatter";
-// todo md-job
-export { MD_MappingTask, type MD_MappingTask_Properties, MD_Mapper, type MD_Mapping, type MD_Mapping_Item,  } from "./lib/md-mapping";
-export { MD_ObserverSubject, type MD_Observer_Interface } from "./lib/md-observer";
-// todo md-tag
-export { MD_Template } from "./lib/md-template";
-export { MD_Transformer_Factory } from "./lib/md-transformer-factory";
-export {
-  MD_Transformer_AbstractBase,
-  type MD_CopyTask_Type,
-  type MD_Transformer_Interface,
-  type MD_Transformer_Parameter_Type,
-} from "./lib/md-transformer";
 
-//* Mapper Tasks
+  MD_CopyJob,
+  Filesystem,
 
-export { MD_AdoptValue_Mapping } from "./lib/mapping-tasks/md-adopt-value-mapping";
-export { MD_ArrayJoin_Mapping, type MD_ArrayJoin_MappingType } from "./lib/mapping-tasks/md-arrayjoin-mapping";
-export { MD_ArraySplit_Mapping, type MD_ArraySplit_MappingType } from "./lib/mapping-tasks/md-arraysplit-mapping";
-export { MD_BooleanInverse_Mapping } from "./lib/mapping-tasks/md-boolean-inverse-mapping";
-export { MD_ImageDownloader_Mapping, type MD_ImageDownloader_MappingType } from "./lib/mapping-tasks/md-image-downloader-mapping";
-export { MD_InsertDate_Mapping } from "./lib/mapping-tasks/md-insert-date-mapping";
-export { MD_InsertUUID_Mapping } from "./lib/mapping-tasks/md-insert-uuid-mapping";
-export { MD_TrimString_Mapping } from "./lib/mapping-tasks/md-trim-string-mapping";
+  // Mapping_Properties
+  // Mapping_Task
 
-//* Transformer Tasks
+  type Observer_Command_Type,
+  type Observer_Type,
+  type Observable_Type,
+  Observer_Props,
+  Observable,
+  Observer_Item,
+  type Observer_Interface,
+  Observer_Subject,
 
-export { MD_Callout_Transformer } from "./lib/transformer/md-callout-task"
-export { MD_Frontmatter_Transformer } from "./lib/transformer/md-frontmatter-task";
-export { MD_MathParagraph_Transformer, MD_MathInline_Transformer , type MD_MathTransformer_TemplateValues_Type } from "./lib/transformer/md-math-task";
-export {
-  MD_ObsidianLink_Transformer_Base,
-  MD_ObsidianLink_Transformer,
-  type MD_LinkTransformer_TemplateValues_Type,
-} from "./lib/transformer/md-obsidian-link-task";
-export { MD_RemoveTODOS_Transformer } from "./lib/transformer/md-remove-todos-task";
-export {
-  MD_Splitter_Transformer,
-  MD_Splitter_Parameter_Type,
-} from "./lib/transformer/md-splitter-task";
+  type Runner_Interface,
+  Runner,
+
+} from "./lib";
 
 export {
   BLC_MODE,
@@ -63,20 +29,87 @@ export {
   Broken_Link_Checker
 } from "./lib/broken-link-checker";
 
-//! Neuer Ansatz
+export {
+  type Task_Interface,
+  type MD_CopyTask_Type,
+  type MD_Task_Parameter_Type,
+  type IO_Interface,
+  type IOable,
+  type IO_Meta_Interface,
+} from "./lib/types";
 
 export {
-  Runner
-} from "./lib/curcuma";
+  CSV_IO_Props_Interface,
+  CSV_IO,
+
+  IO_Meta,
+  IO_Observer_Props,
+  type Markdown_IO_Props_Interface,
+  Markdown_IO,
+
+  XLSX_Mapping_Item,
+  XLSX_Transporter_Parameter_Type,
+  XLSX_IO,
+
+} from "./lib/io";
 
 export {
-  Task_Interface, Runner_Interface, IO_Interface
-} from "./lib/curcuma/types";
+  AdoptValue_Mapping,
+
+  type ArrayJoin_MappingType,
+  ArrayJoin_Mapping,
+
+  type ArraySplit_MappingType,
+  ArraySplit_Mapping,
+
+  BooleanInverse_Mapping,
+
+  type ImageDownloader_MappingType,
+  ImageDownloader_Mapping,
+
+  InsertDate_Mapping,
+  InsertUUID_Mapping,
+
+  type TrimString_MappingType,
+  TrimString_Mapping
+
+} from "./lib/tasks/mappings";
 
 export {
-  Markdown_IO
-} from "./lib/curcuma/io";
+
+  type MD_Callout_TemplateValues_Type,
+  MD_Callout_Task,
+
+  type MD_FrontmatterTask_Parameter_Type,
+  MD_Frontmatter_Task,
+
+  MD_Math_Inline_Task,
+
+  type MD_MathTransformer_TemplateValues_Type,
+  MD_Math_Paragraph_Task,
+
+  MD_Observable_Abstract_TaskBase,
+
+  type MD_LinkTransformer_TemplateValues_Type,
+  MD_ObsidianLink_Task,
+
+  MD_RemoveTODOS_Task,
+
+  type MD_Splitter_Parameter_Type,
+  MD_Splitter_Task,
+
+  MD_Writer_Task
+
+} from "./lib/tasks/markdown";
 
 export {
-MappingTask, NOP_Task
-} from "./lib/curcuma/tasks";
+  MappingTask_Properties,
+  MappingTask,
+  Mapping,
+  Mapper,
+
+  NOP_Task,
+
+  Observable_Abstract_TaskBase,
+
+} from "./lib/tasks";
