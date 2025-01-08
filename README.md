@@ -63,12 +63,12 @@ After the redesign its quite straight forward:
 ```mermaid
 flowchart
     subgraph runner
-      subgraph Tasks
-        Task 1
-        Task 2
+      subgraph tasks
+        task-1
+        task-2
         ...
       end
-     Reader --> Tasks --> Writer
+     reader --> tasks --> writer
     end
 ```
 
