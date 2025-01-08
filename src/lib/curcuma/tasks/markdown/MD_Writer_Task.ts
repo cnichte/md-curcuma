@@ -3,9 +3,9 @@ import { MD_FileContent } from "./helpers/markdown-filecontent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 
 /**
- * TODO: Schreibt eine Markdown Datei.
+ * TODO: Ein Task, der eine Markdown Datei schreibt.
  */
-export class MD_Writer_Task<T> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T> {
+export class MD_Writer_Task<T extends string> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T> {
 
     perform(dao:T, io_meta: IO_Meta_Interface): T {
         dao = super.perform(dao, io_meta);       

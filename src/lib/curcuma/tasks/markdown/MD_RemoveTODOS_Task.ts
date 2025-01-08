@@ -34,6 +34,17 @@ export class MD_RemoveTODOS_Task<T extends string> extends MD_Observable_Abstrac
    * @returns
    */
   protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
+    if (dao.body_array[index].indexOf(this.parameter.find_rule) >= 0) {
+      console.log(
+        `Transform TODO (remove) before: ${dao.body_array[index]}`
+      );
+      dao.body_array.splice(index, 1);
+      dao.index = dao.index - 1;
+      console.log(
+        `Transform TODO (remove) after: ${dao.body_array[index]}`
+      );
+    }
+
     return dao;
   }
 }

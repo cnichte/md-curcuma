@@ -1,6 +1,9 @@
 //! Teste: Das neue Curcuma
 
 import {
+  Mapping,
+  Mapping_Item,
+  MappingTask_Properties,
   Markdown_IO,
   NOP_Task,
   Runner,
@@ -78,11 +81,43 @@ runner.addTask(
 );
 
 
+// use one of the predefined tasks like so:
+// task: new Mapping_BooleanInverse_Task()
+// or write a custom task like so:
+const map_1: Mapping<Mapping_Item> = {
+  mapping_items: [
+    {
+      source_property_name: "doPublish",
+      target_poperty_name: "draft",
+    }
+  ],
+  task: {
+    perform: function (mapping_properties: MappingTask_Properties): boolean {
+      if (typeof mapping_properties.source_value == "boolean") { }
+      return !mapping_properties.source_value;
+    },
+  }
+};
+
+// An example task that inserts the current date. Source Property isnt used here.
+const map_2: Mapping<Mapping_Item> = {
+  mapping_items: [{
+    source_property_name: "",
+    target_poperty_name: "date",
+  }],
+  task: {
+    perform: function (mapping_properties: MappingTask_Properties) {
+      return new Date().toJSON().slice(0, 16);
+    },
+  }
+};
+
 runner.addTask(
   new MD_Frontmatter_Task<string>({
-    //* this is a MD_FrontmatterTask_Parameter_Type
-    frontmatter_filename: "./test-data-obsidian-vault/frontmatter-template.md",
-    frontmatter: {}
+        //* this is a MD_FrontmatterTask_Parameter_Type
+        frontmatter_filename: "./test-data-obsidian-vault/frontmatter-template.md",
+        frontmatter: {},
+        mappings: [map_1, map_2]
   })
 );
 
