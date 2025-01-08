@@ -73,6 +73,6 @@ flowchart
 ```
 
 > [!IMPORTANT]  
-> I am currently redesigning the framework fundamentally. There is na completley new API.
+> I am currently redesigning the framework fundamentally. There is a completely new API.
 
 Until the documentation is updated, please take a look at the (not deprecated) `test` and `test-0-excluded` folder.
