@@ -5,8 +5,9 @@ import {
 
 import { MD_Filesystem } from "../../../md-filesystem";
 import { MD_Frontmatter_Template } from "./helpers/markdown-frontmatter";
-import { MD_FileContent, MD_FileContent_Interface } from "./helpers/markdown-filecontent";
+import { MD_FileContent } from "./helpers/markdown-filecontent";
 import { Markdown_Document, Markdown_Document_Parameter_Type } from "./helpers/markdown-document";
+import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 
 export interface MD_Splitter_Parameter_Type {
   pattern: string;
@@ -17,19 +18,19 @@ export interface MD_Splitter_Parameter_Type {
   url_prefix: string;
   doRemoveHeadline: boolean;
   frontmatter_filename: string;
-  // TODO frontmatter: MD_Frontmatter_Template;
+  frontmatter: MD_Frontmatter_Template;
 }
 
 
 //TODO: Das was früher ein MD_Transporter
-export class MD_Splitter_Task<T extends string>
-  implements Task_Interface<T>
+export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T>
 {
   parameter: MD_Splitter_Parameter_Type;
   md_document: Markdown_Document | null | undefined = null;
   counter: number = 0;
 
   constructor(parameter: MD_Splitter_Parameter_Type) {
+    super();
     this.parameter = parameter;
     this.parameter.frontmatter_filename = parameter.frontmatter_filename.trim();
 
@@ -47,25 +48,7 @@ export class MD_Splitter_Task<T extends string>
   }
 
   public perform(dao: T, io_meta: IO_Meta_Interface): T {
-    // console.log("#######################################");
-    // console.log("before", dao.data);
-
-    // Trenne das Frontmatter vom body ab. siehe md-transporter.
-    const mdfc: MD_FileContent_Interface =
-      MD_Filesystem.split_frontmatter_body(dao);
-
-    for (var i = 0; i < mdfc.body_array.length; i++) {
-      mdfc.index = i;
-      const test: MD_FileContent_Interface = this.transform(mdfc, i, io_meta);
-      if (test.index != i) i = test.index; // elements are added or removed
-    }
-
-    // führe alles wieder zusammen
-    dao = MD_Filesystem.merge_frontmatter_body(mdfc) as T;
-
-    // console.log("after", dao.data);
-    // console.log("#######################################");
-
+    dao = super.perform(dao, io_meta);
     return dao;
   }
 
@@ -91,14 +74,12 @@ export class MD_Splitter_Task<T extends string>
       )
         return dao;
 
-        // io_meta.file_name_writer
-
       if (this.md_document !== null) {
-        this.md_document.write_file(this.job_parameter.writePath);
+        this.md_document.write_file(io_meta.file_name_writer);
       }
 
       let params: Markdown_Document_Parameter_Type = {
-        split_row: file_content.body_array[index],
+        split_row: dao.body_array[index],
         cleanName: this.parameter.cleanName,
         weightBase: this.parameter.weightBase,
         url_prefix: this.parameter.url_prefix,
@@ -124,15 +105,15 @@ export class MD_Splitter_Task<T extends string>
       this.md_document !== null &&
       index == dao.body_array.length - 1
     ) {
-      this.md_document.write_file(this.job_parameter.writePath); // TODO aus Meta
+      this.md_document.write_file(io_meta.file_name_writer);
     }
 
-    // inform MD_Export not to write the entire file after splitting ist up.
-    this.observer_subject.notify_all(
-      "md-splitter-task",
-      "md-exporter",
-      MD_TRANSPORTER_COMMANDS.DO_NOT_WRITE_FILES
-    );
+    // inform not to write the entire file after splitting ist up.
+    super.notify_all({
+      from: "md-splitter-task",
+      to: "runner",
+      command: "do-not-io-write"
+    })
 
     return dao;
   }

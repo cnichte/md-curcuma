@@ -41,6 +41,8 @@ export class Runner<D> implements Runner_Interface<D> {
     ) {
       //! alle Tasks anwenden
       for (let task of this.tasks) {
+        // TODO: TASK Observer
+        task.add_observer(this, "");
         task.perform(props.dao, props.io_meta);
         //TODO Nach jedem DAO mit dem writer schreiben (es sei denn 'do-not-io-write')
         if (this.writer != null) { // TODO && props.command === "do-io-write"
@@ -77,7 +79,7 @@ export class Runner<D> implements Runner_Interface<D> {
   run(): void {
     if (this.reader != null) {
       // Der Reader muss die DAOs häppchenweise weiter geben.
-      this.reader.observer_subject.add_observer(this, 'runner');
+      this.reader.add_observer(this, 'runner');
       this.reader.read(); // and send do_command
     } else {
       console.log("Du hast keinen reader definiert.");

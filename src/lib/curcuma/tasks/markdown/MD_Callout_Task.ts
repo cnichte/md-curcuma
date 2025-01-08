@@ -6,7 +6,7 @@ import {
 import { Filesystem } from "../../filesystem";
 import { MD_FileContent, MD_FileContent_Interface } from "./helpers/markdown-filecontent";
 import { MD_Template } from "./helpers/markdown-template";
-import { MD_AbstractTaskBase } from "./MD_AbstractTaskBase";
+import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 export interface MD_Callout_TemplateValues_Type {
   context: string;
   title: string;
@@ -15,7 +15,7 @@ export interface MD_Callout_TemplateValues_Type {
 }
 
 //TODO: Das was früher ein MD_Transporter
-export class MD_Callout_Task<T extends string> extends MD_AbstractTaskBase<T> implements Task_Interface<T> {
+export class MD_Callout_Task<T extends string> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T> {
   parameter: MD_Task_Parameter_Type;
   collection: string[] | null | undefined = null;
   counter: number = 0;

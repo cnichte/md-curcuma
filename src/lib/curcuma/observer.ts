@@ -1,13 +1,21 @@
 import { IO_Meta_Interface } from "./types";
 
 export type Observer_Command_Type = 'perform-tasks' | 'tasks-finnished' | 'do-io-write' | 'do-not-io-write';
+export type Observer_Type = 'runner';
+export type Observable_Type = 'markdown-io' | 'md-splitter-task';
 
 export interface Observer_Props<D> {
-  from: string
-  to: string
+  from: Observable_Type
+  to: Observer_Type
   command: Observer_Command_Type // TODO Ein Array of Observer_Commands
   dao?: D
   io_meta?: IO_Meta_Interface;
+}
+
+export interface Observable<D> {
+  add_observer(observer: Observer_Interface<D>, id:Observer_Type):void;
+  notify_all(props:Observer_Props<D>): void;
+  notify(props:Observer_Props<D>): void;
 }
 
 export class Observer_Item<D> {
@@ -37,7 +45,7 @@ export class Observer_Subject<D> {
    * @param observer the Observer object
    * @param id - unique identifier (could be the Class-Name)
    */
-  add_observer(observer: Observer_Interface<D>, id:string) {
+  add_observer(observer: Observer_Interface<D>, id:Observer_Type) {
 
     let oi = new Observer_Item<D>();
     oi.observer_id = id;

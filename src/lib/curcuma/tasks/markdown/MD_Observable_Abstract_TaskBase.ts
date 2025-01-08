@@ -1,16 +1,22 @@
 import { Filesystem } from "../../filesystem";
 import { IO_Meta_Interface, Task_Interface } from "../../types";
+import { Observable_Abstract_TaskBase } from "../Observable_Abstract_TaskBase";
 import {
   MD_FileContent,
   MD_FileContent_Interface,
 } from "./helpers/markdown-filecontent";
 
-export abstract class MD_AbstractTaskBase<T extends string>
+/**
+ ** Processes the markdown dao paragraph by paragraph.
+ * Calls the 'transform' method for each paragraph.
+ */
+export abstract class MD_Observable_Abstract_TaskBase<T extends string>
+  extends Observable_Abstract_TaskBase<T>
   implements Task_Interface<T>
 {
-  constructor() {}
-  
-  // TODO Provide observer stuff
+  constructor() {
+    super();
+  }
 
   perform(dao: T, io_meta: IO_Meta_Interface): T {
     // console.log("#######################################");

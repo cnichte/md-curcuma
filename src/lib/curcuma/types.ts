@@ -1,5 +1,5 @@
 import { MD_CopyTask_Type } from "../md-transformer";
-import { Observer_Subject } from "./observer";
+import { Observable, Observer_Interface, Observer_Props, Observer_Subject, Observer_Type } from "./observer";
 
 /**
  * Alles ist ein Task: Transformer und Mapper.
@@ -7,8 +7,12 @@ import { Observer_Subject } from "./observer";
  * Es gibt ein metadata objekt für File-Daten.
  * TODO und ein daten-objekt zum mappen ??
  */
-export interface Task_Interface<D> {
+export interface Task_Interface<D> extends Observable<D> {
   perform(dao: D, io_meta: IO_Meta_Interface): D;
+    // TODO müssen die hier sein?
+    add_observer(observer: Observer_Interface<D>, id:Observer_Type):void;
+    notify_all(props:Observer_Props<D>): void;
+    notify(props:Observer_Props<D>): void;
 }
 
 export interface MD_Task_Parameter_Type {
@@ -19,10 +23,13 @@ export interface MD_Task_Parameter_Type {
   copy_task?: MD_CopyTask_Type;
 }
 
-export interface IO_Interface<D> {
+export interface IO_Interface<D> extends Observable<D> {
   read(): void;
   write(dao: D): void;
-  observer_subject: Observer_Subject<D>;
+  // TODO müssen die hier sein?
+  add_observer(observer: Observer_Interface<D>, id:Observer_Type):void;
+  notify_all(props:Observer_Props<D>): void;
+  notify(props:Observer_Props<D>): void;
 }
 
 export interface IOable {

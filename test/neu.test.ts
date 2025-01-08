@@ -15,6 +15,7 @@ import {
   MD_Splitter_Task,
   MD_RemoveTODOS_Task,
   MD_Frontmatter_Task,
+  MD_Frontmatter_Template,
 } from "../src/lib/curcuma/tasks/markdown";
 
 const runner = new Runner<string>();
@@ -32,7 +33,7 @@ runner.addReader(
   })
 );
 
-runner.addTask(new NOP_Task());
+runner.addTask(new NOP_Task<string>());
 
 runner.addTask(
   new MD_Callout_Task<string>({
@@ -94,6 +95,28 @@ runner.addTask(
   })
 );
 
+
+
+var frontmatter_template: MD_Frontmatter_Template =
+  new MD_Frontmatter_Template(`---
+title: ""
+description: ""
+summary: ""
+date:
+draft:
+weight: 
+categories: []
+tags: []
+contributors: []
+pinned: false
+homepage: false
+seo:
+  title: "" # custom title (optional)
+  description: "" # custom description (recommended)
+  canonical: "" # custom canonical URL (optional)
+  noindex: false # false (default) or true
+---\n\n`);
+
 runner.addTask(
   new MD_Splitter_Task<string>({
     // this is a MD_Splitter_Parameter_Type
@@ -105,13 +128,13 @@ runner.addTask(
     url_prefix: "test-prefix",
     doRemoveHeadline: true,
     frontmatter_filename: "./test-data-obsidian-vault/frontmatter-template.md",
+    frontmatter: frontmatter_template
   })
 );
 
+runner.addTask(new MD_Writer_Task()); // TODO
 
-runner.addTask(new MD_Writer_Task());
-
-// Wenn kein writer definiert ist wird der reader benutzt.
-//! runner.addWriter();
+//! Wenn kein writer definiert ist wird der reader benutzt.
+// runner.addWriter();
 
 runner.run();

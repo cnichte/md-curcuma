@@ -6,6 +6,7 @@ import {
 import { MD_Filesystem } from "../../../md-filesystem";
 import { MD_MathTransformer_TemplateValues_Type } from "./MD_Math_Paragraph_Task";
 import { MD_FileContent, MD_FileContent_Interface } from "./helpers/markdown-filecontent";
+import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 
 
 export interface MD_FrontmatterTask_Parameter_Type {
@@ -14,8 +15,7 @@ export interface MD_FrontmatterTask_Parameter_Type {
 }
 
 //TODO: Das was früher ein MD_Transporter
-export class MD_Frontmatter_Task<T extends string>
-  implements Task_Interface<T>
+export class MD_Frontmatter_Task<T extends string> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T>
 {
   parameter: MD_FrontmatterTask_Parameter_Type;
   collection: string[] | null | undefined = null;
@@ -28,29 +28,12 @@ export class MD_Frontmatter_Task<T extends string>
   };
 
   constructor(parameter: MD_FrontmatterTask_Parameter_Type) {
+    super();
     this.parameter = parameter;
   }
 
   public perform(dao: T, io_meta: IO_Meta_Interface): T {
-    // console.log("#######################################");
-    // console.log("before", dao.data);
-
-    // Trenne das Frontmatter vom body ab. siehe md-transporter.
-    const mdfc: MD_FileContent_Interface =
-      MD_Filesystem.split_frontmatter_body(dao);
-
-    for (var i = 0; i < mdfc.body_array.length; i++) {
-      mdfc.index = i;
-      const test: MD_FileContent_Interface = this.transform(mdfc, i, io_meta);
-      if (test.index != i) i = test.index; // elements are added or removed
-    }
-
-    // führe alles wieder zusammen
-    dao = MD_Filesystem.merge_frontmatter_body(mdfc) as T;
-
-    // console.log("after", dao.data);
-    // console.log("#######################################");
-
+    dao = super.perform(dao, io_meta);
     return dao;
   }
 
