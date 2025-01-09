@@ -1,3 +1,4 @@
 # Produktive Umgebung
 
-Hier wird die App gebaut.
+- Das ist der aktuellste Code.
+- Hier wird die App weiter entwickelt und gebaut.

@@ -55,8 +55,8 @@ const insert_uuid: MD_Mapping<MD_Mapping_Item> = {
 };
 
 const xlsx_transporter_parameter: XLSX_Transporter_Parameter_Type<JsonDoc> = {
-  readPath: "test-data-xlsx/input/",
-  writePath: "test-data-xlsx/output/",
+  readPath: "test-data_xlsx/input/",
+  writePath: "test-data_xlsx/output/",
   simulate: false,
 
   doSubfolders: false,
