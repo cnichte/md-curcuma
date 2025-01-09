@@ -6,12 +6,12 @@ import {
 } from "../../types";
 
 import { Filesystem } from "../../filesystem";
-import { MD_Template } from "./helpers/markdown-template";
+import { MD_Template } from "./helpers/MD_Template";
 
 
 // TODO copy Task ist auch ein separater Task und hier nichrt integriert?
 // oder ein Subtask..
-import { MD_FileContent, MD_FileContent_Interface } from "./helpers/markdown-filecontent";
+import { MD_FileContent, MD_FileContent_Interface } from "./helpers/MD_FileContent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 import { MD_CopyJob } from "../../copy-job";
 

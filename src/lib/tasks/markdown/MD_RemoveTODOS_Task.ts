@@ -1,6 +1,6 @@
 import { Filesystem } from "../../filesystem";
 import { IO_Meta_Interface, MD_Task_Parameter_Type, Task_Interface } from "../../types";
-import { MD_FileContent, MD_FileContent_Interface } from "./helpers/markdown-filecontent";
+import { MD_FileContent, MD_FileContent_Interface } from "./helpers/MD_FileContent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 import { MD_MathTransformer_TemplateValues_Type } from "./MD_Math_Paragraph_Task";
 

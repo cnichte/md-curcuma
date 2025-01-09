@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { MD_Frontmatter_Template, MD_Frontmatter_Type } from "./markdown-frontmatter";
+import { MD_Frontmatter_Template, MD_Frontmatter_Type } from "./MD_Frontmatter_Template";
 import { Filesystem } from "../../../filesystem";
 
 /**
@@ -8,7 +8,7 @@ import { Filesystem } from "../../../filesystem";
  * @author Carsten Nichte - 2024
  */
 
-export interface Markdown_Document_Parameter_Type {
+export interface MD_Document_Parameter_Type {
   split_row: string;
   cleanName: string;
   url_prefix: string;
@@ -18,7 +18,7 @@ export interface Markdown_Document_Parameter_Type {
   frontmatter: MD_Frontmatter_Template;
 }
 
-export class Markdown_Document {
+export class MD_Document {
   public headline: string = "";
 
   public url_prefix: string = "prefix";
@@ -34,10 +34,10 @@ export class Markdown_Document {
 
   /**
    * Creates an instance of MD_Document.
-   * @param {Markdown_Document_Parameter_Type} parameter
+   * @param {MD_Document_Parameter_Type} parameter
    * @memberof MD_Document
    */
-  constructor(parameter: Markdown_Document_Parameter_Type) {
+  constructor(parameter: MD_Document_Parameter_Type) {
     
     this.url_prefix = parameter.url_prefix;
     this.weight = parameter.weightBase;

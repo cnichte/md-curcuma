@@ -4,7 +4,7 @@ import {
 } from "../../types";
 
 import { MD_MathTransformer_TemplateValues_Type } from "./MD_Math_Paragraph_Task";
-import { MD_FileContent, MD_FileContent_Interface } from "./helpers/markdown-filecontent";
+import { MD_FileContent, MD_FileContent_Interface } from "./helpers/MD_FileContent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 import { Filesystem } from "../../filesystem";
 import { Mapper, Mapper_Interface, Mapper_Item_Interface } from "../../mapper";
@@ -57,7 +57,7 @@ export class MD_Frontmatter_Task<T extends string> extends MD_Observable_Abstrac
       // The other like this:
       // this.frontmatter_target: MD_Frontmatter_Template
       const template_content: MD_FileContent_Interface =
-        Filesystem.split_frontmatter_body(
+      MD_FileContent.split_frontmatter_body(
           this.parameter.frontmatter.get_template_string() // TODO get_template_string is not a function
         );
 

@@ -4,8 +4,8 @@ import {
   IO_Meta_Interface,
 } from "../../types";
 import { Filesystem } from "../../filesystem";
-import { MD_FileContent, MD_FileContent_Interface } from "./helpers/markdown-filecontent";
-import { MD_Template } from "./helpers/markdown-template";
+import { MD_FileContent, MD_FileContent_Interface } from "./helpers/MD_FileContent";
+import { MD_Template } from "./helpers/MD_Template";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 
 export interface MD_Callout_TemplateValues_Type {

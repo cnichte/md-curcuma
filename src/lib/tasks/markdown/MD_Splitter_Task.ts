@@ -4,9 +4,9 @@ import {
 } from "../../types";
 
 import { Filesystem } from "../../filesystem";
-import { MD_Frontmatter_Template } from "./helpers/markdown-frontmatter";
-import { MD_FileContent } from "./helpers/markdown-filecontent";
-import { Markdown_Document, Markdown_Document_Parameter_Type } from "./helpers/markdown-document";
+import { MD_Frontmatter_Template } from "./helpers/MD_Frontmatter_Template";
+import { MD_FileContent } from "./helpers/MD_FileContent";
+import { MD_Document, MD_Document_Parameter_Type } from "./helpers/MD_Document";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 
 export interface MD_Splitter_Parameter_Type {
@@ -26,7 +26,7 @@ export interface MD_Splitter_Parameter_Type {
 export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T>
 {
   parameter: MD_Splitter_Parameter_Type;
-  md_document: Markdown_Document | null | undefined = null;
+  md_document: MD_Document | null | undefined = null;
   counter: number = 0;
 
   constructor(parameter: MD_Splitter_Parameter_Type) {
@@ -78,7 +78,7 @@ export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_T
         this.md_document.write_file(io_meta.file_name_writer);
       }
 
-      let params: Markdown_Document_Parameter_Type = {
+      let params: MD_Document_Parameter_Type = {
         split_row: dao.body_array[index],
         cleanName: this.parameter.cleanName,
         weightBase: this.parameter.weightBase,
@@ -88,7 +88,7 @@ export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_T
         counter: this.counter,
       };
 
-      this.md_document = new Markdown_Document(params);
+      this.md_document = new MD_Document(params);
 
       // remove the Headline itself, because it is now in frontmatter.
       // 2nd parameter means remove one item only

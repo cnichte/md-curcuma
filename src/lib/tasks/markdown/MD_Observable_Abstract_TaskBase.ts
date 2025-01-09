@@ -1,10 +1,9 @@
-import { Filesystem } from "../../filesystem";
 import { IO_Meta_Interface, Task_Interface } from "../../types";
 import { Observable_Abstract_TaskBase } from "../Observable_Abstract_TaskBase";
 import {
   MD_FileContent,
   MD_FileContent_Interface,
-} from "./helpers/markdown-filecontent";
+} from "./helpers/MD_FileContent";
 
 /**
  ** Processes the markdown dao paragraph by paragraph.
@@ -29,7 +28,7 @@ export abstract class MD_Observable_Abstract_TaskBase<T extends string>
 
     // Trenne das Frontmatter vom body ab. siehe md-transporter.
     const mdfc: MD_FileContent_Interface =
-      Filesystem.split_frontmatter_body(dao);
+    MD_FileContent.split_frontmatter_body(dao);
 
     for (var i = 0; i < mdfc.body_array.length; i++) {
       mdfc.index = i;
@@ -38,7 +37,7 @@ export abstract class MD_Observable_Abstract_TaskBase<T extends string>
     }
 
     // führe alles wieder zusammen
-    dao = Filesystem.merge_frontmatter_body(mdfc) as T;
+    dao = MD_FileContent.merge_frontmatter_body(mdfc) as T;
 
     // console.log("after", dao.data);
     // console.log("#######################################");

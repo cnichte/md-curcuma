@@ -8,9 +8,9 @@ import {
   IO_Meta_Interface,
 } from "../../types";
 
-import { MD_Template } from "./helpers/markdown-template";
+import { MD_Template } from "./helpers/MD_Template";
 import { MD_MathTransformer_TemplateValues_Type } from "./MD_Math_Paragraph_Task";
-import { MD_FileContent } from "./helpers/markdown-filecontent";
+import { MD_FileContent } from "./helpers/MD_FileContent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 
 //TODO: Das was früher ein MD_Transporter

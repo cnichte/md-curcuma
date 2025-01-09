@@ -145,7 +145,7 @@ export class Markdown_IO<D> implements IO_Interface<D>, Observable<D> {
       (filename: string, data: MD_FileContent_Interface) => {
         Filesystem.write_file_txt(
           filename,
-          Filesystem.merge_frontmatter_body(data)
+          MD_FileContent.merge_frontmatter_body(data)
         );
       }
     );

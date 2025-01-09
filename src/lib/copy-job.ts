@@ -1,6 +1,6 @@
 import { Filesystem } from "./filesystem";
 import { MD_LinkTransformer_TemplateValues_Type } from "./tasks/markdown";
-import { MD_Template } from "./tasks/markdown/helpers/markdown-template";
+import { MD_Template } from "./tasks/markdown/helpers/MD_Template";
 import { MD_CopyTask_Type } from "./types";
 
 export class MD_CopyJob {

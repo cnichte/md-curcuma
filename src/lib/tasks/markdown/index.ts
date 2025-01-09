@@ -1,5 +1,5 @@
-export * from './helpers/markdown-frontmatter';
-export * from './helpers/markdown-template';
+export * from './helpers';
+
 export * from './MD_Callout_Task';
 export * from './MD_Frontmatter_Task';
 export * from './MD_Math_Inline_Task';
