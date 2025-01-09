@@ -3,15 +3,14 @@
 // TODO: Es gibt einen für Inline and Paragraph
 
 import {
-  Task_Interface,
-  MD_Task_Parameter_Type,
   IO_Meta_Interface,
-} from "../../types";
+} from "../../io/types";
 
-import { Filesystem } from "../../filesystem";
+import { Filesystem } from "../../core/filesystem";
 import { MD_Template } from "./helpers/MD_Template";
 import { MD_FileContent, MD_FileContent_Interface } from "./helpers/MD_FileContent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
+import { MD_Task_Parameter_Type, Task_Interface } from "../types";
 
 export interface MD_MathTransformer_TemplateValues_Type {
   content: string;

@@ -3,15 +3,14 @@
 // TODO: Es gibt einen für Inline and Paragraph
 
 import {
-  Task_Interface,
-  MD_Task_Parameter_Type,
   IO_Meta_Interface,
-} from "../../types";
+} from "../../io/types";
 
 import { MD_Template } from "./helpers/MD_Template";
 import { MD_MathTransformer_TemplateValues_Type } from "./MD_Math_Paragraph_Task";
 import { MD_FileContent } from "./helpers/MD_FileContent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
+import { MD_Task_Parameter_Type, Task_Interface } from "../types";
 
 //TODO: Das was früher ein MD_Transporter
 export class MD_Math_Inline_Task<T extends string> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T>

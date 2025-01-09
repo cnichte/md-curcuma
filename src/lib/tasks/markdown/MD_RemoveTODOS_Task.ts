@@ -1,8 +1,9 @@
-import { Filesystem } from "../../filesystem";
-import { IO_Meta_Interface, MD_Task_Parameter_Type, Task_Interface } from "../../types";
+import { Filesystem } from "../../core/filesystem";
+import { IO_Meta_Interface } from "../../io/types";
 import { MD_FileContent, MD_FileContent_Interface } from "./helpers/MD_FileContent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 import { MD_MathTransformer_TemplateValues_Type } from "./MD_Math_Paragraph_Task";
+import { MD_Task_Parameter_Type, Task_Interface } from "../types";
 
 //TODO: Das was früher ein MD_Transporter
 export class MD_RemoveTODOS_Task<T extends string> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T>

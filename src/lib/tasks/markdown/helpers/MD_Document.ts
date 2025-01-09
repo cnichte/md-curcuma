@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { MD_Frontmatter_Template, MD_Frontmatter_Type } from "./MD_Frontmatter_Template";
-import { Filesystem } from "../../../filesystem";
+import { Filesystem } from "../../../core/filesystem";
 
 /**
  * MD_Document contains everything that makes up a single Markdown-Document.

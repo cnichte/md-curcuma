@@ -2,8 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as fsextra from "fs-extra";
 import * as XLSX from "xlsx";
-
-import { IOable } from "./types";
+import { IOable } from "../io/types";
 
 /**
  * Some handy Filesystem stuff from https://nodejs.org/api/fs.html

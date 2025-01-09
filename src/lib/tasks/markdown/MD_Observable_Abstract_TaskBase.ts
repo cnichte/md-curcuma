@@ -1,5 +1,6 @@
-import { IO_Meta_Interface, Task_Interface } from "../../types";
+import { IO_Meta_Interface } from "../../io/types";
 import { Observable_Abstract_TaskBase } from "../Observable_Abstract_TaskBase";
+import { Task_Interface } from "../types";
 import {
   MD_FileContent,
   MD_FileContent_Interface,

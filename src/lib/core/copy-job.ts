@@ -1,19 +1,24 @@
 import { Filesystem } from "./filesystem";
-import { MD_LinkTransformer_TemplateValues_Type } from "./tasks/markdown";
-import { MD_Template } from "./tasks/markdown/helpers/MD_Template";
-import { MD_CopyTask_Type } from "./types";
+import { MD_LinkTransformer_TemplateValues_Type } from "../tasks/markdown";
+import { MD_Template } from "../tasks/markdown/helpers/MD_Template";
 
-export class MD_CopyJob {
+export interface CopyTask_Type {
+  source: string;
+  target: string;
+  simulate: boolean;
+}
+
+export class CopyJob {
   /**
    *
    *
    * @static
-   * @param {MD_CopyTask_Type} copy_task
+   * @param {CopyTask_Type} copy_task
    * @param {MD_LinkTransformer_TemplateValues_Type} template_values
    * @memberof MD_CopyJob
    */
   static perform(
-    copy_task: MD_CopyTask_Type, // TODO Den gibt es doppelt
+    copy_task: CopyTask_Type, // TODO Den gibt es doppelt
     template_values: MD_LinkTransformer_TemplateValues_Type // TODO Den gibt es doppelt
   ): void {
     if (copy_task !== undefined && copy_task !== null) {
@@ -55,7 +60,7 @@ export class MD_CopyJob {
   }
 
   public static toString(obj:any): string {
-      if(MD_CopyJob.hasCopyTask(obj)){
+      if(CopyJob.hasCopyTask(obj)){
         return `simulate:${obj.copy_task.simulate}, source:'${obj.copy_task.source}', target:'${obj.copy_task.target}'`;
       }else{
         return "no copy_task defined."; 

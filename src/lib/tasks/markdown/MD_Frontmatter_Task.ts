@@ -1,13 +1,13 @@
 import {
-  Task_Interface,
   IO_Meta_Interface,
-} from "../../types";
+} from "../../io/types";
 
 import { MD_MathTransformer_TemplateValues_Type } from "./MD_Math_Paragraph_Task";
 import { MD_FileContent, MD_FileContent_Interface } from "./helpers/MD_FileContent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
-import { Filesystem } from "../../filesystem";
-import { Mapper, Mapper_Interface, Mapper_Item_Interface } from "../../mapper";
+import { Filesystem } from "../../core/filesystem";
+import { Mapper, Mapper_Interface, Mapper_Item_Interface } from "../../core/mapper";
+import { Task_Interface } from "../types";
 
 export interface MD_FrontmatterTask_Parameter_Type {
   frontmatter_filename: string;

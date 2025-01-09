@@ -1,4 +1,4 @@
-import { Mapper_Properties, Mapper_Task_Interface } from "../../mapper";
+import { Mapper_Properties, Mapper_Task_Interface } from "../../core/mapper";
 
 import { v4 as uuidv4, validate as uuidValidate } from "uuid";
 

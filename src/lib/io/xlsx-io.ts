@@ -6,8 +6,8 @@ import {
   Observer_Props,
   Observer_Subject,
   Observer_Type,
-} from "../observer";
-import { IO_Interface, IOable } from "../types";
+} from "../core/observer";
+import { IO_Interface, IOable } from "./types";
 
 //! import { Mapping_XXX_Interface, Mapping_Item  } from "../tasks/Mapping_Task";
 

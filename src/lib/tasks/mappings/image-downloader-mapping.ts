@@ -1,9 +1,9 @@
-import { Mapper_Properties, Mapper_Task_Interface } from "../../mapper";
+import { Mapper_Properties, Mapper_Task_Interface } from "../../core/mapper";
 
 import path = require("node:path");
 import url = require("node:url");
 import { v4 as uuidv4 } from "uuid";
-import { Filesystem } from "../../filesystem";
+import { Filesystem } from "../../core/filesystem";
 import { CSV_IO } from "src/lib/io/csv-io";
 
 export interface ImageDownloader_MappingType {

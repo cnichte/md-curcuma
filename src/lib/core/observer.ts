@@ -1,4 +1,4 @@
-import { IO_Meta_Interface } from "./types";
+import { IO_Meta_Interface } from "../io/types";
 
 export type Observer_Command_Type = 'perform-tasks' | 'tasks-finnished' | 'do-io-write' | 'do-not-io-write';
 

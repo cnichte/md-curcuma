@@ -1,6 +1,6 @@
 
-import { Mapper, Mapper_Interface, Mapper_Item_Interface } from "../mapper";
-import { IO_Meta_Interface } from "../types";
+import { Mapper, Mapper_Interface, Mapper_Item_Interface } from "../core/mapper";
+import { IO_Meta_Interface } from "../io/types";
 import { Observable_Abstract_TaskBase } from "./Observable_Abstract_TaskBase";
 
 

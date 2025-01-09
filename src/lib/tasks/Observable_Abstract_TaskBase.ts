@@ -4,8 +4,9 @@ import {
   Observer_Props,
   Observer_Subject,
   Observer_Type,
-} from "../observer";
-import { IO_Meta_Interface, Task_Interface } from "../types";
+} from "../core/observer";
+import { IO_Meta_Interface } from "../io/types";
+import { Task_Interface } from "./types";
 
 /**
  * Makes a Task Observable.

@@ -7,9 +7,9 @@ import {
   Observer_Props,
   Observer_Subject,
   Observer_Type,
-} from "../observer";
-import { IO_Interface } from "../types";
-import { Filesystem } from "../filesystem";
+} from "../core/observer";
+
+import { Filesystem } from "../core/filesystem";
 
 // import { Mapping_Macher, Mapping_XXX_Interface, Mapping_Item  } from "../tasks/Mapping_Task";
 
@@ -17,6 +17,7 @@ import * as fs from "fs";
 import client_http = require("http");
 import client_https = require("https");
 import { URL } from "url";
+import { IO_Interface } from "./types";
 
 
 export interface CSV_IO_Props_Interface {

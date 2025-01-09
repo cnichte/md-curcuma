@@ -1,13 +1,9 @@
 //! Teste: Das neue Curcuma
 
-import {
-  Mapping,
-  Mapping_Item,
-  Mapping_Task_Properties,
-  Markdown_IO,
-  NOP_Task,
-  Runner,
-} from "../src/lib";
+import { Runner } from "../src/lib/core";
+import { Mapper_Interface, Mapper_Item_Interface, Mapper_Properties } from "../src/lib/core/mapper";
+import { Markdown_IO } from "../src/lib/io";
+import { NOP_Task } from "../src/lib/tasks";
 
 import {
   MD_Callout_Task,
@@ -15,11 +11,11 @@ import {
   MD_Math_Inline_Task,
   MD_Writer_Task,
   MD_ObsidianLink_Task,
-  MD_Splitter_Task,
   MD_RemoveTODOS_Task,
   MD_Frontmatter_Task,
   MD_Frontmatter_Template,
 } from "../src/lib/tasks/markdown";
+
 
 var frontmatter_template: MD_Frontmatter_Template =
   new MD_Frontmatter_Template(`---
@@ -104,7 +100,7 @@ runner.addTask(
 // use one of the predefined tasks like so:
 // task: new Mapping_BooleanInverse_Task()
 // or write a custom task like so:
-const map_1: Mapping<Mapping_Item> = {
+const map_1: Mapper_Interface<Mapper_Item_Interface> = {
   mapping_items: [
     {
       source_property_name: "doPublish",
@@ -112,7 +108,7 @@ const map_1: Mapping<Mapping_Item> = {
     }
   ],
   task: {
-    perform: function (mapping_properties: Mapping_Task_Properties): boolean {
+    perform: function (mapping_properties: Mapper_Properties): boolean {
       if (typeof mapping_properties.source_value == "boolean") { }
       return !mapping_properties.source_value;
     },
@@ -120,13 +116,13 @@ const map_1: Mapping<Mapping_Item> = {
 };
 
 // An example task that inserts the current date. Source Property isnt used here.
-const map_2: Mapping<Mapping_Item> = {
+const map_2: Mapper_Interface<Mapper_Item_Interface> = {
   mapping_items: [{
     source_property_name: "",
     target_poperty_name: "date",
   }],
   task: {
-    perform: function (mapping_properties: Mapping_Task_Properties) {
+    perform: function (mapping_properties: Mapper_Properties) {
       return new Date().toJSON().slice(0, 16);
     },
   }

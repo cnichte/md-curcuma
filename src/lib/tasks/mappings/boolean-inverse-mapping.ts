@@ -1,4 +1,4 @@
-import { Mapper_Properties, Mapper_Task_Interface } from "../../mapper";
+import { Mapper_Properties, Mapper_Task_Interface } from "../../core/mapper";
 export class BooleanInverse_Mapping
   implements Mapper_Task_Interface
 {

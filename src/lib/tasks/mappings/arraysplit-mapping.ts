@@ -1,4 +1,4 @@
-import { Mapper_Properties, Mapper_Task_Interface } from "../../mapper";
+import { Mapper_Properties, Mapper_Task_Interface } from "../../core/mapper";
 
 export interface ArraySplit_MappingType {
   separator: string;

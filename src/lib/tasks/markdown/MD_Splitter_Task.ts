@@ -1,13 +1,13 @@
 import {
-  Task_Interface,
   IO_Meta_Interface,
-} from "../../types";
+} from "../../io/types";
 
-import { Filesystem } from "../../filesystem";
+import { Filesystem } from "../../core/filesystem";
 import { MD_Frontmatter_Template } from "./helpers/MD_Frontmatter_Template";
 import { MD_FileContent } from "./helpers/MD_FileContent";
 import { MD_Document, MD_Document_Parameter_Type } from "./helpers/MD_Document";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
+import { Task_Interface } from "../types";
 
 export interface MD_Splitter_Parameter_Type {
   pattern: string;

@@ -4,11 +4,11 @@
  * updating the json with image path.
  */
 
-import { CSV_IO, Json_IO, Mapper_Interface, Mapper_Item_Interface, Mapping_Task, Runner } from "../src/lib";
+import { Mapper_Interface, Mapper_Item_Interface, Runner } from "../src/lib/core";
+import { CSV_IO, Json_IO } from "../src/lib/io";
+import { Mapping_Task } from "../src/lib/tasks";
 
-import { InsertUUID_Mapping } from "../src/lib/tasks/mappings/insert-uuid-mapping";
-import { ArraySplit_Mapping } from "../src/lib/tasks/mappings/arraysplit-mapping";
-import { ImageDownloader_MappingType, ImageDownloader_Mapping } from "../src/lib/tasks/mappings/image-downloader-mapping";
+import { InsertUUID_Mapping, ArraySplit_Mapping, ImageDownloader_MappingType, ImageDownloader_Mapping  } from "../src/lib/tasks/mappings"
 
 const runner = new Runner<string>();
 

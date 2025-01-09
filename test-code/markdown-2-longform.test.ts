@@ -1,11 +1,7 @@
 //! Teste: Das neue Curcuma
 
 import {
-  Mapping,
-  Mapping_Item,
-  Mapping_Task_Properties,
   Markdown_IO,
-  NOP_Task,
   Runner,
 } from "../src/lib";
 

@@ -6,9 +6,9 @@ import {
   Observer_Props,
   Observer_Subject,
   Observer_Type,
-} from "../observer";
-import { IO_Interface, IO_Meta_Interface } from "../types";
-import { Filesystem } from "../filesystem";
+} from "../core/observer";
+import { IO_Interface, IO_Meta_Interface } from "./types";
+import { Filesystem } from "../core/filesystem";
 
 
 // TODO Lese eine JSON Datei oder ein Verzeichnis von JSON Dateien.

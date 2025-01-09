@@ -1,4 +1,4 @@
-import { Mapper_Task_Interface } from "../../../mapper";
+import { Mapper_Task_Interface } from "../../../core/mapper";
 import { MD_Template } from "./MD_Template";
 
 // TODO mapping ???

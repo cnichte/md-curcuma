@@ -1,5 +1,7 @@
-import { IO_Interface, Task_Interface } from "./types";
+import { IO_Interface } from "../io/types";
+import { Task_Interface } from "../tasks";
 import { Observer_Interface, Observer_Props, Observer_Type } from "./observer";
+
 
 export interface Runner_Interface<D> extends Observer_Interface<D> {
   addTask(task: Task_Interface<D>): void;

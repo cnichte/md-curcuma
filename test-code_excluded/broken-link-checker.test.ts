@@ -1,4 +1,4 @@
-import { BLC_Parameter, Broken_Link_Checker } from "../src/lib/broken-link-checker";
+import { BLC_Parameter, Broken_Link_Checker } from "../src/lib/tasks/broken-link-checker";
 
 // const url = 'http://localhost:1313/';
 const url: string = 'http://192.168.178.91:81';

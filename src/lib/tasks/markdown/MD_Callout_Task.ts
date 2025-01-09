@@ -1,12 +1,12 @@
 import {
-  Task_Interface,
-  MD_Task_Parameter_Type,
   IO_Meta_Interface,
-} from "../../types";
-import { Filesystem } from "../../filesystem";
+} from "../../io/types";
+
+import { Filesystem } from "../../core/filesystem";
 import { MD_FileContent, MD_FileContent_Interface } from "./helpers/MD_FileContent";
 import { MD_Template } from "./helpers/MD_Template";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
+import { MD_Task_Parameter_Type, Task_Interface } from "../types";
 
 export interface MD_Callout_TemplateValues_Type {
   context: string;

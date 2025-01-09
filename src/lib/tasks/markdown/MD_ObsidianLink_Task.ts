@@ -1,11 +1,8 @@
 import {
-  Task_Interface,
-  MD_Task_Parameter_Type,
   IO_Meta_Interface,
-  MD_CopyTask_Type,
-} from "../../types";
+} from "../../io/types";
 
-import { Filesystem } from "../../filesystem";
+import { Filesystem } from "../../core/filesystem";
 import { MD_Template } from "./helpers/MD_Template";
 
 
@@ -13,7 +10,8 @@ import { MD_Template } from "./helpers/MD_Template";
 // oder ein Subtask..
 import { MD_FileContent, MD_FileContent_Interface } from "./helpers/MD_FileContent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
-import { MD_CopyJob } from "../../copy-job";
+import { CopyJob, CopyTask_Type } from "../../core/copy-job";
+import { MD_Task_Parameter_Type, Task_Interface } from "../types";
 
 export interface MD_LinkTransformer_TemplateValues_Type {
   name_full: string;
@@ -42,7 +40,7 @@ export class MD_ObsidianLink_Task<T extends string> extends MD_Observable_Abstra
 
   protected tag: string = "";
 
-  protected copy_task?: MD_CopyTask_Type;
+  protected copy_task?: CopyTask_Type;
 
   //! from class
   parameter: MD_Task_Parameter_Type;
@@ -99,10 +97,10 @@ export class MD_ObsidianLink_Task<T extends string> extends MD_Observable_Abstra
       // false true      true
       // true  false     true
       // true  true      true
-      if (MD_CopyJob.hasCopyTask(this)) {
+      if (CopyJob.hasCopyTask(this)) {
         // simulate:  this.copy_task.simulate = this.copy_task.simulate && this.job_parameter.simulate;
 
-        MD_CopyJob.perform(this.copy_task, this.template_values);
+        CopyJob.perform(this.copy_task, this.template_values);
       }
     }
 
@@ -153,6 +151,6 @@ export class MD_ObsidianLink_Task<T extends string> extends MD_Observable_Abstra
     name_full   : ${this.template_values.name_full}
     name        : ${this.template_values.name}
     name_suffix : ${this.template_values.name_suffix}
-    copy_task   : ${MD_CopyJob.toString(this)}`;
+    copy_task   : ${CopyJob.toString(this)}`;
   }
 }

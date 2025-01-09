@@ -1,4 +1,4 @@
-import { IO_Meta_Interface } from "../types";
+import { IO_Meta_Interface } from "../io/types";
 import { Observable_Abstract_TaskBase } from "./Observable_Abstract_TaskBase";
 
 /**
