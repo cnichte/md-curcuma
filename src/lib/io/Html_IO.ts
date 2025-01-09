@@ -11,7 +11,7 @@ import { IO_Interface, IO_Meta_Interface } from "./types";
 import { Filesystem } from "../core/filesystem";
 
 
-// TODO Lese eine JSON Datei oder ein Verzeichnis von JSON Dateien.
+// TODO: HTML umbauen. Für den MacFamilyTree Wrangler.
 
 export interface Html_IO_Props_Interface {
   //! alt: MD_Transporter_Parameter_Type

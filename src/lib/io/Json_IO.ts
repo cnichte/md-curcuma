@@ -1,14 +1,11 @@
 import {
   Observable,
-  Observable_Type,
-  Observer_Command_Type,
   Observer_Interface,
   Observer_Props,
   Observer_Subject,
   Observer_Type,
 } from "../core/observer";
-import { IO_Interface, IO_Meta_Interface } from "./types";
-import { Filesystem } from "../core/filesystem";
+import { IO_Interface } from "./types";
 
 
 // TODO Lese eine JSON Datei oder ein Verzeichnis von JSON Dateien.

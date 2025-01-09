@@ -27,6 +27,9 @@ export interface CSV_IO_Props_Interface {
   // mappings?: Mapping<Mapping_Item>[]; 
 }
 
+/**
+ * Könnte durch Xlsx_IO abgelöst werden.
+ */
 export class CSV_IO<D> implements IO_Interface<D>, Observable<D> {
   // Der reader löst ein Event aus, auf das der Runner hört.
   // Der reader schickt so die file-datensätze nacheinander zu weiteren Verarbeitung.
