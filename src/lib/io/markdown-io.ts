@@ -10,6 +10,12 @@ import {
 import { IO_Interface, IO_Meta_Interface } from "../types";
 import { Filesystem } from "../filesystem";
 
+/*
+
+TODO TaskBase
+
+*/
+
 /**
  ** Lese und schreibe Markdown-Dateien.
  */

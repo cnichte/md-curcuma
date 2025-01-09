@@ -47,8 +47,8 @@ const runner = new Runner<string>();
 runner.addReader(
   new Markdown_IO<string>({
     //* this is a Markdown_IO_Props_Interface
-    readPath: "test-data-obsidian-vault/some-md-docs",
-    writePath: "test-data-hugo/hugo-content-new/",
+    readPath: "test-data_obsidian-vault/some-md-docs",
+    writePath: "test-data_hugo/hugo-content-new/",
     doSubfolders: false,
     limit: 1990,
     useCounter: false,
@@ -93,8 +93,8 @@ runner.addTask(
     find_rule: "pdf|ods|odp",
     replace_template:  "{{< button href=\"/getthis.php?id={name}\" name=\"download {name} ({name_suffix})\" >}}",
     copy_task:{
-      source:"test-data-obsidian-vault/attachments/",
-      target:"test-data-hugo/hugo-content-new/static/downloads/",
+      source:"test-data_obsidian-vault/attachments/",
+      target:"test-data_hugo/hugo-content-new/static/downloads/",
       simulate:false
     }
   })
@@ -135,7 +135,7 @@ const map_2: Mapping<Mapping_Item> = {
 runner.addTask(
   new MD_Frontmatter_Task<string>({
         //* this is a MD_FrontmatterTask_Parameter_Type
-        frontmatter_filename: "./test-data-obsidian-vault/frontmatter-template.md",
+        frontmatter_filename: "./test-data_obsidian-vault/frontmatter-template.md",
         frontmatter: frontmatter_template,
         mappings: [map_1, map_2]
   })

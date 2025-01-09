@@ -4,8 +4,8 @@
       "job_name": "Example-Job No.1",
       "job_description": "Example Job Description",
       "job_parameter": {
-        "readPath": "./test-data-obsidian-vault/longform.md",
-        "writePath": "./test-data-hugo/hugo-content-1/",
+        "readPath": "./test-data_obsidian-vault/longform.md",
+        "writePath": "./test-data_hugo/hugo-content-1/",
         "simulate": false,
         "doSubfolders": false,
         "limit": 100,
@@ -15,7 +15,7 @@
         {
           "transformer_class_name": "MD_Frontmatter_Transformer",
           "transformer_parameter": {
-            "frontmatter_filename": "./test-data-obsidian-vault/frontmatter-template.md",
+            "frontmatter_filename": "./test-data_obsidian-vault/frontmatter-template.md",
             "frontmatter": {}
           }
         },
@@ -27,8 +27,8 @@
             "find_rule": "jpg|png",
             "replace_template": "{{< lightbox-docs id=\"0\" folder=\"images/{name}/*\" showImageNr=0 >}}",
             "copy_task":{
-              "source":"test-data-obsidian-vault/images/",
-              "target":"test-data-hugo/hugo-content-1/assets/images/{name}/",
+              "source":"test-data_obsidian-vault/images/",
+              "target":"test-data_hugo/hugo-content-1/assets/images/{name}/",
               "simulate":false
             }
 
@@ -42,8 +42,8 @@
             "find_rule": "pdf|ods|odp",
             "replace_template": "{{< button href=\"/getthis.php?id={name}\" name=\"download {name} ({name_suffix})\" >}}",
             "copy_task":{
-              "source":"test-data-obsidian-vault/attachments/",
-              "target":"test-data-hugo/hugo-content-1/static/downloads/",
+              "source":"test-data_obsidian-vault/attachments/",
+              "target":"test-data_hugo/hugo-content-1/static/downloads/",
               "simulate":false
             }
           }
@@ -92,7 +92,7 @@
             "weightBase": 8000,
             "url_prefix": "test-prefix",
             "doRemoveHeadline": true,
-            "frontmatter_filename": "./test-data-obsidian-vault/frontmatter-template.md",
+            "frontmatter_filename": "./test-data_obsidian-vault/frontmatter-template.md",
             "frontmatter": {}
           }
         }

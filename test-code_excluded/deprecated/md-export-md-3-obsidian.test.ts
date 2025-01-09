@@ -35,8 +35,8 @@ const simulate_job = false;
 const simulate_copy_job = false;
 
 const md_transporter_parameter: MD_Transporter_Parameter_Type = {
-  readPath: "test-data-obsidian-vault/some-md-docs",
-  writePath: "test-data-hugo/hugo-content-3/",
+  readPath: "test-data_obsidian-vault/some-md-docs",
+  writePath: "test-data_hugo/hugo-content-3/",
   doSubfolders: false,
   limit: 1990,
   useCounter: false,

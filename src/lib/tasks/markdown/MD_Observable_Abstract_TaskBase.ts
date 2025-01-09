@@ -19,6 +19,11 @@ export abstract class MD_Observable_Abstract_TaskBase<T extends string>
   }
 
   perform(dao: T, io_meta: IO_Meta_Interface): T {
+
+    // TODO REFACTOR: Der Code sollte in markdown-io reader umziehen.
+    // TODO REFACTOR: Das DAO sollte komplett mdfc bzw. ein Objekt: mdfc + i 
+    // Vermutliche brauch ich dann diese Basisklasse und transform nichte mehr.
+
     // console.log("#######################################");
     // console.log("before", dao.data);
 

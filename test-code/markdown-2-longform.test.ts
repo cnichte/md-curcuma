@@ -45,8 +45,8 @@ const runner = new Runner<string>();
 
 runner.addReader(
   new Markdown_IO<string>({
-    readPath: "test-data-obsidian-vault/longform.md",
-    writePath: "test-data-hugo/hugo-content-2-longform/",
+    readPath: "test-data_obsidian-vault/longform.md",
+    writePath: "test-data_hugo/hugo-content-2-longform/",
     doSubfolders: false,
     limit: 1990,
     useCounter: false,
@@ -63,7 +63,7 @@ runner.addTask(
     weightBase: 8000,
     url_prefix: "test-prefix",
     doRemoveHeadline: true,
-    frontmatter_filename: "./test-data-obsidian-vault/frontmatter-template.md",
+    frontmatter_filename: "./test-data_obsidian-vault/frontmatter-template.md",
     frontmatter: frontmatter_template,
   })
 );
