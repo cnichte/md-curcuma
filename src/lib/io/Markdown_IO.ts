@@ -8,7 +8,12 @@ import {
   Observer_Type,
 } from "../core/observer";
 
-import { IO_Interface, IO_Meta_Interface } from "./types";
+import {
+  DAO_Interface,
+  IO_Observable_Interface,
+  IO_Meta_Interface,
+  IOable,
+} from "./types";
 import { Filesystem } from "../core/filesystem";
 
 /**
@@ -25,31 +30,44 @@ export class IO_Observer_Props<D> implements Observer_Props<D> {
   from: Observable_Type;
   to: Observer_Type;
   command: Observer_Command_Type;
-  dao: D;
-  io_meta: IO_Meta_Interface;
+  dao: DAO_Interface<D>;
 }
 
 // TODO Lese eine markdown Datei oder ein Verzeichnis von Markdown Dateien.
 
-export interface Markdown_IO_Props_Interface {
-  //! alt: MD_Transporter_Parameter_Type
-  readPath: string; // Datei oder Verzeichnis
-  writePath: string; // Verzeichnis
+export interface Markdown_IO_ReadProps_Interface extends IOable {
+  path: string; // Datei oder Verzeichnis
   simulate: boolean;
   doSubfolders: boolean;
   limit: number; // greift nur bei Verzeichnis
   useCounter: boolean;
 }
 
-export class Markdown_IO<D> implements IO_Interface<D>, Observable<D> {
+export interface Markdown_IO_WriteProps_Interface extends IOable {
+  path: string; // Verzeichnis
+  simulate: boolean;
+}
+
+export class Markdown_IO<D> implements IO_Observable_Interface<D>, Observable<D> {
   // Der reader löst ein Event aus, auf das der Runner hört.
   // Der reader schickt so die file-datensätze nacheinander zu weiteren Verarbeitung.
   private observer_subject: Observer_Subject<D> = new Observer_Subject<D>();
 
-  private props: Markdown_IO_Props_Interface = null;
+  private read_props: Markdown_IO_ReadProps_Interface = null;
+  private write_props: Markdown_IO_WriteProps_Interface = null;
 
-  constructor(props: Markdown_IO_Props_Interface) {
-    this.props = props;
+  constructor(
+    read_props: Markdown_IO_ReadProps_Interface,
+    write_props: Markdown_IO_WriteProps_Interface | null
+  ) {
+    this.read_props = read_props;
+    this.write_props = write_props;
+    if (write_props == null) {
+      this.write_props = {
+        path: read_props.path,
+        simulate: false,
+      };
+    }
   }
 
   add_observer(observer: Observer_Interface<D>, id: Observer_Type): void {
@@ -70,12 +88,12 @@ export class Markdown_IO<D> implements IO_Interface<D>, Observable<D> {
   read(): void {
     var file_list: Array<string> = [];
 
-    if (Filesystem.isFolder(this.props.readPath)) {
-      file_list = Filesystem.get_files_list(this.props.readPath);
-    } else if (Filesystem.isFile(this.props.readPath)) {
-      file_list.push(this.props.readPath);
+    if (Filesystem.isFolder(this.read_props.path)) {
+      file_list = Filesystem.get_files_list(this.read_props.path);
+    } else if (Filesystem.isFile(this.read_props.path)) {
+      file_list.push(this.read_props.path);
     } else {
-      console.log(`not supported: '${this.props.readPath}'`);
+      console.log(`not supported: '${this.read_props.path}'`);
     }
 
     console.log("Markdown_IO.read: ", file_list);
@@ -89,7 +107,7 @@ export class Markdown_IO<D> implements IO_Interface<D>, Observable<D> {
       o_props.command = "perform-tasks";
 
       //* 2. DATEN LADEN und DAO ERZEUGEN (in dem Fall ein Markdown String)
-      o_props.dao = Filesystem.read_file_txt(file);
+      let dao_string: string = Filesystem.read_file_txt(file);
 
       // TODO REFACTOR: MD_Observable_Abstract_TaskBase code nach hier umziehen
       // TODO REFACTOR: Das DAO sollte komplett mdfc bzw. ein Objekt: mdfc + i
@@ -101,9 +119,14 @@ export class Markdown_IO<D> implements IO_Interface<D>, Observable<D> {
 
       // TODO: Unklar. Falls ein writer definiert ist darf es das überschreiben.
       // TODO: Für den MD_Splitter_Task mach ich das erst mal so.
-      io_meta.file_name_writer = this.props.writePath;
+      io_meta.file_name_writer = this.write_props.path;
 
-      o_props.io_meta = io_meta;
+      let the_dao: DAO_Interface<string> = {
+        dao: dao_string,
+        io_meta: io_meta,
+      };
+
+      o_props.dao = the_dao;
 
       //* 4. fire event and inform listeners - which is only the runner at the moment.
       console.log("markdown-io.do_command: perform tasks for", file);
@@ -125,27 +148,19 @@ export class Markdown_IO<D> implements IO_Interface<D>, Observable<D> {
    *
    * @param dao
    */
-  write(dao: D): void {
-    // TODO write markdown file, see md-transporter
-    // Filesystem.write_my_file()
-    /*
+  write(dao: DAO_Interface<D>): void {
+    let source_file = this.read_props.path;
+    // TODO I don't actually want to write the entire file when splitting.
+    // TODO perhaps i want to transform also the filename.
 
-    Filesystem.write_my_file<
-      MD_FileContent_Interface,
-      MD_Transporter_Parameter_Type
-    >(
+    Filesystem.write_my_file<any, Markdown_IO_WriteProps_Interface>(
       source_file,
-      job_parameter,
-      mdfc,
-      this.do_not_write_file,
-      (filename: string, data: MD_FileContent_Interface) => {
-        Filesystem.write_file_txt(
-          filename,
-          MD_FileContent.merge_frontmatter_body(data)
-        );
+      this.write_props,
+      dao.dao,
+      false, // do_not_write_file
+      (filename: string, data: string) => {
+        Filesystem.write_file_txt(filename, data);
       }
     );
-
-*/
   }
 }

@@ -3,6 +3,7 @@
 // TODO: Es gibt einen für Inline and Paragraph
 
 import {
+  DAO_Interface,
   IO_Meta_Interface,
 } from "../../io/types";
 
@@ -30,19 +31,19 @@ export class MD_Math_Inline_Task<T extends string> extends MD_Observable_Abstrac
     this.parameter = parameter;
   }
 
-  public perform(dao: T, io_meta: IO_Meta_Interface): T {
-    dao = super.perform(dao, io_meta);
+  public perform(dao: DAO_Interface<T>): DAO_Interface<T> {
+    dao = super.perform(dao);
     return dao;
   }
 
   /**
    * Is called by super.perform()
-   * @param dao
+   * @param mdfc
    * @param index
    * @returns
    */
-  protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
-    let paragraph = dao.body_array[index];
+  protected transform(mdfc: MD_FileContent, index: number): MD_FileContent {
+    let paragraph = mdfc.body_array[index];
 
     let words_array = paragraph.split(" ");
 
@@ -68,8 +69,8 @@ export class MD_Math_Inline_Task<T extends string> extends MD_Observable_Abstrac
       }
     }
 
-    dao.body_array[index] = words_array.join(" ");
+    mdfc.body_array[index] = words_array.join(" ");
 
-    return dao;
+    return mdfc;
   }
 }

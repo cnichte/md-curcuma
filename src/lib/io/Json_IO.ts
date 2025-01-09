@@ -5,7 +5,7 @@ import {
   Observer_Subject,
   Observer_Type,
 } from "../core/observer";
-import { IO_Interface } from "./types";
+import { DAO_Interface, IO_Observable_Interface } from "./types";
 
 
 // TODO Lese eine JSON Datei oder ein Verzeichnis von JSON Dateien.
@@ -20,7 +20,7 @@ export interface Json_IO_Props_Interface {
   useCounter: boolean;
 }
 
-export class Json_IO<D> implements IO_Interface<D>, Observable<D> {
+export class Json_IO<D> implements IO_Observable_Interface<D>, Observable<D> {
   // Der reader löst ein Event aus, auf das der Runner hört.
   // Der reader schickt so die file-datensätze nacheinander zu weiteren Verarbeitung.
   private observer_subject: Observer_Subject<D> = new Observer_Subject<D>();
@@ -50,11 +50,8 @@ export class Json_IO<D> implements IO_Interface<D>, Observable<D> {
 
   }
 
-  /**
-   *
-   * @param dao
-   */
-  write(dao: D): void {
-
+  write(dao: DAO_Interface<D>): void {
+    throw new Error("Method not implemented.");
   }
+
 }

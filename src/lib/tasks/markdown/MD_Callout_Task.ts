@@ -1,9 +1,6 @@
-import {
-  IO_Meta_Interface,
-} from "../../io/types";
+import { DAO_Interface } from "../../io/types";
 
-import { Filesystem } from "../../core/filesystem";
-import { MD_FileContent, MD_FileContent_Interface } from "./helpers/MD_FileContent";
+import { MD_FileContent } from "./helpers/MD_FileContent";
 import { MD_Template } from "./helpers/MD_Template";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 import { MD_Task_Parameter_Type, Task_Interface } from "../types";
@@ -16,7 +13,10 @@ export interface MD_Callout_TemplateValues_Type {
 }
 
 //TODO: Das was früher ein MD_Transporter
-export class MD_Callout_Task<T extends string> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T> {
+export class MD_Callout_Task<T extends string>
+  extends MD_Observable_Abstract_TaskBase<T>
+  implements Task_Interface<T>
+{
   parameter: MD_Task_Parameter_Type;
   collection: string[] | null | undefined = null;
   counter: number = 0;
@@ -106,12 +106,12 @@ export class MD_Callout_Task<T extends string> extends MD_Observable_Abstract_Ta
   ];
 
   constructor(parameter: MD_Task_Parameter_Type) {
-    super()
+    super();
     this.parameter = parameter;
   }
 
-  public perform(dao: T, io_meta: IO_Meta_Interface): T {
-    return super.perform(dao, io_meta);
+  public perform(dao: DAO_Interface<T>): DAO_Interface<T> {
+    return super.perform(dao);
   }
 
   /**
@@ -120,8 +120,8 @@ export class MD_Callout_Task<T extends string> extends MD_Observable_Abstract_Ta
    * @param index
    * @returns
    */
-  protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
-    let item = dao.body_array[index];
+  protected transform(mdfc: MD_FileContent, index: number): MD_FileContent {
+    let item = mdfc.body_array[index];
 
     // Callout beginnt als Absatz mit "> [!   ]"
     if (
@@ -146,8 +146,8 @@ export class MD_Callout_Task<T extends string> extends MD_Observable_Abstract_Ta
         .substring(separator_pos + 1, item.length)
         .trim();
 
-      dao.body_array.splice(index, 1); // Remove the line:
-      dao.index = dao.index - 1;
+      mdfc.body_array.splice(index, 1); // Remove the line:
+      mdfc.index = mdfc.index - 1;
       // start to collect
     } else if (this.doCollect) {
       const token_pos = item.indexOf(">");
@@ -155,13 +155,13 @@ export class MD_Callout_Task<T extends string> extends MD_Observable_Abstract_Ta
       if (token_pos >= 0) {
         // Only remove, if the next line also belongs to the callout.
         // The last line in the callout is overwritten by the replacement.
-        let next_item = dao.body_array[index + 1];
+        let next_item = mdfc.body_array[index + 1];
         if (next_item.indexOf(">") >= 0) {
           this.collection.push(
             item.substring(token_pos + 1, item.length).trim()
           );
-          dao.body_array.splice(index, 1);
-          dao.index = dao.index - 1;
+          mdfc.body_array.splice(index, 1);
+          mdfc.index = mdfc.index - 1;
         }
       } else {
         this.doCollect = false;
@@ -179,10 +179,10 @@ export class MD_Callout_Task<T extends string> extends MD_Observable_Abstract_Ta
           this.parameter.replace_template
         );
 
-        dao.body_array[index] = template.fill(this.template_values);
+        mdfc.body_array[index] = template.fill(this.template_values);
       }
     }
 
-    return dao;
+    return mdfc;
   }
 }

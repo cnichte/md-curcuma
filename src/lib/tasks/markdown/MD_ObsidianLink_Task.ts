@@ -1,4 +1,5 @@
 import {
+  DAO_Interface,
   IO_Meta_Interface,
 } from "../../io/types";
 
@@ -61,33 +62,33 @@ export class MD_ObsidianLink_Task<T extends string> extends MD_Observable_Abstra
     this.copy_task = parameter.copy_task;
   }
 
-  public perform(dao: T, io_meta: IO_Meta_Interface): T {
-    dao = super.perform(dao, io_meta);
+  public perform(dao: DAO_Interface<T>): DAO_Interface<T> {
+    dao = super.perform(dao);
     return dao;
   }
 
   /**
    * Is called by super.perform()
-   * @param dao
+   * @param mdfc
    * @param index
    * @returns
    */
-  protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
-    this.super_transform(dao, index, io_meta);
+  protected transform(mdfc: MD_FileContent, index: number): MD_FileContent {
+    this.super_transform(mdfc, index);
 
     if (this.template_values.name_suffix.match(`^(${this.find_rule})$`)) {
       // match(/^(pdf|ods|odp)$/)  oder match('^(pdf|ods|odp)$')
       console.log(this.toString(`find rule '${this.find_rule}'`));
-      console.log(`item before : ${dao.body_array[index]}`);
+      console.log(`item before : ${mdfc.body_array[index]}`);
 
       const hugo_template: MD_Template = new MD_Template(this.replace_template);
 
-      dao.body_array[index] = dao.body_array[index].replace(
+      mdfc.body_array[index] = mdfc.body_array[index].replace(
         this.tag,
         hugo_template.fill(this.template_values)
       );
 
-      console.log(`item after  : ${dao.body_array[index]}`);
+      console.log(`item after  : ${mdfc.body_array[index]}`);
       console.log(``);
 
       // parent job-property overwrites copy_task property
@@ -104,9 +105,9 @@ export class MD_ObsidianLink_Task<T extends string> extends MD_Observable_Abstra
       }
     }
 
-    return dao;
+    return mdfc;
   }
-  super_transform(file_content: any, index: number, io_meta: IO_Meta_Interface) {
+  super_transform(file_content: any, index: number) {
     let item = file_content.body_array[index];
 
     this.reset();

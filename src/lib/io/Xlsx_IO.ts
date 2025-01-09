@@ -7,7 +7,7 @@ import {
   Observer_Subject,
   Observer_Type,
 } from "../core/observer";
-import { IO_Interface, IOable } from "./types";
+import { DAO_Interface, IO_Observable_Interface, IOable } from "./types";
 
 //! import { Mapping_XXX_Interface, Mapping_Item  } from "../tasks/Mapping_Task";
 
@@ -33,7 +33,7 @@ export interface XLSX_Transporter_Parameter_Type<T> extends IOable {
 }
 
 //! XLSX.WorkBook
-export class XLSX_IO<D> implements IO_Interface<D>, Observable<D>
+export class XLSX_IO<D> implements IO_Observable_Interface<D>, Observable<D>
 {
   // Der reader löst ein Event aus, auf das der Runner hört.
   // Der reader schickt so die file-datensätze nacheinander zu weiteren Verarbeitung.
@@ -67,11 +67,8 @@ export class XLSX_IO<D> implements IO_Interface<D>, Observable<D>
 
   }
 
-  /**
-   *
-   * @param dao
-   */
-  write(dao: D): void {
-
+  write(dao: DAO_Interface<D>): void {
+    throw new Error("Method not implemented.");
   }
+
 }

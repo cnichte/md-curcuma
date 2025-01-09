@@ -301,11 +301,11 @@ import { IOable } from "../io/types";
     const filename = Filesystem.get_filename_from(source_file);
 
     const path_target_filename = Filesystem.concat_path_filename(
-      job_parameter.writePath,
+      job_parameter.path,
       filename
     );
 
-    Filesystem.ensure_path(job_parameter.writePath, job_parameter.simulate); // TODO that doesn't always work?
+    Filesystem.ensure_path(job_parameter.path, job_parameter.simulate); // TODO that doesn't always work?
 
     if (!job_parameter.simulate) {
       // Here, of course, the option of forcing the disk can be useful.

@@ -1,5 +1,5 @@
 import { Filesystem } from "../../core/filesystem";
-import { IO_Meta_Interface } from "../../io/types";
+import { DAO_Interface, IO_Meta_Interface } from "../../io/types";
 import { MD_FileContent, MD_FileContent_Interface } from "./helpers/MD_FileContent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 import { MD_MathTransformer_TemplateValues_Type } from "./MD_Math_Paragraph_Task";
@@ -23,29 +23,29 @@ export class MD_RemoveTODOS_Task<T extends string> extends MD_Observable_Abstrac
     this.parameter = parameter;
   }
 
-  public perform(dao: T, io_meta: IO_Meta_Interface): T {
-    dao = super.perform(dao, io_meta);
+  public perform(dao:DAO_Interface<T>): DAO_Interface<T> {
+    dao = super.perform(dao);
     return dao;
   }
 
   /**
    * Is called by super.perform()
-   * @param dao
+   * @param mdfc
    * @param index
    * @returns
    */
-  protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
-    if (dao.body_array[index].indexOf(this.parameter.find_rule) >= 0) {
+  protected transform(mdfc: MD_FileContent, index: number): MD_FileContent {
+    if (mdfc.body_array[index].indexOf(this.parameter.find_rule) >= 0) {
       console.log(
-        `Transform TODO (remove) before: ${dao.body_array[index]}`
+        `Transform TODO (remove) before: ${mdfc.body_array[index]}`
       );
-      dao.body_array.splice(index, 1);
-      dao.index = dao.index - 1;
+      mdfc.body_array.splice(index, 1);
+      mdfc.index = mdfc.index - 1;
       console.log(
-        `Transform TODO (remove) after: ${dao.body_array[index]}`
+        `Transform TODO (remove) after: ${mdfc.body_array[index]}`
       );
     }
 
-    return dao;
+    return mdfc;
   }
 }

@@ -5,7 +5,7 @@ import {
   Observer_Type,
 } from "src/lib/core";
 import { CopyTask_Type } from "../core/copy-job";
-import { IO_Meta_Interface } from "../io/types";
+import { DAO_Interface, IO_Meta_Interface } from "../io/types";
 
 export interface MD_Task_Parameter_Type {
   tag_obsidian_prefix?: string;
@@ -22,7 +22,7 @@ export interface MD_Task_Parameter_Type {
  * TODO und ein daten-objekt zum mappen ??
  */
 export interface Task_Interface<D> extends Observable<D> {
-  perform(dao: D, io_meta: IO_Meta_Interface): D;
+  perform(dao:DAO_Interface<D>): DAO_Interface<D>; //! dao: D, io_meta: IO_Meta_Interface
   // TODO müssen die hier sein?
   add_observer(observer: Observer_Interface<D>, id: Observer_Type): void;
   notify_all(props: Observer_Props<D>): void;

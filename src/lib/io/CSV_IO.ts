@@ -1,8 +1,6 @@
 //! Das ist der alte CSV_Transporter
 import {
   Observable,
-  Observable_Type,
-  Observer_Command_Type,
   Observer_Interface,
   Observer_Props,
   Observer_Subject,
@@ -17,7 +15,7 @@ import * as fs from "fs";
 import client_http = require("http");
 import client_https = require("https");
 import { URL } from "url";
-import { IO_Interface } from "./types";
+import { DAO_Interface, IO_Observable_Interface } from "./types";
 
 
 export interface CSV_IO_Props_Interface {
@@ -30,7 +28,7 @@ export interface CSV_IO_Props_Interface {
 /**
  * Könnte durch Xlsx_IO abgelöst werden.
  */
-export class CSV_IO<D> implements IO_Interface<D>, Observable<D> {
+export class CSV_IO<D> implements IO_Observable_Interface<D>, Observable<D> {
   // Der reader löst ein Event aus, auf das der Runner hört.
   // Der reader schickt so die file-datensätze nacheinander zu weiteren Verarbeitung.
   private observer_subject: Observer_Subject<D> = new Observer_Subject<D>();
@@ -135,20 +133,11 @@ export class CSV_IO<D> implements IO_Interface<D>, Observable<D> {
     
     // let json = JSON.stringify(json_obj_array, null, 4);
     // fs.writeFileSync(this.props.writePath, json);
-
   }
 
-  /**
-   *
-   * @param dao
-   */
-  write(dao: D): void {
-
-   // let json = JSON.stringify(json_obj_array, null, 4);
-   // fs.writeFileSync(this.props.writePath, json);
+  write(dao: DAO_Interface<D>): void {
+    throw new Error("Method not implemented.");
   }
-
-
 
 
 

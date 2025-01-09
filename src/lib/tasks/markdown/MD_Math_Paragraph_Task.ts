@@ -3,6 +3,7 @@
 // TODO: Es gibt einen für Inline and Paragraph
 
 import {
+  DAO_Interface,
   IO_Meta_Interface,
 } from "../../io/types";
 
@@ -34,19 +35,19 @@ export class MD_Math_Paragraph_Task<T extends string> extends MD_Observable_Abst
     this.parameter = parameter;
   }
 
-  public perform(dao: T, io_meta: IO_Meta_Interface): T {
-    dao = super.perform(dao, io_meta);
+  public perform(dao: DAO_Interface<T>): DAO_Interface<T> {
+    dao = super.perform(dao);
     return dao;
   }
 
   /**
    * Is called by super.perform()
-   * @param dao
+   * @param mdfc
    * @param index
    * @returns
    */
-  protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
-    let item = dao.body_array[index];
+  protected transform(mdfc: MD_FileContent, index: number): MD_FileContent {
+    let item = mdfc.body_array[index];
 
     // Formel als Absatz mit $$
     if (
@@ -57,8 +58,8 @@ export class MD_Math_Paragraph_Task<T extends string> extends MD_Observable_Abst
       this.doCollect = true;
       console.log("#### math: found!");
       this.collection = []; // may go over several lines
-      dao.body_array.splice(index, 1); // Remove line: $$
-      dao.index = dao.index - 1;
+      mdfc.body_array.splice(index, 1); // Remove line: $$
+      mdfc.index = mdfc.index - 1;
       // start to collect
     } else if (this.doCollect) {
       if (item.indexOf(this.parameter.tag_obsidian_suffix) >= 0) {
@@ -70,14 +71,14 @@ export class MD_Math_Paragraph_Task<T extends string> extends MD_Observable_Abst
         const template: MD_Template = new MD_Template(
           this.parameter.replace_template
         );
-        dao.body_array[index] = template.fill(this.template_values);
+        mdfc.body_array[index] = template.fill(this.template_values);
       } else {
         this.collection.push(item); // remember and remove
-        dao.body_array.splice(index, 1);
-        dao.index = dao.index - 1;
+        mdfc.body_array.splice(index, 1);
+        mdfc.index = mdfc.index - 1;
         console.log("#### math: collect...", this.collection);
       }
     }
-    return dao;
+    return mdfc;
   }
 }

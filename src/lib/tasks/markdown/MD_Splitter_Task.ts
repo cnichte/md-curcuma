@@ -1,4 +1,5 @@
 import {
+  DAO_Interface,
   IO_Meta_Interface,
 } from "../../io/types";
 
@@ -29,6 +30,8 @@ export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_T
   md_document: MD_Document | null | undefined = null;
   counter: number = 0;
 
+  io_meta:any;
+
   constructor(parameter: MD_Splitter_Parameter_Type) {
     super();
     this.parameter = parameter;
@@ -47,39 +50,40 @@ export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_T
     }
   }
 
-  public perform(dao: T, io_meta: IO_Meta_Interface): T {
-    dao = super.perform(dao, io_meta);
+  public perform(dao: DAO_Interface<T>): DAO_Interface<T> {
+    dao = super.perform(dao);
+    this.io_meta = dao.io_meta
     return dao;
   }
 
   /**
    * Is called by super.perform()
-   * @param dao
+   * @param mdfc
    * @param index
    * @returns
    */
-  protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
+  protected transform(mdfc: MD_FileContent, index: number): MD_FileContent {
 
     //
     // Record change...
     // Found a heading to split up
     // TODO Potential content before the first headline gets lost.
     // But my longform documents always start with a # headline.
-    if (dao.body_array[index].indexOf(this.parameter.pattern) == 0) {
+    if (mdfc.body_array[index].indexOf(this.parameter.pattern) == 0) {
       this.counter = this.counter + 1;
 
       if (
         typeof this.parameter.limit != "undefined" &&
         this.counter > this.parameter.limit
       )
-        return dao;
+        return mdfc;
 
       if (this.md_document !== null) {
-        this.md_document.write_file(io_meta.file_name_writer);
+        this.md_document.write_file(this.io_meta.file_name_writer);
       }
 
       let params: MD_Document_Parameter_Type = {
-        split_row: dao.body_array[index],
+        split_row: mdfc.body_array[index],
         cleanName: this.parameter.cleanName,
         weightBase: this.parameter.weightBase,
         url_prefix: this.parameter.url_prefix,
@@ -93,19 +97,19 @@ export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_T
       // remove the Headline itself, because it is now in frontmatter.
       // 2nd parameter means remove one item only
       if (this.parameter.doRemoveHeadline)
-        dao.body_array.splice(index, 1);
+        mdfc.body_array.splice(index, 1);
     } else {
       if (this.md_document !== null) {
-        this.md_document.add_content(dao.body_array[index]);
+        this.md_document.add_content(mdfc.body_array[index]);
       }
     }
 
     // save the last collection...
     if (
       this.md_document !== null &&
-      index == dao.body_array.length - 1
+      index == mdfc.body_array.length - 1
     ) {
-      this.md_document.write_file(io_meta.file_name_writer);
+      this.md_document.write_file(this.io_meta.file_name_writer);
     }
 
     // inform not to write the entire file after splitting ist up.
@@ -114,9 +118,8 @@ export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_T
       to: "runner",
       command: "do-not-io-write",
       dao: null,
-      io_meta: null
     })
 
-    return dao;
+    return mdfc;
   }
 }

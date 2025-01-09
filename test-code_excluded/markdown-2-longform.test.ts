@@ -41,11 +41,13 @@ const runner = new Runner<string>();
 
 runner.addReader(
   new Markdown_IO<string>({
-    readPath: "test-data_obsidian-vault/longform.md",
-    writePath: "test-data_hugo/hugo-content-2-longform/",
+    path: "test-data_obsidian-vault/longform.md",
     doSubfolders: false,
     limit: 1990,
     useCounter: false,
+    simulate: true,
+  }, {
+    path: "test-data_hugo/hugo-content-2-longform/",
     simulate: true,
   })
 );

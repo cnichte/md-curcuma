@@ -1,4 +1,5 @@
 import {
+  DAO_Interface,
   IO_Meta_Interface,
 } from "../../io/types";
 
@@ -32,18 +33,18 @@ export class MD_Frontmatter_Task<T extends string> extends MD_Observable_Abstrac
     this.parameter = parameter;
   }
 
-  public perform(dao: T, io_meta: IO_Meta_Interface): T {
-    dao = super.perform(dao, io_meta);
+  public perform(dao: DAO_Interface<T>): DAO_Interface<T> {
+    dao = super.perform(dao);
     return dao;
   }
 
   /**
    * Is called by super.perform()
-   * @param dao ist mdfc
+   * @param mdfc
    * @param index
    * @returns
    */
-  protected transform(dao: MD_FileContent, index: number, io_meta: IO_Meta_Interface): MD_FileContent {
+  protected transform(mdfc: MD_FileContent, index: number): MD_FileContent {
     // Is only executed the first time, and not for every line.
     if (index === 0) {
       // The one is like this:
@@ -51,8 +52,8 @@ export class MD_Frontmatter_Task<T extends string> extends MD_Observable_Abstrac
       
       // TODO Das neue Frontmatter kommt entweder per file oder objekt.
       // TODO: Das DAO könnte auch frontmatter enthalten!
-      dao.frontmatter;
-      dao.frontmatter_attributes; // da ist noch nix...
+      mdfc.frontmatter;
+      mdfc.frontmatter_attributes; // da ist noch nix...
 
       // The other like this:
       // this.frontmatter_target: MD_Frontmatter_Template
@@ -66,14 +67,14 @@ export class MD_Frontmatter_Task<T extends string> extends MD_Observable_Abstrac
 
       console.log(
         "Frontmatter-Source:",
-        dao.frontmatter_attributes,
+        mdfc.frontmatter_attributes,
         ", Frontmatter-Target:",
         template_content.frontmatter_attributes
       );
 
       //* 2. Replace placeholder
       //* 2a. Is a property in Target > copy content over
-      var fm_old = dao.frontmatter_attributes;
+      var fm_old = mdfc.frontmatter_attributes;
       var fm_new = template_content.frontmatter_attributes;
 
       for (let prop in fm_old) {
@@ -90,13 +91,13 @@ export class MD_Frontmatter_Task<T extends string> extends MD_Observable_Abstrac
       // Was ist mit den Feldern aus dem Splitter? -> MD_Transformer_TemplateValues_Type aus md-transformer.
       const mapper = new Mapper<Mapper_Item_Interface>();
       mapper.addMappings(this.parameter.mappings);
-      mapper.do_mappings(dao.frontmatter_attributes, fm_new);
+      mapper.do_mappings(mdfc.frontmatter_attributes, fm_new);
   
       // github.com/erikvullings/deep-copy-ts
-      dao.frontmatter_attributes = { ...fm_new }; // clone
+      mdfc.frontmatter_attributes = { ...fm_new }; // clone
 
     } // if index===0
 
-    return dao;
+    return mdfc;
   }
 }

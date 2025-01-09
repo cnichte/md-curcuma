@@ -1,8 +1,16 @@
 import { Observable, Observer_Interface, Observer_Props, Observer_Type } from "../core";
 
-export interface IO_Interface<D> extends Observable<D> {
+/**
+ * This is a wrapper for the Data-Object DAO, so that it can be enriched with metadata.
+ */
+export interface DAO_Interface<D> {
+  dao: D
+  io_meta: IO_Meta_Interface;
+}
+
+export interface IO_Observable_Interface<D> extends Observable<D> {
     read(): void;
-    write(dao: D): void;
+    write(dao: DAO_Interface<D>): void;
     // TODO müssen die hier sein?
     add_observer(observer: Observer_Interface<D>, id:Observer_Type):void;
     notify_all(props:Observer_Props<D>): void;
@@ -10,8 +18,7 @@ export interface IO_Interface<D> extends Observable<D> {
   }
   
   export interface IOable {
-    readPath: string; // Datei oder Verzeichnis
-    writePath: string; // Verzeichnis
+    path: string; // Datei oder Verzeichnis
     simulate: boolean;
   }
   
