@@ -4,7 +4,7 @@ import path = require("node:path");
 import url = require("node:url");
 import { v4 as uuidv4 } from "uuid";
 import { Filesystem } from "../../core/filesystem";
-import { CSV_IO } from "src/lib/io/csv-io";
+import { CSV_IO } from "src/lib/io/CSV_IO";
 
 export interface ImageDownloader_MappingType {
   image_target_folder: string;

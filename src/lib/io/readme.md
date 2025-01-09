@@ -6,6 +6,7 @@ There are readers and writers for...
 * HTML
 * Json
 * Markdown
+* url
 * xlsx
 
 They are heavy under development.

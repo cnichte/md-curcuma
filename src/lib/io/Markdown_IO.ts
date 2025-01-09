@@ -11,12 +11,6 @@ import {
 import { IO_Interface, IO_Meta_Interface } from "./types";
 import { Filesystem } from "../core/filesystem";
 
-/*
-
-TODO TaskBase
-
-*/
-
 /**
  ** Lese und schreibe Markdown-Dateien.
  */
@@ -97,21 +91,23 @@ export class Markdown_IO<D> implements IO_Interface<D>, Observable<D> {
       //* 2. DATEN LADEN und DAO ERZEUGEN (in dem Fall ein Markdown String)
       o_props.dao = Filesystem.read_file_txt(file);
 
+      // TODO REFACTOR: MD_Observable_Abstract_TaskBase code nach hier umziehen
+      // TODO REFACTOR: Das DAO sollte komplett mdfc bzw. ein Objekt: mdfc + i
+
       //* 3. File-Metadaten
       let io_meta = new IO_Meta();
       io_meta.file_list_reader = file_list;
       io_meta.file_name_reader = file;
-      
-      // TODO: Unklar. Falls ein writer definiert ist darf es das überschreiben. 
+
+      // TODO: Unklar. Falls ein writer definiert ist darf es das überschreiben.
       // TODO: Für den MD_Splitter_Task mach ich das erst mal so.
       io_meta.file_name_writer = this.props.writePath;
-
 
       o_props.io_meta = io_meta;
 
       //* 4. fire event and inform listeners - which is only the runner at the moment.
       console.log("markdown-io.do_command: perform tasks for", file);
-      
+
       this.notify_all(o_props);
       // this.observer_subject.notify_all(o_props);
     });
@@ -122,7 +118,6 @@ export class Markdown_IO<D> implements IO_Interface<D>, Observable<D> {
     m_props.to = "runner";
     m_props.command = "tasks-finnished";
 
-    // this.observer_subject.notify_all(m_props);
     this.notify_all(m_props);
   }
 
