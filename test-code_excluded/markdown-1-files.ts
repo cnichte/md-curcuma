@@ -7,7 +7,10 @@ import {
   Mapper_Item_Interface,
   Mapper_Properties,
 } from "../src/lib/core/mapper";
-import { Markdown_IO } from "../src/lib/io";
+import {
+  Markdown_IO_Reader,
+  Markdown_IO_Writer,
+} from "../src/lib/io";
 import { NOP_Task } from "../src/lib/tasks";
 
 import {
@@ -44,21 +47,24 @@ seo:
 const runner = new Runner<string>();
 
 runner.addReader(
-  new Markdown_IO<string>(
-    {
-      // Markdown_IO_ReadProps_Interface
-      path: "test-data_obsidian-vault/some-md-docs",
-      doSubfolders: false,
-      limit: 1990,
-      useCounter: false,
-      simulate: true,
-    },
-    {
-      // Markdown_IO_WriteProps_Interface
-      path: "test-data_hugo/hugo-content-new/",
-      simulate: true,
-    }
-  )
+  new Markdown_IO_Reader<string>({
+    // Markdown_IO_ReadProps_Interface
+    path: "test-data/obsidian-vault/some-md-docs",
+    doSubfolders: false,
+    limit: 1990,
+    useCounter: false,
+    simulate: false,
+  })
+);
+
+//! Wenn kein writer definiert ist wird der reader benutzt.
+// runner.addWriter();
+runner.addWriter(
+  new Markdown_IO_Writer<string>({
+    // Markdown_IO_WriteProps_Interface
+    path: "test-data/hugo/hugo-content-new/",
+    simulate: false,
+  })
 );
 
 runner.addTask(new NOP_Task<string>());
@@ -100,8 +106,8 @@ runner.addTask(
     replace_template:
       '{{< button href="/getthis.php?id={name}" name="download {name} ({name_suffix})" >}}',
     copy_task: {
-      source: "test-data_obsidian-vault/attachments/",
-      target: "test-data_hugo/hugo-content-new/static/downloads/",
+      source: "test-data/obsidian-vault/attachments/",
+      target: "test-data/hugo/hugo-content-new/static/downloads/",
       simulate: false,
     },
   })
@@ -144,7 +150,7 @@ const map_2: Mapper_Interface<Mapper_Item_Interface> = {
 runner.addTask(
   new MD_Frontmatter_Task<string>({
     //* this is a MD_FrontmatterTask_Parameter_Type
-    frontmatter_filename: "./test-data_obsidian-vault/frontmatter-template.md",
+    frontmatter_filename: "./test-data/obsidian-vault/frontmatter-template.md",
     frontmatter: frontmatter_template,
     mappings: [map_1, map_2],
   })
@@ -159,8 +165,5 @@ runner.addTask(
 );
 
 runner.addTask(new MD_Writer_Task()); // TODO
-
-//! Wenn kein writer definiert ist wird der reader benutzt.
-// runner.addWriter();
 
 runner.run();

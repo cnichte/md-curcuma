@@ -1,4 +1,4 @@
-import { DAO_Interface } from "../../io/types";
+import { Data_Interface } from "../../io/types";
 
 import { MD_FileContent } from "./helpers/MD_FileContent";
 import { MD_Template } from "./helpers/MD_Template";
@@ -110,7 +110,7 @@ export class MD_Callout_Task<T extends string>
     this.parameter = parameter;
   }
 
-  public perform(dao: DAO_Interface<T>): DAO_Interface<T> {
+  public perform(dao: Data_Interface<T>): Data_Interface<T> {
     return super.perform(dao);
   }
 

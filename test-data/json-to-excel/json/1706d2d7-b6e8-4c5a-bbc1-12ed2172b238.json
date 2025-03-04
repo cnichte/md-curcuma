@@ -1,0 +1,19 @@
+{
+  "dateCreated" : "2025-02-27 12:12",
+  "dateModified" : "1 mal, zuletzt: 2025-02-27 12:13",
+  "protocol" : [ {
+    "dateModified" : "2025-02-27 12:12",
+    "who" : "minime",
+    "what" : "angelegt",
+    "details" : "Neu angelegt."
+  }, {
+    "dateModified" : "2025-02-27 12:13",
+    "who" : "user1",
+    "what" : "geändert",
+    "details" : "Das Dokument wurde geändert."
+  } ],
+  "uuid" : "1706d2d7-b6e8-4c5a-bbc1-12ed2172b238",
+  "data" : "data 1",
+  "data_boolean" : true,
+  "data_array_string" : []
+}

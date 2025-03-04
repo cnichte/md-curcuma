@@ -1,7 +1,5 @@
 import {
   Observable,
-  Observable_Type,
-  Observer_Command_Type,
   Observer_Interface,
   Observer_Props,
   Observer_Subject,
@@ -9,29 +7,9 @@ import {
 } from "../core/observer";
 
 import {
-  DAO_Interface,
-  IO_Observable_Interface,
-  IO_Meta_Interface,
-  IOable,
+  Data_Interface, IO_Meta, IO_Observable_Reader_Interface, IO_Observable_Writer_Interface, IO_Observer_Props, IOable
 } from "./types";
 import { Filesystem } from "../core/filesystem";
-
-/**
- ** Lese und schreibe Markdown-Dateien.
- */
-export class IO_Meta implements IO_Meta_Interface {
-  file_list_reader: string[];
-  file_name_reader: string;
-  file_list_writer: string[];
-  file_name_writer: string;
-}
-
-export class IO_Observer_Props<D> implements Observer_Props<D> {
-  from: Observable_Type;
-  to: Observer_Type;
-  command: Observer_Command_Type;
-  dao: DAO_Interface<D>;
-}
 
 // TODO Lese eine markdown Datei oder ein Verzeichnis von Markdown Dateien.
 
@@ -48,26 +26,16 @@ export interface Markdown_IO_WriteProps_Interface extends IOable {
   simulate: boolean;
 }
 
-export class Markdown_IO<D> implements IO_Observable_Interface<D>, Observable<D> {
+export class Markdown_IO_Reader<D>
+  implements IO_Observable_Reader_Interface<D>, Observable<D>
+{
   // Der reader löst ein Event aus, auf das der Runner hört.
   // Der reader schickt so die file-datensätze nacheinander zu weiteren Verarbeitung.
   private observer_subject: Observer_Subject<D> = new Observer_Subject<D>();
+  private props: Markdown_IO_ReadProps_Interface = null;
 
-  private read_props: Markdown_IO_ReadProps_Interface = null;
-  private write_props: Markdown_IO_WriteProps_Interface = null;
-
-  constructor(
-    read_props: Markdown_IO_ReadProps_Interface,
-    write_props: Markdown_IO_WriteProps_Interface | null
-  ) {
-    this.read_props = read_props;
-    this.write_props = write_props;
-    if (write_props == null) {
-      this.write_props = {
-        path: read_props.path,
-        simulate: false,
-      };
-    }
+  constructor(props: Markdown_IO_ReadProps_Interface) {
+    this.props = props;
   }
 
   add_observer(observer: Observer_Interface<D>, id: Observer_Type): void {
@@ -88,12 +56,12 @@ export class Markdown_IO<D> implements IO_Observable_Interface<D>, Observable<D>
   read(): void {
     var file_list: Array<string> = [];
 
-    if (Filesystem.isFolder(this.read_props.path)) {
-      file_list = Filesystem.get_files_list(this.read_props.path);
-    } else if (Filesystem.isFile(this.read_props.path)) {
-      file_list.push(this.read_props.path);
+    if (Filesystem.isFolder(this.props.path)) {
+      file_list = Filesystem.get_files_list(this.props.path);
+    } else if (Filesystem.isFile(this.props.path)) {
+      file_list.push(this.props.path);
     } else {
-      console.log(`not supported: '${this.read_props.path}'`);
+      console.log(`not supported: '${this.props.path}'`);
     }
 
     console.log("Markdown_IO.read: ", file_list);
@@ -119,10 +87,12 @@ export class Markdown_IO<D> implements IO_Observable_Interface<D>, Observable<D>
 
       // TODO: Unklar. Falls ein writer definiert ist darf es das überschreiben.
       // TODO: Für den MD_Splitter_Task mach ich das erst mal so.
-      io_meta.file_name_writer = this.write_props.path;
+      
+      //TODODas ist jetzt nicht mehr so gut! 
+      io_meta.file_name_writer = this.props.path;
 
-      let the_dao: DAO_Interface<string> = {
-        dao: dao_string,
+      let the_dao: Data_Interface<string> = {
+        data: dao_string,
         io_meta: io_meta,
       };
 
@@ -143,24 +113,45 @@ export class Markdown_IO<D> implements IO_Observable_Interface<D>, Observable<D>
 
     this.notify_all(m_props);
   }
+}
 
+// TODO: Der Writer benötigt keinen Observer?
+export class Markdown_IO_Writer<D>
+  implements IO_Observable_Writer_Interface<D>, Observable<D>
+{
+  private observer_subject: Observer_Subject<D> = new Observer_Subject<D>();
+  private write_props: Markdown_IO_WriteProps_Interface = null;
+
+  constructor(write_props: Markdown_IO_WriteProps_Interface | null) {
+    this.write_props = write_props; 
+  }
   /**
    *
-   * @param dao
+   * @param data
    */
-  write(dao: DAO_Interface<D>): void {
-    let source_file = this.read_props.path;
+  write(data: Data_Interface<D>): void {
+    let source_file = this.write_props.path;
     // TODO I don't actually want to write the entire file when splitting.
     // TODO perhaps i want to transform also the filename.
 
     Filesystem.write_my_file<any, Markdown_IO_WriteProps_Interface>(
       source_file,
       this.write_props,
-      dao.dao,
+      data.data,
       false, // do_not_write_file
       (filename: string, data: string) => {
         Filesystem.write_file_txt(filename, data);
       }
     );
+  }
+
+  add_observer(observer: Observer_Interface<D>, id: Observer_Type): void {
+    this.observer_subject.add_observer(observer, id);
+  }
+  notify_all(props: Observer_Props<D>): void {
+    this.observer_subject.notify_all(props);
+  }
+  notify(props: Observer_Props<D>): void {
+    this.observer_subject.notify(props);
   }
 }

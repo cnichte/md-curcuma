@@ -1,5 +1,5 @@
 import {
-  DAO_Interface,
+  Data_Interface,
   IO_Meta_Interface,
 } from "../../io/types";
 
@@ -62,7 +62,7 @@ export class MD_ObsidianLink_Task<T extends string> extends MD_Observable_Abstra
     this.copy_task = parameter.copy_task;
   }
 
-  public perform(dao: DAO_Interface<T>): DAO_Interface<T> {
+  public perform(dao: Data_Interface<T>): Data_Interface<T> {
     dao = super.perform(dao);
     return dao;
   }

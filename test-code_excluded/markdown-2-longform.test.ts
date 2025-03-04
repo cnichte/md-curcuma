@@ -1,7 +1,6 @@
 //! Teste: Das neue Curcuma
 
 import {
-  Markdown_IO,
   Runner,
 } from "../src/lib";
 
@@ -16,6 +15,11 @@ import {
   MD_Frontmatter_Task,
   MD_Frontmatter_Template,
 } from "../src/lib/tasks/markdown";
+
+import {
+  Markdown_IO_Reader,
+  Markdown_IO_ReadProps_Interface,
+} from "../src/lib/io";
 
 var frontmatter_template: MD_Frontmatter_Template =
   new MD_Frontmatter_Template(`---
@@ -39,17 +43,16 @@ seo:
 
 const runner = new Runner<string>();
 
+let r_props:Markdown_IO_ReadProps_Interface = {
+  path: "test-data/hugo/hugo-content-2-longform/",
+  simulate: false,
+  doSubfolders: false,
+  limit: 0,
+  useCounter: false
+}
+
 runner.addReader(
-  new Markdown_IO<string>({
-    path: "test-data_obsidian-vault/longform.md",
-    doSubfolders: false,
-    limit: 1990,
-    useCounter: false,
-    simulate: true,
-  }, {
-    path: "test-data_hugo/hugo-content-2-longform/",
-    simulate: true,
-  })
+  new Markdown_IO_Reader<string>(r_props)
 );
 
 runner.addTask(
@@ -61,7 +64,7 @@ runner.addTask(
     weightBase: 8000,
     url_prefix: "test-prefix",
     doRemoveHeadline: true,
-    frontmatter_filename: "./test-data_obsidian-vault/frontmatter-template.md",
+    frontmatter_filename: "./test-data/obsidian-vault/frontmatter-template.md",
     frontmatter: frontmatter_template,
   })
 );

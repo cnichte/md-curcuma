@@ -1,5 +1,5 @@
 import {
-  DAO_Interface,
+  Data_Interface,
   IO_Meta_Interface,
 } from "../../io/types";
 
@@ -33,7 +33,7 @@ export class MD_Frontmatter_Task<T extends string> extends MD_Observable_Abstrac
     this.parameter = parameter;
   }
 
-  public perform(dao: DAO_Interface<T>): DAO_Interface<T> {
+  public perform(dao: Data_Interface<T>): Data_Interface<T> {
     dao = super.perform(dao);
     return dao;
   }

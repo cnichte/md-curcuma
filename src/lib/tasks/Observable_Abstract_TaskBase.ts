@@ -5,7 +5,7 @@ import {
   Observer_Subject,
   Observer_Type,
 } from "../core/observer";
-import { DAO_Interface } from "../io/types";
+import { Data_Interface } from "../io/types";
 import { Task_Interface } from "./types";
 
 /**
@@ -29,5 +29,5 @@ export abstract class Observable_Abstract_TaskBase<T>
     this.observer_subject.add_observer(observer, id);
   }
 
-  abstract perform(dao: DAO_Interface<T>): DAO_Interface<T>;
+  abstract perform(dao: Data_Interface<T>): Data_Interface<T>;
 }

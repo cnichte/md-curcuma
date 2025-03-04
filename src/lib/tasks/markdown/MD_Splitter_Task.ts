@@ -1,5 +1,5 @@
 import {
-  DAO_Interface,
+  Data_Interface,
   IO_Meta_Interface,
 } from "../../io/types";
 
@@ -50,7 +50,7 @@ export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_T
     }
   }
 
-  public perform(dao: DAO_Interface<T>): DAO_Interface<T> {
+  public perform(dao: Data_Interface<T>): Data_Interface<T> {
     dao = super.perform(dao);
     this.io_meta = dao.io_meta
     return dao;

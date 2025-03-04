@@ -1,5 +1,5 @@
 import { Filesystem } from "../../core/filesystem";
-import { DAO_Interface, IO_Meta_Interface } from "../../io/types";
+import { Data_Interface, IO_Meta_Interface } from "../../io/types";
 import { MD_FileContent, MD_FileContent_Interface } from "./helpers/MD_FileContent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 import { MD_MathTransformer_TemplateValues_Type } from "./MD_Math_Paragraph_Task";
@@ -23,7 +23,7 @@ export class MD_RemoveTODOS_Task<T extends string> extends MD_Observable_Abstrac
     this.parameter = parameter;
   }
 
-  public perform(dao:DAO_Interface<T>): DAO_Interface<T> {
+  public perform(dao:Data_Interface<T>): Data_Interface<T> {
     dao = super.perform(dao);
     return dao;
   }

@@ -245,6 +245,15 @@ import { IOable } from "../io/types";
     return wb;
   }
 
+  public static read_file_buffer(file: string): Buffer {
+    try {
+      var md_buffer:Buffer = fs.readFileSync(file);
+    } catch (err) {
+      throw err;
+    }
+    return md_buffer;
+  }
+
   public static write_file_xlsx(
     writePath: string,
     content: XLSX.WorkBook

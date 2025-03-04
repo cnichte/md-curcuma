@@ -8,3 +8,8 @@ To exclude tests from running...
 
 * rename them (remove the .test), or
 * move them in the test-0-excluded folder.
+
+TODO Arbeite gerade an...
+
+* markdown-1-files.ts
+* exif.test.ts

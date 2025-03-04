@@ -1,4 +1,4 @@
-import { DAO_Interface, IO_Meta_Interface } from "../../io/types";
+import { Data_Interface, IO_Meta_Interface } from "../../io/types";
 import { Observable_Abstract_TaskBase } from "../Observable_Abstract_TaskBase";
 import { Task_Interface } from "../types";
 import {
@@ -18,7 +18,7 @@ export abstract class MD_Observable_Abstract_TaskBase<T extends string>
     super();
   }
 
-  perform(dao: DAO_Interface<T>): DAO_Interface<T> {
+  perform(dao: Data_Interface<T>): Data_Interface<T> {
 
     // TODO REFACTOR: Der Code sollte in markdown-io reader umziehen.
     // TODO REFACTOR: Das DAO sollte komplett mdfc bzw. ein Objekt: mdfc + i 
@@ -28,7 +28,7 @@ export abstract class MD_Observable_Abstract_TaskBase<T extends string>
     // console.log("before", dao.data);
 
     // Trenne das Frontmatter vom body ab. siehe md-transporter.
-    const mdfc: MD_FileContent_Interface = MD_FileContent.split_frontmatter_body(dao.dao);
+    const mdfc: MD_FileContent_Interface = MD_FileContent.split_frontmatter_body(dao.data);
 
     for (var i = 0; i < mdfc.body_array.length; i++) {
       mdfc.index = i;
@@ -38,7 +38,7 @@ export abstract class MD_Observable_Abstract_TaskBase<T extends string>
     }
 
     // führe alles wieder zusammen
-    dao.dao = MD_FileContent.merge_frontmatter_body(mdfc) as T;
+    dao.data = MD_FileContent.merge_frontmatter_body(mdfc) as T;
 
     // console.log("after", dao.data);
     // console.log("#######################################");

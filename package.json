@@ -27,7 +27,7 @@
     "build:ts": "rm -rf dist/lib && tsc",
     "clean": "npm run clean:dist && npm run clean:test",
     "clean:dist": "find dist -mindepth 1 -delete",
-    "clean:test": "find test-data_hugo -type f | xargs rm -f"
+    "clean:test": "find test-data/hugo -type f | xargs rm -f"
   },
   "author": "Carsten Nichte",
   "license": "GNU GPLv3",

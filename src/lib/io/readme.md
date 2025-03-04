@@ -2,11 +2,13 @@
 
 There are readers and writers for...
 
-* CSV
-* HTML
-* Json
+* PDF
 * Markdown
-* url
+* Image (Exif)
 * xlsx
+* url
+* Json
+* HTML
+* CSV
 
 They are heavy under development.

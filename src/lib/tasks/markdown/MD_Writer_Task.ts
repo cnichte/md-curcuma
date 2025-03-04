@@ -1,4 +1,4 @@
-import { DAO_Interface, IO_Meta_Interface } from "../../io/types";
+import { Data_Interface, IO_Meta_Interface } from "../../io/types";
 import { Task_Interface } from "../types";
 import { MD_FileContent } from "./helpers/MD_FileContent";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
@@ -8,7 +8,7 @@ import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBa
  */
 export class MD_Writer_Task<T extends string> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T> {
 
-    perform(dao:DAO_Interface<T>): DAO_Interface<T> {
+    perform(dao:Data_Interface<T>): Data_Interface<T> {
         dao = super.perform(dao);       
         return dao;
     }

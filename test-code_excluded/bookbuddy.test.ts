@@ -14,7 +14,7 @@ const runner = new Runner<string>();
 
 runner.addReader(
   new CSV_IO<string>({
-    readPath: "test-data_obsidian-vault/attachments/bookbuddy-export.csv",
+    readPath: "test-data/obsidian-vault/attachments/bookbuddy-export.csv",
     writePath: "",
     csvSeparator: ',',
   })
@@ -23,7 +23,7 @@ runner.addReader(
 runner.addWriter(
     new Json_IO<string>({
         readPath: "",
-        writePath: "test-data_hugo/hugo-content-4/data/bookbuddy-export.json", 
+        writePath: "test-data/hugo/hugo-content-4/data/bookbuddy-export.json", 
         simulate: false,
         doSubfolders: true,
         limit: 1000, // greift nur bei Verzeichnis
@@ -49,7 +49,7 @@ const make_array: Mapper_Interface<Mapper_Item_Interface> = {
 };
 
 let image_download_mapping_props: ImageDownloader_MappingType = {
-    image_target_folder: "test-data_hugo/hugo-content-4/assets/images/",
+    image_target_folder: "test-data/hugo/hugo-content-4/assets/images/",
     image_hugo_path: '',
     filename_property_name: "UUID",
     simulate: false,
@@ -91,7 +91,7 @@ const make_array: MD_Mapping<MD_Mapping_Item> = {
 };
 
 let image_download_mapping_props: ImageDownloader_MappingType = {
-    image_target_folder: "test-data_hugo/hugo-content-4/assets/images/",
+    image_target_folder: "test-data/hugo/hugo-content-4/assets/images/",
     image_hugo_path: '',
     filename_property_name: "UUID",
     simulate: false,
@@ -106,8 +106,8 @@ const image_download_mapping: Mapping<MD_Mapping_Item> = {
 };
 
 const csv_exporter_parameter: CSV_Transporter_Parameter_Type = {
-    readPath: "test-data_obsidian-vault/attachments/bookbuddy-export.csv",
-    writePath: "test-data_hugo/hugo-content-4/data/bookbuddy-export.json",
+    readPath: "test-data/obsidian-vault/attachments/bookbuddy-export.csv",
+    writePath: "test-data/hugo/hugo-content-4/data/bookbuddy-export.json",
     csvSeparator: ',',
     mappings: [insert_uuid, make_array]
 }; // image_download_mapping

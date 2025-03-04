@@ -1,4 +1,4 @@
-import { DAO_Interface } from "../io/types";
+import { Data_Interface } from "../io/types";
 
 export type Observer_Command_Type =
   | "perform-tasks"
@@ -7,13 +7,13 @@ export type Observer_Command_Type =
   | "do-not-io-write";
 
 export type Observer_Type = "runner";
-export type Observable_Type = "markdown-io" | "md-splitter-task";
+export type Observable_Type = "markdown-io" | "md-splitter-task" | "json-io";
 
 export interface Observer_Props<D> {
   from: Observable_Type;
   to: Observer_Type;
   command: Observer_Command_Type; // TODO Ein Array of Observer_Commands
-  dao: DAO_Interface<D>;
+  dao: Data_Interface<D>;
 }
 
 export interface Observable<D> {
