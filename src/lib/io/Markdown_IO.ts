@@ -84,13 +84,7 @@ export class Markdown_IO_Reader<D>
       let io_meta = new IO_Meta();
       io_meta.file_list_reader = file_list;
       io_meta.file_name_reader = file;
-
-      // TODO: Unklar. Falls ein writer definiert ist darf es das überschreiben.
-      // TODO: Für den MD_Splitter_Task mach ich das erst mal so.
       
-      //TODODas ist jetzt nicht mehr so gut! 
-      io_meta.file_name_writer = this.props.path;
-
       let the_dao: Data_Interface<string> = {
         data: dao_string,
         io_meta: io_meta,
@@ -101,8 +95,7 @@ export class Markdown_IO_Reader<D>
       //* 4. fire event and inform listeners - which is only the runner at the moment.
       console.log("markdown-io.do_command: perform tasks for", file);
 
-      this.notify_all(o_props);
-      // this.observer_subject.notify_all(o_props);
+      this.notify_all(o_props); // this.observer_subject.notify_all(o_props);
     });
 
     //* fire finished event to perform write!

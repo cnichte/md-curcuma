@@ -9,6 +9,7 @@ import { MD_FileContent } from "./helpers/MD_FileContent";
 import { MD_Document, MD_Document_Parameter_Type } from "./helpers/MD_Document";
 import { MD_Observable_Abstract_TaskBase } from "./MD_Observable_Abstract_TaskBase";
 import { Task_Interface } from "../types";
+import { Markdown_IO_WriteProps_Interface } from "src/lib/io";
 
 export interface MD_Splitter_Parameter_Type {
   pattern: string;
@@ -20,6 +21,8 @@ export interface MD_Splitter_Parameter_Type {
   doRemoveHeadline: boolean;
   frontmatter_filename: string;
   frontmatter: MD_Frontmatter_Template;
+
+  writer_props: Markdown_IO_WriteProps_Interface;
 }
 
 
@@ -79,7 +82,7 @@ export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_T
         return mdfc;
 
       if (this.md_document !== null) {
-        this.md_document.write_file(this.io_meta.file_name_writer);
+        this.md_document.write_file(this.parameter.writer_props.path);
       }
 
       let params: MD_Document_Parameter_Type = {
@@ -109,7 +112,9 @@ export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_T
       this.md_document !== null &&
       index == mdfc.body_array.length - 1
     ) {
-      this.md_document.write_file(this.io_meta.file_name_writer);
+
+      // TODO: Das auslagern auf den Writer im runner!?
+      this.md_document.write_file(this.parameter.writer_props.path);
     }
 
     // inform not to write the entire file after splitting ist up.

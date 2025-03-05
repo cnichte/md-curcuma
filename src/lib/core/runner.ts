@@ -82,9 +82,8 @@ export class Runner<D> implements Runner_Interface<D> {
       props.command === "tasks-finnished"
     ) {
       // TODO nach dem letzten dao schreiben
-      // console.log( "runner.do_command received props: ", props.from, props.to, props.command, props?.dao.io_meta.file_name_reader, props?.dao.io_meta.file_name_writer);
+      console.log("################## FERTIG, FÜHRE WRITE AUS!!!");
 
-      // console.log("################## FERTIG, FÜHRE WRITE AUS!!!");
       if (this.writer != null) {
         // TODO: Was schreiben? da müsste was übergeben werden... meta, data, etc
         // TODO: Benutze IO_Meta_Interface ????
@@ -93,10 +92,10 @@ export class Runner<D> implements Runner_Interface<D> {
         //!!! this.writer.write(props.dao);
       } else {
         console.log("Du hast keinen writer definiert!");
-        // props.io_meta.file_name_writer = props.io_meta.file_name_reader;
-        //! this.reader.write(props.dao);
       }
+
     } else {
+      console.log("runner.do_command received UNKNOWN props: ", props.from, props.to, props.command);
     }
   }
 

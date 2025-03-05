@@ -11,8 +11,10 @@ import { NOP_Task } from "../src/lib/tasks";
 const runner = new Runner<string>();
 
 // TODO process Arrays of folders
-// TODO Schleuse den Type (über Task) ein aktiv, archiv, papierkorb
+// TODO ? Schleuse den Type (über Task) ein aktiv, archiv, papierkorb ?
 // TODO cleanup: erase target-file before first writing.
+
+// getestet, läuft.
 let r_props: Json_IO_ReadProps_Interface = {
   path: "test-data/json-to-excel/json/",
   simulate: false,

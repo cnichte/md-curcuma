@@ -97,12 +97,6 @@ export class Json_IO_Reader<D>
       io_meta.file_list_reader = file_list;
       io_meta.file_name_reader = file;
 
-      // TODO: Unklar. Falls ein writer definiert ist darf es das überschreiben.
-      // TODO: Für den MD_Splitter_Task mach ich das erst mal so.
-
-      //TODODas ist jetzt nicht mehr so gut!
-      //! io_meta.file_name_writer = this.write_props.path;
-
       let the_dao: Data_Interface<D> = {
         data: dao_string,
         io_meta: io_meta,
