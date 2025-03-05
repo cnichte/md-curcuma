@@ -1,5 +1,8 @@
 import { Json_IO_Reader, Markdown_IO_Reader } from "../io";
-import { IO_Observable_Reader_Interface, IO_Observable_Writer_Interface } from "../io/types";
+import {
+  IO_Observable_Reader_Interface,
+  IO_Observable_Writer_Interface,
+} from "../io/types";
 import { Task_Interface } from "../tasks";
 import { Observer_Interface, Observer_Props, Observer_Type } from "./observer";
 
@@ -44,25 +47,34 @@ export class Runner<D> implements Runner_Interface<D> {
         "### runner.do_command received props: ",
         props.from,
         props.to,
-        props.command,
-        // props.dao
+        props.command // props.dao
       );
+
       //! alle Tasks anwenden
       for (let task of this.tasks) {
+        
         // TODO: TASK Observer
         task.add_observer(this, this.get_observer_id());
 
         // (dao:DAO_Interface<D>)
         task.perform(props.dao);
 
-        //TODO Nach jedem DAO mit dem writer schreiben (es sei denn 'do-not-io-write')
-        if (this.writer != null) {
-          // TODO && props.command === "do-io-write"
-          this.writer.write(props.dao);
-        }
+        //TODO: WAT - write after Task - brauch ich das wirklich?
       }
 
-      // TODO am Ende aller Tasks das Ergebnis einmal wegschreiben... ?
+      // Am Ende aller Tasks das Ergebnis einmal wegschreiben...
+      //TODO Nach jedem DAO mit dem Writer schreiben, es sei denn 'do-not-io-write'
+      if (this.writer != null) {
+         this.writer.write(props.dao);
+       }
+
+      } else if (
+        // props.from === "md-splitter-task" &&
+        props.to === "runner" &&
+        props.command === "do-not-io-write"
+      ) {
+
+        // macht einfach nix?
 
     } else if (
       //! props.from === "markdown-io" &&
@@ -72,7 +84,7 @@ export class Runner<D> implements Runner_Interface<D> {
       // TODO nach dem letzten dao schreiben
       // console.log( "runner.do_command received props: ", props.from, props.to, props.command, props?.dao.io_meta.file_name_reader, props?.dao.io_meta.file_name_writer);
 
-      console.log("################## FERTIG, FÜHRE WRITE AUS!!!");
+      // console.log("################## FERTIG, FÜHRE WRITE AUS!!!");
       if (this.writer != null) {
         // TODO: Was schreiben? da müsste was übergeben werden... meta, data, etc
         // TODO: Benutze IO_Meta_Interface ????

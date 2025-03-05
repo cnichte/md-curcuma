@@ -112,9 +112,7 @@ export class Json_IO_Reader<D>
 
       //* 4. fire event and inform listeners - which is only the runner at the moment.
       console.log("markdown-io.do_command: perform tasks for", file);
-
-      this.notify_all(o_props);
-      this.observer_subject.notify_all(o_props);
+      this.notify_all(o_props); // this.observer_subject.notify_all(o_props);
     });
 
     //* fire finished event to perform write!

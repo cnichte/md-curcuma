@@ -204,11 +204,15 @@ import { IOable } from "../io/types";
     dir: string,
     files: Array<string> = []
   ): Array<string> {
+
+    // Fix the path if / is absend.
+    dir = ( dir.endsWith(path.sep) ? dir : dir + path.sep );
+
     // Get an array of all files and directories in the passed directory using fs.readdirSync
     const fileList: fs.Dirent[] = fs.readdirSync(dir, { withFileTypes: true }); // has a recursive: true
     // Create the full path of the file/directory by concatenating the passed directory and file/directory name
     for (const file of fileList) {
-      const name = `${dir}/${file.name}`;
+      const name = `${dir}${file.name}`;
       // Check if the current file/directory is a directory using fs.statSync
       if (fs.statSync(name).isDirectory()) {
         // If it is a directory, recursively call the getFiles function with the directory path and the files array

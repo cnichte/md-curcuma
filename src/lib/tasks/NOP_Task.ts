@@ -6,7 +6,7 @@ import { Observable_Abstract_TaskBase } from "./Observable_Abstract_TaskBase";
  */
 export class NOP_Task<T> extends Observable_Abstract_TaskBase<T> {
     perform(dao:Data_Interface<T>): Data_Interface<T> {
-        console.log("NOP_Task.perform: ", dao);
+        // console.log("NOP_Task.perform: ", dao);
         return dao;
     }
 

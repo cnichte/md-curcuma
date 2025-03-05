@@ -113,6 +113,7 @@ export class MD_Splitter_Task<T extends string> extends MD_Observable_Abstract_T
     }
 
     // inform not to write the entire file after splitting ist up.
+    // TODO Das könnte ich einfach weglassen ????
     super.notify_all({
       from: "md-splitter-task",
       to: "runner",
