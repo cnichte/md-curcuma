@@ -24,7 +24,7 @@ const runner = new Runner<any>();
 // TODO cleanup: erase target-file before first writing.
 
 // getestet, läuft.
-const r_props: Json_IO_ReadProps_Interface = {
+const reader_props: Json_IO_ReadProps_Interface = {
   path: "test-data/json-to-excel/json/",
   simulate: false,
   doSubfolders: false,
@@ -32,7 +32,7 @@ const r_props: Json_IO_ReadProps_Interface = {
   useCounter: false,
 };
 
-const w_props: XLSX_IO_WriteProps_Interface<any> = {
+const writer_props: XLSX_IO_WriteProps_Interface<any> = {
   path: "test-data/json-to-excel/excel/excel-output.xlsx",
   simulate: false,
 
@@ -45,7 +45,7 @@ const w_props: XLSX_IO_WriteProps_Interface<any> = {
   json_template: "", // TODO unused, remove!
 };
 
-const m1: Mapper_Interface = {
+const mapping_1: Mapper_Interface = {
   mapping_items: [
     {
       source_property_name: "data_array_string",
@@ -55,7 +55,7 @@ const m1: Mapper_Interface = {
   task: new ArrayJoin_Mapping({ separator: ", " }),
 };
 
-const m2: Mapper_Interface = {
+const mapping_2: Mapper_Interface = {
   mapping_items: [
     {
       source_property_name: "protocol",
@@ -66,7 +66,7 @@ const m2: Mapper_Interface = {
 };
 
 //* Quick Custom Mapper
-const m3: Mapper_Interface = {
+const mapping_3: Mapper_Interface = {
   mapping_items: [{
     source_property_name: "data_boolean",
     target_poperty_name: "data_boolean",
@@ -81,10 +81,10 @@ const m3: Mapper_Interface = {
 };
 
 const mapping_task_props: Mapping_Task_Props = {
-  mappings: [m1, m2, m3],
+  mappings: [mapping_1, mapping_2, mapping_3],
 };
 
-runner.addReader(new Json_IO_Reader<any>(r_props));
+runner.addReader(new Json_IO_Reader<any>(reader_props));
 runner.addTask(new Mapping_Task<any>(mapping_task_props));
-runner.addWriter(new XLSX_IO_Writer<any>(w_props));
+runner.addWriter(new XLSX_IO_Writer<any>(writer_props));
 runner.run();
