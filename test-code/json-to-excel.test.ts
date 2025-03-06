@@ -2,6 +2,7 @@
 import {
   Mapper_Interface,
   Mapper_Item_Interface,
+  Mapper_Properties,
   Runner,
 } from "../src/lib/core";
 import {
@@ -20,11 +21,10 @@ import {
 const runner = new Runner<any>();
 
 // TODO process Arrays of folders
-// TODO ? Schleuse den Type (über Task) ein aktiv, archiv, papierkorb ?
 // TODO cleanup: erase target-file before first writing.
 
 // getestet, läuft.
-let r_props: Json_IO_ReadProps_Interface = {
+const r_props: Json_IO_ReadProps_Interface = {
   path: "test-data/json-to-excel/json/",
   simulate: false,
   doSubfolders: false,
@@ -32,19 +32,20 @@ let r_props: Json_IO_ReadProps_Interface = {
   useCounter: false,
 };
 
-let w_props: XLSX_IO_WriteProps_Interface<any> = {
+const w_props: XLSX_IO_WriteProps_Interface<any> = {
   path: "test-data/json-to-excel/excel/excel-output.xlsx",
   simulate: false,
 
   worksheet: "Sheet One",
+  // TODO: exclude_columns : ['','']
 
-  doSubfolders: false,
-  limit: 0,
-  useCounter: false,
-  json_template: "",
+  doSubfolders: false, // TODO implement
+  limit: 0, // TODO implement
+  useCounter: false, // TODO implement
+  json_template: "", // TODO unused, remove!
 };
 
-let m1: Mapper_Interface = {
+const m1: Mapper_Interface = {
   mapping_items: [
     {
       source_property_name: "data_array_string",
@@ -54,7 +55,7 @@ let m1: Mapper_Interface = {
   task: new ArrayJoin_Mapping({ separator: ", " }),
 };
 
-let m2: Mapper_Interface = {
+const m2: Mapper_Interface = {
   mapping_items: [
     {
       source_property_name: "protocol",
@@ -64,8 +65,23 @@ let m2: Mapper_Interface = {
   task: new ArrayJoin_Mapping({ separator: "\n" }),
 };
 
-let mapping_task_props: Mapping_Task_Props = {
-  mappings: [m1, m2],
+//* Quick Custom Mapper
+const m3: Mapper_Interface = {
+  mapping_items: [{
+    source_property_name: "data_boolean",
+    target_poperty_name: "data_boolean",
+  }],
+  task: {
+    perform: function (mapping_properties: Mapper_Properties): string {
+      if(mapping_properties.source_value) return "yes";
+      if(!mapping_properties.source_value) return "no";
+      return mapping_properties.source_value;
+    },
+  },
+};
+
+const mapping_task_props: Mapping_Task_Props = {
+  mappings: [m1, m2, m3],
 };
 
 runner.addReader(new Json_IO_Reader<any>(r_props));

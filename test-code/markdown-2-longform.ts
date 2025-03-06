@@ -1,6 +1,8 @@
 //! Teste: Das neue Curcuma
 
 import {
+  Mapper_Interface,
+  Mapper_Properties,
   MD_Task_Parameter_Type,
   Runner,
 } from "../src/lib";
