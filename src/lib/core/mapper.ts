@@ -19,19 +19,19 @@ export interface Mapper_Item_Interface {
   target_poperty_name: any;
 }
 
-export interface Mapper_Interface<MI> {
-  mapping_items: MI[];
+export interface Mapper_Interface {
+  mapping_items: Mapper_Item_Interface[];
   task?: Mapper_Task_Interface; // TODO could be optional?
 }
 
 
-export class Mapper<MI extends Mapper_Item_Interface> {
-  protected mappings: Mapper_Interface<MI>[] = [];
+export class Mapper {
+  protected mappings: Mapper_Interface[] = [];
 
-  public addMapping(mapping: Mapper_Interface<MI>): void {
+  public addMapping(mapping: Mapper_Interface): void {
     this.mappings.push(mapping);
   }
-  public addMappings(mappings: Mapper_Interface<MI>[]): void {
+  public addMappings(mappings: Mapper_Interface[]): void {
     this.mappings = mappings;
   }
 
@@ -49,9 +49,9 @@ export class Mapper<MI extends Mapper_Item_Interface> {
         (source != null || source != undefined) &&
         (target != null || target != undefined)
       ) {
-        this.mappings.forEach((map: Mapper_Interface<MI>) => {
+        this.mappings.forEach((map: Mapper_Interface) => {
           // Alle Felder im Mapping verarbeiten
-          map.mapping_items.forEach((mapping_item: MI) => {
+          map.mapping_items.forEach((mapping_item: Mapper_Item_Interface) => {
             this.do_mapping(mapping_item, source, target, map.task);
           });
         });
@@ -69,7 +69,7 @@ export class Mapper<MI extends Mapper_Item_Interface> {
    * @param task 
    */
   public do_mapping(
-    mapping_item: MI,
+    mapping_item: Mapper_Item_Interface,
     source: any,
     target: any,
     task: Mapper_Task_Interface
@@ -81,14 +81,14 @@ export class Mapper<MI extends Mapper_Item_Interface> {
       source_property_name: mapping_item.source_property_name,
       target_poperty_name: mapping_item.target_poperty_name,
 
-      source_value: source[mapping_item.source_property_name],
-      target_value: target[mapping_item.target_poperty_name],
+      source_value: source.data[mapping_item.source_property_name],
+      target_value: target.data[mapping_item.target_poperty_name],
     };
 
     if (task != null) {
-      target[mapping_item.target_poperty_name] = task.perform(props);
+      target.data[mapping_item.target_poperty_name] = task.perform(props);
     } else {
-      target[mapping_item.target_poperty_name] = props.source_value;
+      target.data[mapping_item.target_poperty_name] = props.source_value;
     }
   }
 }

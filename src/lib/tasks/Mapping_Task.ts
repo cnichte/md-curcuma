@@ -1,11 +1,11 @@
 
-import { Mapper, Mapper_Interface, Mapper_Item_Interface } from "../core/mapper";
+import { Mapper, Mapper_Interface } from "../core/mapper";
 import { Data_Interface } from "../io/types";
 import { Observable_Abstract_TaskBase } from "./Observable_Abstract_TaskBase";
 
 
 export interface Mapping_Task_Props {
-    mappings?: Mapper_Interface<Mapper_Item_Interface>[];
+    mappings?: Mapper_Interface[];
 }
 
 /**
@@ -22,7 +22,7 @@ export class Mapping_Task<T> extends Observable_Abstract_TaskBase<T> {
     perform(dao:Data_Interface<T>): Data_Interface<T> {
 
         if (this.props.hasOwnProperty("mappings")) {
-            let mapper = new Mapper<Mapper_Item_Interface>();
+            let mapper = new Mapper();
             mapper.addMappings(this.props.mappings);
             mapper.do_mappings(dao, dao); // TODO geht das????
           }
