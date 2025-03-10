@@ -13,6 +13,7 @@
     "details" : "Das Dokument wurde geändert."
   } ],
   "uuid" : "1706d2d7-b6e8-4c5a-bbc1-12ed2172b238",
+  "exclude_me_1": "stuff to exclude",
   "data" : "data 1",
   "data_boolean" : true,
   "data_array_string" : []

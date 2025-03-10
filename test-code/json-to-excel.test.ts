@@ -37,7 +37,7 @@ const writer_props: XLSX_IO_WriteProps_Interface<any> = {
   simulate: false,
 
   worksheet: "Sheet One",
-  // TODO: exclude_columns : ['','']
+  exclude_columns : ['exclude_me_1'],
 
   doSubfolders: false, // TODO implement
   limit: 0, // TODO implement

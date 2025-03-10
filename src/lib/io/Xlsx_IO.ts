@@ -1,4 +1,5 @@
 //! ehemals xlsx-transporter
+import { omit } from "lodash";
 import { Filesystem } from "../core/filesystem";
 import {
   Observable,
@@ -48,6 +49,7 @@ export interface XLSX_IO_WriteProps_Interface<T> extends IOable {
   simulate: boolean;
   // the rest
   worksheet: string;
+  exclude_columns: Array<string>;
 
   doSubfolders: boolean;
   limit: number;
@@ -90,17 +92,16 @@ export class XLSX_IO_Reader<D>
   read(): void {
     // https://docs.sheetjs.com/docs/getting-started/examples/import#extract-raw-data
     // TODO Datensätze häppchenweise an die Tasks verfüttern. Siehe zB. Markdown_IO oder Json_IO
-    XLSX.utils.sheet_to_json(
-      Filesystem.read_file_xlsx(this.props.path),
-      { header: 1 }
-    );
+    XLSX.utils.sheet_to_json(Filesystem.read_file_xlsx(this.props.path), {
+      header: 1,
+    });
   }
 }
 
 export class XLSX_IO_Writer<D>
   implements IO_Observable_Writer_Interface<D>, Observable<D>
 {
-    // Der reader löst ein Event aus, auf das der Runner hört.
+  // Der reader löst ein Event aus, auf das der Runner hört.
   // Der reader schickt so die file-datensätze nacheinander zu weiteren Verarbeitung.
   private observer_subject: Observer_Subject<D> = new Observer_Subject<D>();
 
@@ -133,17 +134,24 @@ export class XLSX_IO_Writer<D>
   write(dao: Data_Interface<D>): void {
     console.log("### XLSX_IO.write: ", dao);
 
+    let filtered_data: any = dao.data;
+
+    for (const exclude_column of this.props.exclude_columns) {
+      if (dao.data.hasOwnProperty(exclude_column)){
+      // GUIDE https://stackabuse.com/bytes/typescript-remove-a-property-from-an-object/
+      filtered_data = omit(dao.data as Object, exclude_column);
+      }
+    }
+
     // Datensatz ggfs. in ein Array wrappen...
     // array_of_objects
-    let aoo = Array.isArray(dao.data) ? dao.data : [dao.data];
+    let aoo = Array.isArray(filtered_data) ? filtered_data : [filtered_data];
 
     // https://docs.sheetjs.com/docs/getting-started/examples/export
 
     if (Filesystem.is_file_exist(this.props.path)) {
       // An bestehende Datei / Worksheet anhängen
-      let workbook: XLSX.WorkBook = Filesystem.read_file_xlsx(
-        this.props.path
-      );
+      let workbook: XLSX.WorkBook = Filesystem.read_file_xlsx(this.props.path);
       var worksheet = workbook.Sheets[this.props.worksheet];
 
       XLSX.utils.sheet_add_json(worksheet, aoo, {
