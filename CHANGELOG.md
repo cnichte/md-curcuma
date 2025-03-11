@@ -19,7 +19,11 @@ and on the top of it
 
 What has been implemented so far:
 
-## Release 2.0.1 ff (2025-01)
+## Release 2.0.2 ff (2025-02)
+
+* ongoing complete redesign and new api.
+
+## Release 2.0.1 (2025-01)
 
 Heavy ongoing development stuff and bug fixing.
 

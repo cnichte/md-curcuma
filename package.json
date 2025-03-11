@@ -34,21 +34,21 @@
   "homepage": "https://github.com/cnichte/md-curcuma",
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/lodash": "^4.17.9",
-    "@types/node": "^22.10.5",
+    "@types/lodash": "^4.17.16",
+    "@types/node": "^22.13.10",
     "@types/uuid": "^10.0.0",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
   },
   "dependencies": {
     "date-fns": "^4.1.0",
     "exif-js": "^2.3.0",
-    "exifreader": "^4.26.0",
+    "exifreader": "^4.26.2",
     "front-matter": "^4.0.2",
-    "fs-extra": "^11.2.0",
+    "fs-extra": "^11.3.0",
     "linkinator": "^6.1.2",
     "lodash": "^4.17.21",
-    "uuid": "^11.0.4",
+    "uuid": "^11.1.0",
     "xlsx": "^0.18.5",
     "yaml": "^2.7.0"
   }

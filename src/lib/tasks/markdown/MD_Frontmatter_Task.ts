@@ -13,7 +13,7 @@ import { Task_Interface } from "../types";
 export interface MD_FrontmatterTask_Parameter_Type {
   frontmatter_filename: string;
   frontmatter: any;
-  mappings: Mapper_Interface<any>[]; // TODO not any, but...
+  mappings: Mapper_Interface[]; // TODO not any, but...
 }
 
 export class MD_Frontmatter_Task<T extends string> extends MD_Observable_Abstract_TaskBase<T> implements Task_Interface<T>
@@ -89,7 +89,7 @@ export class MD_Frontmatter_Task<T extends string> extends MD_Observable_Abstrac
       // oder... das geht wenn die propertynames == platzhalter sind: obj[name] -> {name}
       // das ersetzen erfolgt aus den attributen der quelle...
       // Was ist mit den Feldern aus dem Splitter? -> MD_Transformer_TemplateValues_Type aus md-transformer.
-      const mapper = new Mapper<Mapper_Item_Interface>();
+      const mapper = new Mapper();
       mapper.addMappings(this.parameter.mappings);
       mapper.do_mappings(mdfc.frontmatter_attributes, fm_new);
   
