@@ -1,5 +1,4 @@
 //! ehemals xlsx-transporter
-import { omit } from "lodash";
 import { Filesystem } from "../core/filesystem";
 import {
   Observable,
@@ -17,6 +16,7 @@ import {
 } from "./types";
 
 import * as XLSX from "xlsx";
+import { Utils } from "../core/utils";
 
 //! import { Mapping_XXX_Interface, Mapping_Item  } from "../tasks/Mapping_Task";
 
@@ -134,14 +134,7 @@ export class XLSX_IO_Writer<D>
   write(dao: Data_Interface<D>): void {
     console.log("### XLSX_IO.write: ", dao);
 
-    let filtered_data: any = dao.data;
-
-    for (const exclude_column of this.props.exclude_columns) {
-      if (dao.data.hasOwnProperty(exclude_column)){
-      // GUIDE https://stackabuse.com/bytes/typescript-remove-a-property-from-an-object/
-      filtered_data = omit(dao.data as Object, exclude_column);
-      }
-    }
+    let filtered_data = Utils.remove_property_from_object(dao.data, this.props.exclude_columns);
 
     // Datensatz ggfs. in ein Array wrappen...
     // array_of_objects

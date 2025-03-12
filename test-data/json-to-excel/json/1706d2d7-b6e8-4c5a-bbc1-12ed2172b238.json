@@ -1,4 +1,5 @@
 {
+  "exclude_me_1": "stuff to exclude 1",
   "dateCreated" : "2025-02-27 12:12",
   "dateModified" : "1 mal, zuletzt: 2025-02-27 12:13",
   "protocol" : [ {
@@ -13,8 +14,9 @@
     "details" : "Das Dokument wurde geändert."
   } ],
   "uuid" : "1706d2d7-b6e8-4c5a-bbc1-12ed2172b238",
-  "exclude_me_1": "stuff to exclude",
+  "exclude_me_2": "stuff to exclude 2",
   "data" : "data 1",
   "data_boolean" : true,
-  "data_array_string" : []
+  "data_array_string" : [],
+  "exclude_me_3": "stuff to exclude 3"
 }
