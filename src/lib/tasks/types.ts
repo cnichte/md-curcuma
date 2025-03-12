@@ -3,7 +3,7 @@ import {
   Observer_Interface,
   Observer_Props,
   Observer_Type,
-} from "src/lib/core";
+} from "../core";
 import { CopyTask_Type } from "../core/copy-job";
 import { Data_Interface, IO_Meta_Interface } from "../io/types";
 
