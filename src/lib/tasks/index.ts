@@ -8,3 +8,5 @@ export * from './Mapping_Task';
 export * from './NOP_Task';
 export * from './Observable_Abstract_TaskBase'
 export * from './types'
+
+export * from './Xlsx_Anlayse_Task'

@@ -10,8 +10,10 @@ import {
 } from "../core/observer";
 import {
   Data_Interface,
+  IO_Meta,
   IO_Observable_Reader_Interface,
   IO_Observable_Writer_Interface,
+  IO_Observer_Props,
   IOable,
 } from "./types";
 
@@ -90,11 +92,65 @@ export class XLSX_IO_Reader<D>
    * @returns
    */
   read(): void {
-    // https://docs.sheetjs.com/docs/getting-started/examples/import#extract-raw-data
-    // TODO Datensätze häppchenweise an die Tasks verfüttern. Siehe zB. Markdown_IO oder Json_IO
-    XLSX.utils.sheet_to_json(Filesystem.read_file_xlsx(this.props.path), {
-      header: 1,
+    var file_list: Array<string> = [];
+
+    if (Filesystem.isFolder(this.props.path)) {
+      file_list = Filesystem.get_files_list(this.props.path);
+    } else if (Filesystem.isFile(this.props.path)) {
+      file_list.push(this.props.path);
+    } else {
+      console.log(`not supported: '${this.props.path}'`);
+    }
+
+    console.log("Xlsx_IO.read: ", file_list);
+
+    file_list.forEach((file: string) => {
+      //* 1. Observer Properties
+      // Die Nachricht die an alle Listener gesendet wird.
+      let o_props = new IO_Observer_Props<any>();
+      o_props.from = "xlsx-io";
+      o_props.to = "runner";
+      o_props.command = "perform-tasks";
+
+      //* 2. DATEN LADEN und DAO ERZEUGEN
+
+      // https://docs.sheetjs.com/docs/getting-started/examples/import#extract-raw-data
+      let wb: XLSX.WorkBook = Filesystem.read_file_xlsx(this.props.path);
+
+      let wb_json = new Map<string, any>();
+
+      wb.SheetNames.forEach((sn) => {
+        let d: any = XLSX.utils.sheet_to_json(wb.Sheets[sn], {
+          header: 1,
+        });
+        wb_json.set(sn, d);
+      });
+
+      //* 3. File-Metadaten
+      let io_meta = new IO_Meta();
+      io_meta.file_list_reader = file_list;
+      io_meta.file_name_reader = file;
+
+      let the_dao: Data_Interface<any> = {
+        data: Object.fromEntries(wb_json), // Make (Json)-Object from Map
+        io_meta: io_meta,
+      };
+
+      o_props.dao = the_dao;
+
+      //* 4. fire event and inform listeners - which is only the runner at the moment.
+      console.log("xlsx-io.do_command: perform tasks for", file);
+
+      this.notify_all(o_props); // this.observer_subject.notify_all(o_props);
     });
+
+    //* fire finished event to perform write!
+    let m_props = new IO_Observer_Props<any>();
+    m_props.from = "markdown-io";
+    m_props.to = "runner";
+    m_props.command = "tasks-finnished";
+
+    this.notify_all(m_props);
   }
 }
 
@@ -134,7 +190,10 @@ export class XLSX_IO_Writer<D>
   write(dao: Data_Interface<D>): void {
     console.log("### XLSX_IO.write: ", dao);
 
-    let filtered_data = Utils.remove_property_from_object(dao.data, this.props.exclude_columns);
+    let filtered_data = Utils.remove_property_from_object(
+      dao.data,
+      this.props.exclude_columns
+    );
 
     // Datensatz ggfs. in ein Array wrappen...
     // array_of_objects

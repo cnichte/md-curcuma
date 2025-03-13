@@ -10,7 +10,6 @@ import { IOable } from "../io/types";
  * @export
  * @class Filesystem
  */ export class Filesystem {
-
   /**
    * TODO filter https://github.com/jprichardson/node-fs-extra/blob/master/docs/copy-sync.md
    *
@@ -111,21 +110,51 @@ import { IOable } from "../io/types";
 
   /**
    * Get information about a file.
-   * 
+   *
    * https://nodejs.org/api/fs.html#fsfstatsyncfd-options
    * https://nodejs.org/api/fs.html#class-fsstats
-   * 
-   * @param file 
-   * @returns 
+   *
+   * @param file
+   * @returns
    */
-  public static get_file_info(
-    file: string,
-  ): fs.Stats {
+  public static get_file_info(file: string): fs.Stats {
     return fs.statSync(file);
   }
 
-  public static get_filename_from(my_path_filename: string): string {
+  /**
+   * path.parse(filename).name;     //=> "hello"
+   * path.parse(filename).ext;      //=> ".html"
+   * path.parse(filename).base; //=> "hello.html"
+   *
+   * @param my_path_filename
+   * @returns
+   */
+  public static get_filename_base_from(my_path_filename: string): string {
     return path.basename(my_path_filename);
+  }
+
+  /**
+   * path.parse(filename).name;     //=> "hello"
+   * path.parse(filename).ext;      //=> ".html"
+   * path.parse(filename).base; //=> "hello.html"
+   *
+   * @param my_path_filename
+   * @returns
+   */
+  public static get_filename_ext_from(my_path_filename: string): string {
+    return path.extname(my_path_filename);
+  }
+
+  /**
+   * path.parse(filename).name;     //=> "hello"
+   * path.parse(filename).ext;      //=> ".html"
+   * path.parse(filename).base; //=> "hello.html"
+   *
+   * @param my_path_filename
+   * @returns
+   */
+  public static get_filename_name_from(my_path_filename: string): string {
+    return path.parse(my_path_filename).name;
   }
 
   public static get_path_from(my_path_filename: string): string {
@@ -204,9 +233,8 @@ import { IOable } from "../io/types";
     dir: string,
     files: Array<string> = []
   ): Array<string> {
-
     // Fix the path if / is absend.
-    dir = ( dir.endsWith(path.sep) ? dir : dir + path.sep );
+    dir = dir.endsWith(path.sep) ? dir : dir + path.sep;
 
     // Get an array of all files and directories in the passed directory using fs.readdirSync
     const fileList: fs.Dirent[] = fs.readdirSync(dir, { withFileTypes: true }); // has a recursive: true
@@ -251,7 +279,7 @@ import { IOable } from "../io/types";
 
   public static read_file_buffer(file: string): Buffer {
     try {
-      var md_buffer:Buffer = fs.readFileSync(file);
+      var md_buffer: Buffer = fs.readFileSync(file);
     } catch (err) {
       throw err;
     }
@@ -292,12 +320,12 @@ import { IOable } from "../io/types";
 
   /**
    * Does all the nasty filesystem-checking, before writing.
-   * 
+   *
    * - simulation mode (does not write to filesystem anyway)
    * - extra surpress filesystem writing.
    * - does file exist?
    * - is souce-file modified, compared to target-file?
-   * 
+   *
    * @param source_file
    * @param job_parameter
    * @param workbook
@@ -311,7 +339,7 @@ import { IOable } from "../io/types";
     do_not_write_file: boolean,
     doWriting?: (filename: string, data: T) => void
   ) {
-    const filename = Filesystem.get_filename_from(source_file);
+    const filename = Filesystem.get_filename_base_from(source_file);
 
     const path_target_filename = Filesystem.concat_path_filename(
       job_parameter.path,
@@ -324,9 +352,7 @@ import { IOable } from "../io/types";
       // Here, of course, the option of forcing the disk can be useful.
       if (!do_not_write_file) {
         if (Filesystem.is_file_exist(path_target_filename)) {
-          if (
-            Filesystem.is_file_modified(source_file, path_target_filename)
-          ) {
+          if (Filesystem.is_file_modified(source_file, path_target_filename)) {
             console.log(
               "file does exist, and is modified (compared by modified-date): Write it."
             );

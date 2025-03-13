@@ -1,7 +1,6 @@
 //! Teste: Das neue Curcuma
 import {
   Mapper_Interface,
-  Mapper_Item_Interface,
   Mapper_Properties,
   Runner,
 } from "../src/lib/core";
@@ -15,7 +14,6 @@ import {
   ArrayJoin_Mapping,
   Mapping_Task,
   Mapping_Task_Props,
-  NOP_Task,
 } from "../src/lib/tasks";
 
 const runner = new Runner<any>();
