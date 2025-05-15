@@ -1,13 +1,15 @@
+// Alte Observer-Logik
+
 import { Data_Interface } from "../io/types";
 
 export type Observer_Command_Type =
   | "perform-tasks"
-  | "tasks-finnished"
+  | "tasks-finished"
   | "do-io-write"
   | "do-not-io-write";
 
 export type Observer_Type = "runner";
-export type Observable_Type = "markdown-io" | "md-splitter-task" | "json-io" | "xlsx-io";
+export type Observable_Type = "markdown-io" | "md-splitter-task" | "json-io" | "xlsx-io" | "csv-io";
 
 export interface Observer_Props<D> {
   from: Observable_Type;

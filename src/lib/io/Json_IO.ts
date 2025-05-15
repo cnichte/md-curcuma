@@ -32,6 +32,7 @@ export interface Json_IO_WriteProps_Interface {
   simulate: boolean;
 
   doSubfolders: boolean;
+  append: boolean; // TODO: append to file
   limit: number; // greift nur bei Verzeichnis
   useCounter: boolean;
 }
@@ -109,15 +110,19 @@ export class Json_IO_Reader<D>
       this.notify_all(o_props); // this.observer_subject.notify_all(o_props);
     });
 
-    //* fire finished event to perform write!
+    //* 5. fire finished event to perform final write!
     let m_props = new IO_Observer_Props<any>();
     m_props.from = "markdown-io";
     m_props.to = "runner";
-    m_props.command = "tasks-finnished";
+    m_props.command = "tasks-finished";
 
     this.notify_all(m_props);
   }
 }
+
+
+
+
 
 export class Json_IO_Writer<D>
   implements IO_Observable_Writer_Interface<D>, Observable<D>
@@ -126,9 +131,10 @@ export class Json_IO_Writer<D>
   // Der reader schickt so die file-datensätze nacheinander zu weiteren Verarbeitung.
   private observer_subject: Observer_Subject<D> = new Observer_Subject<D>();
 
-  private props: Json_IO_ReadProps_Interface = null;
+  private props: Json_IO_WriteProps_Interface = null;
+  private collected_data: Array<D> = [];
 
-  constructor(props: Json_IO_ReadProps_Interface) {
+  constructor(props: Json_IO_WriteProps_Interface) {
     this.props = props;
   }
 
@@ -150,7 +156,13 @@ export class Json_IO_Writer<D>
    * dao.io_meta.filename_reader
    */
   write(dao: Data_Interface<D>): void {
-    console.log("### XLSX_IO.write: ", dao);
-    Filesystem.write_file_json(this.props.path, dao.data);
+    console.log("### Json_IO.write: ", dao);
+    if(this.props.append){
+      this.collected_data.push(dao.data);
+      Filesystem.write_file_json(this.props.path, this.collected_data);
+    }else{
+      Filesystem.write_file_json(this.props.path, dao.data);
+    }
+   
   }
 }

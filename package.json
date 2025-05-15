@@ -41,6 +41,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "csv": "^6.3.11",
     "date-fns": "^4.1.0",
     "exif-js": "^2.3.0",
     "exifreader": "^4.26.2",

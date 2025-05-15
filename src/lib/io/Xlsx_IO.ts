@@ -144,11 +144,11 @@ export class XLSX_IO_Reader<D>
       this.notify_all(o_props); // this.observer_subject.notify_all(o_props);
     });
 
-    //* fire finished event to perform write!
+    //* 5. fire finished event to perform final write!
     let m_props = new IO_Observer_Props<any>();
     m_props.from = "markdown-io";
     m_props.to = "runner";
-    m_props.command = "tasks-finnished";
+    m_props.command = "tasks-finished";
 
     this.notify_all(m_props);
   }

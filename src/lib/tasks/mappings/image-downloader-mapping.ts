@@ -4,8 +4,11 @@ import path = require("node:path");
 import url = require("node:url");
 import { v4 as uuidv4 } from "uuid";
 import { Filesystem } from "../../core/filesystem";
-import { CSV_IO } from "../../io/CSV_IO";
 
+import * as fs from "fs";
+import client_http = require("http");
+import client_https = require("https");
+import { URL } from "url";
 export interface ImageDownloader_MappingType {
   image_target_folder: string;
   image_hugo_path: string;
@@ -32,11 +35,15 @@ export class ImageDownloader_Mapping implements Mapper_Task_Interface {
    * @memberof MD_ImageDownloader_Mapping
    */
   perform(mapping_properties: Mapper_Properties): string {
-    let image_url = mapping_properties.source_value;
+    // get the value from the property-name
+    let source_property_name = mapping_properties.source_property_name;
+    let source_property_value = mapping_properties.source.data[source_property_name];
+
+    let image_url = source_property_value; // mapping_properties.source_value;
     let image_target_folder = this.properties.image_target_folder;
     let image_hugo_path = this.properties.image_hugo_path;
 
-    if (CSV_IO.is_valid_url(image_url)) {
+    if (ImageDownloader_Mapping.is_valid_url(image_url)) {
       const myURL = new URL(image_url);
 
       let image_name: string = "";
@@ -83,7 +90,7 @@ export class ImageDownloader_Mapping implements Mapper_Task_Interface {
       );
 
       if (!this.properties.simulate) {
-        CSV_IO.download_image(image_url, image_target_folder)
+        ImageDownloader_Mapping.download_image(image_url, image_target_folder)
           .then(function (result) {
             console.log(
               `Downloaded from url: '${image_url}' to '${image_target_folder}' with result '${result}'`
@@ -97,5 +104,56 @@ export class ImageDownloader_Mapping implements Mapper_Task_Interface {
     }
 
     return image_hugo_path;
+  }
+
+  private static is_valid_url_protocol(url: string) {
+    try {
+      const newUrl = new URL(url);
+      return newUrl.protocol === "http:" || newUrl.protocol === "https:";
+    } catch (err) {
+      return false;
+    }
+  }
+
+  private static is_valid_url(url: string): boolean {
+    try {
+      const myURL = new URL(url);
+      return true;
+    } catch (error) {
+      console.log(`${error.input} is not a valid url`);
+      return false;
+    }
+  }
+
+  /**
+   *
+   * @static
+   * @param {(string | client.RequestOptions | URL)} url
+   * @param {fs.PathLike} filepath
+   * @return {*}
+   * @memberof Tools
+   */
+  private static download_image(url: string, filepath: fs.PathLike) {
+    return new Promise((resolve, reject) => {
+      let client = url.startsWith("https://") ? client_https : client_http;
+
+      client.get(url, (response) => {
+        if (response.statusCode === 200) {
+          let write_stream = fs.createWriteStream(filepath);
+          response
+            .pipe(write_stream)
+            .on("error", reject)
+            .once("close", () => resolve(filepath));
+        } else {
+          // Consume response data to free up memory
+          response.resume();
+          reject(
+            new Error(
+              `Download from ${url} Failed With Status Code: ${response.statusCode}`
+            )
+          );
+        }
+      });
+    });
   }
 }

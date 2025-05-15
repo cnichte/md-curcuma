@@ -79,7 +79,7 @@ export class Runner<D> implements Runner_Interface<D> {
     } else if (
       //! props.from === "markdown-io" &&
       props.to === "runner" &&
-      props.command === "tasks-finnished"
+      props.command === "tasks-finished"
     ) {
       // TODO nach dem letzten dao schreiben
       console.log("################## FERTIG, FÜHRE WRITE AUS!!!");

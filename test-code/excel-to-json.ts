@@ -43,7 +43,8 @@ const writer_props: Json_IO_WriteProps_Interface = {
 
   doSubfolders: false, // TODO implement
   limit: 0, // TODO implement
-  useCounter: false, // TODO implement
+  useCounter: false,
+  append: false
 };
 
 runner.addReader(new XLSX_IO_Reader<any>(reader_props));
