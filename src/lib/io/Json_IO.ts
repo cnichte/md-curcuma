@@ -166,3 +166,20 @@ export class Json_IO_Writer<D>
    
   }
 }
+
+export class Json_IO<D> {
+  private reader: Json_IO_Reader<D>;
+  private writer: Json_IO_Writer<D>;
+
+  constructor(read_props: Json_IO_ReadProps_Interface, write_props: Json_IO_WriteProps_Interface) {
+    this.reader = new Json_IO_Reader<D>(read_props);
+    this.writer = new Json_IO_Writer<D>(write_props);
+  }
+  read(): void {
+    this.reader.read();
+  }
+  write(dao: Data_Interface<D>): void {
+    this.writer.write(dao);
+  } 
+} 
+

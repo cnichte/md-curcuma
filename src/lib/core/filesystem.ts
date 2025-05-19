@@ -315,7 +315,7 @@ import { IOable } from "../io/types";
 
   public static write_file_json(file: string, json_object: any): void {
     // if (fs.existsSync(a_path)) { // Do something }
-    fs.writeFileSync(file, JSON.stringify(json_object));
+    fs.writeFileSync(file, JSON.stringify(json_object, null, 4)); // add 4 spaces at each level
   }
 
   /**
