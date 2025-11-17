@@ -19,8 +19,11 @@ and on the top of it
 
 What has been implemented so far:
 
-## Release 2.0.2 ff (2025-02)
+## Release 2.0.2 ff (2025-17)
 
+* Broken Link Checker for Hugo (but not only for Hugo) moved to
+  * <https://github.com/cnichte/hugo-broken-links-checker>
+  * and is part of <https://github.com/cnichte/hugo-toolbox>
 * ongoing complete redesign and new api.
 
 ## Release 2.0.1 (2025-01)

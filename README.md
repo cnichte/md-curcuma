@@ -43,17 +43,6 @@ Markdown and CSV files from your [Obsidian](https://obsidian.md/)-Vault for usag
 
 You can build customized transformers and Mappers for different solutions. For planned features and changes take a look into the [CHANGELOG.md](https://github.com/cnichte/md-curcuma/blob/main/CHANGELOG.md)
 
-### Broken Link Checker
-
-Bases on the great [Linkinator](https://www.npmjs.com/package/linkinator), adds some features:
-
-* Exports the result as JSON, providing a [data source](https://gohugo.io/content-management/data-sources/) for [Hugo](https://gohugo.io)
-* Limit the scan to 'extern', 'intern' or scan 'all'.
-* Write each scan to a different file
-* have some special_excludes.
-
-For usage refere to the `broken-links-checker.test.ts`
-
 ### Restrictions
 
 * It only runs in Backend, not in Browsers.
