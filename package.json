@@ -27,29 +27,31 @@
     "build:ts": "rm -rf dist/lib && tsc",
     "clean": "npm run clean:dist && npm run clean:test",
     "clean:dist": "find dist -mindepth 1 -delete",
-    "clean:test": "find test-data/hugo -type f | xargs rm -f"
+    "clean:test": "find test-data/hugo -type f | xargs rm -f",
+    "ncu-me": "ncu -i --format group",
+    "tree": "tree -a -L 3 ./ > directory structure.txt"
   },
   "author": "Carsten Nichte",
   "license": "GNU GPLv3",
   "homepage": "https://github.com/cnichte/md-curcuma",
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/lodash": "^4.17.16",
-    "@types/node": "^22.13.10",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^24.10.1",
     "@types/uuid": "^10.0.0",
-    "tsx": "^4.19.3",
-    "typescript": "^5.8.2"
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "csv": "^6.3.11",
+    "csv": "^6.4.1",
     "date-fns": "^4.1.0",
     "exif-js": "^2.3.0",
-    "exifreader": "^4.26.2",
+    "exifreader": "^4.32.0",
     "front-matter": "^4.0.2",
-    "fs-extra": "^11.3.0",
+    "fs-extra": "^11.3.2",
     "lodash": "^4.17.21",
-    "uuid": "^11.1.0",
+    "uuid": "^13.0.0",
     "xlsx": "^0.18.5",
-    "yaml": "^2.7.0"
+    "yaml": "^2.8.1"
   }
 }
