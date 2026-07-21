@@ -17,7 +17,7 @@ export interface IO_Observable_Reader_Interface<D> extends Observable<D> {
   }
   
   export interface IO_Observable_Writer_Interface<D> extends Observable<D> {
-    write(data: Data_Interface<D>): void;
+    write(data: Data_Interface<D>): void | Promise<void>;
     // TODO müssen die hier sein?
     add_observer(observer: Observer_Interface<D>, id:Observer_Type):void;
     notify_all(props:Observer_Props<D>): void;

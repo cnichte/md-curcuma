@@ -184,7 +184,7 @@ import { IOable } from "../io/types";
   static ensure_path(my_path: string, simulate: boolean = false) {
     if (!simulate) {
       fsextra.ensureDirSync(my_path);
-      console.log(`ensure_path exist: '${my_path}'`);
+      // Silent - no log output
     } else {
       const folder_arr = Filesystem.get_path_parts(my_path);
       console.log(`ensure_path (simulated): '${my_path}'`);

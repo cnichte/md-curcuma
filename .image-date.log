@@ -1,0 +1,41 @@
+═════════════════════════════════════════════════════════════════
+📷 Image Date Extractor  v1.0.0
+   EXIF & Dateidatum aus Dateinamen setzen
+   Gestartet: 31.12.2025, 18:12:50
+   LogFile: /Users/cnichte/develop-software/01-active/md-curcuma/production/md-curcuma/.image-date.log
+─────────────────────────────────────────────────────────────────
+
+⚙️  Konfiguration:
+   Quelle: /Users/cnichte/Pictures/fotos-familie/fotos
+   Ziel: /Users/cnichte/Pictures/fotos-familie/fotos
+   Modus: IN-PLACE
+   Simulation: deaktiviert
+   Limit: kein Limit
+   Unterordner: aktiviert
+   Dateitypen: .jpg, .jpeg, .png, .dng
+   Resume: aktiviert
+─────────────────────────────────────────────────────────────────
+
+   ✔ 38.109 Dateien gefunden
+   ℹ Starte Verarbeitung...
+   ✔ 38109 Dateien gelesen
+   [11430/38109] familie-nichte_2006-03-01_15-16-00-Verbessert-SR.dng
+   [13335/38109] familie-nichte_2006-06-25_08-38-36.png
+   [15240/38109] familie-nichte_2006-10-15_10-07-16.png
+   ✔ Verarbeitung abgeschlossen
+   ✔ Exiftool geschlossen
+   ✔ ✨ Alle Dateien verarbeitet! State-Datei gelöscht.
+
+─────────────────────────────────────────────────────────────────
+
+📊 Zusammenfassung:
+   Dauer: 14 min 20 s
+
+   Gesamt:     38109
+   ✔ Bearbeitet: 29740
+   ○ Übersprungen: 8369
+
+   Modus: Produktiv
+
+✅ Verarbeitung abgeschlossen.
+═════════════════════════════════════════════════════════════════

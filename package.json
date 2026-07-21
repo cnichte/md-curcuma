@@ -28,6 +28,7 @@
     "clean": "npm run clean:dist && npm run clean:test",
     "clean:dist": "find dist -mindepth 1 -delete",
     "clean:test": "find test-data/hugo -type f | xargs rm -f",
+    "t1": "npx tsx test-code/image-date.test.ts",
     "ncu-me": "ncu -i --format group",
     "tree": "tree -a -L 3 ./ > directory structure.txt"
   },
@@ -47,9 +48,11 @@
     "date-fns": "^4.1.0",
     "exif-js": "^2.3.0",
     "exifreader": "^4.32.0",
+    "exiftool-vendored": "^34.2.0",
     "front-matter": "^4.0.2",
     "fs-extra": "^11.3.2",
     "lodash": "^4.17.21",
+    "picocolors": "^1.1.1",
     "uuid": "^13.0.0",
     "xlsx": "^0.18.5",
     "yaml": "^2.8.1"
