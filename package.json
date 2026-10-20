@@ -51,6 +51,7 @@
     "exiftool-vendored": "^34.2.0",
     "front-matter": "^4.0.2",
     "fs-extra": "^11.3.2",
+    "instagram-private-api": "^1.46.1",
     "lodash": "^4.17.21",
     "picocolors": "^1.1.1",
     "uuid": "^13.0.0",

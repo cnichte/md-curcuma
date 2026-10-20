@@ -1,5 +1,33 @@
 # MD-Curcuma
 
+## Embedded publisher packages
+
+The new website-publisher integration lives in this repository, not in a
+separate Curcuma app:
+
+- [`packages/core`](packages/core/README.md): strict serializable text rules,
+  deterministic text/Markdown transformations and a thin JSON CLI.
+- [`packages/ui`](packages/ui/README.md): shared Mantine source/target/rules
+  table, rule editor and preview with host-supplied labels and theme.
+
+Studio is the first integrated host; an isolated browser host is included.
+Website slots, source resolution, autosave, jobs and deployment remain host
+concerns. No wrapper around the old observer API or runtime compatibility
+fallback is used for this integration.
+
+With the repository's development dependencies installed:
+
+```sh
+npm --prefix packages/core test
+npm --prefix packages/ui install
+npm --prefix packages/ui test
+```
+
+The format readers and tasks documented below are separate from this first
+shared publisher contract; the new UI does not claim to expose all of them.
+
+## Existing format readers and tasks
+
 This is a Data-Wrangler. It copys and transforms data-files and writes. For example:
 
 Markdown and CSV files from your [Obsidian](https://obsidian.md/)-Vault for usage in [Hugo](https://gohugo.io).

@@ -1,0 +1,23 @@
+{
+  "cookies": "{\"version\":\"tough-cookie@2.5.0\",\"storeType\":\"MemoryCookieStore\",\"rejectPublicSuffixes\":true,\"cookies\":[]}",
+  "language": "en_US",
+  "timezoneOffset": "7200",
+  "radioType": "wifi-none",
+  "capabilitiesHeader": "3brTv10=",
+  "connectionTypeHeader": "WIFI",
+  "isLayoutRTL": false,
+  "adsOptOut": false,
+  "thumbnailCacheBustingValue": 1000,
+  "clientSessionIdLifetime": 1200000,
+  "pigeonSessionIdLifetime": 1200000,
+  "deviceString": "26/8.0.0; 480dpi; 1080x2076; samsung; SM-G950F; dreamlte; samsungexynos8895",
+  "deviceId": "android-9a05699ad0950ce9",
+  "uuid": "593f9d43-96ab-5b9e-bf88-4106a1d24748",
+  "phoneId": "96b5314e-6c6a-5e41-99dc-df414a20fda7",
+  "adid": "6a5f6c3a-7ec3-52d2-bf74-b40bc3dac434",
+  "build": "NRD91N",
+  "passwordEncryptionKeyId": "128",
+  "passwordEncryptionPubKey": "LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUE0cHhmZkpMTTZrZjZrZUhyK2FWLwovY3ZEeFhQK0lUR2d3ZmZOR0NTaFZWaUpwSUpmYVE0djMrSFFEU3lkbmhiOU5peDJHU0UrTk9iSmRkQUsrS3RwCnB6N3FIY2E5TXNKNHV1dS82NktNSzl3STlJeE9RUitjbWpYY2Vib1V5ak8xQytDM2FXemdYQXNGZ3BQS1NVZUwKazhsWGFzUm9hMm1jNTBtcVZacDdpbXRNNVZaOGdVV1NtaVhzSjZVVkkzZXQ4bklFdnRDZTVYeTZwUWtzTStFTQpQVk9BOThxOXl3L0tyWVd5MkJxTmhRaTJXaS93ZXo3amFZTTBqT3A1c3p0aFlINjRYb0FmNUJHeUtpeURpN09ECi9iLzdPMUhaU3paUDgxU1NFYzE3OHdkdlFFcnIxbUJlWDhlR3RzaExQQnFyMDErM2dYR3ZlOG1xbTNkelFvY3IKL1FJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg==",
+  "igWWWClaim": "hmac.AR2N5mJe_2U4BExm7qpaMol7_z3uiqkqMIK6vZcrJyQmds4j",
+  "authorization": "Bearer IGT:2:eyJkc191c2VyX2lkIjoiNTkzNjc1NTE4MzkiLCJzZXNzaW9uaWQiOiI1OTM2NzU1MTgzOSUzQUNvbDhHd0JtUnJFTXg5JTNBOSUzQUFZajFkbWhSZzdRdE92NGhXWFN1SU5JSFV4WHh4c1N3ZEZWWEJXTW5tQSJ9"
+}

@@ -1,0 +1,26 @@
+{
+  "name": "md-curcuma-ui",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Embeddable Mantine mapping and rule components for Curcuma hosts",
+  "license": "GPL-3.0-only",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/*.test.mjs"
+  },
+  "peerDependencies": {
+    "md-curcuma-core": "^0.1.0",
+    "@mantine/core": ">=8 <9",
+    "@mantine/hooks": ">=8 <9",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "md-curcuma-core": "file:../core",
+    "vite": "^5.4.21"
+  }
+}
